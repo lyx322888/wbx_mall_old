@@ -88,6 +88,9 @@ import butterknife.OnClick;
 
 import static android.view.View.GONE;
 
+/**
+ * 修改
+ */
 public class StoreDetailActivity extends BaseActivity implements AddWidget.OnAddClick, GoodsFreeView {
     public static final String IS_VEGETABLE_MARKET = "IS_VEGETABLE_MARKET";
     public static final String STORE_ID = "STORE_ID";
