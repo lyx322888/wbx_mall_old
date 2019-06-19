@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/shop_car_detail_container"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:elevation="4dp"
+    android:orientation="vertical"
+    app:behavior_peekHeight="0dp"
+    app:layout_behavior="@string/bottom_sheet_behavior">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="35dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:background="@drawable/rect_solid_eceff1_top_5dp"
+        android:gravity="center_vertical">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="15dp"
+            android:layout_weight="1"
+            android:gravity="left"
+            android:text="已选商品"
+            android:textColor="@color/black"
+            android:textSize="14sp" />
+
+        <TextView
+            android:id="@+id/tv_clear_shop_car"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginRight="19dp"
+            android:drawableLeft="@drawable/delete"
+            android:drawablePadding="4dp"
+            android:drawableTint="#464545"
+            android:gravity="center"
+            android:text="清空" />
+    </LinearLayout>
+
+    <com.wbx.mall.widget.MaxHeightRecyclerView
+        android:id="@+id/recycler_view_shop_car_detail"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:background="@drawable/rect_solid_fffffff_bottom_5dp"
+        android:overScrollMode="never" />
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="35dp"
+        android:src="@drawable/icon_shop_car_detail_bottom" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="55dp" />
+</LinearLayout>

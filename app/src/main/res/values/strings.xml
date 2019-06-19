@@ -1,0 +1,118 @@
+<resources>
+    <string name="app_name">微百姓</string>
+    <string name="net_error">网络未连接</string>
+    <string name="error">您的设备网络不稳定\n请检查后点击图标重试</string>
+    <string name="empty">暂无数据</string>
+    <string name="loading">加载中...</string>
+    <string name="system_download_component_disable">下载服务不可用,请您启用</string>
+
+
+    <string-array name="market_type_src">
+        <item>@drawable/greens</item>
+        <item>@drawable/meat</item>
+        <item>@drawable/seafood</item>
+        <item>@drawable/eggs</item>
+        <item>@drawable/dry</item>
+        <item>@drawable/fruit</item>
+        <item>@drawable/dishes</item>
+        <item>@drawable/other</item>
+    </string-array>
+    <string-array name="market_type_str">
+        <item>蔬菜</item>
+        <item>肉类</item>
+        <item>海鲜</item>
+        <item>蛋类</item>
+        <item>干货</item>
+        <item>水果</item>
+        <item>配菜</item>
+        <item>其他</item>
+    </string-array>
+
+    <string-array name="shop_type_str">
+        <item>地方特产</item>
+        <item>超市百货</item>
+        <item>母婴用品</item>
+        <item>美容护肤</item>
+        <item>体育保健</item>
+        <item>生活必备</item>
+        <item>女人街</item>
+        <item>商业服务</item>
+    </string-array>
+    <string-array name="shop_type_src">
+        <item>@drawable/specialty</item>
+        <item>@drawable/supermarket</item>
+        <item>@drawable/maternal</item>
+        <item>@drawable/beauty</item>
+        <item>@drawable/sports</item>
+        <item>@drawable/life</item>
+        <item>@drawable/woman</item>
+        <item>@drawable/business</item>
+    </string-array>
+
+    <string-array name="cate_type_str">
+        <item>自助餐</item>
+        <item>烧烤</item>
+        <item>小吃快餐</item>
+        <item>西餐</item>
+        <item>甜点饮品</item>
+        <item>火锅</item>
+        <item>川湘菜</item>
+        <item>海鲜</item>
+    </string-array>
+    <string-array name="cate_type_src">
+        <item>@drawable/cate1</item>
+        <item>@drawable/cate2</item>
+        <item>@drawable/cate3</item>
+        <item>@drawable/cate4</item>
+        <item>@drawable/cate5</item>
+        <item>@drawable/cate6</item>
+        <item>@drawable/cate7</item>
+        <item>@drawable/cate8</item>
+    </string-array>
+
+    <string-array name="pay_ment_array">
+        <item>@drawable/balance_order</item>
+        <item>@drawable/weixin</item>
+        <item>@drawable/ali_pay</item>
+        <item>@drawable/cash_delivery</item>
+    </string-array>
+
+    <string-array name="type_agent_str">
+        <item>分红提现</item>
+        <!--<item>我的押金</item>-->
+        <item>我的商户</item>
+        <item>授权证书</item>
+        <item>余额日志</item>
+        <!--<item>星伙分享</item>-->
+        <item>我的团队</item>
+        <item>数据分析</item>
+        <item>邀请开店</item>
+        <item>商家数据</item>
+        <item>我的软件</item>
+        <item>销售明细</item>>
+    </string-array>
+
+    <string-array name="type_agent_src">
+        <item>@drawable/agent_money</item>
+        <!--<item>@drawable/agent_pledge</item>-->
+        <item>@drawable/agent_mer</item>
+        <item>@drawable/agent_im</item>
+        <item>@drawable/agent_log</item>
+        <!--<item>@drawable/agent_share</item>-->
+        <item>@drawable/customer_bind</item>
+        <item>@drawable/data_analysis</item>
+        <item>@drawable/agent_invite</item>
+        <item>@drawable/agent_shop_user</item>
+        <item>@drawable/my_app</item>
+        <item>@drawable/agent_sales</item>
+    </string-array>
+
+    <string name="gravity_left">left</string>
+    <string name="gravity_center">center</string>
+    <string name="gravity_right">right</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="title_activity_free_detail_activityn2">FreeActivityDetailActivityn2Activity
+    </string>
+</resources>

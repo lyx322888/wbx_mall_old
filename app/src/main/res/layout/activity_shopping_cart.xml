@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".activity.ShoppingCartActivity">
+
+    <LinearLayout
+        android:id="@+id/title_bar"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:background="@color/app_color"
+        android:orientation="horizontal">
+
+        <RelativeLayout
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:onClick="back">
+
+            <ImageView
+                android:layout_width="15dp"
+                android:layout_height="15dp"
+                android:layout_alignParentBottom="true"
+                android:layout_marginLeft="10dp"
+                android:layout_marginBottom="10dp"
+                android:src="@drawable/w_return"
+                android:tint="@color/colorWhite" />
+        </RelativeLayout>
+
+        <TextView
+            android:id="@+id/title_name_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom"
+            android:layout_marginBottom="4dp"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="购物车"
+            android:textColor="@color/colorWhite"
+            android:textSize="15sp" />
+
+        <RelativeLayout
+            android:id="@+id/rl_right"
+            android:layout_width="60dp"
+            android:layout_height="60dp">
+
+            <TextView
+                android:id="@+id/edit_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentBottom="true"
+                android:layout_marginRight="15dp"
+                android:layout_marginBottom="10dp"
+                android:text="编辑"
+                android:textColor="@color/colorWhite" />
+        </RelativeLayout>
+    </LinearLayout>
+
+    <com.wbx.mall.widget.refresh.PullToRefreshLayout
+        android:id="@+id/refresh_layout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/title_bar">
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/trolley_recycle_view"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+    </com.wbx.mall.widget.refresh.PullToRefreshLayout>
+
+    <Button
+        android:id="@+id/delete_cart_btn"
+        android:layout_width="match_parent"
+        android:layout_height="35dp"
+        android:layout_alignParentBottom="true"
+        android:background="@color/red"
+        android:text="删除"
+        android:textColor="@color/colorWhite"
+        android:visibility="gone" />
+</RelativeLayout>

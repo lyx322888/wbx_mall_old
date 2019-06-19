@@ -1,0 +1,176 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/index_fragment"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorWhite">
+
+    <com.wbx.mall.widget.refresh.PullToRefreshLayout
+        android:id="@+id/index_refresh_layout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <com.wbx.mall.widget.MyScrollview
+            android:id="@+id/scroll_view"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:focusable="true"
+                    android:focusableInTouchMode="true">
+
+                    <ImageView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:scaleType="fitXY"
+                        android:src="@drawable/bg_index" />
+
+                    <View
+                        android:id="@+id/fragment_index_search_tv"
+                        android:layout_width="match_parent"
+                        android:layout_height="40dp"
+                        android:layout_marginLeft="15dp"
+                        android:layout_marginTop="85dp"
+                        android:layout_marginRight="15dp" />
+                </RelativeLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/index_buy_tv"
+                        style="@style/textWithImageStyle"
+                        android:drawableTop="@drawable/index_supermarket"
+                        android:text="超市便利" />
+
+                    <TextView
+                        android:id="@+id/index_nearby_tv"
+                        style="@style/textWithImageStyle"
+                        android:drawableTop="@drawable/index_food"
+                        android:text="美食街" />
+
+                    <TextView
+                        android:id="@+id/my_xq_tv"
+                        style="@style/textWithImageStyle"
+                        android:drawableTop="@drawable/index_recipe"
+                        android:text="菜谱大全" />
+
+                    <TextView
+                        android:id="@+id/index_country_tv"
+                        style="@style/textWithImageStyle"
+                        android:drawableTop="@drawable/index_tenants"
+                        android:text="积分商城" />
+
+                </LinearLayout>
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:background="@drawable/index_line_bg">
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/index_hint_im" />
+
+                </RelativeLayout>
+
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:src="@drawable/index_nearby" />
+
+                <View
+                    style="@style/GrayLineStyle"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginBottom="10dp" />
+
+                <android.support.v7.widget.RecyclerView
+                    android:id="@+id/index_recycler_view"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+            </LinearLayout>
+        </com.wbx.mall.widget.MyScrollview>
+    </com.wbx.mall.widget.refresh.PullToRefreshLayout>
+
+    <LinearLayout
+        android:id="@+id/title_view"
+        android:layout_width="match_parent"
+        android:layout_height="70dp"
+        android:clickable="true"
+        android:gravity="bottom"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/index_choose_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="16dp"
+            android:layout_marginBottom="3dp"
+            android:drawableLeft="@drawable/index_location"
+            android:drawableRight="@drawable/choose"
+            android:drawablePadding="5dp"
+            android:ellipsize="end"
+            android:maxWidth="150dp"
+            android:singleLine="true"
+            android:text="获取中.."
+            android:textColor="@color/colorWhite"
+            android:textSize="15sp" />
+
+        <View
+            android:layout_width="0dp"
+            android:layout_height="1dp"
+            android:layout_weight="1" />
+
+        <ImageView
+            android:id="@+id/iv_scan"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"
+            android:paddingBottom="11dp"
+            android:src="@drawable/icon_scan_code"
+            android:visibility="gone" />
+
+        <RelativeLayout
+            android:id="@+id/rl_right"
+            android:layout_width="50dp"
+            android:layout_height="40dp"
+            android:paddingHorizontal="15dp"
+            android:paddingVertical="10dp">
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:src="@drawable/message" />
+
+            <TextView
+                android:id="@+id/has_message_tv"
+                android:layout_width="8dp"
+                android:layout_height="8dp"
+                android:layout_alignParentRight="true"
+                android:background="@drawable/ova_bg_red"
+                android:visibility="gone" />
+        </RelativeLayout>
+    </LinearLayout>
+
+    <com.wbx.mall.widget.DragImageView
+        android:id="@+id/service_im"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|right"
+        android:layout_marginBottom="80dp"
+        android:src="@drawable/kefu" />
+</FrameLayout>

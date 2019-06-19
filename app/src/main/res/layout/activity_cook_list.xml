@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:id="@+id/title_layout"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:background="@color/app_color"
+        android:orientation="horizontal">
+
+        <RelativeLayout
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:onClick="back">
+
+            <ImageView
+                android:layout_width="15dp"
+                android:layout_height="15dp"
+                android:layout_alignParentBottom="true"
+                android:layout_marginBottom="10dp"
+                android:layout_marginLeft="10dp"
+                android:src="@drawable/w_return"
+                android:tint="@color/colorWhite" />
+
+
+        </RelativeLayout>
+
+        <EditText
+            android:id="@+id/title_search_edit"
+            android:layout_width="wrap_content"
+            android:layout_height="25dp"
+            android:layout_gravity="bottom"
+            android:layout_marginBottom="3dp"
+            android:layout_weight="1"
+            android:background="@drawable/ova_bg_haf_black"
+            android:drawableLeft="@drawable/w_search"
+            android:drawablePadding="5dp"
+            android:gravity="center|left"
+            android:hint="想吃什么搜这里"
+            android:imeOptions="actionSearch"
+            android:padding="5dp"
+            android:singleLine="true"
+            android:textColor="@color/colorWhite"
+            android:textColorHint="@color/color_gray_line"
+            android:textSize="12sp" />
+
+        <RelativeLayout
+            android:layout_width="60dp"
+            android:layout_height="60dp">
+
+            <Button
+                android:id="@+id/show_view_btn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:layout_alignParentRight="true"
+                android:layout_marginTop="20dp"
+                android:background="@null"
+                android:text="取消"
+                android:textColor="@color/colorWhite"
+                android:textSize="13sp" />
+        </RelativeLayout>
+    </LinearLayout>
+
+    <com.wbx.mall.widget.refresh.PullToRefreshLayout
+        android:id="@+id/cook_refresh_layout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/cook_list_recycler_view"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+
+    </com.wbx.mall.widget.refresh.PullToRefreshLayout>
+
+</LinearLayout>

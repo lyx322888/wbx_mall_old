@@ -1,0 +1,43 @@
+<resources>
+    <!-- Default screen margins, per the Android Design guidelines. -->
+
+
+    <item name="id_stickynavlayout_topview" type="id" />
+    <item name="id_stickynavlayout_viewpager" type="id" />
+    <item name="id_stickynavlayout_indicator" type="id" />
+    <item name="id_stickynavlayout_innerscrollview" type="id" />
+    <item name="id_stickynavlayout_innerscrollview2" type="id" />
+    <dimen name="footer_padding">10dp</dimen>
+    <dimen name="sectioned_top">30dp</dimen>
+    <dimen name="text_size_13sp">13sp</dimen>
+
+    <item name="fixedTabIndicator" type="id" />
+    <item name="mFilterContentView" type="id" />
+
+    <dimen name="add_width">75dp</dimen>
+
+    <dimen name="dp_3">3dp</dimen>
+    <dimen name="dp_4">4dp</dimen>
+    <dimen name="dp_5">5dp</dimen>
+    <dimen name="dp_6">6dp</dimen>
+    <dimen name="dp_7">7dp</dimen>
+    <dimen name="dp_8">8dp</dimen>
+    <dimen name="dp_9">9dp</dimen>
+    <dimen name="dp_10">10dp</dimen>
+    <dimen name="dp_11">11dp</dimen>
+    <dimen name="dp_13">13dp</dimen>
+    <dimen name="dp_14">14dp</dimen>
+    <dimen name="dp_15">15dp</dimen>
+    <dimen name="dp_16">16dp</dimen>
+    <dimen name="dp_17">17dp</dimen>
+    <dimen name="dp_18">18dp</dimen>
+    <dimen name="dp_19">19dp</dimen>
+    <dimen name="dp_20">20dp</dimen>
+
+    <dimen name="sp_1">1sp</dimen>
+    <dimen name="sp_2">2sp</dimen>
+    <dimen name="sp_3">3sp</dimen>
+    <dimen name="sp_4">5sp</dimen>
+    <dimen name="sp_5">6sp</dimen>
+    <dimen name="fab_margin">16dp</dimen>
+</resources>

@@ -1,0 +1,285 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/root_view"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:splitMotionEvents="false">
+
+    <!--<android.support.v7.widget.RecyclerView-->
+    <!--android:id="@+id/cate_recycler"-->
+    <!--android:layout_width="200dp"-->
+    <!--android:layout_gravity="left"-->
+    <!--android:background="@color/white"-->
+    <!--android:layout_height="match_parent"></android.support.v7.widget.RecyclerView>-->
+
+    <!--<android.support.design.widget.CoordinatorLayout-->
+    <!--android:id="@+id/drawerlayout"-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="match_parent">-->
+
+
+    <android.support.design.widget.AppBarLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingTop="25dp"
+        app:layout_behavior="com.wbx.mall.behaviors.AppBarBehavior">
+
+        <android.support.design.widget.CollapsingToolbarLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/white"
+            app:layout_scrollFlags="scroll|exitUntilCollapsed">
+
+            <LinearLayout
+                android:id="@+id/ll_activity"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="145dp"
+                android:background="@color/white"
+                android:orientation="vertical">
+
+                <HorizontalScrollView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="5dp"
+                    android:scrollbars="none">
+
+                    <LinearLayout
+                        android:id="@+id/ll_container_coupoon"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal" />
+                </HorizontalScrollView>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginBottom="5dp"
+                    android:orientation="horizontal"
+                    android:visibility="gone">
+
+                    <TextView
+                        android:layout_width="24dp"
+                        android:layout_height="14dp"
+                        android:background="@drawable/bg_member"
+                        android:gravity="center"
+                        android:text="会员"
+                        android:textColor="@color/app_color"
+                        android:textSize="10sp" />
+
+                    <TextView
+                        android:id="@+id/tv_member_condition"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="10dp"
+                        android:text="消费满100元"
+                        android:textColor="@color/app_color"
+                        android:textSize="11sp" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="立即成为本店VIP会员"
+                        android:textColor="@color/black"
+                        android:textSize="11sp" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:orientation="horizontal"
+                    android:visibility="gone">
+
+                    <TextView
+                        android:layout_width="24dp"
+                        android:layout_height="14dp"
+                        android:background="@drawable/bg_full_reduce"
+                        android:gravity="center"
+                        android:text="满减"
+                        android:textColor="#CF7C78"
+                        android:textSize="10sp" />
+
+                    <TextView
+                        android:id="@+id/tv_full_reduce"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="10dp"
+                        android:layout_weight="1"
+                        android:ellipsize="end"
+                        android:maxLines="1"
+                        android:text="满20减10，满20减10，满20减10，满20减10，满20减10"
+                        android:textColor="@color/black"
+                        android:textSize="11sp" />
+
+                    <TextView
+                        android:id="@+id/tv_full_reduce_num"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="5dp"
+                        android:layout_marginRight="15dp"
+                        android:drawableRight="@drawable/down"
+                        android:drawablePadding="5dp"
+                        android:paddingTop="5dp"
+                        android:paddingBottom="5dp"
+                        android:text="5个优惠"
+                        android:textColor="@color/black"
+                        android:textSize="11sp" />
+                </LinearLayout>
+
+                <RelativeLayout
+                    android:id="@+id/goods_free"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:visibility="gone">
+
+                    <ImageView
+                        android:layout_width="match_parent"
+                        android:layout_height="220dp"
+                        android:layout_marginLeft="5dp"
+                        android:layout_marginTop="40dp"
+                        android:layout_marginRight="5dp"
+                        android:scaleType="fitXY"
+                        android:src="@drawable/new_shop1" />
+
+                    <android.support.v7.widget.RecyclerView
+                        android:id="@+id/new_shop_recycler"
+                        android:layout_width="match_parent"
+                        android:layout_height="180dp"
+                        android:layout_marginLeft="15dp"
+                        android:layout_marginTop="45dp"
+                        android:layout_marginRight="15dp"
+                        android:background="@drawable/shape_corner"></android.support.v7.widget.RecyclerView>
+
+                    <ImageView
+                        android:layout_width="170dp"
+                        android:layout_height="40dp"
+                        android:layout_centerHorizontal="true"
+                        android:layout_marginTop="5dp"
+                        android:src="@drawable/new_shop2" />
+
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:id="@+id/goods_free2"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:visibility="gone">
+
+                    <ImageView
+                        android:layout_width="match_parent"
+                        android:layout_height="220dp"
+                        android:layout_marginLeft="5dp"
+                        android:layout_marginTop="40dp"
+                        android:layout_marginRight="5dp"
+                        android:scaleType="fitXY"
+                        android:src="@drawable/new_shop1" />
+
+                    <android.support.v7.widget.RecyclerView
+                        android:id="@+id/new_shop_recycler2"
+                        android:layout_width="match_parent"
+                        android:layout_height="180dp"
+                        android:layout_marginLeft="15dp"
+                        android:layout_marginTop="45dp"
+                        android:layout_marginRight="15dp"
+                        android:background="@drawable/shape_corner"></android.support.v7.widget.RecyclerView>
+
+                    <ImageView
+                        android:layout_width="170dp"
+                        android:layout_height="40dp"
+                        android:layout_centerHorizontal="true"
+                        android:layout_marginTop="5dp"
+                        android:src="@drawable/new_shop2" />
+
+
+                </RelativeLayout>
+            </LinearLayout>
+
+            <android.support.v7.widget.Toolbar
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:minHeight="?android:attr/actionBarSize"
+                app:layout_collapseMode="pin"
+                app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
+                app:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar" />
+
+        </android.support.design.widget.CollapsingToolbarLayout>
+
+        <android.support.design.widget.TabLayout
+            android:id="@+id/tab_layout"
+            android:layout_width="match_parent"
+            android:layout_height="49dp"
+            android:background="@color/white" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="#FAFAFA" />
+    </android.support.design.widget.AppBarLayout>
+
+    <LinearLayout
+        android:id="@+id/scroll_container"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+        <android.support.v4.view.ViewPager
+            android:id="@+id/view_pager"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:overScrollMode="never" />
+    </LinearLayout>
+
+    <com.wbx.mall.widget.ShopInfoContainer
+        android:id="@+id/shop_info_container"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_behavior="com.wbx.mall.behaviors.ShopContainerBehavior" />
+
+    <View
+        android:id="@+id/blackview"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#60000000"
+        android:elevation="4dp"
+        android:visibility="gone" />
+
+    <!--<ImageView-->
+    <!--android:id="@+id/img_fenl"-->
+    <!--android:layout_width="55dp"-->
+    <!--android:layout_height="55dp"-->
+    <!--android:layout_marginLeft="50dp"-->
+    <!--android:layout_marginTop="700dp"-->
+    <!--android:src="@drawable/fenl" />-->
+
+    <include layout="@layout/view_shop_car_detail" />
+
+    <include layout="@layout/view_shopping_car" />
+
+    <include layout="@layout/view_discount_activity" />
+
+    <include layout="@layout/view_shop_coupon" />
+
+    <com.wbx.mall.widget.DragImageView
+        android:id="@+id/iv_book"
+        android:layout_width="45dp"
+        android:layout_height="45dp"
+        android:layout_gravity="end"
+        android:layout_marginTop="75dp"
+        android:layout_marginRight="50dp"
+        android:src="@drawable/reserve"
+        android:visibility="gone" />
+
+    <com.wbx.mall.widget.DragImageView
+        android:id="@+id/iv_intelligent_pay"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:layout_gravity="end"
+        android:layout_marginTop="110dp"
+        android:layout_marginRight="25dp"
+        android:src="@drawable/icon_daodian" />
+</android.support.design.widget.CoordinatorLayout>

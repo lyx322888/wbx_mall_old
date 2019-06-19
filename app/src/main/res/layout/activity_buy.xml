@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:id="@+id/title_view"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:orientation="horizontal">
+
+        <RelativeLayout
+            android:id="@+id/rl_left"
+            android:layout_width="60dp"
+            android:layout_height="60dp">
+
+            <ImageView
+                android:layout_width="15dp"
+                android:layout_height="15dp"
+                android:layout_alignParentBottom="true"
+                android:layout_marginBottom="10dp"
+                android:layout_marginLeft="10dp"
+                android:src="@drawable/w_return"
+                android:tint="@color/gray" />
+        </RelativeLayout>
+
+        <ImageView
+            android:id="@+id/title_image"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="5dp" />
+
+        <RelativeLayout
+            android:id="@+id/search_rl"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_alignParentRight="true">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:layout_alignParentRight="true"
+                android:layout_marginRight="10dp"
+                android:src="@drawable/w_search"
+                android:tint="@color/index_gray" />
+        </RelativeLayout>
+
+    </RelativeLayout>
+
+    <View style="@style/GrayLineStyle" />
+
+    <com.wbx.mall.widget.refresh.PullToRefreshLayout
+        android:id="@+id/refresh_layout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <com.wbx.mall.widget.MyScrollview
+            android:id="@+id/scroll_view"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <com.wbx.mall.widget.RatioLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:ratio="2.5">
+
+                    <ImageView
+                        android:id="@+id/banner_im"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:scaleType="centerCrop"
+                        android:src="@drawable/banner_buy" />
+                </com.wbx.mall.widget.RatioLayout>
+
+                <android.support.v7.widget.RecyclerView
+                    android:id="@+id/type_recycler_view"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="10dp"
+                    android:background="@color/color_gray_line" />
+
+                <com.wbx.mall.widget.expandtabview.ExpandTabView
+                    android:id="@+id/expand_view"
+                    android:layout_width="match_parent"
+                    android:layout_height="45dp"></com.wbx.mall.widget.expandtabview.ExpandTabView>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1px"
+                    android:background="@color/color_gray_line" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:background="@color/colorWhite"
+                    android:gravity="center">
+
+                    <View
+                        android:layout_width="100dp"
+                        android:layout_height="1px"
+                        android:background="@color/black" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="8dp"
+                        android:layout_marginRight="8dp"
+                        android:text="附近的市场" />
+
+                    <View
+                        android:layout_width="100dp"
+                        android:layout_height="1px"
+                        android:background="@color/black" />
+                </LinearLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1px"
+                    android:background="@color/color_gray_line" />
+
+                <android.support.v7.widget.RecyclerView
+                    android:id="@+id/shop_recycler_view"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+            </LinearLayout>
+
+        </com.wbx.mall.widget.MyScrollview>
+
+    </com.wbx.mall.widget.refresh.PullToRefreshLayout>
+</LinearLayout>

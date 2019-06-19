@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    tools:context=".fragment.GoodsFragment">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+        <EditText
+            android:id="@+id/et_search"
+            android:layout_width="match_parent"
+            android:layout_height="26dp"
+            android:layout_margin="10dp"
+            android:background="@drawable/bg_shop_search_goods"
+            android:drawableLeft="@drawable/b_search"
+            android:drawablePadding="15dp"
+            android:gravity="center|left"
+            android:hint="搜索店内商品"
+            android:imeOptions="actionSearch"
+            android:paddingLeft="15dp"
+            android:singleLine="true"
+            android:textColorHint="#888888"
+            android:textSize="13sp" />
+
+        <com.wbx.mall.widget.ShopGoodsContainer
+            android:id="@+id/list_container"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+    </LinearLayout>
+    <!--<ImageView-->
+        <!--android:id="@+id/img_fenl"-->
+        <!--android:layout_width="55dp"-->
+        <!--android:layout_height="55dp"-->
+        <!--android:layout_alignParentLeft="true"-->
+        <!--android:layout_alignParentBottom="true"-->
+        <!--android:layout_marginBottom="60dp"-->
+        <!--android:layout_marginLeft="50dp"-->
+        <!--android:src="@drawable/fenl" />-->
+
+</RelativeLayout>

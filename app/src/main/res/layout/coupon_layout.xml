@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="290dp"
+    android:layout_height="80dp">
+
+    <ImageView
+        android:layout_width="290dp"
+        android:layout_height="80dp"
+        android:layout_marginTop="8dp"
+        android:src="@drawable/you2" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <LinearLayout
+            android:layout_width="73dp"
+            android:layout_height="70dp"
+            android:layout_marginTop="8dp"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="73dp"
+                android:layout_height="36dp"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="36dp"
+                    android:layout_marginLeft="24dp"
+                    android:layout_marginTop="15dp"
+                    android:text="￥"
+                    android:textColor="@color/red"
+                    android:textSize="15sp" />
+
+                <TextView
+                    android:id="@+id/coupon_monet_tv"
+                    android:layout_width="14dp"
+                    android:layout_height="20dp"
+                    android:layout_marginTop="16dp"
+                    android:text="6"
+                    android:textColor="@color/red"
+                    android:textSize="18sp"
+                    android:textStyle="bold" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="73dp"
+                android:layout_height="35dp"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/full_reduction_tv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="7dp"
+                    android:layout_marginLeft="5dp"
+                    android:text="满29元可用"
+                    android:textSize="12sp" />
+            </LinearLayout>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="190dp"
+            android:layout_height="70dp"
+            android:layout_marginTop="8dp"
+            android:orientation="horizontal">
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/shop_name_tv"
+                    android:layout_width="100dp"
+                    android:layout_height="18dp"
+                    android:layout_marginLeft="13dp"
+                    android:layout_marginTop="18dp"
+                    android:ellipsize="end"
+                    android:maxEms="5"
+                    android:gravity="center"
+                    android:singleLine="true"
+                    android:text="吃了餐饮店阿萨斯的"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:layout_width="65dp"
+                    android:layout_height="20dp"
+                    android:background="@drawable/textview_coupon"
+                    android:text="店铺优惠券"
+                    android:textColor="#ECCE9B"
+                    android:layout_marginLeft="6dp"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="6dp"
+                    android:textStyle="bold"
+                    android:gravity="center"
+                    android:textSize="12sp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <Button
+                    android:id="@+id/user_button"
+                    android:layout_width="70dp"
+                    android:layout_height="23dp"
+                    android:text="立即进店"
+                    android:layout_marginLeft="8dp"
+                    android:textColor="@color/white"
+                    android:layout_gravity="center"
+                    android:background="@drawable/button_coupon"
+                    android:textSize="14sp"
+                    android:textStyle="bold" />
+            </LinearLayout>
+        </LinearLayout>
+    </LinearLayout>
+</RelativeLayout>

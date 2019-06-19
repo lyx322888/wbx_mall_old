@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_gravity="center"
+    >
+
+    <LinearLayout
+        android:id="@+id/choose_bg_rl"
+        android:layout_width="140dp"
+        android:layout_height="100dp"
+        android:background="@drawable/side_line_app_color"
+        android:orientation="vertical"
+        android:gravity="center"
+        >
+        <ImageView
+            android:layout_width="35dp"
+            android:layout_height="35dp"
+            android:src="@drawable/agen_two_star"
+            android:layout_gravity="center"
+            />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="二星合伙人"
+            android:layout_gravity="center"
+            />
+
+    </LinearLayout>
+</LinearLayout>

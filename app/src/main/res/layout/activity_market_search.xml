@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:background="@color/app_color">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:padding="6dp">
+
+            <EditText
+                android:id="@+id/et_search_keyword"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_weight="1"
+                android:background="@drawable/ova_edit_text_bg"
+                android:drawableLeft="@drawable/b_search"
+                android:drawablePadding="10dp"
+                android:hint="请输入店铺名称"
+                android:imeOptions="actionSearch"
+                android:padding="6dp"
+                android:singleLine="true"
+                android:textSize="13sp" />
+
+            <TextView
+                android:id="@+id/tv_cancel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="6dp"
+                android:text="取消"
+                android:textColor="@color/colorWhite" />
+        </LinearLayout>
+    </RelativeLayout>
+
+    <com.wbx.mall.widget.refresh.PullToRefreshLayout
+        android:id="@+id/ptrl"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/recycler_view_search_result"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+    </com.wbx.mall.widget.refresh.PullToRefreshLayout>
+</LinearLayout>

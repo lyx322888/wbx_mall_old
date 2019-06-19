@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/rl_get_free_ticket_bg"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#55000000">
+
+    <ImageView
+        android:id="@+id/iv_get_free_ticket_bg"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:scaleType="centerCrop"
+        android:src="@drawable/ic_free_ticket" />
+
+    <TextView
+        android:id="@+id/tv_get_free_ticket_use"
+        android:layout_width="160dp"
+        android:layout_height="50dp"
+        android:layout_alignBottom="@+id/iv_get_free_ticket_bg"
+        android:layout_centerInParent="true"
+        android:layout_marginBottom="20dp" />
+
+    <ImageView
+        android:id="@+id/iv_get_free_ticket_cancel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/iv_get_free_ticket_bg"
+        android:layout_centerInParent="true"
+        android:layout_marginTop="@dimen/dp_40"
+        android:src="@drawable/guaka_close" />
+</RelativeLayout>

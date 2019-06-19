@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.wbx.mall.widget.ShopCarView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/shop_car_view"
+    android:layout_width="match_parent"
+    android:layout_height="55dp"
+    android:layout_gravity="bottom"
+    android:elevation="4dp"
+    android:gravity="bottom">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_marginBottom="5dp"
+        android:orientation="horizontal">
+
+        <RelativeLayout
+            android:id="@+id/car_rl"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_gravity="bottom"
+            android:layout_marginLeft="15dp"
+            android:layout_weight="1"
+            android:background="@drawable/bg_shop_car_bar">
+
+            <TextView
+                android:id="@+id/car_nonselect"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="60dp"
+                android:text="购物车是空的"
+                android:textColor="#CECBCC"
+                android:textSize="14sp"
+                android:visibility="visible" />
+
+            <LinearLayout
+                android:id="@+id/amount_container"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="60dp"
+                android:gravity="center_vertical"
+                android:orientation="vertical"
+                android:visibility="gone">
+
+                <TextView
+                    android:id="@+id/tv_total_price"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/white"
+                    android:textSize="18sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/tv_send_start_price"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="另需配送费¥4元"
+                    android:textColor="@color/white"
+                    android:textSize="10sp" />
+            </LinearLayout>
+        </RelativeLayout>
+
+        <TextView
+            android:id="@+id/btn_ensure_order"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_marginRight="15dp"
+            android:background="@drawable/bg_shop_info_order"
+            android:backgroundTint="@color/bg_cant_order"
+            android:gravity="center"
+            android:text="选好了"
+            android:textColor="#a8a8a8"
+            android:textSize="17sp" />
+    </LinearLayout>
+
+    <ImageView
+        android:id="@+id/iv_shop_car"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_marginBottom="5dp"
+        android:layout_marginLeft="15dp"
+        android:src="@drawable/icon_shop_car" />
+
+    <TextView
+        android:id="@+id/car_badge"
+        style="@style/badge_style"
+        android:layout_marginLeft="52dp"
+        android:text="5" />
+</com.wbx.mall.widget.ShopCarView>

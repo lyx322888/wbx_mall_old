@@ -1,0 +1,214 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="PullToRefreshLayout">
+        <attr name="view_error" format="reference" />
+        <attr name="view_empty" format="reference" />
+        <attr name="view_loading" format="reference" />
+    </declare-styleable>
+    <declare-styleable name="CircleImageViewMy">
+        <attr name="bor_width" format="dimension" />
+        <attr name="bor_color" format="color" />
+    </declare-styleable>
+    <declare-styleable name="RatioLayout">
+        <attr name="ratio" format="float" />
+    </declare-styleable>
+    <declare-styleable name="ColorTextView">
+        <attr name="color_texts" format="string" />
+        <attr name="color_arrays" format="string" />
+    </declare-styleable>
+    <declare-styleable name="MaterialCircleView">
+
+        <attr name="bGradient" format="boolean"></attr>
+        <attr name="circleColor" format="color"></attr>
+        <attr name="circleWidth" format="dimension"></attr>
+        <attr name="radius1" format="dimension"></attr>
+    </declare-styleable>
+    <declare-styleable name="UniversalLoadingView">
+        <attr name="bg_transparent" format="boolean"></attr>
+        <attr name="bg_alpha" format="integer"></attr>
+    </declare-styleable>
+
+    <declare-styleable name="StickNavLayout">
+        <attr name="isStickNav" format="boolean" />
+        <attr name="stickOffset" format="integer" />
+    </declare-styleable>
+
+    <declare-styleable name="ArrowRectangleView">
+        <attr name="arrow_width" format="dimension" />
+        <attr name="arrow_height" format="dimension" />
+        <attr name="arrow_offset" format="dimension" />
+        <attr name="radiuss" format="dimension" />
+        <attr name="background_color" format="color" />
+        <attr name="shadow_color" format="color" />
+        <attr name="shadow_thickness" format="dimension" />
+    </declare-styleable>
+
+    <declare-styleable name="DropDownMenu">
+
+        <attr name="ddunderlineColor" format="color" />
+        <attr name="dddividerColor" format="color" />
+        <attr name="ddtextSelectedColor" format="color" />
+        <attr name="ddtextUnselectedColor" format="color" />
+        <attr name="ddmenuBackgroundColor" format="color" />
+        <attr name="ddmaskColor" format="color" />
+        <attr name="ddmenuTextSize" format="dimension" />
+        <attr name="ddmenuSelectedIcon" format="reference" />
+        <attr name="ddmenuUnselectedIcon" format="reference" />
+        <attr name="ddmenuMenuHeightPercent" format="float" />
+    </declare-styleable>
+
+    <declare-styleable name="LaybelLayout">
+        <attr name="line_padding" format="integer" />
+        <attr name="text_background" format="reference" /><!-- TextView的背景 -->
+        <attr name="child_margin" format="integer" /><!-- 子View的外边距 -->
+    </declare-styleable>
+
+
+    <declare-styleable name="WaveView">
+        <attr name="above_wave_color" format="color" />
+        <attr name="blow_wave_color" format="color" />
+        <attr name="progress" format="integer" />
+        <attr name="wave_length" format="enum">
+            <enum name="large" value="1" />
+            <enum name="middle" value="2" />
+            <enum name="little" value="3" />
+        </attr>
+        <attr name="wave_height" format="enum">
+            <enum name="large" value="1" />
+            <enum name="middle" value="2" />
+            <enum name="little" value="3" />
+        </attr>
+        <attr name="wave_hz" format="enum">
+            <enum name="fast" value="1" />
+            <enum name="normal" value="2" />
+            <enum name="slow" value="3" />
+        </attr>
+    </declare-styleable>
+
+    <declare-styleable name="Themes">
+        <attr name="waveViewStyle" format="reference" />
+    </declare-styleable>
+
+    <declare-styleable name="RadarWaveView">
+
+        <attr name="waveColor" format="color" />
+
+        <attr name="waveAmplitude" format="dimension" />
+
+        <attr name="waveSpeed" format="float" />
+
+        <attr name="waveStartPeriod" format="float" />
+        <attr name="waveStart" format="boolean" />
+
+        <attr name="waveFillTop" format="boolean" />
+        <attr name="waveFillBottom" format="boolean" />
+
+        <attr name="waveFillType" format="enum">
+            <enum name="top" value="0" />
+            <enum name="bottom" value="1" />
+        </attr>
+
+        <attr name="waveType" format="enum">
+            <enum name="sin" value="0" />
+            <enum name="cos" value="1" />
+        </attr>
+
+    </declare-styleable>
+
+
+    <declare-styleable name="UpdateAppNumberProgressBar">
+        <attr name="progress_current" format="integer" />
+        <attr name="progress_max" format="integer" />
+
+        <attr name="progress_unreached_color" format="color" />
+        <attr name="progress_reached_color" format="color" />
+
+        <attr name="progress_reached_bar_height" format="dimension" />
+        <attr name="progress_unreached_bar_height" format="dimension" />
+
+        <attr name="progress_text_size" format="dimension" />
+        <attr name="progress_text_color" format="color" />
+
+        <attr name="progress_text_offset" format="dimension" />
+
+        <attr name="progress_text_visibility" format="enum">
+            <enum name="visible" value="0" />
+            <enum name="invisible" value="1" />
+        </attr>
+    </declare-styleable>
+
+
+    <declare-styleable name="HorizontalselectedView">
+        <!--可见数目-->
+        <attr name="HorizontalselectedViewSeesize" format="integer"></attr>
+        <!--被选择文字的大小和颜色-->
+        <attr name="HorizontalselectedViewSelectedTextSize" format="float"></attr>
+        <attr name="HorizontalselectedViewSelectedTextColor" format="color|reference"></attr>
+
+
+        <!--未被被选择文字的大小和颜色-->
+        <attr name="HorizontalselectedViewTextSize" format="float"></attr>
+        <attr name="HorizontalselectedViewTextColor" format="color|reference"></attr>
+
+    </declare-styleable>
+
+
+    <declare-styleable name="MZBannerView">
+        <attr name="open_mz_mode" format="boolean" />
+        <attr name="canLoop" format="boolean" />
+        <attr name="indicatorPaddingLeft" format="dimension" />
+        <attr name="indicatorPaddingRight" format="dimension" />
+        <attr name="indicatorPaddingTop" format="dimension" />
+        <attr name="indicatorPaddingBottom" format="dimension" />
+        <attr name="indicatorAlign">
+            <enum name="left" value="0" />
+            <enum name="center" value="1" />
+            <enum name="right" value="2" />
+        </attr>
+        <attr name="middle_page_cover" format="boolean" />
+    </declare-styleable>
+
+    <declare-styleable name="DragScaleImageView">
+        <attr name="scale_image" format="reference"></attr>
+    </declare-styleable>
+
+    <declare-styleable name="AddWidget">
+        <attr name="circle_anim" format="boolean" />
+        <attr name="sub_anim" format="boolean" />
+    </declare-styleable>
+    <declare-styleable name="CustomDragExpandLayout">
+        <attr name="expand_margin_top" format="dimension" />
+        <attr name="shrink_margin_top" format="dimension" />
+    </declare-styleable>
+    <declare-styleable name="TagFlowLayout">
+        <attr name="max_select" format="integer"></attr>
+        <attr name="tag_gravity">
+            <enum name="left" value="-1" />
+            <enum name="center" value="0" />
+            <enum name="right" value="1" />
+        </attr>
+    </declare-styleable>
+    <declare-styleable name="DiscussionAvatarView">
+        <!--头像的半径,dp为单位-->
+        <attr name="radiusss" format="reference|integer" />
+        <!--头像间的距离，为头像直径的长度的百分比，dp为单位-->
+        <attr name="space" format="reference|float" />
+        <!--最多显示多少个头像-->
+        <attr name="maxCount" format="reference|integer" />
+        <!--是否最后一个显示完全,默认是true-->
+        <attr name="isLastComplete" format="reference|boolean" />
+        <!--是否显示动画效果-->
+        <attr name="isShowAnimation" format="reference|boolean" />
+        <!--是否显示边框-->
+        <attr name="isShowFrame" format="reference|boolean" />
+        <!--边框颜色-->
+        <attr name="frameColor" format="reference|color" />
+    </declare-styleable>
+
+    <declare-styleable name="IndexAvatar">
+        <attr name="left_top_radius" format="dimension" />
+        <attr name="left_bottom_radius" format="dimension" />
+        <attr name="right_top_radius" format="dimension" />
+        <attr name="right_bottom_radius" format="dimension" />
+    </declare-styleable>
+</resources>

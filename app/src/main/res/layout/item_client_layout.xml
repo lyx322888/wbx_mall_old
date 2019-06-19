@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_gravity="center"
+    android:layout_height="wrap_content"
+    android:background="@color/colorWhite"
+    >
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:padding="10dp"
+    >
+    <TextView
+        android:id="@+id/account_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="账号:"
+        />
+    <TextView
+        android:id="@+id/nick_name_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="昵称:"
+        android:layout_marginTop="5dp"
+        />
+    <TextView
+        android:id="@+id/store_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="店铺:"
+        android:layout_marginTop="5dp"
+        />
+    <TextView
+        android:id="@+id/money_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="提成:"
+        android:textColor="@color/app_color"
+        android:layout_marginTop="5dp"
+        />
+    <TextView
+        android:id="@+id/time_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="到期时间:"
+        android:textColor="@color/red"
+        android:layout_marginTop="5dp"
+        />
+</LinearLayout>
+    <View style="@style/GrayLineStyle"/>
+
+</LinearLayout>

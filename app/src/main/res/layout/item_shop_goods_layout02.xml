@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/root_view"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_gravity="center"
+    android:orientation="horizontal">
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:orientation="vertical">
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+            <ImageView
+                android:id="@+id/goods_pic_im"
+                android:layout_width="110dp"
+                android:layout_height="110dp"
+                android:layout_gravity="center"
+                android:scaleType="fitXY"
+                android:src="@drawable/ic_image_loading" />
+
+            <ImageView
+                android:id="@+id/iv_free_activity"
+                android:layout_width="32dp"
+                android:layout_height="32dp"
+                android:layout_alignParentTop="true"
+                android:layout_marginLeft="78dp"
+                android:layout_marginTop="7dp"
+                android:src="@drawable/miand" />
+        </RelativeLayout>
+
+
+        <TextView
+            android:id="@+id/goods_name_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="5dp"
+            android:ellipsize="end"
+            android:maxLength="6"
+            android:text="商品名称"
+            android:textSize="13sp"
+            android:visibility="visible" />
+
+        <TextView
+            android:id="@+id/goods_price_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="5dp"
+            android:text="店内价：¥60.00元"
+            android:textColor="@color/red"
+            android:textSize="@dimen/sp_12" />
+
+        <TextView
+            android:id="@+id/tv_activity_user_num"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="5dp"
+            android:text="565人免单成功"
+            android:textColor="@color/gray_normal"
+            android:textSize="@dimen/sp_12" />
+
+        <LinearLayout
+            android:id="@+id/ll_activity_user"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/dp_8"
+            android:layout_marginTop="@dimen/dp_5"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <com.wbx.mall.widget.CircleImageView
+                android:id="@+id/iv_acitivity_user_1"
+                android:layout_width="15dp"
+                android:layout_height="15dp"
+                android:src="@color/black" />
+
+            <com.wbx.mall.widget.CircleImageView
+                android:id="@+id/iv_acitivity_user_2"
+                android:layout_width="15dp"
+                android:layout_height="15dp"
+                android:src="@color/app_color"
+                android:translationX="-3dp" />
+
+            <com.wbx.mall.widget.CircleImageView
+                android:id="@+id/iv_acitivity_user_3"
+                android:layout_width="15dp"
+                android:layout_height="15dp"
+                android:src="@color/black"
+                android:translationX="-6dp" />
+
+            <TextView
+                android:id="@+id/goods_lookmore_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="查看更多"
+                android:textColor="@color/gray"
+                android:textSize="12sp" />
+        </LinearLayout>
+
+
+    </LinearLayout>
+
+    <View
+        android:layout_width="10dp"
+        android:layout_height="1dp" />
+</LinearLayout>
