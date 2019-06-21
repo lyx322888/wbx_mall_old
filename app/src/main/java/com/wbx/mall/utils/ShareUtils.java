@@ -17,6 +17,7 @@ import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.animation.GlideAnimation;
 import com.bumptech.glide.request.target.SimpleTarget;
 import com.tencent.mm.opensdk.modelmsg.SendMessageToWX;
+import com.tencent.mm.opensdk.modelmsg.WXImageObject;
 import com.tencent.mm.opensdk.modelmsg.WXMediaMessage;
 import com.tencent.mm.opensdk.modelmsg.WXMiniProgramObject;
 import com.tencent.mm.opensdk.modelmsg.WXWebpageObject;
@@ -40,6 +41,61 @@ public class ShareUtils {
         }
         return instance;
     }
+
+
+    public void shareImage(final Context context, final String descrption, final String imageUrl) {
+        final Dialog shareDialog = new Dialog(context, R.style.ActionSheetDialogStyle);
+        View shareInflate = LayoutInflater.from(context).inflate(R.layout.share_pop_view, null);
+        shareDialog.setContentView(shareInflate);
+        //获取当前Activity所在的窗体
+        Window dialogWindow = shareDialog.getWindow();
+        //设置Dialog从窗体底部弹出
+        dialogWindow.setGravity(Gravity.BOTTOM);
+        WindowManager windowManager = dialogWindow.getWindowManager();
+        Display display = windowManager.getDefaultDisplay();
+        WindowManager.LayoutParams lp = dialogWindow.getAttributes();
+        lp.width = display.getWidth(); //设置宽度
+        dialogWindow.setAttributes(lp);
+        shareDialog.show();//显示对话框
+
+        //微信好友
+        shareInflate.findViewById(R.id.share_wechat_friends_tv).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                doShareImage(context, descrption, imageUrl, SendMessageToWX.Req.WXSceneSession);
+                shareDialog.dismiss();
+            }
+        });
+        //微信朋友圈
+        shareInflate.findViewById(R.id.share_wechat_tv).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                doShareImage(context, descrption, imageUrl, SendMessageToWX.Req.WXSceneTimeline);
+                shareDialog.dismiss();
+            }
+        });
+        //微信收藏
+        shareInflate.findViewById(R.id.share_wechat_collection_tv).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                doShareImage(context, descrption, imageUrl, SendMessageToWX.Req.WXSceneFavorite);
+                shareDialog.dismiss();
+            }
+        });
+        shareInflate.findViewById(R.id.poop_share_cancel_btn).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                shareDialog.dismiss();
+            }
+        });
+        shareInflate.findViewById(R.id.cover).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                shareDialog.dismiss();
+            }
+        });
+    }
+
 
     public void share(final Context context, final String title, final String descrption, final String imageUrl, final String clickUrl) {
         final Dialog shareDialog = new Dialog(context, R.style.ActionSheetDialogStyle);
@@ -94,6 +150,24 @@ public class ShareUtils {
         });
     }
 
+
+    private void doShareImage(final Context context, final String descrption, String imageUrl, final int scene) {
+        if (TextUtils.isEmpty(imageUrl)) {
+            Bitmap bitmap = BitmapFactory.decodeResource(context.getResources(), R.mipmap.app_logo);
+            commitShareImage(context, descrption, bitmap, scene);
+        } else {
+            if (imageUrl.startsWith("http://imgs.wbx365.com/")) {
+                imageUrl = imageUrl + "?imageView2/0/w/200/h/200";
+            }
+            Glide.with(context).load(imageUrl).asBitmap().into(new SimpleTarget<Bitmap>(200, 200) {
+                @Override
+                public void onResourceReady(Bitmap resource, GlideAnimation<? super Bitmap> glideAnimation) {
+                    commitShareImage(context, descrption, resource, scene);
+                }
+            });
+        }
+    }
+
     public void doShare(final Context context, final String title, final String descrption, String imageUrl, final String clickUrl, final int scene) {
         if (TextUtils.isEmpty(imageUrl)) {
             Bitmap bitmap = BitmapFactory.decodeResource(context.getResources(), R.mipmap.app_logo);
@@ -109,6 +183,21 @@ public class ShareUtils {
                 }
             });
         }
+    }
+
+    private void commitShareImage(Context context, String descrption, Bitmap resource, int scene) {
+        IWXAPI wxapi = WXAPIFactory.createWXAPI(context, AppConfig.WX_APP_ID);
+        wxapi.registerApp(AppConfig.WX_APP_ID);
+        WXImageObject wxImageObject = new WXImageObject(PictureUtil.compressWxShareImage(resource, 32));
+        WXMediaMessage msg = new WXMediaMessage();
+        msg.mediaObject = wxImageObject;
+        msg.description = descrption;
+        msg.thumbData = PictureUtil.compressWxShareImage(resource, 32);
+        SendMessageToWX.Req req = new SendMessageToWX.Req();
+        req.transaction = String.valueOf(System.currentTimeMillis());
+        req.message = msg;
+        req.scene = scene;
+        wxapi.sendReq(req);
     }
 
     private void commitShare(Context context, String title, String descrption, Bitmap resource, String clickUrl, int scene) {

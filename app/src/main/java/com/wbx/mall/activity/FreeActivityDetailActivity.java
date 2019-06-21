@@ -248,7 +248,7 @@ public class FreeActivityDetailActivity extends BaseActivity implements UpFreeIn
         super.onDestroy();
     }
 
-    @OnClick({R.id.iv_close, R.id.tv_home, R.id.iv_shop, R.id.tv_share_rule, R.id.tv_consume_rule, R.id.bar_1, R.id.bar_2, R.id.bar_3})
+    @OnClick({R.id.iv_close, R.id.tv_home, R.id.iv_shop, R.id.tv_share_rule, R.id.bar_1, R.id.bar_2, R.id.bar_3})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.iv_close:
@@ -259,8 +259,6 @@ public class FreeActivityDetailActivity extends BaseActivity implements UpFreeIn
                 StoreDetailActivity.actionStart(this, gradeId, shopId);
                 break;
             case R.id.tv_share_rule:
-                break;
-            case R.id.tv_consume_rule:
                 break;
             case R.id.bar_1:
                 directlyBuy();

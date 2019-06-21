@@ -215,7 +215,7 @@ public class MerchantInfoFragment extends BaseFragment {
     }
 
     private void share() {
-        ShareUtils.getInstance().share(getContext(), shopInfo.getShop_name(), "我在微百姓购物，方便、实惠！推荐你也一起来使用吧！", shopInfo.getPhoto(), shopInfo.getGrade_id() == AppConfig.StoreGrade.MARKET ? "http://www.wbx365.com/wap/ele/shop/shop_id/" + shopInfo.getShop_id() + ".html" : "http://www.wbx365.com/wap/shop/goods/shop_id/" + shopInfo.getShop_id() + ".html");
+        ShareUtils.getInstance().shareImage(getContext(), "我在微百姓购物，方便、实惠！推荐你也一起来使用吧！", shopInfo.getSmall_routine_photo());
     }
 
     private void openAddress() {
