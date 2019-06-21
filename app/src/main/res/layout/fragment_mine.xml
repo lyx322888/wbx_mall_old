@@ -247,7 +247,7 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_marginTop="10dp"
-                                android:text="免单活动"
+                                android:text="累积免单"
                                 android:textSize="12sp" />
                         </LinearLayout>
                         <LinearLayout
