@@ -48,7 +48,7 @@ public class MerchantDataAdapter extends RecyclerView.Adapter<MerchantDataAdapte
         GlideUtils.showMediumPic(context, holder.iv_photo, list.get(position).getPhoto().contains("http://") ? list.get(position).getPhoto().contains("wbx365888") ? list.get(position).getPhoto() + "?imageView2/1/w/200/h/200" : list.get(position).getPhoto() : "http://www.wbx365.com" + list.get(position).getPhoto());
         holder.tv_name.setText(list.get(position).getShop_name());
         holder.tv_price.setText("营业额 ￥ " + list.get(position).getTurnover());
-        holder.tv_num.setText("人气浏览量 " + list.get(position).getOrder_num());
+        holder.tv_num.setText("人气 " + list.get(position).getView());
         //当当前的item为最后一个时隐藏view
         if (position == list.size() - 1) {
             holder.bottomLine.setVisibility(View.GONE);

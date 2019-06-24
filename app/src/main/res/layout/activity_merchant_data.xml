@@ -40,7 +40,7 @@
                 android:layout_marginBottom="4dp"
                 android:layout_weight="1"
                 android:gravity="center"
-                android:text="商家人气排行榜"
+                android:text="商家销量排行榜"
                 android:textColor="@color/colorWhite"
                 android:textSize="15sp" />
 
