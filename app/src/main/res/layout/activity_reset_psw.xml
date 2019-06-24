@@ -19,8 +19,8 @@
                 android:layout_width="15dp"
                 android:layout_height="15dp"
                 android:layout_alignParentBottom="true"
-                android:layout_marginBottom="10dp"
                 android:layout_marginLeft="10dp"
+                android:layout_marginBottom="10dp"
                 android:src="@drawable/w_return"
                 android:tint="@color/colorWhite" />
 
@@ -34,19 +34,18 @@
             android:layout_marginBottom="4dp"
             android:layout_weight="1"
             android:gravity="center"
-            android:text="修改密码"
+            android:text="修改登录密码"
             android:textColor="@color/colorWhite"
             android:textSize="15sp" />
 
-        <RelativeLayout
+        <View
             android:layout_width="60dp"
-            android:layout_height="60dp"></RelativeLayout>
+            android:layout_height="60dp" />
     </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="45dp"
-        android:layout_marginTop="20dp"
         android:background="@color/colorWhite"
         android:orientation="horizontal">
 
@@ -55,18 +54,20 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_marginLeft="10dp"
+            android:minEms="6"
             android:text="旧密码"
-            android:textSize="13dp" />
+            android:textColor="@color/text_black"
+            android:textSize="13sp" />
 
         <EditText
             android:id="@+id/reset_psw_old_edit"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_marginLeft="43dp"
             android:background="@color/colorWhite"
             android:gravity="center|left"
             android:hint="请输入旧密码"
             android:inputType="textPassword"
+            android:textColor="@color/text_black"
             android:textSize="13sp" />
 
     </LinearLayout>
@@ -88,18 +89,20 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_marginLeft="10dp"
+            android:minEms="6"
             android:text="新设密码"
-            android:textSize="13dp" />
+            android:textColor="@color/text_black"
+            android:textSize="13sp" />
 
         <EditText
             android:id="@+id/reset_psw_new_edit"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_marginLeft="28dp"
             android:background="@color/colorWhite"
             android:gravity="center|left"
             android:hint="请输入新的密码"
             android:inputType="textPassword"
+            android:textColor="@color/text_black"
             android:textSize="13sp" />
 
     </LinearLayout>
@@ -121,18 +124,20 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_marginLeft="10dp"
+            android:minEms="6"
             android:text="确认密码"
-            android:textSize="13dp" />
+            android:textColor="@color/text_black"
+            android:textSize="13sp" />
 
         <EditText
             android:id="@+id/reset_psw_affirm_edit"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_marginLeft="28dp"
             android:background="@color/colorWhite"
             android:gravity="center|left"
             android:hint="再次确认密码"
             android:inputType="textPassword"
+            android:textColor="@color/text_black"
             android:textSize="13sp" />
 
     </LinearLayout>
@@ -150,5 +155,6 @@
         android:layout_margin="30dp"
         android:background="@drawable/text_view_bg_3"
         android:text="立即修改"
-        android:textColor="@color/colorWhite" />
+        android:textColor="@color/colorWhite"
+        android:textSize="15sp" />
 </LinearLayout>

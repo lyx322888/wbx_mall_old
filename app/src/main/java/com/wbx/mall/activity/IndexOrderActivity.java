@@ -6,6 +6,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
 import android.support.v4.view.ViewPager;
+import android.view.View;
 
 import com.wbx.mall.R;
 import com.wbx.mall.base.BaseActivity;
@@ -50,6 +51,7 @@ public class IndexOrderActivity extends BaseActivity {
     public void setListener() {
 
     }
+
     private class OrderPageAdapter extends FragmentStatePagerAdapter {
         public OrderPageAdapter(FragmentManager fm) {
             super(fm);
@@ -70,5 +72,9 @@ public class IndexOrderActivity extends BaseActivity {
         public int getCount() {
             return title.length;
         }
+    }
+
+    public void onBack(View view) {
+        finish();
     }
 }

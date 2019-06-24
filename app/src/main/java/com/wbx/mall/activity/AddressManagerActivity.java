@@ -85,8 +85,8 @@ public class AddressManagerActivity extends BaseActivity implements BaseAdapter.
 
     @Override
     public void setListener() {
-        mAdapter.setOnItemClickListener(R.id.item_address_del_tv, AddressManagerActivity.this);
-        mAdapter.setOnItemClickListener(R.id.item_address_edit_tv, AddressManagerActivity.this);
+        mAdapter.setOnItemClickListener(R.id.item_address_del_tv, this);
+        mAdapter.setOnItemClickListener(R.id.item_address_edit_tv, this);
         mAdapter.setOnItemClickListener(R.id.root_view, new BaseAdapter.ItemClickListener() {
             @Override
             public void onItemClicked(View view, int position) {

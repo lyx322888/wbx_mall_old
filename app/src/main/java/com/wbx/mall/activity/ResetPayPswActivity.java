@@ -60,23 +60,25 @@ public class ResetPayPswActivity extends BaseActivity {
 
     @OnClick(R.id.sms_code_btn)
     public void getCode() {
-        LoadingDialog.showDialogForLoading(mActivity, "发送中...", true);
-        new MyHttp().doPost(Api.getDefault().sendSMSCode(userInfo.getMobile()), new HttpListener() {
-            @Override
-            public void onSuccess(JSONObject result) {
-                timer.start();
-            }
+        if (isSuccess(false)) {
+            LoadingDialog.showDialogForLoading(mActivity, "发送中...", true);
+            new MyHttp().doPost(Api.getDefault().sendSMSCode(userInfo.getMobile()), new HttpListener() {
+                @Override
+                public void onSuccess(JSONObject result) {
+                    showShortToast(result.getString("msg"));
+                    timer.start();
+                }
 
-            @Override
-            public void onError(int code) {
+                @Override
+                public void onError(int code) {
 
-            }
-        });
-
+                }
+            });
+        }
     }
 
     public void reset(View view) {
-        if (isSuccess()) {
+        if (isSuccess(true)) {
             String payPswStr = payPsw.getText().toString();
             String md5PayPsw = new MD5().EncoderByMd5(new MD5().EncoderByMd5(payPswStr));
             new MyHttp().doPost(Api.getDefault().resetPayPassword(SPUtils.getSharedStringData(mActivity, AppConfig.LOGIN_TOKEN), SMSEdit.getText().toString(), userInfo.getMobile(), md5PayPsw), new HttpListener() {
@@ -95,7 +97,7 @@ public class ResetPayPswActivity extends BaseActivity {
 
     }
 
-    private boolean isSuccess() {
+    private boolean isSuccess(boolean isSMS) {
         if ("".equals(payPsw.getText().toString())) {
             showShortToast("请输入新的密码");
             return false;
@@ -104,13 +106,15 @@ public class ResetPayPswActivity extends BaseActivity {
             showShortToast("请再次输入密码");
             return false;
         }
-        if ("".equals(SMSEdit.getText().toString())) {
-            showShortToast("请输入验证码");
-            return false;
-        }
         if (!payPsw.getText().toString().equals(paySecondPsw.getText().toString())) {
             showShortToast("两次输入的密码不同");
             return false;
+        }
+        if (isSMS) {
+            if ("".equals(SMSEdit.getText().toString())) {
+                showShortToast("请输入验证码");
+                return false;
+            }
         }
         return true;
     }

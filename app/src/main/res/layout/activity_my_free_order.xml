@@ -34,7 +34,7 @@
             android:layout_marginBottom="4dp"
             android:layout_weight="1"
             android:gravity="center"
-            android:text="我的免单"
+            android:text="分享免单"
             android:textColor="@color/colorWhite"
             android:textSize="15sp" />
 

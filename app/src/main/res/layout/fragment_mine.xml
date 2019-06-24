@@ -99,6 +99,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="我的微米"
+                            android:textColor="@color/text_black"
                             android:textSize="@dimen/text_size_13sp" />
                     </LinearLayout>
 
@@ -131,6 +132,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="我的积分"
+                            android:textColor="@color/text_black"
                             android:textSize="@dimen/text_size_13sp" />
                     </LinearLayout>
 
@@ -163,8 +165,10 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="我的红包"
+                            android:textColor="@color/text_black"
                             android:textSize="@dimen/text_size_13sp" />
                     </LinearLayout>
+
                     <ImageView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -195,6 +199,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="免单+1劵"
+                            android:textColor="@color/text_black"
                             android:textSize="@dimen/text_size_13sp" />
                     </LinearLayout>
                 </LinearLayout>
@@ -216,13 +221,8 @@
                         android:layout_marginLeft="13dp"
                         android:gravity="center_vertical"
                         android:text="我的常用"
+                        android:textColor="@color/text_black"
                         android:textStyle="bold" />
-
-                    <View
-                        android:layout_width="350dp"
-                        android:layout_height="1px"
-                        android:layout_gravity="center"
-                        android:background="@color/color_gray_line" />
 
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -248,8 +248,10 @@
                                 android:layout_height="wrap_content"
                                 android:layout_marginTop="10dp"
                                 android:text="累积免单"
+                                android:textColor="@color/text_black"
                                 android:textSize="12sp" />
                         </LinearLayout>
+
                         <LinearLayout
                             android:id="@+id/ll_free_sheet"
                             android:layout_width="0dp"
@@ -262,13 +264,16 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:src="@drawable/free_sheep" />
+
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_marginTop="6dp"
                                 android:text="分享免单"
+                                android:textColor="@color/text_black"
                                 android:textSize="12sp" />
                         </LinearLayout>
+
                         <LinearLayout
                             android:id="@+id/ll_my_collection"
                             android:layout_width="0dp"
@@ -287,6 +292,7 @@
                                 android:layout_height="wrap_content"
                                 android:layout_marginTop="10dp"
                                 android:text="我的收藏"
+                                android:textColor="@color/text_black"
                                 android:textSize="12sp" />
                         </LinearLayout>
                         <!--<LinearLayout-->
@@ -327,6 +333,7 @@
                                 android:layout_height="wrap_content"
                                 android:layout_marginTop="10dp"
                                 android:text="到店付款"
+                                android:textColor="@color/text_black"
                                 android:textSize="12sp" />
                         </LinearLayout>
                     </LinearLayout>
@@ -350,13 +357,9 @@
                         android:layout_marginLeft="13dp"
                         android:gravity="center_vertical"
                         android:text="服务中心"
+                        android:textColor="@color/text_black"
                         android:textStyle="bold" />
 
-                    <View
-                        android:layout_width="350dp"
-                        android:layout_height="1px"
-                        android:layout_gravity="center"
-                        android:background="@color/color_gray_line" />
 
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -365,24 +368,24 @@
                         android:orientation="horizontal">
 
                         <!--<LinearLayout-->
-                            <!--android:id="@+id/ll_intelligent_pay"-->
-                            <!--android:layout_width="0dp"-->
-                            <!--android:layout_height="match_parent"-->
-                            <!--android:layout_weight="1"-->
-                            <!--android:gravity="center"-->
-                            <!--android:orientation="vertical">-->
+                        <!--android:id="@+id/ll_intelligent_pay"-->
+                        <!--android:layout_width="0dp"-->
+                        <!--android:layout_height="match_parent"-->
+                        <!--android:layout_weight="1"-->
+                        <!--android:gravity="center"-->
+                        <!--android:orientation="vertical">-->
 
-                            <!--<ImageView-->
-                                <!--android:layout_width="wrap_content"-->
-                                <!--android:layout_height="wrap_content"-->
-                                <!--android:src="@drawable/icon_intelligent_pay" />-->
+                        <!--<ImageView-->
+                        <!--android:layout_width="wrap_content"-->
+                        <!--android:layout_height="wrap_content"-->
+                        <!--android:src="@drawable/icon_intelligent_pay" />-->
 
-                            <!--<TextView-->
-                                <!--android:layout_width="wrap_content"-->
-                                <!--android:layout_height="wrap_content"-->
-                                <!--android:layout_marginTop="10dp"-->
-                                <!--android:text="智能付款"-->
-                                <!--android:textSize="12sp" />-->
+                        <!--<TextView-->
+                        <!--android:layout_width="wrap_content"-->
+                        <!--android:layout_height="wrap_content"-->
+                        <!--android:layout_marginTop="10dp"-->
+                        <!--android:text="智能付款"-->
+                        <!--android:textSize="12sp" />-->
                         <!--</LinearLayout>-->
                         <LinearLayout
                             android:id="@+id/ll_red_envelope"
@@ -402,8 +405,10 @@
                                 android:layout_height="wrap_content"
                                 android:layout_marginTop="2dp"
                                 android:text="我的红包"
+                                android:textColor="@color/text_black"
                                 android:textSize="12sp" />
                         </LinearLayout>
+
                         <LinearLayout
                             android:id="@+id/ll_my_integral"
                             android:layout_width="0dp"
@@ -422,6 +427,7 @@
                                 android:layout_height="wrap_content"
                                 android:layout_marginTop="10dp"
                                 android:text="积分兑换"
+                                android:textColor="@color/text_black"
                                 android:textSize="12sp" />
                         </LinearLayout>
 
@@ -443,6 +449,7 @@
                                 android:layout_height="wrap_content"
                                 android:layout_marginTop="13dp"
                                 android:text="扫码点餐"
+                                android:textColor="@color/text_black"
                                 android:textSize="12sp" />
                         </LinearLayout>
 
@@ -464,6 +471,7 @@
                                 android:layout_height="wrap_content"
                                 android:layout_marginTop="10dp"
                                 android:text="我的订单"
+                                android:textColor="@color/text_black"
                                 android:textSize="12sp" />
                         </LinearLayout>
                     </LinearLayout>
@@ -486,13 +494,9 @@
                         android:layout_marginLeft="13dp"
                         android:gravity="center_vertical"
                         android:text="账户管理"
+                        android:textColor="@color/text_black"
                         android:textStyle="bold" />
 
-                    <View
-                        android:layout_width="350dp"
-                        android:layout_height="1px"
-                        android:layout_gravity="center"
-                        android:background="@color/color_gray_line" />
 
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -518,6 +522,7 @@
                                 android:layout_height="wrap_content"
                                 android:layout_marginTop="10dp"
                                 android:text="帮助中心"
+                                android:textColor="@color/text_black"
                                 android:textSize="12sp" />
                         </LinearLayout>
 
@@ -539,6 +544,7 @@
                                 android:layout_height="wrap_content"
                                 android:layout_marginTop="10dp"
                                 android:text="消息中心"
+                                android:textColor="@color/text_black"
                                 android:textSize="12sp" />
                         </LinearLayout>
 
@@ -560,6 +566,7 @@
                                 android:layout_height="wrap_content"
                                 android:layout_marginTop="10dp"
                                 android:text="地址管理"
+                                android:textColor="@color/text_black"
                                 android:textSize="12sp" />
                         </LinearLayout>
 
@@ -581,6 +588,7 @@
                                 android:layout_height="wrap_content"
                                 android:layout_marginTop="10dp"
                                 android:text="账户中心"
+                                android:textColor="@color/text_black"
                                 android:textSize="12sp" />
                         </LinearLayout>
 
@@ -604,13 +612,9 @@
                         android:layout_marginLeft="13dp"
                         android:gravity="center_vertical"
                         android:text="我的活动"
+                        android:textColor="@color/text_black"
                         android:textStyle="bold" />
 
-                    <View
-                        android:layout_width="350dp"
-                        android:layout_height="1px"
-                        android:layout_gravity="center"
-                        android:background="@color/color_gray_line" />
 
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -636,6 +640,7 @@
                                 android:layout_height="wrap_content"
                                 android:layout_marginTop="10dp"
                                 android:text="推荐开店"
+                                android:textColor="@color/text_black"
                                 android:textSize="12sp" />
                         </LinearLayout>
 
@@ -658,8 +663,10 @@
                                 android:layout_height="wrap_content"
                                 android:layout_marginTop="7dp"
                                 android:text="我的预定"
+                                android:textColor="@color/text_black"
                                 android:textSize="12sp" />
                         </LinearLayout>
+
                         <LinearLayout
                             android:layout_width="0dp"
                             android:layout_height="match_parent"

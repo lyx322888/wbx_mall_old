@@ -6,6 +6,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 
@@ -39,8 +40,8 @@ public class FindFragment extends BaseFragment {
     RelativeLayout mTitleLayout;
     @Bind(R.id.ll_container)
     LinearLayout llContainer;
-    @Bind(R.id.ll_empty)
-    LinearLayout llEmpty;
+    @Bind(R.id.img_empty)
+    ImageView mImgEmpty;
     private MyHttp myHttp;
     private BusinessCircleAdapter businessCircleAdapter;
 
@@ -81,10 +82,10 @@ public class FindFragment extends BaseFragment {
             public void onSuccess(JSONObject result) {
                 List<BusinessCircleBean> data = JSONArray.parseArray(result.getString("data"), BusinessCircleBean.class);
                 if (data == null) {
-                    llEmpty.setVisibility(View.VISIBLE);
+                    mImgEmpty.setVisibility(View.VISIBLE);
                     businessCircleAdapter.update(new ArrayList<BusinessCircleBean>());
                 } else {
-                    llEmpty.setVisibility(View.GONE);
+                    mImgEmpty.setVisibility(View.GONE);
                     businessCircleAdapter.update(data);
                 }
             }

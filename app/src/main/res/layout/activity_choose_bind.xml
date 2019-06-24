@@ -19,8 +19,8 @@
                 android:layout_width="15dp"
                 android:layout_height="15dp"
                 android:layout_alignParentBottom="true"
-                android:layout_marginBottom="10dp"
                 android:layout_marginLeft="10dp"
+                android:layout_marginBottom="10dp"
                 android:src="@drawable/w_return"
                 android:tint="@color/colorWhite" />
         </RelativeLayout>
@@ -37,9 +37,9 @@
             android:textColor="@color/colorWhite"
             android:textSize="15sp" />
 
-        <RelativeLayout
+        <View
             android:layout_width="60dp"
-            android:layout_height="60dp"></RelativeLayout>
+            android:layout_height="60dp" />
     </LinearLayout>
 
     <LinearLayout
@@ -63,7 +63,9 @@
             android:layout_gravity="center"
             android:layout_marginLeft="20dp"
             android:layout_weight="1"
-            android:text="支付宝" />
+            android:text="支付宝"
+            android:textColor="@color/text_black"
+            android:textSize="15sp" />
 
 
         <ImageView
@@ -134,7 +136,9 @@
             android:layout_gravity="center"
             android:layout_marginLeft="20dp"
             android:layout_weight="1"
-            android:text="银行卡" />
+            android:text="银行卡"
+            android:textColor="@color/text_black"
+            android:textSize="15sp" />
 
 
         <ImageView

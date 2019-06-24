@@ -24,7 +24,6 @@
                 android:src="@drawable/w_return"
                 android:tint="@color/colorWhite" />
 
-
         </RelativeLayout>
 
         <TextView
@@ -40,7 +39,7 @@
 
         <RelativeLayout
             android:layout_width="60dp"
-            android:layout_height="60dp"/>
+            android:layout_height="60dp" />
     </LinearLayout>
 
     <android.support.v4.widget.NestedScrollView
@@ -67,12 +66,14 @@
                     android:src="@drawable/user" />
 
                 <TextView
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:layout_marginLeft="10dp"
                     android:layout_weight="1"
-                    android:text="上传头像" />
+                    android:text="上传头像"
+                    android:textColor="@color/text_black"
+                    android:textSize="15sp" />
 
                 <com.wbx.mall.widget.CircleImageView
                     android:id="@+id/head_pic_im"
@@ -107,12 +108,14 @@
                     android:src="@drawable/nickname" />
 
                 <TextView
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:layout_marginLeft="10dp"
                     android:layout_weight="1"
-                    android:text="用户昵称" />
+                    android:text="用户昵称"
+                    android:textColor="@color/text_black"
+                    android:textSize="15sp" />
 
                 <TextView
                     android:id="@+id/activity_personal_nick_name_tv"
@@ -122,7 +125,8 @@
                     android:background="@color/colorWhite"
                     android:hint="输入昵称"
                     android:src="@drawable/ic_image_loading"
-                    android:textSize="13sp" />
+                    android:textColor="@color/text_black"
+                    android:textSize="15sp" />
 
                 <ImageView
                     android:layout_width="15dp"
@@ -148,12 +152,14 @@
                     android:src="@drawable/address_management" />
 
                 <TextView
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:layout_marginLeft="10dp"
                     android:layout_weight="1"
-                    android:text="收货地址" />
+                    android:text="收货地址"
+                    android:textColor="@color/text_black"
+                    android:textSize="15sp" />
 
 
                 <ImageView
@@ -180,12 +186,14 @@
                     android:src="@drawable/pay_password" />
 
                 <TextView
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:layout_marginLeft="10dp"
                     android:layout_weight="1"
-                    android:text="微米充值" />
+                    android:text="微米充值"
+                    android:textColor="@color/text_black"
+                    android:textSize="15sp" />
 
 
                 <ImageView
@@ -215,13 +223,88 @@
                     android:src="@drawable/log_list" />
 
                 <TextView
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:layout_marginLeft="10dp"
                     android:layout_weight="1"
-                    android:text="微米明细" />
+                    android:text="微米明细"
+                    android:textColor="@color/text_black"
+                    android:textSize="15sp" />
 
+
+                <ImageView
+                    android:layout_width="15dp"
+                    android:layout_height="15dp"
+                    android:layout_gravity="center"
+                    android:layout_marginLeft="10dp"
+                    android:src="@drawable/more" />
+            </LinearLayout>
+
+            <View
+                style="@style/GrayLineStyle"
+                android:layout_marginLeft="10dp" />
+
+            <LinearLayout
+                android:id="@+id/bind_pay_account_layout"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:background="@color/colorWhite"
+                android:orientation="horizontal"
+                android:padding="10dp">
+
+                <ImageView
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:layout_gravity="center"
+                    android:src="@drawable/binding_pay_account" />
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginLeft="10dp"
+                    android:layout_weight="1"
+                    android:text="绑定账户"
+                    android:textColor="@color/text_black"
+                    android:textSize="15sp" />
+
+
+                <ImageView
+                    android:layout_width="15dp"
+                    android:layout_height="15dp"
+                    android:layout_gravity="center"
+                    android:layout_marginLeft="10dp"
+                    android:src="@drawable/more" />
+            </LinearLayout>
+
+            <View
+                style="@style/GrayLineStyle"
+                android:layout_marginLeft="10dp" />
+
+            <LinearLayout
+                android:id="@+id/agent_layout"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:background="@color/colorWhite"
+                android:orientation="horizontal"
+                android:padding="10dp">
+
+                <ImageView
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:layout_gravity="center"
+                    android:src="@drawable/zhanghu_icon_daili" />
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginLeft="10dp"
+                    android:layout_weight="1"
+                    android:text="内部代理"
+                    android:textColor="@color/text_black"
+                    android:textSize="15sp" />
 
                 <ImageView
                     android:layout_width="15dp"
@@ -248,86 +331,13 @@
                     android:src="@drawable/binding" />
 
                 <TextView
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:layout_marginLeft="10dp"
                     android:layout_weight="1"
-                    android:text="绑定手机" />
-
-
-                <ImageView
-                    android:layout_width="15dp"
-                    android:layout_height="15dp"
-                    android:layout_gravity="center"
-                    android:layout_marginLeft="10dp"
-                    android:src="@drawable/more" />
-            </LinearLayout>
-
-            <View
-                style="@style/GrayLineStyle"
-                android:layout_marginLeft="10dp" />
-
-            <LinearLayout
-                android:id="@+id/bind_pay_account_layout"
-                android:layout_width="match_parent"
-                android:layout_height="40dp"
-                android:layout_marginTop="10dp"
-                android:background="@color/colorWhite"
-                android:orientation="horizontal"
-                android:padding="10dp">
-
-                <ImageView
-                    android:layout_width="20dp"
-                    android:layout_height="20dp"
-                    android:layout_gravity="center"
-                    android:src="@drawable/binding_pay_account" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:layout_marginLeft="10dp"
-                    android:layout_weight="1"
-                    android:text="绑定账户" />
-
-
-                <ImageView
-                    android:layout_width="15dp"
-                    android:layout_height="15dp"
-                    android:layout_gravity="center"
-                    android:layout_marginLeft="10dp"
-                    android:src="@drawable/more" />
-            </LinearLayout>
-
-            <View
-                style="@style/GrayLineStyle"
-                android:layout_marginLeft="10dp" />
-
-
-            <LinearLayout
-                android:id="@+id/agent_layout"
-                android:layout_width="match_parent"
-                android:layout_height="40dp"
-                android:layout_marginTop="10dp"
-                android:background="@color/colorWhite"
-                android:orientation="horizontal"
-                android:padding="10dp">
-
-                <ImageView
-                    android:layout_width="20dp"
-                    android:layout_height="20dp"
-                    android:layout_gravity="center"
-                    android:src="@drawable/zhanghu_icon_daili" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:layout_marginLeft="10dp"
-                    android:layout_weight="1"
-                    android:text="内部代理" />
-
+                    android:text="绑定手机"
+                    android:textColor="@color/text_black" />
 
                 <ImageView
                     android:layout_width="15dp"
@@ -345,6 +355,7 @@
                 android:id="@+id/personal_reset_psw_ll"
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
+                android:layout_marginTop="10dp"
                 android:background="@color/colorWhite"
                 android:orientation="horizontal"
                 android:padding="10dp">
@@ -356,13 +367,14 @@
                     android:src="@drawable/lock" />
 
                 <TextView
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:layout_marginLeft="10dp"
                     android:layout_weight="1"
-                    android:text="修改登录密码" />
-
+                    android:text="修改登录密码"
+                    android:textColor="@color/text_black"
+                    android:textSize="15sp" />
 
                 <ImageView
                     android:layout_width="15dp"
@@ -391,12 +403,14 @@
                     android:src="@drawable/zzz" />
 
                 <TextView
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:layout_marginLeft="10dp"
                     android:layout_weight="1"
-                    android:text="修改支付密码" />
+                    android:text="重置支付密码"
+                    android:textColor="@color/text_black"
+                    android:textSize="15sp" />
 
 
                 <ImageView
@@ -420,15 +434,17 @@
                     android:layout_width="20dp"
                     android:layout_height="20dp"
                     android:layout_gravity="center"
-                    android:src="@drawable/lock" />
+                    android:src="@drawable/icon_about" />
 
                 <TextView
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:layout_marginLeft="10dp"
                     android:layout_weight="1"
-                    android:text="关于我们" />
+                    android:text="关于我们"
+                    android:textColor="@color/text_black"
+                    android:textSize="15sp" />
 
 
                 <ImageView
@@ -455,16 +471,17 @@
                     android:layout_width="20dp"
                     android:layout_height="20dp"
                     android:layout_gravity="center"
-                    android:src="@drawable/lock" />
+                    android:src="@drawable/icon_mark" />
 
                 <TextView
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:layout_marginLeft="10dp"
                     android:layout_weight="1"
-                    android:text="为我们评分" />
-
+                    android:text="为我们评分"
+                    android:textColor="@color/text_black"
+                    android:textSize="15sp" />
 
                 <ImageView
                     android:layout_width="15dp"

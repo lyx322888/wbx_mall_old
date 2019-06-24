@@ -63,7 +63,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="福建省厦门市思明区观音山花莲路11号"
-                android:textColor="@color/black"
+                android:textColor="@color/text_black"
                 android:textSize="13sp" />
         </LinearLayout>
 
@@ -89,6 +89,7 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:text="默认地址"
+                    android:textColor="@color/text_black"
                     android:textSize="12sp" />
             </RelativeLayout>
 

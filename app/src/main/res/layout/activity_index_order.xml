@@ -15,7 +15,20 @@
 
         <RelativeLayout
             android:layout_width="60dp"
-            android:layout_height="60dp" />
+            android:layout_height="60dp"
+            android:onClick="onBack">
+
+            <ImageView
+                android:layout_width="15dp"
+                android:layout_height="15dp"
+                android:layout_alignParentBottom="true"
+                android:layout_marginLeft="10dp"
+                android:layout_marginBottom="10dp"
+                android:src="@drawable/w_return"
+                android:tint="@color/colorWhite" />
+
+
+        </RelativeLayout>
 
         <TextView
             android:layout_width="wrap_content"
@@ -28,7 +41,7 @@
             android:textColor="@color/colorWhite"
             android:textSize="15sp" />
 
-        <RelativeLayout
+        <View
             android:layout_width="60dp"
             android:layout_height="60dp" />
     </LinearLayout>

@@ -54,9 +54,14 @@ public class BusinessCircleAdapter extends RecyclerView.Adapter<BusinessCircleAd
 
     public void update(List<BusinessCircleBean> data) {
         lstData.clear();
+        addList(data);
+    }
+
+    public void addList(List<BusinessCircleBean> data) {
         lstData.addAll(data);
         notifyDataSetChanged();
     }
+
 
     @Override
     public MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {

@@ -27,19 +27,20 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:layout_marginLeft="15dp"
+                    android:minEms="5"
                     android:text="银行账号"
-                    android:textColor="@color/black" />
+                    android:textColor="@color/black"
+                    android:textSize="15sp" />
 
                 <EditText
                     android:id="@+id/bank_edit"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_marginLeft="10dp"
                     android:background="@null"
                     android:gravity="center|left"
                     android:hint="请输入银行账号"
                     android:inputType="numberDecimal"
-                    android:textSize="13sp" />
+                    android:textSize="14sp" />
             </LinearLayout>
 
             <View
@@ -57,18 +58,19 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:layout_marginLeft="15dp"
+                    android:minEms="5"
                     android:text="所属银行"
-                    android:textColor="@color/black" />
+                    android:textColor="@color/black"
+                    android:textSize="15sp" />
 
                 <EditText
                     android:id="@+id/bank_name_edit"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_marginLeft="10dp"
                     android:background="@null"
                     android:gravity="center|left"
                     android:hint="请输入所属银行"
-                    android:textSize="13sp" />
+                    android:textSize="14sp" />
             </LinearLayout>
 
             <View
@@ -86,18 +88,19 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:layout_marginLeft="15dp"
+                    android:minEms="5"
                     android:text="真实姓名"
-                    android:textColor="@color/black" />
+                    android:textColor="@color/black"
+                    android:textSize="15sp" />
 
                 <EditText
                     android:id="@+id/real_name_edit"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_marginLeft="10dp"
                     android:background="@null"
                     android:gravity="center|left"
                     android:hint="请输入持卡人姓名"
-                    android:textSize="13sp" />
+                    android:textSize="14sp" />
             </LinearLayout>
 
             <View
@@ -116,18 +119,19 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:layout_marginLeft="15dp"
+                    android:minEms="5"
                     android:text="开户支行"
-                    android:textColor="@color/black" />
+                    android:textColor="@color/black"
+                    android:textSize="15sp" />
 
                 <EditText
                     android:id="@+id/subbranch_edit"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_marginLeft="10dp"
                     android:background="@null"
                     android:gravity="center|left"
                     android:hint="请输入开户支行"
-                    android:textSize="13sp" />
+                    android:textSize="14sp" />
             </LinearLayout>
 
             <View
@@ -138,7 +142,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:padding="15dp"
-                android:text="实例: 广东广州天河工业支行" />
+                android:text="实例: 广东广州天河工业支行"
+                android:textSize="15sp" />
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -151,19 +156,20 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:layout_marginLeft="15dp"
+                    android:minEms="5"
                     android:text="手机号码"
-                    android:textColor="@color/black" />
+                    android:textColor="@color/black"
+                    android:textSize="15sp" />
 
                 <EditText
                     android:id="@+id/mobile_edit"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_marginLeft="10dp"
                     android:background="@null"
                     android:gravity="center|left"
                     android:hint="请输入手机号码"
                     android:inputType="phone"
-                    android:textSize="13sp" />
+                    android:textSize="14sp" />
             </LinearLayout>
 
             <View
@@ -181,20 +187,21 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:layout_marginLeft="15dp"
+                    android:minEms="5"
                     android:text="验证码"
-                    android:textColor="@color/black" />
+                    android:textColor="@color/black"
+                    android:textSize="15sp" />
 
                 <EditText
                     android:id="@+id/sms_code_edit"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
-                    android:layout_marginLeft="24dp"
                     android:layout_weight="1"
                     android:background="@null"
                     android:gravity="center|left"
                     android:hint="请输入验证码"
                     android:inputType="number"
-                    android:textSize="13sp" />
+                    android:textSize="14sp" />
 
                 <View
                     android:layout_width="1px"
@@ -208,7 +215,7 @@
                     android:layout_height="wrap_content"
                     android:background="@null"
                     android:text="获取验证码"
-                    android:textSize="12sp" />
+                    android:textSize="14sp" />
             </LinearLayout>
 
             <View
