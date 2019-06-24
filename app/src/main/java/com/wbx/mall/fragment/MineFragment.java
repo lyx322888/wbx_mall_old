@@ -237,7 +237,7 @@ public class MineFragment extends BaseFragment implements BaseRefreshListener {
                 ScanOrderListActivity.actionStart(getActivity());
                 break;
             case R.id.ll_invite:
-                InviteActivity.actionStart(getContext(), "http://www.wbx365.com/Wbxwaphome/apply/activity.html?type=2", false);
+                InviteActivity.actionStart(getContext(), "https://www.wbx365.com/Wbxwaphome/purchase/index.html", false);
                 break;
             case R.id.ll_payment_store:
                 IntelligentPayListActivity.actionStart(getActivity());
