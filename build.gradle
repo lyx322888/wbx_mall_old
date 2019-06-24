@@ -32,7 +32,7 @@ ext {
     applicationId = "com.wbx.mall"
     minSdkVersion = 19
     targetSdkVersion = 26
-    versionCode = 36
-    versionName = "3.8.0"
+    versionCode = 37
+    versionName = "3.7.1"
     supportVersion = "27.1.1"
 }

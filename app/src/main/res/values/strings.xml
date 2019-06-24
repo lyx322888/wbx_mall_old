@@ -107,12 +107,4 @@
         <item>@drawable/agent_sales</item>
     </string-array>
 
-    <string name="gravity_left">left</string>
-    <string name="gravity_center">center</string>
-    <string name="gravity_right">right</string>
-
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
-    <string name="title_activity_free_detail_activityn2">FreeActivityDetailActivityn2Activity
-    </string>
 </resources>

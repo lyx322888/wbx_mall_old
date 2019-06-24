@@ -24,7 +24,6 @@
                 android:src="@drawable/w_return"
                 android:tint="@color/colorWhite" />
 
-
         </RelativeLayout>
 
         <TextView
@@ -38,9 +37,9 @@
             android:textColor="@color/colorWhite"
             android:textSize="15sp" />
 
-        <RelativeLayout
+        <View
             android:layout_width="60dp"
-            android:layout_height="60dp"></RelativeLayout>
+            android:layout_height="60dp" />
     </LinearLayout>
 
     <android.support.v4.widget.NestedScrollView
@@ -159,13 +158,13 @@
 
             <Button
                 android:layout_width="match_parent"
-                android:layout_height="30dp"
+                android:layout_height="40dp"
                 android:layout_margin="30dp"
                 android:background="@drawable/text_view_bg_3"
                 android:onClick="reset"
                 android:text="立即修改"
-                android:textColor="@color/colorWhite"
-                android:textSize="13sp" />
+                android:textColor="@color/colorWhite" />
+
         </LinearLayout>
     </android.support.v4.widget.NestedScrollView>
 </LinearLayout>
