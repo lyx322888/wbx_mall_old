@@ -23,7 +23,7 @@ import com.tencent.mm.opensdk.modelpay.PayReq;
 import com.tencent.mm.opensdk.openapi.IWXAPI;
 import com.tencent.mm.opensdk.openapi.WXAPIFactory;
 import com.wbx.mall.R;
-import com.wbx.mall.adapter.PayMentAdapter;
+import com.wbx.mall.adapter.PayWayAdapter;
 import com.wbx.mall.adapter.SubmitOrderGoodsAdapter;
 import com.wbx.mall.api.Api;
 import com.wbx.mall.api.HttpListener;
@@ -124,7 +124,7 @@ public class SubmitOrderActivity extends BaseActivity {
     private List<GoodsInfo2> lstGoods = new ArrayList<>();
     private List<PaymentInfo> lstPayType = new ArrayList<>();
     private SubmitOrderGoodsAdapter orderAdapter;
-    private PayMentAdapter mPayMentAdapter;
+    private PayWayAdapter mPayWayAdapter;
     private Dialog dialog;
     private boolean isBook;
     private MyHttp myHttp;
@@ -186,8 +186,8 @@ public class SubmitOrderActivity extends BaseActivity {
 
     private void initPayTypeRv() {
         rvPayType.setLayoutManager(new LinearLayoutManager(this));
-        mPayMentAdapter = new PayMentAdapter(lstPayType, mContext);
-        rvPayType.setAdapter(mPayMentAdapter);
+        mPayWayAdapter = new PayWayAdapter(lstPayType, mContext);
+        rvPayType.setAdapter(mPayWayAdapter);
     }
 
     private void initGoodsRv() {
@@ -249,7 +249,7 @@ public class SubmitOrderActivity extends BaseActivity {
         lstPayType.clear();
         lstPayType.addAll(JSONArray.parseArray(data.getString("payment"), PaymentInfo.class));
         lstPayType.get(0).setChecked(true);
-        mPayMentAdapter.notifyDataSetChanged();
+        mPayWayAdapter.notifyDataSetChanged();
         tvPayType.setText(lstPayType.get(0).getName());
 
         lstGoods.clear();
@@ -303,7 +303,7 @@ public class SubmitOrderActivity extends BaseActivity {
 
     @Override
     public void setListener() {
-        mPayMentAdapter.setOnItemClickListener(R.id.root_view, new BaseAdapter.ItemClickListener() {
+        mPayWayAdapter.setOnItemClickListener(R.id.root_view, new BaseAdapter.ItemClickListener() {
             @Override
             public void onItemClicked(View view, int position) {
                 payCode = lstPayType.get(position).getCode();
@@ -312,7 +312,7 @@ public class SubmitOrderActivity extends BaseActivity {
                 }
                 lstPayType.get(position).setChecked(true);
                 tvPayType.setText(lstPayType.get(position).getName());
-                mPayMentAdapter.notifyDataSetChanged();
+                mPayWayAdapter.notifyDataSetChanged();
             }
         });
     }

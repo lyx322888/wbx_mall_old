@@ -200,6 +200,8 @@ public class NearByActivity extends BaseActivity implements BaseRefreshListener 
         new MyHttp().doPost(Api.getDefault().getNearByShopList(mParams), new HttpListener() {
             @Override
             public void onSuccess(JSONObject result) {
+                mRefreshLayout.finishRefresh();
+                mRefreshLayout.finishLoadMore();
                 List<ShopInfo2> dataList = JSONArray.parseArray(result.getString("data"), ShopInfo2.class);
                 if (null == dataList) {
                     SkeletonScreen skeletonScreen =
@@ -218,15 +220,19 @@ public class NearByActivity extends BaseActivity implements BaseRefreshListener 
                     //说明下次已经没有数据了
                     canLoadMore = false;
                 }
-                mRefreshLayout.finishRefresh();
-                mRefreshLayout.finishLoadMore();
                 shopInfoList.addAll(dataList);
                 mShopAdapter.notifyDataSetChanged();
             }
 
             @Override
             public void onError(int code) {
-
+                if (code == AppConfig.ERROR_STATE.NULLDATA) {
+                    shopInfoList.clear();
+                    mShopAdapter.notifyDataSetChanged();
+                    showShortToast("暂无数据");
+                }
+                mRefreshLayout.finishRefresh();
+                mRefreshLayout.finishLoadMore();
             }
         });
     }

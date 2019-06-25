@@ -101,7 +101,8 @@ public class IndexFragment02 extends BaseFragment implements BaseRefreshListener
     LinearLayout ll_fragment02;
     @Bind(R.id.recycler_shops_visited)
     RecyclerView mShopVisited;
-
+    @Bind({R.id.tv_history})
+    TextView mTvHistory;
     private int pageNum = AppConfig.pageNum;
     private int pageSize = AppConfig.pageSize;
     private HashMap<String, Object> mParams = new HashMap<>();
@@ -389,15 +390,21 @@ public class IndexFragment02 extends BaseFragment implements BaseRefreshListener
 
     @Override
     public void getVisitShop(final VisitShopBean shopBean) {
-        VisitShopAdapter adapter = new VisitShopAdapter(shopBean.getData(), getContext());
-        mShopVisited.setAdapter(adapter);
-        adapter.notifyDataSetChanged();
-        adapter.setOnItemClickListener(R.id.root_view, new BaseAdapter.ItemClickListener() {
-            @Override
-            public void onItemClicked(View view, int position) {
-                StoreDetailActivity.actionStart(getActivity(), shopBean.getData().get(position).getGrade_id(), String.valueOf(shopBean.getData().get(position).getShop_id()));
-            }
-        });
+        final List<VisitShopBean.DataBean> data = shopBean.getData();
+        if (data == null || data.size() == 0) {
+            mTvHistory.setVisibility(View.GONE);
+            mShopVisited.setVisibility(View.GONE);
+        } else {
+            VisitShopAdapter adapter = new VisitShopAdapter(data, getContext());
+            mShopVisited.setAdapter(adapter);
+            adapter.notifyDataSetChanged();
+            adapter.setOnItemClickListener(R.id.root_view, new BaseAdapter.ItemClickListener() {
+                @Override
+                public void onItemClicked(View view, int position) {
+                    StoreDetailActivity.actionStart(getActivity(), data.get(position).getGrade_id(), String.valueOf(data.get(position).getShop_id()));
+                }
+            });
+        }
     }
 
 
@@ -501,6 +508,4 @@ public class IndexFragment02 extends BaseFragment implements BaseRefreshListener
             mLoadingDialog.dismiss();
         }
     }
-
-
 }

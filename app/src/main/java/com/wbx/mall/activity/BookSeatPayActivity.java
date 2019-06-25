@@ -20,7 +20,7 @@ import com.tencent.mm.opensdk.modelpay.PayReq;
 import com.tencent.mm.opensdk.openapi.IWXAPI;
 import com.tencent.mm.opensdk.openapi.WXAPIFactory;
 import com.wbx.mall.R;
-import com.wbx.mall.adapter.PayMentAdapter;
+import com.wbx.mall.adapter.PayWayAdapter;
 import com.wbx.mall.api.Api;
 import com.wbx.mall.api.HttpListener;
 import com.wbx.mall.api.MyHttp;
@@ -105,7 +105,7 @@ public class BookSeatPayActivity extends BaseActivity {
     TextView remarkTv;
     @Bind(R.id.book_recycler_view)
     RecyclerView mRecyclerView;
-    private PayMentAdapter mPayMentAdapter;
+    private PayWayAdapter mPayWayAdapter;
     private List<PaymentInfo> payment = new ArrayList<>();
     private String payCode = AppConfig.PayType.money;
     private String bookId;
@@ -131,8 +131,8 @@ public class BookSeatPayActivity extends BaseActivity {
     public void initView() {
         mParams.put("code", AppConfig.PayType.money);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(mContext));
-        mPayMentAdapter = new PayMentAdapter(payment, mContext);
-        mRecyclerView.setAdapter(mPayMentAdapter);
+        mPayWayAdapter = new PayWayAdapter(payment, mContext);
+        mRecyclerView.setAdapter(mPayWayAdapter);
     }
 
     @Override
@@ -153,7 +153,7 @@ public class BookSeatPayActivity extends BaseActivity {
                 bookTimeTv.setText(FormatUtil.stampToDate2(infoJsonObject.getString("reserve_time"), "yyyy年MM月dd日 HH:mm"));
                 payment.addAll(JSONArray.parseArray(result.getJSONObject("data").getString("payment"), PaymentInfo.class));
                 payment.get(0).setChecked(true);
-                mPayMentAdapter.notifyDataSetChanged();
+                mPayWayAdapter.notifyDataSetChanged();
             }
 
             @Override
@@ -165,7 +165,7 @@ public class BookSeatPayActivity extends BaseActivity {
 
     @Override
     public void setListener() {
-        mPayMentAdapter.setOnItemClickListener(R.id.root_view, new BaseAdapter.ItemClickListener() {
+        mPayWayAdapter.setOnItemClickListener(R.id.root_view, new BaseAdapter.ItemClickListener() {
             @Override
             public void onItemClicked(View view, int position) {
                 mParams.put("code", payment.get(position).getCode());
@@ -174,7 +174,7 @@ public class BookSeatPayActivity extends BaseActivity {
                     paymentBean.setChecked(false);
                 }
                 payment.get(position).setChecked(true);
-                mPayMentAdapter.notifyDataSetChanged();
+                mPayWayAdapter.notifyDataSetChanged();
             }
         });
 

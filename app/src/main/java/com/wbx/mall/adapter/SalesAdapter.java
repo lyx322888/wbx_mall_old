@@ -30,8 +30,7 @@ public class SalesAdapter extends RecyclerView.Adapter<SalesAdapter.VH> {
     @Override
     public VH onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(context).inflate(R.layout.layout_sales, parent, false);
-        VH vh = new VH(view);
-        return vh;
+        return new VH(view);
     }
 
     @Override
@@ -54,8 +53,7 @@ public class SalesAdapter extends RecyclerView.Adapter<SalesAdapter.VH> {
         TextView tvGradeName;
         TextView tvTime;
         TextView tvMoney;
-
-        public VH(View itemView) {
+        VH(View itemView) {
             super(itemView);
             ivFace = itemView.findViewById(R.id.user_face);
             tvShopName = itemView.findViewById(R.id.user_shop_name);

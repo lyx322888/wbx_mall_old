@@ -35,13 +35,13 @@
             android:layout_marginBottom="4dp"
             android:layout_weight="1"
             android:gravity="center"
-            android:text="我的星伙"
+            android:text="我的团队"
             android:textColor="@color/colorWhite"
             android:textSize="15sp" />
 
         <RelativeLayout
             android:layout_width="60dp"
-            android:layout_height="60dp"></RelativeLayout>
+            android:layout_height="60dp"/>
     </LinearLayout>
 
     <android.support.v7.widget.RecyclerView

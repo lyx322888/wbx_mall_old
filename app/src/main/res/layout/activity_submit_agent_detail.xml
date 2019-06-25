@@ -36,13 +36,13 @@
             android:layout_marginBottom="4dp"
             android:layout_weight="1"
             android:gravity="center"
-            android:text="星伙计划"
+            android:text="合伙人计划"
             android:textColor="@color/colorWhite"
             android:textSize="15sp" />
 
         <RelativeLayout
             android:layout_width="60dp"
-            android:layout_height="60dp"></RelativeLayout>
+            android:layout_height="60dp"/>
     </LinearLayout>
 
     <android.support.v4.widget.NestedScrollView

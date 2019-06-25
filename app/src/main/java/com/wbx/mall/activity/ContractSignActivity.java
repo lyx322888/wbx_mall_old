@@ -133,6 +133,7 @@ public class ContractSignActivity extends BaseActivity {
                             LoadingDialog.cancelDialogForLoading();
                             hasSign = true;
                             webView.reload();
+                            submit();
                         }
 
                         @Override

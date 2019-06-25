@@ -70,7 +70,7 @@
         <item>@drawable/cate8</item>
     </string-array>
 
-    <string-array name="pay_ment_array">
+    <string-array name="pay_way_array">
         <item>@drawable/balance_order</item>
         <item>@drawable/icon_wechat_pay</item>
         <item>@drawable/ali_pay</item>

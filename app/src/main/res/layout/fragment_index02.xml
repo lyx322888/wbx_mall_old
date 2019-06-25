@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/index2_fragment"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -58,8 +58,8 @@
                             android:layout_marginLeft="10dp"
                             android:ellipsize="end"
                             android:singleLine="true"
-                            android:text="12sssssssssssssssssssssssssssssssssss31456"
-                            android:textColor="@color/white" />
+                            android:textColor="@color/white"
+                            tools:text="弹幕" />
                     </LinearLayout>
 
                     <View
@@ -69,6 +69,7 @@
                         android:layout_marginLeft="15dp"
                         android:layout_marginTop="85dp"
                         android:layout_marginRight="15dp" />
+
                     <RelativeLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -89,7 +90,7 @@
                             <TextView
                                 android:id="@+id/index_buy_tv"
                                 style="@style/textWithImageStyle"
-                                 android:drawableTop="@drawable/index_supermarket"
+                                android:drawableTop="@drawable/index_supermarket"
                                 android:text="超市便利" />
 
                             <TextView
@@ -116,62 +117,41 @@
                                 android:drawableTop="@drawable/index_drinks"
                                 android:text="果汁饮品"
                                 android:visibility="gone" />
-
                         </LinearLayout>
                     </RelativeLayout>
                 </RelativeLayout>
 
-                <LinearLayout
+                <com.wbx.mall.widget.AutoPollRecyclerView
+                    android:id="@+id/recycler_polling"
                     android:layout_width="match_parent"
                     android:layout_height="29dp"
-                    android:layout_gravity="center"
-                    android:layout_marginLeft="5dp"
-                    android:layout_marginTop="12dp"
-                    android:layout_marginRight="5dp"
-                    android:layout_marginBottom="12dp"
+                    android:layout_marginLeft="6dp"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginRight="6dp"
                     android:background="@drawable/shape_corner"
-                    android:gravity="center"
-                    android:orientation="vertical"
-                    android:padding="@dimen/dp_3">
+                    android:padding="@dimen/dp_3" />
 
-                    <com.wbx.mall.widget.AutoPollRecyclerView
-                        android:id="@+id/recycler_polling"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:background="@drawable/shape_corner">
-
-                    </com.wbx.mall.widget.AutoPollRecyclerView>
-
-                </LinearLayout>
                 <TextView
+                    android:id="@+id/tv_history"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:paddingLeft="6dp"
-                    android:paddingTop="10dp"
+                    android:paddingTop="5dp"
                     android:paddingBottom="5dp"
                     android:text="浏览过的店铺"
                     android:textColor="@color/black"
                     android:textSize="20sp"
                     android:textStyle="bold" />
 
-                <LinearLayout
+                <android.support.v7.widget.RecyclerView
+                    android:id="@+id/recycler_shops_visited"
                     android:layout_width="match_parent"
-                    android:layout_height="180dp"
-                    android:layout_gravity="center"
-                    android:layout_marginLeft="5dp"
-                    android:layout_marginTop="10dp"
-                    android:layout_marginRight="5dp"
-                    android:layout_marginBottom="10dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="6dp"
+                    android:layout_marginRight="6dp"
                     android:background="@drawable/shape_corner"
-                    android:gravity="center"
-                    android:orientation="vertical"
-                    android:padding="@dimen/dp_3">
+                    android:padding="@dimen/dp_3" />
 
-                    <android.support.v7.widget.RecyclerView
-                        android:id="@+id/recycler_shops_visited"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"></android.support.v7.widget.RecyclerView>
-                </LinearLayout>
                 <RelativeLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -197,17 +177,12 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:paddingLeft="6dp"
-                    android:paddingTop="12dp"
-                    android:paddingBottom="8dp"
+                    android:paddingTop="5dp"
+                    android:paddingBottom="4dp"
                     android:text="附近自营店"
                     android:textColor="@color/black"
                     android:textSize="20sp"
                     android:textStyle="bold" />
-
-                <View
-                    style="@style/GrayLineStyle"
-                    android:layout_marginTop="6dp"
-                    android:layout_marginBottom="6dp" />
 
                 <android.support.v7.widget.RecyclerView
                     android:id="@+id/index_recycler_view"

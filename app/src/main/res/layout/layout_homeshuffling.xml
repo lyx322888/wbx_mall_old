@@ -3,9 +3,11 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_marginStart="20dp"
-    android:layout_marginEnd="20dp"
-    android:orientation="horizontal">
+    android:layout_marginStart="10dp"
+    android:layout_marginEnd="10dp"
+    android:orientation="horizontal"
+    android:paddingTop="2dp"
+    android:paddingBottom="2dp">
 
     <ImageView
         android:layout_width="20dp"
@@ -25,9 +27,9 @@
         android:id="@+id/tv_shuffling"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:gravity="center_vertical"
         android:layout_marginLeft="3dp"
         android:ellipsize="end"
+        android:gravity="center_vertical"
         android:singleLine="true"
         android:textSize="13sp"
         tools:text="免单成功" />

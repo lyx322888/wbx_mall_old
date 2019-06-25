@@ -197,6 +197,8 @@ public class SpecialtyActivity extends BaseActivity implements BaseRefreshListen
         new MyHttp().doPost(Api.getDefault().getNearByShopList(mParams), new HttpListener() {
             @Override
             public void onSuccess(JSONObject result) {
+                mRefreshLayout.finishRefresh();
+                mRefreshLayout.finishLoadMore();
                 List<ShopInfo2> dataList = JSONArray.parseArray(result.getString("data"), ShopInfo2.class);
                 if (null == dataList) {
                     SkeletonScreen skeletonScreen =
@@ -223,7 +225,13 @@ public class SpecialtyActivity extends BaseActivity implements BaseRefreshListen
 
             @Override
             public void onError(int code) {
-
+                if (code == AppConfig.ERROR_STATE.NULLDATA) {
+                    shopInfoList.clear();
+                    mShopAdapter.notifyDataSetChanged();
+                    showShortToast("暂无数据");
+                }
+                mRefreshLayout.finishRefresh();
+                mRefreshLayout.finishLoadMore();
             }
         });
     }

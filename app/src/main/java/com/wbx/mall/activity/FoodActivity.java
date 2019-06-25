@@ -201,6 +201,8 @@ public class FoodActivity extends BaseActivity implements BaseRefreshListener {
         new MyHttp().doPost(Api.getDefault().getNearByShopList(mParams), new HttpListener() {
             @Override
             public void onSuccess(JSONObject result) {
+                mRefreshLayout.finishRefresh();
+                mRefreshLayout.finishLoadMore();
                 List<ShopInfo2> dataList = JSONArray.parseArray(result.getString("data"), ShopInfo2.class);
                 if (null == dataList) {
                     SkeletonScreen skeletonScreen =
@@ -219,8 +221,6 @@ public class FoodActivity extends BaseActivity implements BaseRefreshListener {
                     //说明下次已经没有数据了
                     canLoadMore = false;
                 }
-                mRefreshLayout.finishRefresh();
-                mRefreshLayout.finishLoadMore();
                 shopInfoList.addAll(dataList);
                 mShopAdapter.notifyDataSetChanged();
             }

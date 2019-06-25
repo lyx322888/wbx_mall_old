@@ -133,6 +133,7 @@ public class ToBeAgentActivity extends BaseActivity {
                     if (isRightStarMan) {
                         ivReferee.setImageResource(R.drawable.icon_isnt_star_man);
                         tvReferee.setTextColor(Color.parseColor("#d3d3d3"));
+                        tvReferee.setText("非合伙人");
                     }
                     isRightStarMan = false;
                 }
@@ -175,6 +176,7 @@ public class ToBeAgentActivity extends BaseActivity {
                 isRightStarMan = true;
                 ivReferee.setImageResource(R.drawable.icon_is_star_man);
                 tvReferee.setTextColor(getResources().getColor(R.color.app_color));
+                tvReferee.setText("城市合伙人");
             }
 
             @Override
@@ -183,6 +185,7 @@ public class ToBeAgentActivity extends BaseActivity {
                 if (code == AppConfig.ERROR_STATE.NO_STAR_MAN) {
                     ivReferee.setImageResource(R.drawable.icon_isnt_star_man);
                     tvReferee.setTextColor(Color.parseColor("#d3d3d3"));
+                    tvReferee.setText("非合伙人");
                 }
             }
         });

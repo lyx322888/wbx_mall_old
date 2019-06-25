@@ -155,6 +155,7 @@ public class ShareUtils {
         if (TextUtils.isEmpty(imageUrl)) {
             Bitmap bitmap = BitmapFactory.decodeResource(context.getResources(), R.mipmap.app_logo);
             commitShareImage(context, descrption, bitmap, scene);
+            bitmap.recycle();
         } else {
             if (imageUrl.startsWith("http://imgs.wbx365.com/")) {
                 imageUrl = imageUrl + "?imageView2/0/w/200/h/200";
@@ -172,6 +173,7 @@ public class ShareUtils {
         if (TextUtils.isEmpty(imageUrl)) {
             Bitmap bitmap = BitmapFactory.decodeResource(context.getResources(), R.mipmap.app_logo);
             commitShare(context, title, descrption, bitmap, clickUrl, scene);
+            bitmap.recycle();
         } else {
             if (imageUrl.startsWith("http://imgs.wbx365.com/")) {
                 imageUrl = imageUrl + "?imageView2/0/w/200/h/200";
