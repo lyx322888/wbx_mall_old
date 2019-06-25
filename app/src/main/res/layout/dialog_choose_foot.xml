@@ -1,45 +1,56 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="wrap_content"
+    android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:layout_gravity="center"
-    >
+    android:orientation="vertical">
+
     <ImageView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:src="@drawable/xuancaifangshi_pic"
-        />
+        android:src="@drawable/xuancaifangshi_pic" />
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
         android:layout_gravity="center"
         android:background="@color/colorWhite"
-        >
+        android:orientation="vertical">
+
         <TextView
             android:id="@+id/now_order_tv"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="立即选菜"
-            android:textColor="@color/app_color"
             android:layout_gravity="center"
             android:layout_marginTop="40dp"
-            />
-        <View style="@style/GrayLineStyle" android:layout_marginLeft="20dp" android:layout_marginRight="20dp" android:background="@color/black" android:layout_marginTop="15dp"/>
+            android:text="立即选菜"
+            android:textColor="@color/app_color" />
+
+        <View
+            style="@style/GrayLineStyle"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="15dp"
+            android:layout_marginRight="20dp"
+            android:background="@color/black" />
 
         <TextView
             android:id="@+id/to_order_tv"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="到店点菜"
             android:layout_gravity="center"
             android:layout_marginTop="20dp"
-            />
-        <View style="@style/GrayLineStyle" android:layout_marginLeft="20dp" android:layout_marginRight="20dp" android:background="@color/black" android:layout_marginTop="15dp" android:layout_marginBottom="30dp"/>
+            android:text="到店点菜" />
+
+        <View
+            style="@style/GrayLineStyle"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="15dp"
+            android:layout_marginRight="20dp"
+            android:layout_marginBottom="30dp"
+            android:background="@color/black" />
 
 
     </LinearLayout>
-
 
 
 </LinearLayout>

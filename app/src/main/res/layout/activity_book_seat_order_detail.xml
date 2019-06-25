@@ -357,7 +357,7 @@
                             android:layout_height="30dp"
                             android:layout_gravity="center"
                             android:layout_marginLeft="15dp"
-                            android:src="@drawable/xuanzuodingzuo_icon_lianxishangjia" />
+                            android:src="@drawable/icon_contach_store" />
 
                         <TextView
                             android:id="@+id/total_price_tv"

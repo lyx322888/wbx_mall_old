@@ -38,7 +38,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:drawablePadding="8dp"
-            android:drawableTop="@drawable/wechat"
+            android:drawableTop="@drawable/icon_wechat"
             android:gravity="center"
             android:text="微信好友"
             android:textSize="@dimen/text_size_13sp" />

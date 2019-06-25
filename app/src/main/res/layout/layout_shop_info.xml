@@ -38,14 +38,14 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginRight="19dp"
-            android:src="@drawable/share" />
+            android:src="@drawable/icon_share_white" />
 
         <ImageView
             android:id="@+id/iv_collect"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginRight="19dp"
-            android:src="@drawable/shop_collect" />
+            android:src="@drawable/icon_collection_un" />
     </LinearLayout>
 
     <ImageView

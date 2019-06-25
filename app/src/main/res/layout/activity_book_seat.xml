@@ -112,7 +112,7 @@
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
                         android:layout_marginLeft="15dp"
-                        android:src="@drawable/shijian_icon" />
+                        android:src="@drawable/icon_time" />
 
                     <TextView
                         android:id="@+id/hour_time_tv"

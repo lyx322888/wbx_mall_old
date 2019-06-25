@@ -211,7 +211,7 @@ public class FinanceOperationActivity extends BaseActivity implements ActionShee
                     payHintTv.setText(userAliPay.getString("depict"));
                     break;
                 case AppConfig.WidthdrawType.wxpay:
-                    payModeIm.setImageResource(R.drawable.weixin);
+                    payModeIm.setImageResource(R.drawable.icon_wechat_pay);
                     payNameTv.setText("微信");
                     payHintTv.setText(userWeiXinPay.getString("depict"));
                     break;
@@ -229,7 +229,7 @@ public class FinanceOperationActivity extends BaseActivity implements ActionShee
                     payHintTv.setText("推荐已安装支付宝客户端的用户使用");
                     break;
                 case AppConfig.PayType.wxpay:
-                    payModeIm.setImageResource(R.drawable.weixin);
+                    payModeIm.setImageResource(R.drawable.icon_wechat_pay);
                     payNameTv.setText("微信");
                     payHintTv.setText("推荐已安装微信客户端的用户使用");
                     break;
@@ -257,7 +257,7 @@ public class FinanceOperationActivity extends BaseActivity implements ActionShee
                     payHintTv.setText(userAliPay.getString("depict"));
                 } else if (null != userWeiXinPay) {
                     platform = AppConfig.WidthdrawType.wxpay;
-                    payModeIm.setImageResource(R.drawable.weixin);
+                    payModeIm.setImageResource(R.drawable.icon_wechat_pay);
                     payNameTv.setText("微信");
                     payHintTv.setText(userWeiXinPay.getString("depict"));
                 } else {

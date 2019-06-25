@@ -294,7 +294,7 @@
                     android:layout_width="20dp"
                     android:layout_height="20dp"
                     android:layout_gravity="center"
-                    android:src="@drawable/zhanghu_icon_daili" />
+                    android:src="@drawable/icon_agent " />
 
                 <TextView
                     android:layout_width="0dp"
@@ -400,7 +400,7 @@
                     android:layout_width="20dp"
                     android:layout_height="20dp"
                     android:layout_gravity="center"
-                    android:src="@drawable/zzz" />
+                    android:src="@drawable/icon_rest_pay_pwd" />
 
                 <TextView
                     android:layout_width="0dp"

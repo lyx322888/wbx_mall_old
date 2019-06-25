@@ -72,7 +72,7 @@
 
     <string-array name="pay_ment_array">
         <item>@drawable/balance_order</item>
-        <item>@drawable/weixin</item>
+        <item>@drawable/icon_wechat_pay</item>
         <item>@drawable/ali_pay</item>
         <item>@drawable/cash_delivery</item>
     </string-array>
