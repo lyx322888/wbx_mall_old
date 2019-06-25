@@ -30,11 +30,11 @@ public class MyFreeOrderAdapter extends BaseQuickAdapter<MyFreeOrderBean, BaseVi
         if (item.getActivity_type() == 1) {
             //消费免单
             tvType.setText("消费免单");
-            tvType.setBackgroundResource(R.drawable.bg_btn_consume_free_2);
+            tvType.setBackgroundResource(R.drawable.icon_free_consume);
         } else {
             //分享免单
             tvType.setText("分享免单");
-            tvType.setBackgroundResource(R.drawable.bg_btn_share_free_2);
+            tvType.setBackgroundResource(R.drawable.icon_free_share);
         }
         GlideUtils.showMediumPic(mContext, (ImageView) helper.getView(R.id.iv_goods), item.getPhoto());
         helper.setText(R.id.tv_name, item.getTitle())

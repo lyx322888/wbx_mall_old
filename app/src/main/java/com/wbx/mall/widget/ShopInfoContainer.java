@@ -74,7 +74,7 @@ public class ShopInfoContainer extends RelativeLayout {
         this.shopInfo = shopInfo;
         GlideUtils.showBlurBigPic(getContext(), ivShopBg, shopInfo.getPhoto());
         GlideUtils.showRoundMediumPic(getContext(), ivShop, shopInfo.getPhoto());
-        ivCollect.setImageResource(shopInfo.getIs_favorites() == 0 ? R.drawable.shop_collect : R.drawable.already);
+        ivCollect.setImageResource(shopInfo.getIs_favorites() == 0 ? R.drawable.icon_collection_un : R.drawable.already);
         tvShopName.setText(shopInfo.getShop_name());
         rbScore.setRating(shopInfo.getScore());
         if (LoginUtil.isLogin() && LoginUtil.getUserInfo().getIs_salesman() == 1) {

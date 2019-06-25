@@ -41,7 +41,7 @@ public class HomeShufflingAdapter extends MarqueeView.Adapter<HomeShufflingAdapt
     @Override
     public void onBindViewHolder(@NonNull VH holder, int position) {
         if (Util.isOnMainThread()) {
-            GlideUtils.showSmallPic(context.getApplicationContext(), (ImageView) holder.user, list.get(position % list.size()).getFace());
+            GlideUtils.showSmallPic(context.getApplicationContext(), holder.user, list.get(position % list.size()).getFace());
         }
         String time = TimerUtils.timeParse(list.get(position % list.size()).getCreate_time());
         holder.tv_shuffling.setText(list.get(position % list.size()).getNickname() + " " + time + "分钟前购买了" + list.get(position % list.size()).getTitle() + " 免单成功");
@@ -58,7 +58,7 @@ public class HomeShufflingAdapter extends MarqueeView.Adapter<HomeShufflingAdapt
 
         public VH(View itemView) {
             super(itemView);
-            user = itemView.findViewById(R.id.iv_acitivity_user);
+            user = itemView.findViewById(R.id.iv_activity_user);
             tv_shuffling = itemView.findViewById(R.id.tv_shuffling);
         }
     }

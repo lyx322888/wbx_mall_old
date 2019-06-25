@@ -45,7 +45,7 @@
                         android:orientation="horizontal">
 
                         <com.wbx.mall.widget.CircleImageView
-                            android:id="@+id/iv_acitivity_user"
+                            android:id="@+id/iv_activity_user"
                             android:layout_width="22dp"
                             android:layout_height="22dp"
                             android:layout_marginLeft="5dp"

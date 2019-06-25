@@ -93,7 +93,7 @@ public class IndexFragment02 extends BaseFragment implements BaseRefreshListener
     TextView unReadMsgTv;
     @Bind(R.id.recycler_polling)
     AutoPollRecyclerView shufflingRecycler;
-    @Bind(R.id.iv_acitivity_user)
+    @Bind(R.id.iv_activity_user)
     CircleImageView img_user;
     @Bind(R.id.tv_activity)
     TextView tv_user;

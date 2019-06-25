@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_marginLeft="20dp"
-    android:layout_marginTop="1dp"
-
+    android:layout_marginStart="20dp"
+    android:layout_marginEnd="20dp"
     android:orientation="horizontal">
 
     <ImageView
@@ -14,19 +14,13 @@
         android:src="@drawable/index_laba" />
 
     <com.wbx.mall.widget.CircleImageView
-        android:id="@+id/iv_acitivity_user"
+        android:id="@+id/iv_activity_user"
         android:layout_width="22dp"
         android:layout_height="22dp"
         android:layout_gravity="center_vertical"
         android:layout_marginLeft="6dp"
         android:src="@color/black" />
-    <!--<ImageView-->
-        <!--android:id="@+id/iv_acitivity_user"-->
-        <!--android:layout_width="22dp"-->
-        <!--android:layout_height="22dp"-->
-        <!--android:layout_gravity="center_vertical"-->
-        <!--android:layout_marginLeft="6dp"-->
-        <!--android:src="@drawable/user_yuan" />-->
+
     <TextView
         android:id="@+id/tv_shuffling"
         android:layout_width="wrap_content"
@@ -34,7 +28,7 @@
         android:layout_marginLeft="3dp"
         android:ellipsize="end"
         android:singleLine="true"
-        android:text="asdasdsadasdasd"
-        android:textSize="13sp" />
+        android:textSize="13sp"
+        tools:text="免单成功" />
 
 </LinearLayout>
