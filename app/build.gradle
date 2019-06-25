@@ -138,7 +138,7 @@ dependencies {
     implementation 'com.bugtags.library:bugtags-lib:latest.integration'
     implementation 'cn.jiguang.sdk:jpush:3.1.5'
     implementation 'cn.jiguang.sdk:jcore:1.2.3'
-    implementation 'com.tencent.mm.opensdk:icon_wechat-sdk-android-without-mta:+'
+    implementation 'com.tencent.mm.opensdk:wechat-sdk-android-without-mta:+'
     implementation 'com.github.florent37:viewanimator:1.0.5'
     implementation 'com.github.CymChad:BaseRecyclerViewAdapterHelper:2.9.42'
     implementation 'com.github.hnsycsxhzcsh:DiscussionAvatarView:v1.3'
