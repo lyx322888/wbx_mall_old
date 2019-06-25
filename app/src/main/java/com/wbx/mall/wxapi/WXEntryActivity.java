@@ -148,7 +148,7 @@ public class WXEntryActivity extends Activity implements IWXAPIEventHandler {
         final StringBuilder result = new StringBuilder();
         try {
             //GET请求直接在链接后面拼上请求参数
-            String mPath = "https://api.icon_wechat_pay.qq.com/sns/userinfo?";
+            String mPath = "https://api.weixin.qq.com/sns/userinfo?";
             HashMap<String, String> mData = new HashMap<>();
             mData.put("access_token", accessToken);
             mData.put("openid", openId);
