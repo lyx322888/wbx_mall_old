@@ -677,7 +677,7 @@ public interface ApiService {
      */
     @FormUrlEncoded
     @POST("/api/discovery/list_discover")
-    Observable<JSONObject> getDiscoveryList(@Field("city_name") String cityName, @Field("lat") double lat, @Field("lng") double lng, @Field("login_token") String loginToken);
+    Observable<JSONObject> getDiscoveryList(@Field("city_name") String cityName, @Field("lat") double lat, @Field("lng") double lng, @Field("login_token") String loginToken,@Field("page") int page, @Field("num") int num);
 
     /**
      * 获取随机红包

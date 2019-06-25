@@ -32,7 +32,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="270dp"
                         android:scaleType="fitXY"
-                        android:src="@drawable/bg_index2" />
+                        android:src="@drawable/bg_index" />
 
                     <LinearLayout
                         android:id="@+id/ll_fragment02"

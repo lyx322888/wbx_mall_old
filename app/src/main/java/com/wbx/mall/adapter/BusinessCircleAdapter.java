@@ -28,7 +28,6 @@ import com.wbx.mall.widget.LoadingDialog;
 import com.wbx.mall.widget.decoration.SpacesItemDecoration;
 
 import java.text.DecimalFormat;
-import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.Bind;
@@ -40,34 +39,23 @@ import butterknife.ButterKnife;
 
 public class BusinessCircleAdapter extends RecyclerView.Adapter<BusinessCircleAdapter.MyViewHolder> {
     private Activity mContext;
-    private List<BusinessCircleBean> lstData = new ArrayList<>();
+    private List<BusinessCircleBean> lstData;
     private DecimalFormat format = new DecimalFormat("0.00");
     private LatLng currentLatLng;
 
-    public BusinessCircleAdapter(Activity context) {
-        mContext = context;
+    public BusinessCircleAdapter(Activity context, List<BusinessCircleBean> list) {
+        this.mContext = context;
+        this.lstData = list;
     }
 
     public void setCurrentLatLng(LatLng currentLatLng) {
         this.currentLatLng = currentLatLng;
     }
 
-    public void update(List<BusinessCircleBean> data) {
-        lstData.clear();
-        addList(data);
-    }
-
-    public void addList(List<BusinessCircleBean> data) {
-        lstData.addAll(data);
-        notifyDataSetChanged();
-    }
-
-
     @Override
     public MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View layout = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_business_circle, parent, false);
-        MyViewHolder holder = new MyViewHolder(layout);
-        return holder;
+        return new MyViewHolder(layout);
     }
 
     @Override
