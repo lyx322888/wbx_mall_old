@@ -2,10 +2,7 @@ package com.wbx.mall.activity;
 
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.View;
-import android.widget.ImageView;
-import android.widget.TextView;
 
 import com.wbx.mall.R;
 import com.wbx.mall.adapter.MerchantDataAdapter;
@@ -21,12 +18,6 @@ public class MerchantDataActivity extends BaseActivity implements MerchantView {
 
     @Bind(R.id.recycler_merchant)
     RecyclerView mRecycler;
-    @Bind(R.id.text_all_turnover)
-    TextView text_all_turnover;
-    @Bind(R.id.text_all_order_num)
-    TextView text_all_order_num;
-    @Bind(R.id.text_all_order_people)
-    TextView text_all_order_people;
 
     @Override
     public int getLayoutId() {
@@ -40,7 +31,6 @@ public class MerchantDataActivity extends BaseActivity implements MerchantView {
 
     @Override
     public void initView() {
-        Log.e("TAG",LoginUtil.getLoginToken());
         MerchantPresenterImp presenterImp = new MerchantPresenterImp(this);
         presenterImp.getMerchant(LoginUtil.getLoginToken());
         mRecycler.setLayoutManager(new LinearLayoutManager(this));
@@ -61,9 +51,6 @@ public class MerchantDataActivity extends BaseActivity implements MerchantView {
         listShopDataBean.getData().getShops().size();
         MerchantDataAdapter adapter = new MerchantDataAdapter(this, listShopDataBean.getData().getShops());
         mRecycler.setAdapter(adapter);
-        text_all_turnover.setText(listShopDataBean.getData().getAll_turnover()+".00");
-        text_all_order_num.setText("交易共 " + listShopDataBean.getData().getAll_order_num() + " 笔");
-        text_all_order_people.setText("顾客共 " + listShopDataBean.getData().getAll_order_people() + " 人");
     }
 
     public void onBack(View view) {

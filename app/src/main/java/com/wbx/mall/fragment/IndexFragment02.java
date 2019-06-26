@@ -395,6 +395,8 @@ public class IndexFragment02 extends BaseFragment implements BaseRefreshListener
             mTvHistory.setVisibility(View.GONE);
             mShopVisited.setVisibility(View.GONE);
         } else {
+            mTvHistory.setVisibility(View.VISIBLE);
+            mShopVisited.setVisibility(View.VISIBLE);
             VisitShopAdapter adapter = new VisitShopAdapter(data, getContext());
             mShopVisited.setAdapter(adapter);
             adapter.notifyDataSetChanged();

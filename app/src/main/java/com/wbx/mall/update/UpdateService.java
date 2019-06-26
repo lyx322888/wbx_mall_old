@@ -73,7 +73,7 @@ public class UpdateService extends Service {
     private static Intent installIntent(String path) {
         Uri uri;
         if (Build.VERSION.SDK_INT >= 24) {
-            uri = FileProvider.getUriForFile(BaseApplication.getInstance(), "com.wbx.mall.fileprovider", new File(path));
+            uri = FileProvider.getUriForFile(BaseApplication.getInstance(), "com.wbx.mall.fileProvider", new File(path));
         } else {
             uri = Uri.fromFile(new File(path));
         }

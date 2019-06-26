@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.view.View;
+import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -60,7 +61,16 @@ public class ContractSignActivity extends BaseActivity {
 
     @Override
     public void initView() {
-
+        WebSettings settings = webView.getSettings();
+        settings.setJavaScriptEnabled(true);
+        //缩放开关，设置此属性，仅支持双击缩放，不支持触摸缩放
+        settings.setSupportZoom(true);
+        //设置是否可缩放，会出现缩放工具（若为true则上面的设值也默认为true）
+        settings.setBuiltInZoomControls(true);
+        //隐藏缩放工具
+        settings.setDisplayZoomControls(false);
+        //扩大比例的缩放
+        settings.setUseWideViewPort(true);
     }
 
     @Override

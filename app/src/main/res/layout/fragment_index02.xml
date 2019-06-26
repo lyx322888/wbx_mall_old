@@ -141,7 +141,8 @@
                     android:text="浏览过的店铺"
                     android:textColor="@color/black"
                     android:textSize="20sp"
-                    android:textStyle="bold" />
+                    android:textStyle="bold"
+                    android:visibility="gone" />
 
                 <android.support.v7.widget.RecyclerView
                     android:id="@+id/recycler_shops_visited"
@@ -150,7 +151,8 @@
                     android:layout_marginLeft="6dp"
                     android:layout_marginRight="6dp"
                     android:background="@drawable/shape_corner"
-                    android:padding="@dimen/dp_3" />
+                    android:padding="@dimen/dp_3"
+                    android:visibility="gone" />
 
                 <RelativeLayout
                     android:layout_width="match_parent"
