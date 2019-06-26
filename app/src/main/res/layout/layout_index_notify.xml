@@ -13,10 +13,10 @@
         android:layout_width="20dp"
         android:layout_height="19dp"
         android:layout_gravity="center_vertical"
-        android:src="@drawable/index_laba" />
+        android:src="@drawable/icon_notify" />
 
     <com.wbx.mall.widget.CircleImageView
-        android:id="@+id/iv_activity_user"
+        android:id="@+id/iv_head"
         android:layout_width="22dp"
         android:layout_height="22dp"
         android:layout_gravity="center_vertical"
@@ -24,7 +24,7 @@
         android:src="@color/black" />
 
     <TextView
-        android:id="@+id/tv_shuffling"
+        android:id="@+id/tv_title"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginLeft="3dp"

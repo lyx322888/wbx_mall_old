@@ -116,7 +116,7 @@ public class IndexFragment02 extends BaseFragment implements BaseRefreshListener
     private MyHttp myHttp;
     private HomeShufflingPresenterImp shufflingPresenterImp;
     private LinearLayoutManager shopLayoutManager;
-    private List<HomeShufflingData.DataBean.ActivityUserBean> data = new ArrayList<>();
+    private List<HomeShufflingData.DataBean.OrderBean> data = new ArrayList<>();
 
     @Override
     protected int getLayoutResource() {
@@ -140,14 +140,11 @@ public class IndexFragment02 extends BaseFragment implements BaseRefreshListener
             // getActivity().bindService(intent,serviceConnection,Context.BIND_AUTO_CREATE);
         } catch (IllegalStateException e) {
         }
-
-
     }
 
 
     @Override
     protected void initView() {
-
         shufflingPresenterImp = new HomeShufflingPresenterImp(this);
         shufflingPresenterImp.getHomeShuffling(LoginUtil.getLoginToken(), mLocationInfo.getCity_id());
         ScrollSpeedLinearLayoutManger layoutManager = new ScrollSpeedLinearLayoutManger(getActivity());
@@ -376,7 +373,7 @@ public class IndexFragment02 extends BaseFragment implements BaseRefreshListener
 
     @Override
     public void getHomeShuffling(HomeShufflingData homeShufflingData) {
-        data.addAll(homeShufflingData.getData().getActivity_user());
+        data.add(homeShufflingData.getData().getOrder());
         HomeShufflingAdapter shufflingAdapter = new HomeShufflingAdapter(getActivity(), data);
         shufflingRecycler.setAdapter(shufflingAdapter);
 //        shufflingAdapter.notifyDataSetChanged();
@@ -469,7 +466,6 @@ public class IndexFragment02 extends BaseFragment implements BaseRefreshListener
             case R.id.my_foodsx_tv:
                 getActivity().startActivity(new Intent(getActivity(), FoodsxActivity.class));
                 break;
-
             case R.id.index_my_free:
 //                if (LoginUtil.isLogin()) {
 //                    startActivity(new Intent(getActivity(), MyFreeOrderCouponActivity.class));
@@ -477,7 +473,6 @@ public class IndexFragment02 extends BaseFragment implements BaseRefreshListener
 //                    LoginUtil.login();
 //                }
                 getActivity().startActivity(new Intent(getActivity(), BuyActivity.class));
-
                 break;
         }
     }

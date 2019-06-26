@@ -14,7 +14,7 @@
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@drawable/lib_update_app_top_bg" />
+            android:src="@drawable/bg_update" />
 
         <LinearLayout
             android:layout_width="match_parent"

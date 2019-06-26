@@ -13,7 +13,6 @@ import com.bumptech.glide.util.Util;
 import com.wbx.mall.R;
 import com.wbx.mall.bean.HomeShufflingData;
 import com.wbx.mall.utils.GlideUtils;
-import com.wbx.mall.utils.TimerUtils;
 import com.wbx.mall.widget.MarqueeView;
 
 import java.util.List;
@@ -21,30 +20,27 @@ import java.util.List;
 public class HomeShufflingAdapter extends MarqueeView.Adapter<HomeShufflingAdapter.VH> {
 
     Context context;
-    List<HomeShufflingData.DataBean.ActivityUserBean> list;
-//    private int size;
+    List<HomeShufflingData.DataBean.OrderBean> list;
 
-    public HomeShufflingAdapter(Context context, List<HomeShufflingData.DataBean.ActivityUserBean> list) {
+    public HomeShufflingAdapter(Context context, List<HomeShufflingData.DataBean.OrderBean> list) {
         this.context = context;
         this.list = list;
-//        size=list.size();
     }
 
     @NonNull
     @Override
     public VH onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(context).inflate(R.layout.layout_homeshuffling, parent, false);
-        VH vh = new VH(view);
-        return vh;
+        View view = LayoutInflater.from(context).inflate(R.layout.layout_index_notify, parent, false);
+        return new VH(view);
     }
 
     @Override
     public void onBindViewHolder(@NonNull VH holder, int position) {
         if (Util.isOnMainThread()) {
-            GlideUtils.showSmallPic(context.getApplicationContext(), holder.user, list.get(position % list.size()).getFace());
+            GlideUtils.showSmallPic(context.getApplicationContext(), holder.ivHead, list.get(position % list.size()).getFace());
         }
-        String time = TimerUtils.timeParse(list.get(position % list.size()).getCreate_time());
-        holder.tv_shuffling.setText(list.get(position % list.size()).getNickname() + " " + time + "分钟前购买了" + list.get(position % list.size()).getTitle() + " 免单成功");
+//        String time = TimerUtils.timeParse(list.get(position % list.size()).getCreate_time());
+        holder.tvTitle.setText(list.get(position % list.size()).getNickname() + "十分钟前购买了" + list.get(position % list.size()).getTitle());
     }
 
     @Override
@@ -53,13 +49,13 @@ public class HomeShufflingAdapter extends MarqueeView.Adapter<HomeShufflingAdapt
     }
 
     class VH extends RecyclerView.ViewHolder {
-        ImageView user;
-        TextView tv_shuffling;
+        ImageView ivHead;
+        TextView tvTitle;
 
-        public VH(View itemView) {
+        VH(View itemView) {
             super(itemView);
-            user = itemView.findViewById(R.id.iv_activity_user);
-            tv_shuffling = itemView.findViewById(R.id.tv_shuffling);
+            ivHead = itemView.findViewById(R.id.iv_head);
+            tvTitle = itemView.findViewById(R.id.tv_title);
         }
     }
 }

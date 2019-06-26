@@ -61,7 +61,7 @@ public class ShopAdapter extends BaseAdapter<ShopInfo2, Context> {
         ImageView storePicIm = holder.getView(R.id.item_promotion_store_pic_im);
         TextView tvShopState = holder.getView(R.id.tv_shop_state);
         TextView tvpopularity=holder.getView(R.id.popularity_tv);
-        tvpopularity.setText(shopInfo.getView()+"");
+        tvpopularity.setText("人气 " + shopInfo.getView());
         switch (shopInfo.getShop_status()) {
             case 0:
                 //休息中

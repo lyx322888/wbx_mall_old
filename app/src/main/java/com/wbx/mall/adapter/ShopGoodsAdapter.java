@@ -32,6 +32,7 @@ public class ShopGoodsAdapter extends BaseAdapter<ShopInfo2, Context> {
     private int pre_shop_is_exceed = 0;
     private NewFreeInfoBean newFreeInfo;
     private boolean isShowHead = true;
+
     public ShopGoodsAdapter(List<ShopInfo2> dataList, Context context) {
         super(dataList, context);
     }
@@ -63,8 +64,8 @@ public class ShopGoodsAdapter extends BaseAdapter<ShopInfo2, Context> {
         }
         ImageView storePicIm = holder.getView(R.id.item_promotion_store_pic_im);
         TextView tvShopState = holder.getView(R.id.tv_shop_state);
-        TextView tvpopularity=holder.getView(R.id.popularity_tv);
-        tvpopularity.setText(shopInfo.getView()+"");
+        TextView tvpopularity = holder.getView(R.id.popularity_tv);
+        tvpopularity.setText("人气 " + shopInfo.getView());
         switch (shopInfo.getShop_status()) {
             case 0:
                 //休息中
@@ -143,9 +144,9 @@ public class ShopGoodsAdapter extends BaseAdapter<ShopInfo2, Context> {
                     return;
                 }
                 if (shopInfo.getGoods().get(position).getIs_share_free() == 1 || shopInfo.getGoods().get(position).getIs_consume_free() == 1) {
-                    FreeActivityDetailActivity.actionStart(mContext, shopInfo.getShop_id()+"", shopInfo.getGoods().get(position).getGoods_id()+"", shopInfo.getGrade_id());
+                    FreeActivityDetailActivity.actionStart(mContext, shopInfo.getShop_id() + "", shopInfo.getGoods().get(position).getGoods_id() + "", shopInfo.getGrade_id());
                 } else {
-                    StoreDetailActivity.actionStart(mContext, shopInfo.getGrade_id(), shopInfo.getShop_id()+"", shopInfo.getGoods().get(position).getGoods_id());
+                    StoreDetailActivity.actionStart(mContext, shopInfo.getGrade_id(), shopInfo.getShop_id() + "", shopInfo.getGoods().get(position).getGoods_id());
                 }
             }
         });
@@ -155,9 +156,11 @@ public class ShopGoodsAdapter extends BaseAdapter<ShopInfo2, Context> {
     public void setFreeInfo(NewFreeInfoBean newFreeInfoBean) {
         this.newFreeInfo = newFreeInfoBean;
     }
+
     public boolean isFirstsFreeInfo() {
         return this.newFreeInfo == null;
     }
+
     public void hideHeadFreeInfo() {
         isShowHead = false;
     }

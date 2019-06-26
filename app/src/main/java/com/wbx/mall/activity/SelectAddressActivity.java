@@ -95,15 +95,12 @@ public class SelectAddressActivity extends BaseActivity implements PoiSearch.OnP
 
     @Override
     public void fillData() {
-
         if (SPUtils.getString("city_name_select", mLocationInfo.getName()) == null) {
             cityNameTv.setText(mLocationInfo.getName());
-            search("", mLocationInfo.getName(), new LatLng(mLocationInfo.getLat(), mLocationInfo.getLng()));
         } else {
             cityNameTv.setText(SPUtils.getString("city_name_select", mLocationInfo.getName()));
-            search("", mLocationInfo.getName(), new LatLng(mLocationInfo.getLat(), mLocationInfo.getLng()));
         }
-
+        search("", mLocationInfo.getName(), new LatLng(mLocationInfo.getLat(), mLocationInfo.getLng()));
     }
 
     private void search(String keyword, String cityName, LatLng latLng) {
@@ -222,9 +219,7 @@ public class SelectAddressActivity extends BaseActivity implements PoiSearch.OnP
         new MyHttp().doPost(Api.getDefault().getCityList(), new HttpListener() {
             @Override
             public void onSuccess(JSONObject result) {
-
                 cityInfoList = JSONArray.parseArray(result.getString("data"), LocationInfo.class);
-                initIndexBar();
                 initAllView();
             }
 
@@ -233,10 +228,6 @@ public class SelectAddressActivity extends BaseActivity implements PoiSearch.OnP
 
             }
         });
-    }
-
-    private void initIndexBar() {
-
     }
 
     //显示所有的城市
