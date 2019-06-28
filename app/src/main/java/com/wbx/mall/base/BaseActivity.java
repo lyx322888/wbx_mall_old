@@ -15,7 +15,6 @@ import android.view.WindowManager;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 
-import com.bugtags.library.Bugtags;
 import com.wbx.mall.activity.SplashActivity;
 import com.wbx.mall.bean.LocationInfo;
 import com.wbx.mall.bean.UserInfo;
@@ -105,7 +104,6 @@ public abstract class BaseActivity extends AppCompatActivity {
     protected void onResume() {
         super.onResume();
         userInfo = (UserInfo) BaseApplication.getInstance().readObject(AppConfig.USER_DATA);
-        Bugtags.onResume(this);
     }
 
     @Override
@@ -116,7 +114,6 @@ public abstract class BaseActivity extends AppCompatActivity {
                 hideKeyboard(v.getWindowToken());
             }
         }
-        Bugtags.onDispatchTouchEvent(this, ev);
         return super.dispatchTouchEvent(ev);
     }
 
@@ -157,7 +154,6 @@ public abstract class BaseActivity extends AppCompatActivity {
     @Override
     protected void onPause() {
         super.onPause();
-        Bugtags.onPause(this);
     }
 
     /**

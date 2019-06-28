@@ -9,7 +9,6 @@ import android.os.StrictMode;
 import android.support.annotation.Nullable;
 import android.support.multidex.MultiDexApplication;
 
-import com.bugtags.library.Bugtags;
 import com.hyphenate.chat.EMClient;
 import com.hyphenate.chat.EMMessage;
 import com.hyphenate.chat.EMOptions;
@@ -83,8 +82,6 @@ public class BaseApplication extends MultiDexApplication {
         initJPush();
         initHxChat();
         initLog();
-        //        Bugtags.start("af6d006285b8c34fe7d70792f7e7c27f", this, Bugtags.BTGInvocationEventBubble);
-        Bugtags.start("af6d006285b8c34fe7d70792f7e7c27f", this, ApiConstants.DEBUG ? Bugtags.BTGInvocationEventBubble : Bugtags.BTGInvocationEventNone);
     }
 
     public long getAppInitTime() {

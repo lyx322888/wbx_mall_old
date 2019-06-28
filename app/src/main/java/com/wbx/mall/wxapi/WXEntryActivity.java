@@ -4,10 +4,8 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.StrictMode;
-import android.view.MotionEvent;
 
 import com.alibaba.fastjson.JSONObject;
-import com.bugtags.library.Bugtags;
 import com.google.gson.Gson;
 import com.tencent.mm.opensdk.modelbase.BaseReq;
 import com.tencent.mm.opensdk.modelbase.BaseResp;
@@ -190,23 +188,5 @@ public class WXEntryActivity extends Activity implements IWXAPIEventHandler {
             MyRxBus.getInstance().post(weChatUserInfoBean);
             finish();
         }
-    }
-
-    @Override
-    protected void onResume() {
-        super.onResume();
-        Bugtags.onResume(this);
-    }
-
-    @Override
-    public boolean dispatchTouchEvent(MotionEvent ev) {
-        Bugtags.onDispatchTouchEvent(this, ev);
-        return super.dispatchTouchEvent(ev);
-    }
-
-    @Override
-    protected void onPause() {
-        super.onPause();
-        Bugtags.onPause(this);
     }
 }
