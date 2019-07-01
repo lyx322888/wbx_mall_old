@@ -337,7 +337,6 @@
 
         <activity android:name=".activity.ShoppingCartActivity" />
         <activity android:name=".activity.FreeActivityDetailActivity" />
-        <activity android:name=".activity.TestActivity" />
         <activity android:name=".activity.ConsumeFreeActivity" />
         <!-- 消费免单 -->
         <activity android:name=".activity.ShareFreeActivity" />

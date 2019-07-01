@@ -67,7 +67,7 @@
 
                 <RatingBar
                     android:id="@+id/ratingbar_default"
-                    style="@style/Custom_Ratingbar"
+                    style="@style/Custom_RatingBar"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"

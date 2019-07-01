@@ -247,7 +247,7 @@ public class SelectAddressActivity extends BaseActivity implements PoiSearch.OnP
                 public void run() {
                     LoadingDialog.cancelDialogForLoading();
                 }
-            }, 1000);
+            }, 500);
             easyPopup.showAtAnchorView(handViewLl, VerticalGravity.BELOW, HorizontalGravity.LEFT, 0, 0);
         }
     }

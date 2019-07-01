@@ -3,7 +3,6 @@ package com.wbx.mall.activity;
 import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.app.Dialog;
-import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
@@ -23,9 +22,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.alibaba.fastjson.JSONObject;
-import com.bigkoo.convenientbanner.ConvenientBanner;
-import com.bigkoo.convenientbanner.holder.CBViewHolderCreator;
-import com.bigkoo.convenientbanner.holder.Holder;
 import com.google.gson.Gson;
 import com.tencent.mm.opensdk.modelmsg.SendMessageToWX;
 import com.wbx.mall.R;
@@ -42,7 +38,7 @@ import com.wbx.mall.bean.OrderBean;
 import com.wbx.mall.bean.SpecInfo;
 import com.wbx.mall.common.LoginUtil;
 import com.wbx.mall.presenter.GoodsPresenterImp;
-import com.wbx.mall.utils.GlideUtils;
+import com.wbx.mall.utils.GlideImageLoader;
 import com.wbx.mall.utils.SPUtils;
 import com.wbx.mall.utils.ShareUtils;
 import com.wbx.mall.utils.UilImageGetter;
@@ -51,6 +47,7 @@ import com.wbx.mall.widget.LoadingDialog;
 import com.wbx.mall.widget.MyScrollview;
 import com.wbx.mall.widget.flowLayout.BaseTagAdapter;
 import com.wbx.mall.widget.flowLayout.TagFlowLayout;
+import com.youth.banner.Banner;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -67,8 +64,8 @@ import butterknife.OnClick;
  */
 
 public class GoodsDetailActivity extends BaseActivity implements GoodsView {
-    @Bind(R.id.convenientBanner)
-    ConvenientBanner mBanner;
+    @Bind(R.id.banner)
+    Banner mBanner;
     @Bind(R.id.product_detail_sv)
     MyScrollview mScrollView;
     @Bind(R.id.pro_detail_title_view)
@@ -218,13 +215,7 @@ public class GoodsDetailActivity extends BaseActivity implements GoodsView {
         } else {
             images.add(mGoodsInfo.getPhoto());
         }
-        mBanner.startTurning(3000);
-        mBanner.setPages(new CBViewHolderCreator<LocalImageHolderView>() {
-            @Override
-            public LocalImageHolderView createHolder() {
-                return new LocalImageHolderView();
-            }
-        }, images).setPageIndicatorAlign(ConvenientBanner.PageIndicatorAlign.ALIGN_PARENT_RIGHT);
+        mBanner.setImages(images).setDelayTime(3000).setImageLoader(new GlideImageLoader()).start();
     }
 
     //添加店铺已有标识
@@ -275,21 +266,6 @@ public class GoodsDetailActivity extends BaseActivity implements GoodsView {
         allRecycler.setAdapter(goodsDetallAdapter);
     }
 
-    class LocalImageHolderView implements Holder<String> {
-        private ImageView imageView;
-
-        @Override
-        public View createView(Context context) {
-            imageView = new ImageView(context);
-            imageView.setScaleType(ImageView.ScaleType.FIT_XY);
-            return imageView;
-        }
-
-        @Override
-        public void UpdateUI(Context context, int position, String data) {
-            GlideUtils.showBigPic(mActivity, imageView, data);
-        }
-    }
 
     @OnClick({R.id.detail_store_tv, R.id.sub_product_im, R.id.add_car_btn, R.id.now_buy_btn, R.id.collect_product_tv, R.id.forwarding})
     public void onClick(View view) {
@@ -791,5 +767,17 @@ public class GoodsDetailActivity extends BaseActivity implements GoodsView {
         intent.putExtra("goodsInfo", goodsInfo);
         setResult(RESULT_OK, intent);
         super.finish();
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        mBanner.startAutoPlay();
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        mBanner.stopAutoPlay();
     }
 }

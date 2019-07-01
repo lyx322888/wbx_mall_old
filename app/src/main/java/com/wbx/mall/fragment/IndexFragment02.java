@@ -168,7 +168,6 @@ public class IndexFragment02 extends BaseFragment implements BaseRefreshListener
 
     @Override
     protected void fillData() {
-
         IntentFilter filtermsg = new IntentFilter(AppConfig.REFRESH_UI);
         refreshUIReceiver = new MyReceiver();
         getActivity().registerReceiver(refreshUIReceiver, filtermsg);
