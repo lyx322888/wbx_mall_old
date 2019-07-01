@@ -5,6 +5,7 @@ import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.widget.ImageView;
 
+import com.hedgehog.ratingbar.RatingBar;
 import com.wbx.mall.R;
 import com.wbx.mall.base.BaseAdapter;
 import com.wbx.mall.base.BaseViewHolder;
@@ -31,7 +32,7 @@ public class CommentAdapter extends BaseAdapter<CommentInfo, Context> {
 
     @Override
     public void convert(BaseViewHolder holder, CommentInfo commentInfo, int position) {
-        holder.setText(R.id.comment_user_name_tv, commentInfo.getNickname()).setText(R.id.comment_content_tv, commentInfo.getMessage()).setRating(R.id.ratingBar, commentInfo.getGrade());
+        holder.setText(R.id.comment_user_name_tv, commentInfo.getNickname()).setText(R.id.comment_content_tv, commentInfo.getMessage()).setRating(R.id.rb_score, commentInfo.getGrade());
         holder.setText(R.id.tv_time, DateUtil.formatDate2(commentInfo.getCreate_time()));
         ImageView faceIm = holder.getView(R.id.comment_face_im);
         GlideUtils.showRoundSmallPic(mContext, faceIm, commentInfo.getFace());

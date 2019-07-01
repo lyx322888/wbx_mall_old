@@ -1,59 +1,55 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="60dp"
-        android:orientation="horizontal"
         android:background="@color/app_color"
-        >
+        android:orientation="horizontal">
+
         <RelativeLayout
             android:layout_width="60dp"
             android:layout_height="60dp"
-            android:onClick="back"
-            >
+            android:onClick="back">
+
             <ImageView
                 android:layout_width="15dp"
                 android:layout_height="15dp"
-                android:src="@drawable/w_return"
                 android:layout_alignParentBottom="true"
-                android:layout_marginBottom="10dp"
                 android:layout_marginLeft="10dp"
-                android:tint="@color/colorWhite"
-                />
-
+                android:layout_marginBottom="10dp"
+                android:src="@drawable/w_return"
+                android:tint="@color/colorWhite" />
 
         </RelativeLayout>
+
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="15sp"
-            android:textColor="@color/colorWhite"
-            android:text="我的收藏"
-            android:layout_weight="1"
             android:layout_gravity="bottom"
-            android:gravity="center"
             android:layout_marginBottom="4dp"
-            />
-        <RelativeLayout
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="我的收藏"
+            android:textColor="@color/colorWhite"
+            android:textSize="15sp" />
+
+        <View
             android:layout_width="60dp"
-            android:layout_height="60dp"
-            >
-        </RelativeLayout>
+            android:layout_height="60dp" />
     </LinearLayout>
-    <com.wbx.mall.widget.SegmentView
-        android:id="@+id/collection_segment_view"
+
+    <android.support.design.widget.TabLayout
+        android:id="@+id/tab_layout"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:layout_marginLeft="50dp"
-        android:layout_marginRight="50dp"
-        android:layout_marginTop="25dp"
-        android:layout_marginBottom="25dp"
-        />
+        android:layout_height="49dp"
+        android:background="@color/white" />
+
     <android.support.v4.view.ViewPager
         android:id="@+id/collection_view_pager"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"></android.support.v4.view.ViewPager>
+        android:layout_height="match_parent" />
 </LinearLayout>

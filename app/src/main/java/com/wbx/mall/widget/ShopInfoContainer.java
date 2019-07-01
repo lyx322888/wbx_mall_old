@@ -7,12 +7,12 @@ import android.text.TextUtils;
 import android.util.AttributeSet;
 import android.view.View;
 import android.widget.ImageView;
-import android.widget.RatingBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.alibaba.fastjson.JSONObject;
+import com.hedgehog.ratingbar.RatingBar;
 import com.wbx.mall.R;
 import com.wbx.mall.activity.ChatActivity;
 import com.wbx.mall.activity.LoginActivity;
@@ -76,7 +76,7 @@ public class ShopInfoContainer extends RelativeLayout {
         GlideUtils.showRoundMediumPic(getContext(), ivShop, shopInfo.getPhoto());
         ivCollect.setImageResource(shopInfo.getIs_favorites() == 0 ? R.drawable.icon_collection_un : R.drawable.already);
         tvShopName.setText(shopInfo.getShop_name());
-        rbScore.setRating(shopInfo.getScore());
+        rbScore.setStar(shopInfo.getScore());
         if (LoginUtil.isLogin() && LoginUtil.getUserInfo().getIs_salesman() == 1) {
             tvSellNum.setVisibility(VISIBLE);
             tvSellNum.setText(String.format("销量 : %d", shopInfo.getSold_num()));

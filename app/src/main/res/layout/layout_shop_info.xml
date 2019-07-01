@@ -1,17 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:hedgehog="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
     <ImageView
         android:id="@+id/iv_shop_bg"
         android:layout_width="match_parent"
-        android:layout_height="145dp" />
+        android:layout_height="150dp" />
 
     <View
         android:id="@+id/cover"
         android:layout_width="match_parent"
-        android:layout_height="145dp"
+        android:layout_height="150dp"
         android:background="#33000000" />
 
     <LinearLayout
@@ -61,8 +62,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="107dp"
-        android:layout_marginRight="10dp"
         android:layout_marginTop="70dp"
+        android:layout_marginRight="10dp"
         android:orientation="vertical">
 
         <TextView
@@ -82,12 +83,17 @@
             android:gravity="center_vertical"
             android:orientation="horizontal">
 
-            <RatingBar
+            <com.hedgehog.ratingbar.RatingBar
                 android:id="@+id/rb_score"
-                style="@style/Custom_RatingBar"
                 android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:progressTint="#ffD161" />
+                android:layout_height="wrap_content"
+                hedgehog:clickable="false"
+                hedgehog:starCount="5"
+                hedgehog:starEmpty="@drawable/no_evaluation"
+                hedgehog:starFill="@drawable/evaluation"
+                hedgehog:starImageHeight="20dp"
+                hedgehog:starImagePadding="5dp"
+                hedgehog:starImageWidth="20dp" />
 
             <TextView
                 android:id="@+id/tv_sell_num"
@@ -101,8 +107,8 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginRight="60dp"
             android:layout_marginTop="5dp"
+            android:layout_marginRight="60dp"
             android:orientation="horizontal">
 
             <TextView
@@ -130,8 +136,8 @@
         android:layout_width="60dp"
         android:layout_height="60dp"
         android:layout_gravity="end"
-        android:layout_marginRight="15dp"
         android:layout_marginTop="120dp"
-        android:visibility="gone"
-        android:src="@drawable/icon_chat" />
+        android:layout_marginRight="15dp"
+        android:src="@drawable/icon_chat"
+        android:visibility="gone" />
 </FrameLayout>

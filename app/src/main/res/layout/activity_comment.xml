@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:hedgehog="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
@@ -55,6 +56,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="45dp"
                 android:background="@color/colorWhite"
+                android:gravity="center_vertical"
                 android:orientation="horizontal">
 
                 <TextView
@@ -65,16 +67,20 @@
                     android:text="评价:"
                     android:textColor="@color/black" />
 
-                <RatingBar
-                    android:id="@+id/ratingbar_default"
-                    style="@style/Custom_RatingBar"
+                <com.hedgehog.ratingbar.RatingBar
+                    android:id="@+id/rb_score"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="center"
                     android:layout_marginLeft="10dp"
-                    android:isIndicator="true"
-                    android:rating="5"
-                    android:stepSize="1" />
+                    android:focusable="true"
+                    hedgehog:clickable="true"
+                    hedgehog:starCount="5"
+                    hedgehog:starEmpty="@drawable/no_evaluation"
+                    hedgehog:starFill="@drawable/evaluation"
+                    hedgehog:starImageHeight="20dp"
+                    hedgehog:starImagePadding="5dp"
+                    hedgehog:starImageWidth="20dp" />
+
             </LinearLayout>
 
             <View style="@style/GrayLineStyle" />

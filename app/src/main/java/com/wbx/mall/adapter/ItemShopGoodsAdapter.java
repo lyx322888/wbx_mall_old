@@ -1,11 +1,15 @@
 package com.wbx.mall.adapter;
 
-import android.content.Context;
+import android.support.annotation.Nullable;
+import android.text.TextUtils;
+import android.view.View;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.TextView;
 
+import com.chad.library.adapter.base.BaseQuickAdapter;
+import com.chad.library.adapter.base.BaseViewHolder;
 import com.wbx.mall.R;
-import com.wbx.mall.base.BaseAdapter;
-import com.wbx.mall.base.BaseViewHolder;
 import com.wbx.mall.bean.GoodsInfo2;
 import com.wbx.mall.utils.GlideUtils;
 
@@ -15,21 +19,61 @@ import java.util.List;
  * Created by wushenghui on 2017/7/18.
  */
 
-public class ItemShopGoodsAdapter extends BaseAdapter<GoodsInfo2, Context> {
+public class ItemShopGoodsAdapter extends BaseQuickAdapter<GoodsInfo2, BaseViewHolder> {
 
-    public ItemShopGoodsAdapter(List<GoodsInfo2> dataList, Context context) {
-        super(dataList, context);
+    ItemShopGoodsAdapter(@Nullable List<GoodsInfo2> data) {
+        super(R.layout.item_shop_goods_layout, data);
     }
 
     @Override
-    public int getLayoutId(int viewType) {
-        return R.layout.item_shop_goods_layout;
-    }
-
-    @Override
-    public void convert(BaseViewHolder holder, GoodsInfo2 goodsInfo, int position) {
+    public void convert(BaseViewHolder holder, GoodsInfo2 goodsInfo) {
         ImageView view = holder.getView(R.id.goods_pic_im);
+        ImageView faceView = holder.getView(R.id.iv_free_activity);
         GlideUtils.showMediumPic(mContext, view, goodsInfo.getPhoto());
-        holder.setText(R.id.goods_name_tv, goodsInfo.getTitle()).setText(R.id.goods_price_tv, String.format("¥%.2f", goodsInfo.getSales_promotion_price() == 0 ? goodsInfo.getPrice() / 100.00 : goodsInfo.getSales_promotion_price() / 100.00));
+        TextView user_num = holder.getView(R.id.tv_activity_user_num);
+        TextView tvTitle = holder.getView(R.id.goods_name_tv);
+        if (!TextUtils.isEmpty(goodsInfo.getTitle())) {
+            tvTitle.setText(goodsInfo.getTitle());
+        } else {
+            tvTitle.setText(goodsInfo.getProduct_name());
+        }
+        holder.setText(R.id.goods_price_tv, String.format("店内价:" + "¥%.2f", goodsInfo.getSales_promotion_price() == 0 ? goodsInfo.getPrice() / 100.00 : goodsInfo.getSales_promotion_price() / 100.00));
+        if (goodsInfo.getIs_share_free() == 1 || goodsInfo.getIs_consume_free() == 1) {
+            faceView.setVisibility(View.VISIBLE);
+        } else {
+            faceView.setVisibility(View.GONE);
+        }
+        if (goodsInfo.getFree_goods_peoples() <= 0) {
+            user_num.setVisibility(View.GONE);
+        }
+        LinearLayout linearLayout = holder.getView(R.id.ll_activity_user);
+        if (goodsInfo.getFree_goods_peoples() == 0 || (goodsInfo.getIs_share_free() == 0 && goodsInfo.getIs_consume_free() == 0)) {
+            linearLayout.setVisibility(View.GONE);
+        } else {
+            linearLayout.setVisibility(View.VISIBLE);
+            ImageView face1 = holder.getView(R.id.iv_acitivity_user_1);
+            ImageView face2 = holder.getView(R.id.iv_acitivity_user_2);
+            ImageView face3 = holder.getView(R.id.iv_acitivity_user_3);
+            face1.setVisibility(View.GONE);
+            face2.setVisibility(View.GONE);
+            face3.setVisibility(View.GONE);
+            if (goodsInfo.getFree_goods_peoples_face() != null && goodsInfo.getFree_goods_peoples_face().size() > 0) {
+                if (goodsInfo.getFree_goods_peoples_face().size() > 0) {
+                    face1.setVisibility(View.VISIBLE);
+                    GlideUtils.showSmallPic(mContext, (ImageView) holder.getView(R.id.iv_acitivity_user_1), goodsInfo.getFree_goods_peoples_face().get(0));
+                }
+                if (goodsInfo.getFree_goods_peoples_face().size() > 1) {
+                    face2.setVisibility(View.VISIBLE);
+                    GlideUtils.showSmallPic(mContext, (ImageView) holder.getView(R.id.iv_acitivity_user_2), goodsInfo.getFree_goods_peoples_face().get(1));
+                }
+                if (goodsInfo.getFree_goods_peoples_face().size() > 2) {
+                    face3.setVisibility(View.VISIBLE);
+                    GlideUtils.showSmallPic(mContext, (ImageView) holder.getView(R.id.iv_acitivity_user_3), goodsInfo.getFree_goods_peoples_face().get(2));
+                }
+            }
+            user_num.setText(goodsInfo.getFree_goods_peoples() + "人免单成功");
+
+        }
+        holder.addOnClickListener(R.id.root_view);
     }
 }

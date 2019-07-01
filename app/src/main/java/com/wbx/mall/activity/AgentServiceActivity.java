@@ -127,6 +127,8 @@ public class AgentServiceActivity extends BaseActivity {
                 gradeTv.setText("战略合作伙伴");
             } else if (data.getRank() == 7) {
                 gradeTv.setText("城市代理");
+            } else {
+                gradeTv.setText("创业合伙人");
             }
         }
         TypedArray ar = getResources().obtainTypedArray(R.array.type_agent_src);
@@ -203,8 +205,8 @@ public class AgentServiceActivity extends BaseActivity {
                         startActivity(intent);
                         break;
                     case 9:
-                        Log.e("TAG",LoginUtil.getLoginToken());
-                        intent=new Intent(mContext,SalesDetailActivity.class);
+                        Log.e("TAG", LoginUtil.getLoginToken());
+                        intent = new Intent(mContext, SalesDetailActivity.class);
                         startActivity(intent);
                         break;
                     default:

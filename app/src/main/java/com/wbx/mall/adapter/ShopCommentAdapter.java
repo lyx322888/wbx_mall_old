@@ -7,6 +7,7 @@ import android.widget.ImageView;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
+import com.hedgehog.ratingbar.RatingBar;
 import com.wbx.mall.R;
 import com.wbx.mall.bean.CommentInfo;
 import com.wbx.mall.utils.DateUtil;
@@ -26,8 +27,12 @@ public class ShopCommentAdapter extends BaseQuickAdapter<CommentInfo, BaseViewHo
 
     @Override
     protected void convert(BaseViewHolder holder, CommentInfo commentInfo) {
-        holder.setText(R.id.comment_user_name_tv, commentInfo.getNickname()).setText(R.id.comment_content_tv, commentInfo.getMessage()).setRating(R.id.ratingBar, commentInfo.getGrade());
+        holder.setText(R.id.comment_user_name_tv, commentInfo.getNickname());
         holder.setText(R.id.tv_time, DateUtil.formatDate2(commentInfo.getCreate_time()));
+        holder.setText(R.id.comment_content_tv, commentInfo.getMessage());
+        RatingBar rb = holder.getView(R.id.rb_score);
+        rb.setStar(commentInfo.getGrade());
+
         ImageView faceIm = holder.getView(R.id.comment_face_im);
         GlideUtils.showRoundSmallPic(mContext, faceIm, commentInfo.getFace());
         RecyclerView commentPicRv = holder.getView(R.id.comment_pic_rv);

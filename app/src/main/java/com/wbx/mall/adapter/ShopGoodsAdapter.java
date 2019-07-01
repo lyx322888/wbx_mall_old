@@ -94,7 +94,7 @@ public class ShopGoodsAdapter extends BaseAdapter<ShopInfo2, Context> {
         }
         GlideUtils.showRoundMediumPic(mContext, storePicIm, shopInfo.getPhoto());
         holder.setText(R.id.promotion_name_tv, shopInfo.getShop_name())
-                .setRating(R.id.ratingBar, shopInfo.getScore())
+                .setRating(R.id.rb_score, shopInfo.getScore())
                 .setText(R.id.item_promotion_info_tv, String.format("起送¥%.2f", shopInfo.getSince_money() / 100.00) + ((LoginUtil.isLogin() && LoginUtil.getUserInfo().getIs_salesman() == 1) ? " 销量:" + sold_num : ""))
                 .setText(R.id.promotion_address_tv, "地址:" + shopInfo.getAddr())
                 .setText(R.id.item_promotion_distance_tv, shopInfo.getD())
@@ -131,7 +131,7 @@ public class ShopGoodsAdapter extends BaseAdapter<ShopInfo2, Context> {
         }
 
         RecyclerView goodsRecycler = holder.getView(R.id.promotion_goods_rv);
-        ItemShopGoodsAdapter02 goodsAdapter = new ItemShopGoodsAdapter02(shopInfo.getGoods());
+        ItemShopGoodsAdapter goodsAdapter = new ItemShopGoodsAdapter(shopInfo.getGoods());
         LinearLayoutManager lm = new LinearLayoutManager(mContext);
         lm.setOrientation(LinearLayoutManager.HORIZONTAL);
         goodsRecycler.setLayoutManager(lm);

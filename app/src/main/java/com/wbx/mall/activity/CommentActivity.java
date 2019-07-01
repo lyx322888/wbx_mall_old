@@ -6,11 +6,11 @@ import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.EditText;
-import android.widget.RatingBar;
 import android.widget.TextView;
 
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
+import com.hedgehog.ratingbar.RatingBar;
 import com.wbx.mall.R;
 import com.wbx.mall.adapter.TakePhotoAdapter;
 import com.wbx.mall.api.Api;
@@ -40,10 +40,11 @@ public class CommentActivity extends BaseActivity {
     RecyclerView photoRv;
     @Bind(R.id.select_count_tv)
     TextView selectCountTv;
-    @Bind(R.id.ratingbar_default)
+    @Bind(R.id.rb_score)
     RatingBar mRatingBar;
     @Bind(R.id.comment_content_edit)
     EditText messageEdit;
+    private int mScore;
 
     private ArrayList<String> picList = new ArrayList<>();
     private ArrayList<String> lstQiNiuPath = new ArrayList<>();
@@ -67,6 +68,13 @@ public class CommentActivity extends BaseActivity {
         mAdapter = new TakePhotoAdapter(picList, this);
         photoRv.setLayoutManager(new GridLayoutManager(mContext, 3));
         photoRv.setAdapter(mAdapter);
+
+        mRatingBar.setOnRatingChangeListener(new RatingBar.OnRatingChangeListener() {
+            @Override
+            public void onRatingChange(float RatingCount) {
+                mScore = (int) RatingCount;
+            }
+        });
     }
 
     @Override
@@ -75,7 +83,6 @@ public class CommentActivity extends BaseActivity {
         physical = getIntent().getBooleanExtra("physical", false);
         mParams.put("type", physical ? 2 : 1);
         mParams.put("login_token", SPUtils.getSharedStringData(mContext, AppConfig.LOGIN_TOKEN));
-
     }
 
     @Override
@@ -166,7 +173,7 @@ public class CommentActivity extends BaseActivity {
     }
 
     private void submit() {
-        mParams.put("grade", mRatingBar.getRating());
+        mParams.put("grade", mScore);
         mParams.put("message", messageEdit.getText().toString());
         new MyHttp().doPost(Api.getDefault().publishComment(mParams), new HttpListener() {
             @Override

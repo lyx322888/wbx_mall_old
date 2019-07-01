@@ -11,8 +11,9 @@ import android.widget.BaseAdapter;
 import android.widget.CheckedTextView;
 import android.widget.CompoundButton;
 import android.widget.ImageView;
-import android.widget.RatingBar;
 import android.widget.TextView;
+
+import com.hedgehog.ratingbar.RatingBar;
 
 /**
  * Created by wushenghui on 2017/4/27.
@@ -52,7 +53,7 @@ public class BaseViewHolder extends RecyclerView.ViewHolder {
     }
     public BaseViewHolder setRating(int viewId, int rating){
         RatingBar view = getView(viewId);
-         view.setRating(rating);
+        view.setStar(rating);
         return this;
     }
 

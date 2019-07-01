@@ -60,7 +60,7 @@ public class ShopAdapter extends BaseAdapter<ShopInfo2, Context> {
         }
         ImageView storePicIm = holder.getView(R.id.item_promotion_store_pic_im);
         TextView tvShopState = holder.getView(R.id.tv_shop_state);
-        TextView tvpopularity=holder.getView(R.id.popularity_tv);
+        TextView tvpopularity = holder.getView(R.id.popularity_tv);
         tvpopularity.setText("人气 " + shopInfo.getView());
         switch (shopInfo.getShop_status()) {
             case 0:
@@ -90,7 +90,7 @@ public class ShopAdapter extends BaseAdapter<ShopInfo2, Context> {
         }
         GlideUtils.showRoundMediumPic(mContext, storePicIm, shopInfo.getPhoto());
         holder.setText(R.id.promotion_name_tv, shopInfo.getShop_name())
-                .setRating(R.id.ratingBar, shopInfo.getScore())
+                .setRating(R.id.rb_score, shopInfo.getScore())
                 .setText(R.id.item_promotion_info_tv, String.format("起送¥%.2f", shopInfo.getSince_money() / 100.00) + ((LoginUtil.isLogin() && LoginUtil.getUserInfo().getIs_salesman() == 1) ? " 销量:" + sold_num : ""))
                 .setText(R.id.promotion_address_tv, "地址:" + shopInfo.getAddr())
                 .setText(R.id.item_promotion_distance_tv, shopInfo.getD())
@@ -127,7 +127,7 @@ public class ShopAdapter extends BaseAdapter<ShopInfo2, Context> {
         }
         RecyclerView goodsRecycler = holder.getView(R.id.promotion_goods_rv);
 
-        ItemShopGoodsAdapter02 goodsAdapter = new ItemShopGoodsAdapter02(shopInfo.getGoods());
+        ItemShopGoodsAdapter goodsAdapter = new ItemShopGoodsAdapter(shopInfo.getGoods());
         LinearLayoutManager lm = new LinearLayoutManager(mContext);
         lm.setOrientation(LinearLayoutManager.HORIZONTAL);
         goodsRecycler.setLayoutManager(lm);
@@ -140,9 +140,9 @@ public class ShopAdapter extends BaseAdapter<ShopInfo2, Context> {
                     return;
                 }
                 if (shopInfo.getGoods().get(position).getIs_share_free() == 1 || shopInfo.getGoods().get(position).getIs_consume_free() == 1) {
-                    FreeActivityDetailActivity.actionStart(mContext, shopInfo.getShop_id()+"", shopInfo.getGoods().get(position).getGoods_id(), shopInfo.getGrade_id());
+                    FreeActivityDetailActivity.actionStart(mContext, shopInfo.getShop_id() + "", shopInfo.getGoods().get(position).getGoods_id(), shopInfo.getGrade_id());
                 } else {
-                    StoreDetailActivity.actionStart(mContext, shopInfo.getGrade_id(), shopInfo.getShop_id()+"", shopInfo.getGoods().get(position).getGoods_id());
+                    StoreDetailActivity.actionStart(mContext, shopInfo.getGrade_id(), shopInfo.getShop_id() + "", shopInfo.getGoods().get(position).getGoods_id());
                 }
             }
         });

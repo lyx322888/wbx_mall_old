@@ -91,10 +91,8 @@ public class CommentMoreActivity extends BaseActivity implements BaseRefreshList
                 if (code == AppConfig.ERROR_STATE.NULLDATA) {
                     mRefreshLayout.showView(ViewStatus.EMPTY_STATUS);
                 }
-
             }
         });
-
     }
 
     @Override

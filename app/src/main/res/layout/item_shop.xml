@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:hedgehog="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/root_view"
     android:layout_width="match_parent"
@@ -85,16 +86,20 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="5dp"
+                    android:gravity="center_vertical"
                     android:orientation="horizontal">
 
-                    <RatingBar
-                        android:id="@+id/ratingBar"
-                        style="@style/Custom_RatingBar"
+                    <com.hedgehog.ratingbar.RatingBar
+                        android:id="@+id/rb_score"
                         android:layout_width="wrap_content"
-                        android:layout_height="match_parent"
-                        android:isIndicator="true"
-                        android:progressTint="#ffD161"
-                        android:rating="3.5" />
+                        android:layout_height="wrap_content"
+                        hedgehog:clickable="false"
+                        hedgehog:starCount="5"
+                        hedgehog:starEmpty="@drawable/no_evaluation"
+                        hedgehog:starFill="@drawable/evaluation"
+                        hedgehog:starImageHeight="20dp"
+                        hedgehog:starImagePadding="5dp"
+                        hedgehog:starImageWidth="20dp" />
 
                     <ImageView
                         android:layout_width="wrap_content"
