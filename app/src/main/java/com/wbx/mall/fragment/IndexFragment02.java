@@ -23,16 +23,15 @@ import com.alibaba.fastjson.JSONObject;
 import com.hyphenate.chat.EMChatManager;
 import com.hyphenate.chat.EMClient;
 import com.wbx.mall.R;
-import com.wbx.mall.activity.BuyActivity;
-import com.wbx.mall.activity.DrinksActivity;
-import com.wbx.mall.activity.FoodActivity;
-import com.wbx.mall.activity.FoodsxActivity;
+import com.wbx.mall.activity.VegetablesActivity;
+import com.wbx.mall.activity.FoodsActivity;
+import com.wbx.mall.activity.FruitsActivity;
 import com.wbx.mall.activity.IntelligentServiceActivity;
 import com.wbx.mall.activity.MessageCenterActivity;
-import com.wbx.mall.activity.NearByActivity;
+import com.wbx.mall.activity.MarketActivity;
 import com.wbx.mall.activity.SearchActivity;
 import com.wbx.mall.activity.SelectAddressActivity;
-import com.wbx.mall.activity.SpecialtyActivity;
+import com.wbx.mall.activity.SnacksActivity;
 import com.wbx.mall.activity.StoreDetailActivity;
 import com.wbx.mall.adapter.HomeShufflingAdapter;
 import com.wbx.mall.adapter.ShopGoodsAdapter;
@@ -85,7 +84,7 @@ public class IndexFragment02 extends BaseFragment implements BaseRefreshListener
     MyScrollview mScrollView;
     @Bind(R.id.title_view)
     LinearLayout mTitleView;
-    @Bind(R.id.index_choose_tv)
+    @Bind(R.id.tv_address)
     TextView cityTv;
     @Bind(R.id.index_recycler_view)
     RecyclerView mRecyclerView;
@@ -429,13 +428,28 @@ public class IndexFragment02 extends BaseFragment implements BaseRefreshListener
         }
     }
 
-    @OnClick({R.id.fragment_index_search_tv, R.id.my_foodsx_tv, R.id.index_choose_tv, R.id.rl_right, R.id.service_im, R.id.my_xq_tv, R.id.index_buy_tv, R.id.index_nearby_tv, R.id.index_country_tv, R.id.index_my_free})
+    @OnClick({R.id.fragment_index_search_tv, R.id.tv_vegetables, R.id.tv_market, R.id.tv_fruits, R.id.tv_snacks, R.id.tv_foods, R.id.tv_address, R.id.rl_right, R.id.service_im})
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.fragment_index_search_tv:
                 startActivity(new Intent(getActivity(), SearchActivity.class));
                 break;
-            case R.id.index_choose_tv:
+            case R.id.tv_vegetables:
+                startActivity(new Intent(getActivity(), VegetablesActivity.class));
+                break;
+            case R.id.tv_market:
+                startActivity(new Intent(getActivity(), MarketActivity.class));
+                break;
+            case R.id.tv_fruits:
+                startActivity(new Intent(getActivity(), FruitsActivity.class));
+                break;
+            case R.id.tv_snacks:
+                startActivity(new Intent(getActivity(), SnacksActivity.class));
+                break;
+            case R.id.tv_foods:
+                startActivity(new Intent(getActivity(), FoodsActivity.class));
+                break;
+            case R.id.tv_address:
                 startActivityForResult(new Intent(getActivity(), SelectAddressActivity.class), 0);
                 break;
             case R.id.rl_right:
@@ -447,32 +461,6 @@ public class IndexFragment02 extends BaseFragment implements BaseRefreshListener
                 break;
             case R.id.service_im:
                 startActivity(new Intent(getActivity(), IntelligentServiceActivity.class));
-                break;
-            case R.id.my_xq_tv:
-//                startActivity(new Intent(getActivity(), CookBookActivity.class));
-                startActivity(new Intent(getActivity(), SpecialtyActivity.class));
-                break;
-            case R.id.index_buy_tv:
-                getActivity().startActivity(new Intent(getActivity(), NearByActivity.class));
-                break;
-            case R.id.index_nearby_tv:
-                getActivity().startActivity(new Intent(getActivity(), FoodActivity.class));
-                break;
-            case R.id.index_country_tv:
-//                //积分商城
-//                getActivity().startActivity(new Intent(getActivity(), IntegralMallActivity.class));
-                getActivity().startActivity(new Intent(getActivity(), DrinksActivity.class));
-                break;
-            case R.id.my_foodsx_tv:
-                getActivity().startActivity(new Intent(getActivity(), FoodsxActivity.class));
-                break;
-            case R.id.index_my_free:
-//                if (LoginUtil.isLogin()) {
-//                    startActivity(new Intent(getActivity(), MyFreeOrderCouponActivity.class));
-//                } else {
-//                    LoginUtil.login();
-//                }
-                getActivity().startActivity(new Intent(getActivity(), BuyActivity.class));
                 break;
         }
     }

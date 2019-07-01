@@ -31,8 +31,7 @@ public class GoodsDetallAdapter extends RecyclerView.Adapter<GoodsDetallAdapter.
     @Override
     public VH onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(context).inflate(R.layout.layout_goodsdetall, parent, false);
-        VH vh = new VH(view);
-        return vh;
+        return new VH(view);
     }
 
     @Override
@@ -68,8 +67,6 @@ public class GoodsDetallAdapter extends RecyclerView.Adapter<GoodsDetallAdapter.
 
             }
         });
-
-
     }
 
     @Override
@@ -87,7 +84,7 @@ public class GoodsDetallAdapter extends RecyclerView.Adapter<GoodsDetallAdapter.
         ImageView add;
         TextView tvBuyNum;
 
-        public VH(View itemView) {
+        VH(View itemView) {
             super(itemView);
             iv_goods = itemView.findViewById(R.id.img_goods);
             tv_name = itemView.findViewById(R.id.detail_goods_name_tv);

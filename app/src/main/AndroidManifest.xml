@@ -116,9 +116,9 @@
             </intent-filter>
         </activity>
         <!-- 附近逛街 -->
-        <activity android:name=".activity.NearByActivity" />
+        <activity android:name=".activity.MarketActivity" />
         <!-- 美食 -->
-        <activity android:name=".activity.FoodActivity" />
+        <activity android:name=".activity.FoodsActivity" />
         <!-- 开票资料 -->
         <activity android:name=".activity.TicketInfoActivity" />
         <!-- 网页 -->
@@ -349,10 +349,10 @@
         <activity android:name=".activity.MerchantDataActivity" />
         <!-- 订单 -->
         <activity android:name=".activity.IndexOrderActivity" />
-        <activity android:name=".activity.FoodsxActivity" />
-        <activity android:name=".activity.SpecialtyActivity" />
+        <activity android:name=".activity.FruitsActivity" />
+        <activity android:name=".activity.SnacksActivity" />
         <activity android:name=".activity.DrinksActivity" />
-        <activity android:name=".activity.BuyActivity" />
+        <activity android:name=".activity.VegetablesActivity" />
         <activity android:name=".activity.MySoftwareActivity" />
         <activity android:name=".activity.SalesDetailActivity"></activity>
     </application>

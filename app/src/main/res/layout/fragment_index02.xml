@@ -82,33 +82,33 @@
                             android:orientation="horizontal">
 
                             <TextView
-                                android:id="@+id/index_my_free"
+                                android:id="@+id/tv_vegetables"
                                 style="@style/textWithImageStyle"
-                                android:drawableTop="@drawable/img_maicai"
+                                android:drawableTop="@drawable/icon_index_vegetables"
                                 android:text="附近买菜" />
 
                             <TextView
-                                android:id="@+id/index_buy_tv"
+                                android:id="@+id/tv_market"
                                 style="@style/textWithImageStyle"
-                                android:drawableTop="@drawable/index_supermarket"
+                                android:drawableTop="@drawable/icon_index_market"
                                 android:text="超市便利" />
 
                             <TextView
-                                android:id="@+id/my_foodsx_tv"
+                                android:id="@+id/tv_fruits"
                                 style="@style/textWithImageStyle"
-                                android:drawableTop="@drawable/index_fruits"
+                                android:drawableTop="@drawable/icon_index_fruits"
                                 android:text="水果生鲜" />
 
                             <TextView
-                                android:id="@+id/my_xq_tv"
+                                android:id="@+id/tv_snacks"
                                 style="@style/textWithImageStyle"
-                                android:drawableTop="@drawable/index_recipe"
+                                android:drawableTop="@drawable/icon_index_snacks"
                                 android:text="特产零食" />
 
                             <TextView
-                                android:id="@+id/index_nearby_tv"
+                                android:id="@+id/tv_foods"
                                 style="@style/textWithImageStyle"
-                                android:drawableTop="@drawable/index_food"
+                                android:drawableTop="@drawable/icon_index_foods"
                                 android:text="餐饮美食" />
 
                             <TextView
@@ -203,7 +203,7 @@
         android:orientation="horizontal">
 
         <TextView
-            android:id="@+id/index_choose_tv"
+            android:id="@+id/tv_address"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="16dp"

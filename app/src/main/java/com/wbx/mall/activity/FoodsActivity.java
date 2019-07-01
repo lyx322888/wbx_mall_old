@@ -46,11 +46,10 @@ import butterknife.Bind;
 import butterknife.OnClick;
 
 /**
- * Created by wushenghui on 2018/2/8.
- * 美食
+ * 首页餐饮美食
  */
 
-public class FoodActivity extends BaseActivity implements BaseRefreshListener {
+public class FoodsActivity extends BaseActivity implements BaseRefreshListener {
     @Bind(R.id.title_image)
     ImageView titleImage;
     @Bind(R.id.type_recycler_view)

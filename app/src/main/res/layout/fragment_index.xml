@@ -50,19 +50,19 @@
                     <TextView
                         android:id="@+id/index_buy_tv"
                         style="@style/textWithImageStyle"
-                        android:drawableTop="@drawable/index_supermarket"
+                        android:drawableTop="@drawable/icon_index_market"
                         android:text="超市便利" />
 
                     <TextView
-                        android:id="@+id/index_nearby_tv"
+                        android:id="@+id/tv_foods"
                         style="@style/textWithImageStyle"
-                        android:drawableTop="@drawable/index_food"
+                        android:drawableTop="@drawable/icon_index_foods"
                         android:text="美食街" />
 
                     <TextView
-                        android:id="@+id/my_xq_tv"
+                        android:id="@+id/tv_snacks"
                         style="@style/textWithImageStyle"
-                        android:drawableTop="@drawable/index_recipe"
+                        android:drawableTop="@drawable/icon_index_snacks"
                         android:text="菜谱大全" />
 
                     <TextView
@@ -114,7 +114,7 @@
         android:orientation="horizontal">
 
         <TextView
-            android:id="@+id/index_choose_tv"
+            android:id="@+id/tv_address"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="16dp"

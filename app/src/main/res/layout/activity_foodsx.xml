@@ -21,8 +21,8 @@
                 android:layout_width="15dp"
                 android:layout_height="15dp"
                 android:layout_alignParentBottom="true"
-                android:layout_marginBottom="10dp"
                 android:layout_marginLeft="10dp"
+                android:layout_marginBottom="10dp"
                 android:src="@drawable/w_return"
                 android:tint="@color/gray" />
         </RelativeLayout>
@@ -44,8 +44,8 @@
             <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_alignParentBottom="true"
                 android:layout_alignParentRight="true"
+                android:layout_alignParentBottom="true"
                 android:layout_marginRight="10dp"
                 android:src="@drawable/w_search"
                 android:tint="@color/index_gray" />
@@ -78,7 +78,7 @@
                     <ImageView
                         android:id="@+id/banner_im"
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent"
+                        android:layout_height="wrap_content"
                         android:scaleType="centerCrop"
                         android:src="@drawable/banner_foods" />
                 </com.wbx.mall.widget.RatioLayout>

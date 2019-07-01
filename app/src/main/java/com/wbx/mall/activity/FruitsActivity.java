@@ -45,7 +45,7 @@ import java.util.List;
 import butterknife.Bind;
 import butterknife.OnClick;
 
-public class SpecialtyActivity extends BaseActivity implements BaseRefreshListener {
+public class FruitsActivity extends BaseActivity implements BaseRefreshListener {
     @Bind(R.id.title_image)
     ImageView titleImage;
     @Bind(R.id.type_recycler_view)
@@ -95,7 +95,7 @@ public class SpecialtyActivity extends BaseActivity implements BaseRefreshListen
 
     @Override
     public void fillData() {
-        mBannerIm.setImageResource(R.drawable.banner_techan);
+        mBannerIm.setImageResource(R.drawable.banner_foods);
         //广播接受者实例
         receiver = new MyReceiver();
         IntentFilter intentFilter = new IntentFilter();
@@ -193,7 +193,7 @@ public class SpecialtyActivity extends BaseActivity implements BaseRefreshListen
 //        LoadingDialog.showDialogForLoading(mContext,"加载中...",true);
         mParams.put("page", pageNum);
         mParams.put("num", pageSize);
-        mParams.put("cate_id", 22);
+        mParams.put("cate_id", 21);
         new MyHttp().doPost(Api.getDefault().getNearByShopList(mParams), new HttpListener() {
             @Override
             public void onSuccess(JSONObject result) {
@@ -217,8 +217,6 @@ public class SpecialtyActivity extends BaseActivity implements BaseRefreshListen
                     //说明下次已经没有数据了
                     canLoadMore = false;
                 }
-                mRefreshLayout.finishRefresh();
-                mRefreshLayout.finishLoadMore();
                 shopInfoList.addAll(dataList);
                 mShopAdapter.notifyDataSetChanged();
             }

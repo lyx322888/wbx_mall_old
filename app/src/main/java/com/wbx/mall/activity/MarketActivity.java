@@ -10,7 +10,6 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.ImageView;
-import android.widget.RelativeLayout;
 
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
@@ -30,12 +29,12 @@ import com.wbx.mall.bean.BusinessInfo;
 import com.wbx.mall.bean.LocationInfo;
 import com.wbx.mall.bean.ShopInfo2;
 import com.wbx.mall.bean.TypeInfo;
+import com.wbx.mall.utils.ToastUitl;
 import com.wbx.mall.widget.MyScrollview;
 import com.wbx.mall.widget.expandtabview.ExpandTabView;
 import com.wbx.mall.widget.expandtabview.ViewLeft;
 import com.wbx.mall.widget.expandtabview.ViewMiddle;
 import com.wbx.mall.widget.expandtabview.ViewRight;
-import com.wbx.mall.widget.filter.interfaces.OnFilterDoneListener;
 import com.wbx.mall.widget.refresh.BaseRefreshListener;
 import com.wbx.mall.widget.refresh.PullToRefreshLayout;
 
@@ -46,20 +45,20 @@ import java.util.List;
 import butterknife.Bind;
 import butterknife.OnClick;
 
-public class BuyActivity extends BaseActivity implements BaseRefreshListener, OnFilterDoneListener {
+/**
+ * 首页超市便利
+ */
+
+public class MarketActivity extends BaseActivity implements BaseRefreshListener {
     @Bind(R.id.title_image)
     ImageView titleImage;
-    @Bind(R.id.rl_left)
-    RelativeLayout rlLeft;
     @Bind(R.id.type_recycler_view)
     RecyclerView mTypeRecyclerView;
     @Bind(R.id.shop_recycler_view)
     RecyclerView shopRecyclerView;
     @Bind(R.id.refresh_layout)
     PullToRefreshLayout mRefreshLayout;
-    @Bind(R.id.scroll_view)
-    MyScrollview mScrollView;
-    private MyReceiver receiver;
+
     private List<TypeInfo> typeInfoList = new ArrayList<>();
     private TypeAdapter mTypeAdapter;
     private HashMap<String, Object> mParams = new HashMap<>();
@@ -68,18 +67,22 @@ public class BuyActivity extends BaseActivity implements BaseRefreshListener, On
     private List<ShopInfo2> shopInfoList = new ArrayList<>();
     private boolean canLoadMore = true;
     private ShopAdapter mShopAdapter;
+    private MyReceiver receiver;
 
     @Bind(R.id.expand_view)
     ExpandTabView mExpandView;
+    @Bind(R.id.scroll_view)
+    MyScrollview mScrollView;
     private ArrayList<View> mViewArray = new ArrayList<View>();
     private ViewLeft viewLeft;
     private ViewMiddle viewMiddle;
     private ViewRight viewRight;
-
+    @Bind(R.id.banner_im)
+    ImageView mBannerIm;
 
     @Override
     public int getLayoutId() {
-        return R.layout.activity_buy;
+        return R.layout.activity_food;
     }
 
     @Override
@@ -89,31 +92,25 @@ public class BuyActivity extends BaseActivity implements BaseRefreshListener, On
 
     @Override
     public void initView() {
-//        boolean isNeedBack = false;
-//        if (getArguments() != null) {
-//            isNeedBack = getArguments().getBoolean("isNeedBack", false);
-//        }
-//        if (isNeedBack) {
-//            rlLeft.setVisibility(View.VISIBLE);
-//        } else {
-//            rlLeft.setVisibility(View.INVISIBLE);
-//        }
-        mTypeRecyclerView.setLayoutManager(new GridLayoutManager(this, 4));
-        titleImage.setImageResource(R.drawable.buy_title);
-        shopRecyclerView.setLayoutManager(new LinearLayoutManager(this));
+        mTypeRecyclerView.setLayoutManager(new GridLayoutManager(mContext, 4));
+        titleImage.setImageResource(R.drawable.nearby_title);
+        shopRecyclerView.setLayoutManager(new LinearLayoutManager(mContext));
     }
 
     @Override
     public void fillData() {
+        mBannerIm.setImageResource(R.drawable.banner_shoping);
         //广播接受者实例
         receiver = new MyReceiver();
         IntentFilter intentFilter = new IntentFilter();
         intentFilter.addAction("refreshHasLocation");
-        this.registerReceiver(receiver, intentFilter);
-        mParams.put("city_name", mLocationInfo.getName());
-        mParams.put("lat", mLocationInfo.getLat());
-        mParams.put("lng", mLocationInfo.getLng());
-        TypedArray ar = getResources().obtainTypedArray(R.array.market_type_src);
+        mContext.registerReceiver(receiver, intentFilter);
+        if (mLocationInfo != null) {
+            mParams.put("city_name", mLocationInfo.getName());
+            mParams.put("lat", mLocationInfo.getLat());
+            mParams.put("lng", mLocationInfo.getLng());
+        }
+        TypedArray ar = getResources().obtainTypedArray(R.array.shop_type_src);
         int len = ar.length();
         int[] resIds = new int[len];
         for (int i = 0; i < len; i++) {
@@ -121,24 +118,25 @@ public class BuyActivity extends BaseActivity implements BaseRefreshListener, On
         }
         ar.recycle();
 
-        String[] stringArray = getResources().getStringArray(R.array.market_type_str);
+        String[] stringArray = getResources().getStringArray(R.array.shop_type_str);
         for (int i = 0; i < stringArray.length; i++) {
             TypeInfo type = new TypeInfo();
             type.setName(stringArray[i]);
             type.setSrcScore(resIds[i]);
             typeInfoList.add(type);
         }
-        mTypeAdapter = new TypeAdapter(typeInfoList, this);
+        mTypeAdapter = new TypeAdapter(typeInfoList, mContext);
         mTypeRecyclerView.setAdapter(mTypeAdapter);
-        mShopAdapter = new ShopAdapter(shopInfoList, this);
+        mShopAdapter = new ShopAdapter(shopInfoList, mContext);
         shopRecyclerView.setAdapter(mShopAdapter);
         getShopList();
 
-        viewLeft = new ViewLeft(this);
+
+        viewLeft = new ViewLeft(mContext);
         mViewArray.add(viewLeft);
-        viewMiddle = new ViewMiddle(this);
+        viewMiddle = new ViewMiddle(mContext);
         mViewArray.add(viewMiddle);
-        viewRight = new ViewRight(this);
+        viewRight = new ViewRight(mContext);
         mViewArray.add(viewRight);
         ArrayList<String> mTextArray = new ArrayList<String>();
         mTextArray.add("选择分类");
@@ -171,11 +169,17 @@ public class BuyActivity extends BaseActivity implements BaseRefreshListener, On
         orderByList.add("起送价最低");
         orderByList.add("送货最快");
         orderByList.add("距离最近");
-        orderByList.add("销量最高");
+//        orderByList.add("销量最高");
         viewRight.setData(orderByList);
     }
+
     private void getBusinessAreaData() {
-        new MyHttp().doPost(Api.getDefault().getScreenArea(mLocationInfo.getName()), new HttpListener() {
+        LocationInfo location = (LocationInfo) BaseApplication.getInstance().readObject(AppConfig.LOCATION_DATA);
+        if (location == null) {
+            ToastUitl.showShort("请先定位");
+            return;
+        }
+        new MyHttp().doPost(Api.getDefault().getScreenArea(location.getName()), new HttpListener() {
             @Override
             public void onSuccess(JSONObject result) {
                 List<BusinessInfo> data = JSONArray.parseArray(result.getString("data"), BusinessInfo.class);
@@ -188,13 +192,16 @@ public class BuyActivity extends BaseActivity implements BaseRefreshListener, On
             }
         });
     }
+
     private void getShopList() {
-//        LoadingDialog.showDialogForLoading(getActivity(),"加载中...",true);
+//        LoadingDialog.showDialogForLoading(mContext,"加载中...",true);
         mParams.put("page", pageNum);
         mParams.put("num", pageSize);
-        new MyHttp().doPost(Api.getDefault().getBuyShopList(mParams), new HttpListener() {
+        new MyHttp().doPost(Api.getDefault().getNearByShopList(mParams), new HttpListener() {
             @Override
             public void onSuccess(JSONObject result) {
+                mRefreshLayout.finishRefresh();
+                mRefreshLayout.finishLoadMore();
                 List<ShopInfo2> dataList = JSONArray.parseArray(result.getString("data"), ShopInfo2.class);
                 if (null == dataList) {
                     SkeletonScreen skeletonScreen =
@@ -213,20 +220,8 @@ public class BuyActivity extends BaseActivity implements BaseRefreshListener, On
                     //说明下次已经没有数据了
                     canLoadMore = false;
                 }
-                mRefreshLayout.finishRefresh();
-                mRefreshLayout.finishLoadMore();
                 shopInfoList.addAll(dataList);
                 mShopAdapter.notifyDataSetChanged();
-                mShopAdapter.setOnItemClickListener(R.id.root_view, new BaseAdapter.ItemClickListener() {
-                    @Override
-                    public void onItemClicked(View view, int position) {
-                        if (position + 1 > shopInfoList.size()) {
-                            return;
-                        }
-                        ShopInfo2 shopInfo = shopInfoList.get(position);
-                        StoreDetailActivity.actionStart(mContext, shopInfo.getGrade_id(), String.valueOf(shopInfo.getShop_id()));
-                    }
-                });
             }
 
             @Override
@@ -236,21 +231,25 @@ public class BuyActivity extends BaseActivity implements BaseRefreshListener, On
                     mShopAdapter.notifyDataSetChanged();
                     showShortToast("暂无数据");
                 }
+                mRefreshLayout.finishRefresh();
+                mRefreshLayout.finishLoadMore();
             }
         });
     }
 
-    protected void bindEvent() {
+    @Override
+    public void setListener() {
         mTypeAdapter.setOnItemClickListener(R.id.root_view, new BaseAdapter.ItemClickListener() {
             @Override
             public void onItemClicked(View view, int position) {
                 mScrollView.smoothScrollTo(0, mExpandView.getTop());
                 shopInfoList.clear();
+                mExpandView.setTitle(typeInfoList.get(position).getName(), 0);
                 mParams.put("cate_id", position + 1);
-                mExpandView.setTitle(typeInfoList.get(position).getCate_id() != 0 ? typeInfoList.get(position).getCate_name() : typeInfoList.get(position).getName(), 0);
                 getShopList();
             }
         });
+
         mRefreshLayout.setRefreshListener(this);
         mShopAdapter.setOnItemClickListener(R.id.root_view, new BaseAdapter.ItemClickListener() {
             @Override
@@ -262,15 +261,6 @@ public class BuyActivity extends BaseActivity implements BaseRefreshListener, On
                 StoreDetailActivity.actionStart(mContext, shopInfo.getGrade_id(), String.valueOf(shopInfo.getShop_id()));
             }
         });
-    }
-    @Override
-    public void setListener() {
-
-    }
-
-    @Override
-    public void onFilterDone(int position, String positionTitle, String urlValue) {
-
     }
 
     @Override
@@ -290,6 +280,7 @@ public class BuyActivity extends BaseActivity implements BaseRefreshListener, On
         }
         getShopList();
     }
+
     class MyReceiver extends BroadcastReceiver {
         @Override
         public void onReceive(Context context, Intent intent) {
@@ -300,26 +291,25 @@ public class BuyActivity extends BaseActivity implements BaseRefreshListener, On
             LocationInfo location = (LocationInfo) BaseApplication.getInstance().readObject(AppConfig.LOCATION_DATA);
             mParams.put("city_name", location.getName());
             getShopList();
-            getBusinessAreaData();
         }
     }
 
     @Override
     public void onDestroy() {
         super.onDestroy();
-        this.unregisterReceiver(receiver);
+        mContext.unregisterReceiver(receiver);
     }
-    @OnClick({R.id.rl_left, R.id.search_rl})
+
+    @OnClick({R.id.search_rl})
     public void onClick(View view) {
         switch (view.getId()) {
-            case R.id.rl_left:
-                this.finish();
-                break;
             case R.id.search_rl:
-                startActivity(new Intent(this, MarketSearchActivity.class));
+                startActivity(new Intent(mContext, SearchActivity.class));
                 break;
         }
     }
+
+
     private void onRefresh(View view, String text, int businessId, int areaId) {
         mExpandView.onPressBack();
         int position = getPositon(view);
@@ -329,7 +319,6 @@ public class BuyActivity extends BaseActivity implements BaseRefreshListener, On
         mParams.put("area_id", areaId);
         mParams.put("business_id", businessId);
         pageNum = AppConfig.pageNum;
-        getBusinessAreaData();
         getShopList();
 
     }

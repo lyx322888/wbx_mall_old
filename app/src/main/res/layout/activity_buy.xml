@@ -77,7 +77,7 @@
                     <ImageView
                         android:id="@+id/banner_im"
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent"
+                        android:layout_height="wrap_content"
                         android:scaleType="centerCrop"
                         android:src="@drawable/banner_buy" />
                 </com.wbx.mall.widget.RatioLayout>
@@ -95,7 +95,7 @@
                 <com.wbx.mall.widget.expandtabview.ExpandTabView
                     android:id="@+id/expand_view"
                     android:layout_width="match_parent"
-                    android:layout_height="45dp"></com.wbx.mall.widget.expandtabview.ExpandTabView>
+                    android:layout_height="45dp"/>
 
                 <View
                     android:layout_width="match_parent"

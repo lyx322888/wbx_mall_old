@@ -46,10 +46,9 @@ import butterknife.Bind;
 import butterknife.OnClick;
 
 /**
- * Created by wushenghui on 2018/2/8.
+ * 首页特产零食
  */
-
-public class NearByActivity extends BaseActivity implements BaseRefreshListener {
+public class SnacksActivity extends BaseActivity implements BaseRefreshListener {
     @Bind(R.id.title_image)
     ImageView titleImage;
     @Bind(R.id.type_recycler_view)
@@ -82,7 +81,7 @@ public class NearByActivity extends BaseActivity implements BaseRefreshListener 
 
     @Override
     public int getLayoutId() {
-        return R.layout.activity_food;
+        return R.layout.activity_foodsx;
     }
 
     @Override
@@ -93,13 +92,13 @@ public class NearByActivity extends BaseActivity implements BaseRefreshListener 
     @Override
     public void initView() {
         mTypeRecyclerView.setLayoutManager(new GridLayoutManager(mContext, 4));
-        titleImage.setImageResource(R.drawable.nearby_title);
+//        titleImage.setImageResource(R.drawable.nearby_title);
         shopRecyclerView.setLayoutManager(new LinearLayoutManager(mContext));
     }
 
     @Override
     public void fillData() {
-        mBannerIm.setImageResource(R.drawable.banner_shoping);
+        mBannerIm.setImageResource(R.drawable.banner_techan);
         //广播接受者实例
         receiver = new MyReceiver();
         IntentFilter intentFilter = new IntentFilter();
@@ -197,6 +196,7 @@ public class NearByActivity extends BaseActivity implements BaseRefreshListener 
 //        LoadingDialog.showDialogForLoading(mContext,"加载中...",true);
         mParams.put("page", pageNum);
         mParams.put("num", pageSize);
+        mParams.put("cate_id", 22);
         new MyHttp().doPost(Api.getDefault().getNearByShopList(mParams), new HttpListener() {
             @Override
             public void onSuccess(JSONObject result) {
@@ -220,6 +220,8 @@ public class NearByActivity extends BaseActivity implements BaseRefreshListener 
                     //说明下次已经没有数据了
                     canLoadMore = false;
                 }
+                mRefreshLayout.finishRefresh();
+                mRefreshLayout.finishLoadMore();
                 shopInfoList.addAll(dataList);
                 mShopAdapter.notifyDataSetChanged();
             }
@@ -347,4 +349,5 @@ public class NearByActivity extends BaseActivity implements BaseRefreshListener 
         }
         return -1;
     }
+
 }

@@ -23,11 +23,11 @@ import com.hyphenate.chat.EMChatManager;
 import com.hyphenate.chat.EMClient;
 import com.wbx.mall.R;
 import com.wbx.mall.activity.CookBookActivity;
-import com.wbx.mall.activity.FoodActivity;
+import com.wbx.mall.activity.FoodsActivity;
 import com.wbx.mall.activity.IntegralMallActivity;
 import com.wbx.mall.activity.IntelligentServiceActivity;
 import com.wbx.mall.activity.MessageCenterActivity;
-import com.wbx.mall.activity.NearByActivity;
+import com.wbx.mall.activity.MarketActivity;
 import com.wbx.mall.activity.SearchActivity;
 import com.wbx.mall.activity.SelectAddressActivity;
 import com.wbx.mall.activity.StoreDetailActivity;
@@ -66,7 +66,7 @@ public class IndexFragment extends BaseFragment implements BaseRefreshListener {
     MyScrollview mScrollView;
     @Bind(R.id.title_view)
     LinearLayout mTitleView;
-    @Bind(R.id.index_choose_tv)
+    @Bind(R.id.tv_address)
     TextView cityTv;
     @Bind(R.id.index_recycler_view)
     RecyclerView mRecyclerView;
@@ -296,13 +296,13 @@ public class IndexFragment extends BaseFragment implements BaseRefreshListener {
 
 
 
-    @OnClick({R.id.fragment_index_search_tv, R.id.index_choose_tv, R.id.rl_right, R.id.service_im, R.id.my_xq_tv, R.id.index_buy_tv, R.id.index_nearby_tv, R.id.index_country_tv})
+    @OnClick({R.id.fragment_index_search_tv, R.id.tv_address, R.id.rl_right, R.id.service_im, R.id.tv_snacks, R.id.index_buy_tv, R.id.tv_foods, R.id.index_country_tv})
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.fragment_index_search_tv:
                 startActivity(new Intent(getActivity(), SearchActivity.class));
                 break;
-            case R.id.index_choose_tv:
+            case R.id.tv_address:
                 startActivityForResult(new Intent(getActivity(), SelectAddressActivity.class), 0);
                 break;
             case R.id.rl_right:
@@ -315,14 +315,14 @@ public class IndexFragment extends BaseFragment implements BaseRefreshListener {
             case R.id.service_im:
                 startActivity(new Intent(getActivity(), IntelligentServiceActivity.class));
                 break;
-            case R.id.my_xq_tv:
+            case R.id.tv_snacks:
                 startActivity(new Intent(getActivity(), CookBookActivity.class));
                 break;
             case R.id.index_buy_tv:
-                getActivity().startActivity(new Intent(getActivity(), NearByActivity.class));
+                getActivity().startActivity(new Intent(getActivity(), MarketActivity.class));
                 break;
-            case R.id.index_nearby_tv:
-                getActivity().startActivity(new Intent(getActivity(), FoodActivity.class));
+            case R.id.tv_foods:
+                getActivity().startActivity(new Intent(getActivity(), FoodsActivity.class));
                 break;
             case R.id.index_country_tv:
                 //积分商城

@@ -1,20 +1,23 @@
 package com.wbx.mall.utils;
 
+import android.app.Activity;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Point;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.LevelListDrawable;
 import android.os.AsyncTask;
 import android.text.Html;
-import android.view.WindowManager;
+import android.view.Display;
 import android.widget.TextView;
 
 import com.wbx.mall.R;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.lang.ref.WeakReference;
 import java.net.MalformedURLException;
 import java.net.URL;
 
@@ -23,110 +26,75 @@ import java.net.URL;
  */
 
 public class UilImageGetter implements Html.ImageGetter {
-    // The context of activity
-    Context mContext;
-    // The textview control
-    TextView mContentText;
+    private Activity mContext;
+    private TextView mContentText;
 
-    /**
-     * The contructor
-     * @param c
-     * 		The context of activity
-     * @param t
-     * 		The textview control
-     */
-    public UilImageGetter(Context c, TextView t){
-        this.mContext = c;
+    public UilImageGetter(Context c, TextView t) {
+        this.mContext = (Activity) c;
         this.mContentText = t;
     }
 
-    /**
-     * @return the context
-     */
-    public Context getContext(){
-        return mContext;
-    }
-
-    /**
-     * @param source
-     * 			the link of tag <img>
-     * @return drawable
-     */
     @Override
     public Drawable getDrawable(String source) {
-        // TODO Auto-generated method stub
-
         LevelListDrawable d = new LevelListDrawable();
-        Drawable empty = getContext().getResources().getDrawable(R.drawable.loading_logo);
+        Drawable empty = mContext.getResources().getDrawable(R.drawable.loading_logo);
         d.addLevel(0, 0, empty);
-        d.setBounds(0, 0, empty.getIntrinsicWidth(), empty.getIntrinsicHeight());
-        new ImageGetterAsync(mContext,mContentText,d).execute(source);
+//        d.setBounds(0, 0, empty.getIntrinsicWidth(), empty.getIntrinsicHeight());
+        new ImageGetterAsync(mContext, mContentText, d).execute(UrlUtils.getCompressUrl(source));
         return d;
     }
 
 
     /**
-     *
      * @author ThachNguyen
-     *
      */
     public static class ImageGetterAsync extends AsyncTask<Object, Void, Bitmap> {
-
+        // 弱引用是允许被gc回收的;
+        private WeakReference<Activity> mWeakReference;
         LevelListDrawable listDrawable;
-        Context context;
         TextView textView;
-        private WindowManager wm;
+        private int mWidth, mHeight;
 
-        public ImageGetterAsync(Context ctx, TextView tv, LevelListDrawable lv) {
-            // TODO Auto-generated constructor stub
-          wm = (WindowManager) ctx
-                    .getSystemService(Context.WINDOW_SERVICE);
-            this.context = ctx;
+        ImageGetterAsync(Activity activity, TextView tv, LevelListDrawable lv) {
+            this.mWeakReference = new WeakReference<>(activity);
             this.textView = tv;
             this.listDrawable = lv;
+            Display display = activity.getWindowManager().getDefaultDisplay();
+            Point point = new Point();
+            display.getSize(point);
+            this.mWidth = point.x;
+            this.mHeight = mWidth / 2;
         }
+
         @Override
         protected Bitmap doInBackground(Object... params) {
-            // TODO Auto-generated method stub
             String source = (String) params[0];
-
-            Bitmap bitmap = null;
-
+            Bitmap bitmap;
             try {
                 InputStream inputStream = new URL(source).openStream();
                 bitmap = BitmapFactory.decodeStream(inputStream);
                 return bitmap;
             } catch (MalformedURLException e) {
-                // TODO Auto-generated catch block
                 e.printStackTrace();
             } catch (IOException e) {
-                // TODO Auto-generated catch block
+                e.printStackTrace();
+            } catch (OutOfMemoryError e) {
                 e.printStackTrace();
             } catch (Exception e) {
-                // TODO: handle exception
-            }catch (OutOfMemoryError e){
-                // outofmemoryerror
-                e.printStackTrace();
             }
-
-            return bitmap;
+            return null;
         }
 
         @Override
         protected void onPostExecute(Bitmap result) {
-            // TODO Auto-generated method stub
             super.onPostExecute(result);
-            if(result!=null){
-                listDrawable.addLevel(1,1, new BitmapDrawable(context.getResources(),result));
-                listDrawable.setBounds(0, 0, wm.getDefaultDisplay().getWidth(), result.getHeight()+(wm.getDefaultDisplay().getWidth()-result.getWidth()));
+            Activity activity = mWeakReference.get();
+            if (result != null || activity != null || !activity.isFinishing() || !activity.isDestroyed()) {
+                listDrawable.addLevel(1, 1, new BitmapDrawable(activity.getResources(), result));
+                listDrawable.setBounds(0, 0, mWidth, mHeight);
                 listDrawable.setLevel(1);
-                //textView.invalidate();
-                //textView.postInvalidate();
-
-                // update view
                 CharSequence text = textView.getText();
                 textView.setText(text);
-
             }
         }
     }
