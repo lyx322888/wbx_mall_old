@@ -43,7 +43,7 @@
 
         <RelativeLayout
             android:layout_width="60dp"
-            android:layout_height="60dp"></RelativeLayout>
+            android:layout_height="60dp"/>
     </LinearLayout>
 
     <LinearLayout

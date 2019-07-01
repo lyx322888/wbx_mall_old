@@ -19,7 +19,7 @@ import butterknife.Bind;
  */
 
 public class BookSeatOrderActivity extends BaseActivity {
-    @Bind(R.id.order_lab_layout)
+    @Bind(R.id.tab_layout)
     TabLayout mTabLayout;
     @Bind(R.id.order_view_pager)
     ViewPager mOrderViewPager;
@@ -37,7 +37,9 @@ public class BookSeatOrderActivity extends BaseActivity {
 
     @Override
     public void initView() {
-        mTabLayout.setTabMode(TabLayout.MODE_SCROLLABLE);
+        mTabLayout.setTabTextColors(getResources().getColor(R.color.gray_normal), getResources().getColor(R.color.app_color));
+        mTabLayout.setSelectedTabIndicatorColor(getResources().getColor(R.color.app_color));
+        mTabLayout.setTabMode(TabLayout.MODE_FIXED);
         myViewPager = new MyPagerAdapter(getSupportFragmentManager());
         mOrderViewPager.setAdapter(myViewPager);
         mTabLayout.setupWithViewPager(mOrderViewPager);
