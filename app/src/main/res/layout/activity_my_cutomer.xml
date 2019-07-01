@@ -24,7 +24,6 @@
                 android:src="@drawable/w_return"
                 android:tint="@color/colorWhite" />
 
-
         </RelativeLayout>
 
         <TextView

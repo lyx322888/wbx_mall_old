@@ -353,7 +353,7 @@
         <activity android:name=".activity.DrinksActivity" />
         <activity android:name=".activity.VegetablesActivity" />
         <activity android:name=".activity.MySoftwareActivity" />
-        <activity android:name=".activity.SalesDetailActivity"></activity>
+        <activity android:name=".activity.SalesDetailActivity"/>
     </application>
 
 </manifest>
