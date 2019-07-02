@@ -653,7 +653,10 @@ public class StoreDetailActivity extends BaseActivity implements AddWidget.OnAdd
             return;
         }
         LoadingDialog.showDialogForLoading(this, "下单中...", false);
-        new MyHttp().doPost(storeDetailBean.getDetail().getGrade_id() == AppConfig.StoreType.VEGETABLE_MARKET ? Api.getDefault().createVegetableOrder(SPUtils.getSharedStringData(mContext, AppConfig.LOGIN_TOKEN), createGoodsJson()) : Api.getDefault().createOrder(SPUtils.getSharedStringData(mContext, AppConfig.LOGIN_TOKEN), createGoodsJson(), bookSeatId), new HttpListener() {
+        new MyHttp().doPost(storeDetailBean.getDetail().getGrade_id() == AppConfig.StoreType.VEGETABLE_MARKET
+                ? Api.getDefault().createVegetableOrder(SPUtils.getSharedStringData(mContext, AppConfig.LOGIN_TOKEN), createGoodsJson())
+                : Api.getDefault().createOrder(SPUtils.getSharedStringData(mContext, AppConfig.LOGIN_TOKEN), createGoodsJson(), bookSeatId),
+                new HttpListener() {
             @Override
             public void onSuccess(JSONObject result) {
                 String orderId = result.getJSONObject("data").getString("order_id");

@@ -17,7 +17,7 @@
             android:layout_width="15dp"
             android:layout_height="15dp"
             android:layout_marginRight="5dp"
-            android:src="@drawable/pro_icon"
+            android:src="@drawable/icon_classify_sale"
             android:visibility="gone" />
 
         <TextView

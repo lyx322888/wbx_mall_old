@@ -37,11 +37,11 @@ public class MerchantDataAdapter extends RecyclerView.Adapter<MerchantDataAdapte
     public void onBindViewHolder(@NonNull VH holder, int position) {
         holder.tv_position.setText("");
         if (position == 0) {
-            holder.tv_position.setBackgroundResource(R.drawable.img_gold);
+            holder.tv_position.setBackgroundResource(R.drawable.icon_rank_gold);
         } else if (position == 1) {
-            holder.tv_position.setBackgroundResource(R.drawable.img_silver);
+            holder.tv_position.setBackgroundResource(R.drawable.icon_rank_silver);
         } else if (position == 2) {
-            holder.tv_position.setBackgroundResource(R.drawable.img_copper);
+            holder.tv_position.setBackgroundResource(R.drawable.icon_rank_copper);
         } else {
             holder.tv_position.setText(position + 1 + "");
         }

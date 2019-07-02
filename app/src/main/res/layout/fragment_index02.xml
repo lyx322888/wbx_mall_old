@@ -113,7 +113,7 @@
                             <TextView
                                 android:id="@+id/index_country_tv"
                                 style="@style/textWithImageStyle"
-                                android:drawableTop="@drawable/index_drinks"
+                                android:drawableTop="@drawable/icon_index_drinks"
                                 android:text="果汁饮品"
                                 android:visibility="gone" />
                         </LinearLayout>

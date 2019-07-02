@@ -17,7 +17,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        tools:background="@drawable/img_gold"
+        tools:background="@drawable/icon_rank_gold"
         tools:text="4" />
 
     <ImageView

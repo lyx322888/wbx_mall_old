@@ -28,11 +28,11 @@ public class GoodsTypeAdapter extends BaseQuickAdapter<CateInfo, BaseViewHolder>
         ImageView typeIconIm = helper.getView(R.id.type_icon_im);
         typeIconIm.setVisibility(View.VISIBLE);
         if ("特价".equals(cateInfo.getCate_name())) {
-            typeIconIm.setImageResource(R.drawable.seckill_icon_type);
+            typeIconIm.setImageResource(R.drawable.icon_classify_special);
         } else if ("促销".equals(cateInfo.getCate_name())) {
-            typeIconIm.setImageResource(R.drawable.pro_icon);
+            typeIconIm.setImageResource(R.drawable.icon_classify_sale);
         } else if ("免单".equals(cateInfo.getCate_name())) {
-            typeIconIm.setImageResource(R.drawable.mian_icon);
+            typeIconIm.setImageResource(R.drawable.icon_classify_free);
         } else {
             typeIconIm.setVisibility(View.GONE);
         }
