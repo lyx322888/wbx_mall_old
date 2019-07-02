@@ -1,6 +1,7 @@
 package com.wbx.mall.fragment;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -237,7 +238,9 @@ public class MineFragment extends BaseFragment implements BaseRefreshListener {
                 ScanOrderListActivity.actionStart(getActivity());
                 break;
             case R.id.ll_invite:
-                InviteActivity.actionStart(getContext(), "http://www.wbx365.com/Wbxwaphome/apply/activity.html?type=2", false);
+//                InviteActivity.actionStart(getContext(), "http://www.wbx365.com/Wbxwaphome/apply/activity.html?type=2", false);
+                Uri uri = Uri.parse("https://www.wbx365.com/Wbxwaphome/purchase/index.html");
+                startActivity(new Intent(Intent.ACTION_VIEW, uri));
                 break;
             case R.id.ll_payment_store:
                 IntelligentPayListActivity.actionStart(getActivity());

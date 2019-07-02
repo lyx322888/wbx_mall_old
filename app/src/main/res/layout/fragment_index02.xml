@@ -24,7 +24,6 @@
                 <RelativeLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_alignParentStart="true"
                     android:focusable="true"
                     android:focusableInTouchMode="true">
 
@@ -125,9 +124,9 @@
                     android:id="@+id/recycler_polling"
                     android:layout_width="match_parent"
                     android:layout_height="30dp"
-                    android:layout_marginLeft="6dp"
+                    android:layout_marginLeft="10dp"
                     android:layout_marginTop="8dp"
-                    android:layout_marginRight="6dp"
+                    android:layout_marginRight="10dp"
                     android:background="@drawable/shape_corner"
                     android:padding="@dimen/dp_3" />
 
@@ -135,25 +134,23 @@
                     android:id="@+id/tv_history"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp"
-                    android:paddingLeft="6dp"
-                    android:paddingTop="5dp"
-                    android:paddingBottom="5dp"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginEnd="10dp"
+                    android:padding="3dp"
                     android:text="浏览过的店铺"
                     android:textColor="@color/black"
                     android:textSize="20sp"
-                    android:textStyle="bold"
                     android:visibility="gone" />
 
                 <android.support.v7.widget.RecyclerView
                     android:id="@+id/recycler_shops_visited"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="6dp"
-                    android:layout_marginTop="8dp"
-                    android:layout_marginRight="6dp"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginRight="10dp"
                     android:background="@drawable/shape_corner"
-                    android:padding="@dimen/dp_3"
                     android:visibility="gone" />
 
                 <RelativeLayout
@@ -180,20 +177,20 @@
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp"
-                    android:paddingLeft="6dp"
-                    android:paddingTop="5dp"
-                    android:paddingBottom="4dp"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginEnd="10dp"
                     android:text="附近自营店"
                     android:textColor="@color/black"
-                    android:textSize="20sp"
-                    android:textStyle="bold" />
+                    android:textSize="20sp" />
 
                 <android.support.v7.widget.RecyclerView
                     android:id="@+id/index_recycler_view"
                     android:layout_width="match_parent"
-                    android:layout_marginTop="8dp"
-                    android:layout_height="wrap_content" />
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginRight="10dp" />
             </LinearLayout>
         </com.wbx.mall.widget.MyScrollview>
     </com.wbx.mall.widget.refresh.PullToRefreshLayout>
