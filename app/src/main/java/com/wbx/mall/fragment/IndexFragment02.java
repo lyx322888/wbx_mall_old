@@ -52,7 +52,7 @@ import com.wbx.mall.bean.VisitShopBean;
 import com.wbx.mall.common.LoginUtil;
 import com.wbx.mall.presenter.HomeShufflingPresenterImp;
 import com.wbx.mall.presenter.VisitShopPresenterImp;
-import com.wbx.mall.service.LocationService02;
+import com.wbx.mall.service.LocationService;
 import com.wbx.mall.utils.GlideUtils;
 import com.wbx.mall.utils.SPUtils;
 import com.wbx.mall.view.HomeShufflingView;
@@ -133,7 +133,7 @@ public class IndexFragment02 extends BaseFragment implements BaseRefreshListener
         IntentFilter filter = new IntentFilter("refreshHasLocation");
         refreshHasLocationReceiver = new MyReceiver();
         getActivity().registerReceiver(refreshHasLocationReceiver, filter);
-        intent = new Intent(getActivity(), LocationService02.class);
+        intent = new Intent(getActivity(), LocationService.class);
         try {
             getActivity().startService(intent);
             // getActivity().bindService(intent,serviceConnection,Context.BIND_AUTO_CREATE);
@@ -174,7 +174,7 @@ public class IndexFragment02 extends BaseFragment implements BaseRefreshListener
         IntentFilter filter = new IntentFilter("refreshHasLocation");
         refreshHasLocationReceiver = new MyReceiver();
         getActivity().registerReceiver(refreshHasLocationReceiver, filter);
-       /* intent = new Intent(getActivity(), LocationService02.class);
+       /* intent = new Intent(getActivity(), LocationService.class);
         try {
             getActivity().startService(intent);
         } catch (IllegalStateException e) {

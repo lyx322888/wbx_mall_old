@@ -173,6 +173,10 @@
         <activity
             android:name="me.iwf.photopicker.PhotoPickerActivity"
             android:theme="@style/Theme.AppCompat.NoActionBar" />
+        <!-- 查看照片 -->
+        <activity
+            android:name="me.iwf.photopicker.PhotoPagerActivity"
+            android:theme="@style/Theme.AppCompat.NoActionBar" />
         <!-- 申请入驻 -->
         <activity android:name=".activity.ApplyJoinActivity" />
         <!-- 积分商城 -->
@@ -206,10 +210,6 @@
         <activity android:name=".activity.BindUnionpayActivity" />
         <!-- 余额明细 -->
         <activity android:name=".activity.BalanceLogActivity" />
-        <!-- 查看照片 -->
-        <activity
-            android:name="me.iwf.photopicker.PhotoPagerActivity"
-            android:theme="@style/Theme.AppCompat.NoActionBar" />
         <!-- 代金券充值 -->
         <activity android:name=".activity.VoucherActivity" />
 
@@ -224,10 +224,7 @@
         <activity android:name=".activity.BookSeatOrderActivity" />
         <!-- 预定订单详情 -->
         <activity android:name=".activity.BookSeatOrderDetailActivity" />
-
         <service android:name=".service.LocationService" />
-        <service android:name=".service.LocationService02" />
-
         <activity android:name=".activity.SelectAddressActivity" />
         <!-- 发送地图 -->
         <activity android:name="com.hyphenate.easeui.ui.EaseBaiduMapActivity" />

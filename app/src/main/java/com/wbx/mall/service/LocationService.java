@@ -2,6 +2,8 @@ package com.wbx.mall.service;
 
 import android.app.Service;
 import android.content.Intent;
+import android.content.ServiceConnection;
+import android.os.Binder;
 import android.os.IBinder;
 import android.support.annotation.Nullable;
 import android.text.TextUtils;
@@ -36,18 +38,21 @@ public class LocationService extends Service implements AMapLocationListener {
     public AMapLocationClient mlocationClient = null;
     private LocationInfo mLocationInfo;
     private List<LocationInfo> lstCity;
+    private String cityList;
+    private LocationBinder locationBinder;
 
     @Override
     public void onCreate() {
         super.onCreate();
-        String cityList = (String) BaseApplication.getInstance().readObject(AppConfig.CITY_LIST);
+       /* cityList = (String) BaseApplication.getInstance().readObject(AppConfig.CITY_LIST);
         if (!TextUtils.isEmpty(cityList)) {
             lstCity = JSONArray.parseArray(cityList, LocationInfo.class);
             startLocation();
         } else {
             getAllCity();
-        }
+        }*/
     }
+
 
     private void getAllCity() {
         new MyHttp().doPost(Api.getDefault().getAllCityList(), new HttpListener() {
@@ -66,11 +71,23 @@ public class LocationService extends Service implements AMapLocationListener {
 
     }
 
+
+    @Override
+    public boolean bindService(Intent service, ServiceConnection conn, int flags) {
+        return super.bindService(service, conn, flags);
+    }
+
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
-
-
+        cityList = (String) BaseApplication.getInstance().readObject(AppConfig.CITY_LIST);
+        if (!TextUtils.isEmpty(cityList)) {
+            lstCity = JSONArray.parseArray(cityList, LocationInfo.class);
+            startLocation();
+        } else {
+            getAllCity();
+        }
         return super.onStartCommand(intent, flags, startId);
+
     }
 
     private void startLocation() {
@@ -101,13 +118,18 @@ public class LocationService extends Service implements AMapLocationListener {
     @Nullable
     @Override
     public IBinder onBind(Intent intent) {
-        return null;
+
+        if (locationBinder==null)
+        {
+            locationBinder = new LocationBinder();
+        }
+        return locationBinder;
     }
 
     @Override
     public void onLocationChanged(final AMapLocation aMapLocation) {
         if (aMapLocation.getErrorCode() != AMapLocation.LOCATION_SUCCESS) {
-            new AlertDialog(getApplicationContext()).builder()
+            new AlertDialog(ActivityManager.getTopActivity()).builder()
                     .setTitle("提示")
                     .setMsg("抱歉,定位失败,使用默认地址。\n开启定位权限--->授权管理--->应用权限管理--->定位权限开启")
                     .setPositiveButton("确定", new View.OnClickListener() {
@@ -115,6 +137,7 @@ public class LocationService extends Service implements AMapLocationListener {
                         public void onClick(View view) {
                             LocationInfo locationInfo = new LocationInfo();
                             locationInfo.setName("厦门");
+                            locationInfo.setAddressName("厦门市");
                             locationInfo.setCity_id(19);
                             locationInfo.setSelectCityId(19);
                             locationInfo.setSelectCityName("厦门");
@@ -127,56 +150,36 @@ public class LocationService extends Service implements AMapLocationListener {
         } else {
             final LocationInfo locationInfo = new LocationInfo();
             locationInfo.setName(aMapLocation.getCity().replace("市", ""));
+            locationInfo.setAddressName(aMapLocation.getPoiName());
+            locationInfo.setLat(aMapLocation.getLatitude());
+            locationInfo.setLng(aMapLocation.getLongitude());
+            BaseApplication.getInstance().saveObject(locationInfo, AppConfig.LOCATION_DATA);
             for (LocationInfo info : lstCity) {
                 if (locationInfo.getName().equals(info.getName())) {
                     locationInfo.setCity_id(info.getCity_id());
                     break;
                 }
             }
-            locationInfo.setAddressName(aMapLocation.getPoiName());
-            locationInfo.setLat(aMapLocation.getLatitude());
-            locationInfo.setLng(aMapLocation.getLongitude());
             LocationInfo lastLocationInfo = (LocationInfo) BaseApplication.getInstance().readObject(AppConfig.LOCATION_DATA);
             if (lastLocationInfo != null && !lastLocationInfo.getName().equals(locationInfo.getName())) {
                 new AlertDialog(ActivityManager.getTopActivity()).builder().setTitle("温馨提示").setMsg(String.format("你当前城市是%s,是否切换到当前位置", locationInfo.getName()))
                         .setNegativeButton("不切换", new View.OnClickListener() {
                             @Override
                             public void onClick(View v) {
-                                Intent intent = new Intent();
-                                intent.setAction("refreshHasLocation");
-                                sendBroadcast(intent);
+                                sendBroadcast();
                             }
                         }).setPositiveButton("切换", new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
                         BaseApplication.getInstance().saveObject(locationInfo, AppConfig.LOCATION_DATA);
-                        Intent intent = new Intent();
-                        intent.setAction("refreshHasLocation");
-                        sendBroadcast(intent);
+                        sendBroadcast();
                     }
                 }).setCancelable(false).show();
             } else {
                 BaseApplication.getInstance().saveObject(locationInfo, AppConfig.LOCATION_DATA);
-                Intent intent = new Intent();
-                intent.setAction("refreshHasLocation");
-                sendBroadcast(intent);
+                sendBroadcast();
             }
         }
-    }
-
-    @Override
-    public boolean onUnbind(Intent intent) {
-        return super.onUnbind(intent);
-    }
-
-    private boolean isContains(List<LocationInfo> locationInfoList, String city) {
-        for (LocationInfo l : locationInfoList) {
-            if (city.contains(l.getName())){
-                return true;
-            }
-
-        }
-        return false;
     }
 
     private void sendBroadcast() {
@@ -184,5 +187,38 @@ public class LocationService extends Service implements AMapLocationListener {
         intent.setAction("refreshHasLocation");
         sendBroadcast(intent);
     }
+
+
+    @Override
+    public boolean onUnbind(Intent intent) {
+        return super.onUnbind(intent);
+    }
+
+
+    private boolean isContains(List<LocationInfo> locationInfoList, String city) {
+        for (LocationInfo l : locationInfoList) {
+            if (city.contains(l.getName())) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+
+    public class LocationBinder extends Binder {
+
+        public LocationService getService() {
+            cityList = (String) BaseApplication.getInstance().readObject(AppConfig.CITY_LIST);
+            if (!TextUtils.isEmpty(cityList)) {
+                lstCity = JSONArray.parseArray(cityList, LocationInfo.class);
+                startLocation();
+            } else {
+                getAllCity();
+            }
+            return LocationService.this;
+
+        }
+    }
+
 
 }

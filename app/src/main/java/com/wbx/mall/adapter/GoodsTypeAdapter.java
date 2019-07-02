@@ -26,12 +26,13 @@ public class GoodsTypeAdapter extends BaseQuickAdapter<CateInfo, BaseViewHolder>
     protected void convert(BaseViewHolder helper, CateInfo cateInfo) {
         LinearLayout itemLayout = helper.getView(R.id.item_layout);
         ImageView typeIconIm = helper.getView(R.id.type_icon_im);
-        if ("1".equals(cateInfo.getCate_id())) {
-            typeIconIm.setVisibility(View.VISIBLE);
+        typeIconIm.setVisibility(View.VISIBLE);
+        if ("特价".equals(cateInfo.getCate_name())) {
             typeIconIm.setImageResource(R.drawable.seckill_icon_type);
-        } else if ("2".equals(cateInfo.getCate_id())) {
-            typeIconIm.setVisibility(View.VISIBLE);
+        } else if ("促销".equals(cateInfo.getCate_name())) {
             typeIconIm.setImageResource(R.drawable.pro_icon);
+        } else if ("免单".equals(cateInfo.getCate_name())) {
+            typeIconIm.setImageResource(R.drawable.mian_icon);
         } else {
             typeIconIm.setVisibility(View.GONE);
         }
