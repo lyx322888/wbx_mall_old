@@ -351,6 +351,8 @@
         <activity android:name=".activity.VegetablesActivity" />
         <activity android:name=".activity.MySoftwareActivity" />
         <activity android:name=".activity.SalesDetailActivity"/>
+        <activity android:name=".activity.DetailActivity" />
+        <activity android:name=".activity.NearbyStoreActivity" />
     </application>
 
 </manifest>

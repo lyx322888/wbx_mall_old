@@ -12,27 +12,29 @@
         android:orientation="horizontal">
 
         <RelativeLayout
-            android:id="@+id/rl_left"
             android:layout_width="60dp"
-            android:layout_height="60dp">
+            android:layout_height="60dp"
+            android:onClick="back">
 
             <ImageView
                 android:layout_width="15dp"
                 android:layout_height="15dp"
                 android:layout_alignParentBottom="true"
-                android:layout_marginBottom="10dp"
                 android:layout_marginLeft="10dp"
+                android:layout_marginBottom="10dp"
                 android:src="@drawable/w_return"
                 android:tint="@color/gray" />
         </RelativeLayout>
 
-        <ImageView
-            android:id="@+id/title_image"
+        <TextView
+            android:id="@+id/tv_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
             android:layout_centerHorizontal="true"
-            android:layout_marginBottom="5dp" />
+            android:layout_marginBottom="5dp"
+            android:textColor="@color/text_black"
+            android:textSize="16sp" />
 
         <RelativeLayout
             android:id="@+id/search_rl"
@@ -43,8 +45,8 @@
             <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_alignParentBottom="true"
                 android:layout_alignParentRight="true"
+                android:layout_alignParentBottom="true"
                 android:layout_marginRight="10dp"
                 android:src="@drawable/w_search"
                 android:tint="@color/index_gray" />
@@ -60,7 +62,6 @@
         android:layout_height="match_parent">
 
         <com.wbx.mall.widget.MyScrollview
-            android:id="@+id/scroll_view"
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
@@ -77,67 +78,24 @@
                     <ImageView
                         android:id="@+id/banner_im"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
+                        android:layout_height="match_parent"
                         android:scaleType="centerCrop"
-                        android:src="@drawable/bg_banner1" />
+                        android:src="@drawable/bg_banner3" />
                 </com.wbx.mall.widget.RatioLayout>
 
                 <android.support.v7.widget.RecyclerView
-                    android:id="@+id/type_recycler_view"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content" />
-
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="10dp"
-                    android:background="@color/color_gray_line" />
-
-                <com.wbx.mall.widget.expandtabview.ExpandTabView
-                    android:id="@+id/expand_view"
-                    android:layout_width="match_parent"
-                    android:layout_height="45dp"/>
-
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="1px"
-                    android:background="@color/color_gray_line" />
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="50dp"
-                    android:background="@color/colorWhite"
-                    android:gravity="center">
-
-                    <View
-                        android:layout_width="100dp"
-                        android:layout_height="1px"
-                        android:background="@color/black" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="8dp"
-                        android:layout_marginRight="8dp"
-                        android:text="附近的市场" />
-
-                    <View
-                        android:layout_width="100dp"
-                        android:layout_height="1px"
-                        android:background="@color/black" />
-                </LinearLayout>
-
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="1px"
-                    android:background="@color/color_gray_line" />
-
-                <android.support.v7.widget.RecyclerView
-                    android:id="@+id/shop_recycler_view"
+                    android:id="@+id/recyclerView"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content" />
             </LinearLayout>
-
         </com.wbx.mall.widget.MyScrollview>
 
+        <ImageView
+            android:id="@+id/img_empty_data"
+            android:layout_width="240dp"
+            android:layout_height="240dp"
+            android:layout_gravity="center"
+            android:src="@drawable/icon_empty_data"
+            android:visibility="gone" />
     </com.wbx.mall.widget.refresh.PullToRefreshLayout>
 </LinearLayout>

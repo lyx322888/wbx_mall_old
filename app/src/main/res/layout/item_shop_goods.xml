@@ -5,7 +5,6 @@
     android:id="@+id/root_view"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_gravity="center"
     android:layout_marginLeft="5dp"
     android:layout_marginTop="5dp"
     android:layout_marginRight="5dp"
@@ -13,315 +12,298 @@
     android:orientation="vertical"
     android:padding="3dp">
 
-    <ImageView
-        android:id="@+id/iv_is_exceed"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:layout_marginTop="18dp"
-        android:src="@drawable/exceed_range" />
-
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical">
+        android:orientation="horizontal">
+
+        <FrameLayout
+            android:layout_width="90dp"
+            android:layout_height="90dp"
+            android:layout_marginLeft="15dp"
+            android:layout_marginTop="15dp"
+            android:layout_marginRight="15dp">
+
+            <ImageView
+                android:id="@+id/item_promotion_store_pic_im"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:scaleType="centerCrop"
+                android:src="@drawable/ic_image_loading"
+                android:transitionName="shopPhoto" />
+
+            <ImageView
+                android:id="@+id/iv_shop_tag"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="end"
+                android:src="@drawable/shop_tag_new" />
+        </FrameLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal">
-
-            <FrameLayout
-                android:layout_width="90dp"
-                android:layout_height="90dp"
-                android:layout_marginLeft="15dp"
-                android:layout_marginTop="15dp"
-                android:layout_marginRight="15dp">
-
-                <ImageView
-                    android:id="@+id/item_promotion_store_pic_im"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:scaleType="centerCrop"
-                    android:src="@drawable/ic_image_loading"
-                    android:transitionName="shopPhoto" />
-
-                <ImageView
-                    android:id="@+id/iv_shop_tag"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="end"
-                    android:src="@drawable/shop_tag_new" />
-            </FrameLayout>
+            android:layout_marginTop="15dp"
+            android:orientation="vertical">
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="15dp"
-                android:orientation="vertical">
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/promotion_name_tv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/black"
+                    android:textSize="18sp"
+                    android:textStyle="bold" />
+
+                <ImageView
+                    android:layout_width="16dp"
+                    android:layout_height="14dp"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginLeft="15dp"
+                    android:src="@drawable/icon_video" />
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <com.hedgehog.ratingbar.RatingBar
+                    android:id="@+id/rb_score"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    hedgehog:clickable="false"
+                    hedgehog:starCount="5"
+                    hedgehog:starEmpty="@drawable/no_evaluation"
+                    hedgehog:starFill="@drawable/evaluation"
+                    hedgehog:starImageHeight="20dp"
+                    hedgehog:starImagePadding="5dp"
+                    hedgehog:starImageWidth="20dp" />
+
+                <TextView
+                    android:id="@+id/popularity_tv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="5dp"
+                    android:drawableStart="@drawable/index_fire"
+                    android:drawablePadding="2dp"
+                    android:ellipsize="end"
+                    android:maxLines="1"
+                    android:textSize="12sp"
+                    tools:text="人气 365888" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:layout_marginRight="20dp"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/item_promotion_info_tv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:textColor="@color/color_gray"
+                    android:textSize="12sp" />
 
                 <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:gravity="right|center"
                     android:orientation="horizontal">
 
                     <TextView
-                        android:id="@+id/promotion_name_tv"
+                        android:id="@+id/item_promotion_distance_tv"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:textColor="@color/black"
-                        android:textSize="18sp"
-                        android:textStyle="bold" />
-
-                    <ImageView
-                        android:layout_width="16dp"
-                        android:layout_height="14dp"
-                        android:layout_gravity="center_vertical"
-                        android:layout_marginLeft="15dp"
-                        android:src="@drawable/icon_video" />
-                </LinearLayout>
-
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="5dp"
-                    android:gravity="center_vertical"
-                    android:orientation="horizontal">
-
-                    <com.hedgehog.ratingbar.RatingBar
-                        android:id="@+id/rb_score"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        hedgehog:clickable="false"
-                        hedgehog:starCount="5"
-                        hedgehog:starEmpty="@drawable/no_evaluation"
-                        hedgehog:starFill="@drawable/evaluation"
-                        hedgehog:starImageHeight="20dp"
-                        hedgehog:starImagePadding="5dp"
-                        hedgehog:starImageWidth="20dp" />
+                        android:background="@drawable/text_view_bg_1"
+                        android:padding="2dp"
+                        android:text="2.1km"
+                        android:textColor="@color/app_color"
+                        android:textSize="8sp" />
 
                     <TextView
-                        android:id="@+id/popularity_tv"
+                        android:id="@+id/item_promotion_attestation_tv"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginLeft="10dp"
-                        android:layout_marginRight="5dp"
-                        android:drawableStart="@drawable/index_fire"
-                        android:drawablePadding="2dp"
-                        android:ellipsize="end"
-                        android:maxLines="1"
-                        android:textSize="12sp"
-                        tools:text="人气 365888" />
-
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="5dp"
-                    android:layout_marginRight="20dp"
-                    android:gravity="center_vertical"
-                    android:orientation="horizontal">
+                        android:layout_marginLeft="5dp"
+                        android:background="@drawable/text_view_bg_2"
+                        android:padding="2dp"
+                        android:text="已认证"
+                        android:textColor="@color/colorWhite"
+                        android:textSize="8sp" />
 
                     <TextView
-                        android:id="@+id/item_promotion_info_tv"
+                        android:id="@+id/item_store_grade_tv"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:textColor="@color/color_gray"
-                        android:textSize="12sp" />
-
-                    <LinearLayout
-                        android:layout_width="wrap_content"
-                        android:layout_height="match_parent"
-                        android:layout_weight="1"
-                        android:gravity="right|center"
-                        android:orientation="horizontal">
-
-                        <TextView
-                            android:id="@+id/item_promotion_distance_tv"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:background="@drawable/text_view_bg_1"
-                            android:padding="2dp"
-                            android:text="2.1km"
-                            android:textColor="@color/app_color"
-                            android:textSize="8sp" />
-
-                        <TextView
-                            android:id="@+id/item_promotion_attestation_tv"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginLeft="5dp"
-                            android:background="@drawable/text_view_bg_2"
-                            android:padding="2dp"
-                            android:text="已认证"
-                            android:textColor="@color/colorWhite"
-                            android:textSize="8sp" />
-
-                        <TextView
-                            android:id="@+id/item_store_grade_tv"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginLeft="5dp"
-                            android:background="@drawable/text_view_bg_3"
-                            android:padding="2dp"
-                            android:text="菜市场"
-                            android:textColor="@color/colorWhite"
-                            android:textSize="8sp" />
-
-                    </LinearLayout>
-
+                        android:layout_marginLeft="5dp"
+                        android:background="@drawable/text_view_bg_3"
+                        android:padding="2dp"
+                        android:text="菜市场"
+                        android:textColor="@color/colorWhite"
+                        android:textSize="8sp" />
 
                 </LinearLayout>
 
 
             </LinearLayout>
 
-            <!--  <android.support.v7.widget.RecyclerView
-                  android:id="@+id/promotion_goods_rv"
-                  android:layout_width="match_parent"
-                  android:layout_height="wrap_content"
-                  android:layout_marginTop="10dp"
-                  android:layout_marginRight="10dp" />-->
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="15dp"
-            android:layout_marginTop="5dp"
-            android:layout_marginRight="20dp"
-            android:gravity="center_vertical"
-            android:orientation="horizontal">
-
-            <TextView
-                android:id="@+id/promotion_address_tv"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:ellipsize="end"
-                android:singleLine="true"
-                android:textColor="@color/color_gray"
-                android:textSize="12sp" />
-
-            <TextView
-                android:id="@+id/tv_shop_sonda"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginRight="10dp"
-                android:background="@drawable/rect_stroke_app_color_3dp"
-                android:paddingLeft="4dp"
-                android:paddingTop="1dp"
-                android:paddingRight="4dp"
-                android:paddingBottom="1dp"
-                android:text="急速达"
-                android:textColor="@color/app_color"
-                android:textSize="10sp" />
-
-            <TextView
-                android:id="@+id/tv_shop_state"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:background="@drawable/rect_stroke_app_color_3dp"
-                android:paddingLeft="4dp"
-                android:paddingTop="1dp"
-                android:paddingRight="4dp"
-                android:paddingBottom="1dp"
-                android:text="营业中"
-                android:textColor="@color/app_color"
-                android:textSize="10sp" />
 
         </LinearLayout>
 
+        <!--  <android.support.v7.widget.RecyclerView
+              android:id="@+id/promotion_goods_rv"
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:layout_marginTop="10dp"
+              android:layout_marginRight="10dp" />-->
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="15dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginRight="20dp"
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
 
         <TextView
-            android:id="@+id/item_promotion_send_range_tv"
+            android:id="@+id/promotion_address_tv"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:ellipsize="end"
+            android:singleLine="true"
+            android:textColor="@color/color_gray"
+            android:textSize="12sp" />
+
+        <TextView
+            android:id="@+id/tv_shop_sonda"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="10dp"
+            android:background="@drawable/rect_stroke_app_color_3dp"
+            android:paddingLeft="4dp"
+            android:paddingTop="1dp"
+            android:paddingRight="4dp"
+            android:paddingBottom="1dp"
+            android:text="急速达"
+            android:textColor="@color/app_color"
+            android:textSize="10sp" />
+
+        <TextView
+            android:id="@+id/tv_shop_state"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/rect_stroke_app_color_3dp"
+            android:paddingLeft="4dp"
+            android:paddingTop="1dp"
+            android:paddingRight="4dp"
+            android:paddingBottom="1dp"
+            android:text="营业中"
+            android:textColor="@color/app_color"
+            android:textSize="10sp" />
+
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/item_promotion_send_range_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="15dp"
+        android:layout_marginTop="5dp"
+        android:enabled="true"
+        android:maxLines="1"
+        android:textColor="@color/app_color"
+        android:textSize="11sp" />
+
+    <View
+        style="@style/GrayLineStyle"
+        android:layout_marginTop="5dp"
+        android:layout_marginBottom="5dp"
+        android:visibility="gone" />
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:orientation="horizontal">
+
+        <LinearLayout
+            android:id="@+id/has_coupon_layout"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="15dp"
-            android:layout_marginTop="5dp"
-            android:enabled="true"
-            android:maxLines="1"
-            android:textColor="@color/app_color"
-            android:textSize="11sp" />
-
-        <View
-            style="@style/GrayLineStyle"
-            android:layout_marginTop="5dp"
-            android:layout_marginBottom="5dp"
-            android:visibility="gone" />
-
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="5dp"
+            android:layout_marginBottom="1dp"
             android:orientation="horizontal">
 
-            <LinearLayout
-                android:id="@+id/has_coupon_layout"
+            <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="15dp"
-                android:layout_marginBottom="1dp"
-                android:orientation="horizontal">
+                android:layout_gravity="center"
+                android:background="@color/app_color"
+                android:padding="2dp"
+                android:text="领券"
+                android:textColor="@color/colorWhite"
+                android:textSize="8sp" />
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:background="@color/app_color"
-                    android:padding="2dp"
-                    android:text="领券"
-                    android:textColor="@color/colorWhite"
-                    android:textSize="8sp" />
-
-                <TextView
-                    android:id="@+id/shop_coupon_tv"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:layout_marginLeft="5dp"
-                    android:enabled="true"
-                    android:maxLines="1"
-                    android:text="优惠券"
-                    android:textSize="12sp" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:id="@+id/has_full_layout"
+            <TextView
+                android:id="@+id/shop_coupon_tv"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="15dp"
-                android:layout_marginBottom="1dp"
-                android:orientation="horizontal">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:background="@color/red"
-                    android:padding="2dp"
-                    android:text="满减"
-                    android:textColor="@color/colorWhite"
-                    android:textSize="8sp" />
-
-                <TextView
-                    android:id="@+id/shop_activity_tv"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:layout_marginLeft="5dp"
-                    android:enabled="true"
-                    android:maxLines="1"
-                    android:text="满多少减多少"
-                    android:textSize="12sp" />
-
-            </LinearLayout>
+                android:layout_gravity="center"
+                android:layout_marginLeft="5dp"
+                android:enabled="true"
+                android:maxLines="1"
+                android:text="优惠券"
+                android:textSize="12sp" />
         </LinearLayout>
 
+        <LinearLayout
+            android:id="@+id/has_full_layout"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="15dp"
+            android:layout_marginBottom="1dp"
+            android:orientation="horizontal">
 
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:background="@color/red"
+                android:padding="2dp"
+                android:text="满减"
+                android:textColor="@color/colorWhite"
+                android:textSize="8sp" />
+
+            <TextView
+                android:id="@+id/shop_activity_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginLeft="5dp"
+                android:enabled="true"
+                android:maxLines="1"
+                android:text="满多少减多少"
+                android:textSize="12sp" />
+
+        </LinearLayout>
     </LinearLayout>
 
     <android.support.v7.widget.RecyclerView
@@ -332,5 +314,4 @@
         android:layout_marginTop="10dp"
         android:layout_marginRight="10dp" />
 
-    <!--<View style="@style/GrayLineStyle" />-->
 </LinearLayout>

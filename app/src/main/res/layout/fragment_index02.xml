@@ -96,13 +96,13 @@
                                 android:id="@+id/tv_fruits"
                                 style="@style/textWithImageStyle"
                                 android:drawableTop="@drawable/icon_index_fruits"
-                                android:text="水果生鲜" />
+                                android:text="果蔬生鲜" />
 
                             <TextView
                                 android:id="@+id/tv_snacks"
                                 style="@style/textWithImageStyle"
-                                android:drawableTop="@drawable/icon_index_snacks"
-                                android:text="特产零食" />
+                                android:drawableTop="@drawable/icon_index_drinks"
+                                android:text="甜点饮品" />
 
                             <TextView
                                 android:id="@+id/tv_foods"

@@ -95,7 +95,7 @@ public class FruitsActivity extends BaseActivity implements BaseRefreshListener 
 
     @Override
     public void fillData() {
-        mBannerIm.setImageResource(R.drawable.banner_foods);
+        mBannerIm.setImageResource(R.drawable.bg_banner3);
         //广播接受者实例
         receiver = new MyReceiver();
         IntentFilter intentFilter = new IntentFilter();

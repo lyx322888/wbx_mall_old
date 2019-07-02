@@ -79,7 +79,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:scaleType="centerCrop"
-                        android:src="@drawable/banner_buy" />
+                        android:src="@drawable/bg_banner1" />
                 </com.wbx.mall.widget.RatioLayout>
 
                 <android.support.v7.widget.RecyclerView

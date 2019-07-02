@@ -29,9 +29,7 @@ import java.util.List;
  */
 
 public class ShopGoodsAdapter extends BaseAdapter<ShopInfo2, Context> {
-    private int pre_shop_is_exceed = 0;
     private NewFreeInfoBean newFreeInfo;
-    private boolean isShowHead = true;
 
     public ShopGoodsAdapter(List<ShopInfo2> dataList, Context context) {
         super(dataList, context);
@@ -45,12 +43,6 @@ public class ShopGoodsAdapter extends BaseAdapter<ShopInfo2, Context> {
 
     @Override
     public void convert(BaseViewHolder holder, final ShopInfo2 shopInfo, int position) {
-        if (pre_shop_is_exceed == 0 && shopInfo.getIs_exceed() == 1) {
-            holder.getView(R.id.iv_is_exceed).setVisibility(View.VISIBLE);
-        } else {
-            holder.getView(R.id.iv_is_exceed).setVisibility(View.GONE);
-        }
-        pre_shop_is_exceed = shopInfo.getIs_exceed();
         ImageView shopTag = holder.getView(R.id.iv_shop_tag);
         int sold_num = shopInfo.getSold_num();
         if (sold_num < 100) {
@@ -64,29 +56,25 @@ public class ShopGoodsAdapter extends BaseAdapter<ShopInfo2, Context> {
         }
         ImageView storePicIm = holder.getView(R.id.item_promotion_store_pic_im);
         TextView tvShopState = holder.getView(R.id.tv_shop_state);
-        TextView tvpopularity = holder.getView(R.id.popularity_tv);
-        tvpopularity.setText("人气 " + shopInfo.getView());
+        TextView tvPopularity = holder.getView(R.id.popularity_tv);
+        tvPopularity.setText("人气 " + shopInfo.getView());
         switch (shopInfo.getShop_status()) {
             case 0:
-                //休息中
                 tvShopState.setText("休息中");
                 tvShopState.setTextColor(Color.parseColor("#888888"));
                 tvShopState.setBackgroundResource(R.drawable.rect_stroke_888888_3dp);
                 break;
             case 1:
-                //营业中
                 tvShopState.setText("营业中");
                 tvShopState.setTextColor(mContext.getResources().getColor(R.color.app_color));
                 tvShopState.setBackgroundResource(R.drawable.rect_stroke_app_color_3dp);
                 break;
             case 2:
-                //筹备开业
                 tvShopState.setText("筹备开业");
                 tvShopState.setTextColor(Color.parseColor("#F39800"));
                 tvShopState.setBackgroundResource(R.drawable.rect_stroke_f39800_3dp);
                 break;
             case 3:
-                //新店开业
                 tvShopState.setText("新店开业");
                 tvShopState.setTextColor(Color.parseColor("#F15353"));
                 tvShopState.setBackgroundResource(R.drawable.rect_stroke_f15353_3dp);
@@ -120,8 +108,6 @@ public class ShopGoodsAdapter extends BaseAdapter<ShopInfo2, Context> {
         } else {
             hasCouponLayout.setVisibility(View.GONE);
         }
-
-
         if (shopInfo.getGrade_id() == AppConfig.StoreGrade.MARKET) {
             holder.setText(R.id.item_store_grade_tv, "菜市场");
         } else if (shopInfo.getGrade_id() == 20) {
@@ -129,7 +115,6 @@ public class ShopGoodsAdapter extends BaseAdapter<ShopInfo2, Context> {
         } else {
             holder.setText(R.id.item_store_grade_tv, "实体店");
         }
-
         RecyclerView goodsRecycler = holder.getView(R.id.promotion_goods_rv);
         ItemShopGoodsAdapter goodsAdapter = new ItemShopGoodsAdapter(shopInfo.getGoods());
         LinearLayoutManager lm = new LinearLayoutManager(mContext);
@@ -161,7 +146,4 @@ public class ShopGoodsAdapter extends BaseAdapter<ShopInfo2, Context> {
         return this.newFreeInfo == null;
     }
 
-    public void hideHeadFreeInfo() {
-        isShowHead = false;
-    }
 }

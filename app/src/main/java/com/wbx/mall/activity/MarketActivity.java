@@ -99,7 +99,7 @@ public class MarketActivity extends BaseActivity implements BaseRefreshListener 
 
     @Override
     public void fillData() {
-        mBannerIm.setImageResource(R.drawable.banner_shoping);
+        mBannerIm.setImageResource(R.drawable.bg_banner2);
         //广播接受者实例
         receiver = new MyReceiver();
         IntentFilter intentFilter = new IntentFilter();

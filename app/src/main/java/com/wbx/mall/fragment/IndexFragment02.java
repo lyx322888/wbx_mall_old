@@ -23,15 +23,11 @@ import com.alibaba.fastjson.JSONObject;
 import com.hyphenate.chat.EMChatManager;
 import com.hyphenate.chat.EMClient;
 import com.wbx.mall.R;
-import com.wbx.mall.activity.VegetablesActivity;
-import com.wbx.mall.activity.FoodsActivity;
-import com.wbx.mall.activity.FruitsActivity;
 import com.wbx.mall.activity.IntelligentServiceActivity;
 import com.wbx.mall.activity.MessageCenterActivity;
-import com.wbx.mall.activity.MarketActivity;
+import com.wbx.mall.activity.NearbyStoreActivity;
 import com.wbx.mall.activity.SearchActivity;
 import com.wbx.mall.activity.SelectAddressActivity;
-import com.wbx.mall.activity.SnacksActivity;
 import com.wbx.mall.activity.StoreDetailActivity;
 import com.wbx.mall.adapter.HomeShufflingAdapter;
 import com.wbx.mall.adapter.ShopGoodsAdapter;
@@ -434,19 +430,24 @@ public class IndexFragment02 extends BaseFragment implements BaseRefreshListener
                 startActivity(new Intent(getActivity(), SearchActivity.class));
                 break;
             case R.id.tv_vegetables:
-                startActivity(new Intent(getActivity(), VegetablesActivity.class));
+//                startActivity(new Intent(getActivity(), VegetablesActivity.class));
+                NearbyStoreActivity.startNearbyStore(getActivity(), 0);
                 break;
             case R.id.tv_market:
-                startActivity(new Intent(getActivity(), MarketActivity.class));
+//                startActivity(new Intent(getActivity(), MarketActivity.class));
+                NearbyStoreActivity.startNearbyStore(getActivity(), 1);
                 break;
             case R.id.tv_fruits:
-                startActivity(new Intent(getActivity(), FruitsActivity.class));
+//                startActivity(new Intent(getActivity(), FruitsActivity.class));
+                NearbyStoreActivity.startNearbyStore(getActivity(), 2);
                 break;
             case R.id.tv_snacks:
-                startActivity(new Intent(getActivity(), SnacksActivity.class));
+//                startActivity(new Intent(getActivity(), SnacksActivity.class));
+                NearbyStoreActivity.startNearbyStore(getActivity(), 3);
                 break;
             case R.id.tv_foods:
-                startActivity(new Intent(getActivity(), FoodsActivity.class));
+//                startActivity(new Intent(getActivity(), FoodsActivity.class));
+                NearbyStoreActivity.startNearbyStore(getActivity(), 4);
                 break;
             case R.id.tv_address:
                 startActivityForResult(new Intent(getActivity(), SelectAddressActivity.class), 0);
