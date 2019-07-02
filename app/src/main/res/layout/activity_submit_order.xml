@@ -478,7 +478,7 @@
                 <LinearLayout
                     android:id="@+id/ll_remark"
                     android:layout_width="match_parent"
-                    android:layout_height="49dp"
+                    android:layout_height="wrap_content"
                     android:layout_marginLeft="15dp"
                     android:layout_marginTop="15dp"
                     android:layout_marginRight="15dp"
@@ -486,7 +486,9 @@
                     android:gravity="center_vertical"
                     android:orientation="horizontal"
                     android:paddingLeft="15dp"
-                    android:paddingRight="15dp">
+                    android:paddingTop="10dp"
+                    android:paddingRight="15dp"
+                    android:paddingBottom="10dp">
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -505,13 +507,10 @@
                         android:hint="口味、偏好"
                         android:textColor="#CCCCCC"
                         android:textColorHint="#CCCCCC"
+                        android:drawablePadding="5dp"
+                        android:drawableEnd="@drawable/more"
                         android:textSize="15sp" />
 
-                    <ImageView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="10dp"
-                        android:src="@drawable/more" />
                 </LinearLayout>
             </LinearLayout>
         </android.support.v4.widget.NestedScrollView>

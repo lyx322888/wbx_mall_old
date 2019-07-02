@@ -313,6 +313,7 @@ public class SubmitOrderActivity extends BaseActivity {
                 lstPayType.get(position).setChecked(true);
                 tvPayType.setText(lstPayType.get(position).getName());
                 mPayWayAdapter.notifyDataSetChanged();
+                llChoosePayType.setVisibility(View.GONE);
             }
         });
     }
