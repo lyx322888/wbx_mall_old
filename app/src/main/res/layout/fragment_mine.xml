@@ -173,7 +173,8 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
-                        android:src="@drawable/mine_line" />
+                        android:src="@drawable/mine_line"
+                        android:visibility="gone" />
 
                     <LinearLayout
                         android:id="@+id/ll_free_activity_coupon"
@@ -184,7 +185,8 @@
                         android:layout_marginBottom="8dp"
                         android:layout_weight="1"
                         android:gravity="center"
-                        android:orientation="vertical">
+                        android:orientation="vertical"
+                        android:visibility="gone">
 
                         <TextView
                             android:id="@+id/tv_free_activity_coupon"
@@ -387,7 +389,7 @@
                         <!--android:textSize="12sp" />-->
                         <!--</LinearLayout>-->
                         <LinearLayout
-                            android:id="@+id/ll_red_envelope"
+                            android:id="@+id/ll_my_book"
                             android:layout_width="0dp"
                             android:layout_height="match_parent"
                             android:layout_weight="1"
@@ -396,14 +398,14 @@
 
                             <ImageView
                                 android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:src="@drawable/icon_mine_packet" />
+                                android:layout_height="25dp"
+                                android:src="@drawable/icon_mine_reserve" />
 
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:layout_marginTop="2dp"
-                                android:text="我的红包"
+                                android:layout_marginTop="7dp"
+                                android:text="我的预定"
                                 android:textColor="@color/text_black"
                                 android:textSize="12sp" />
                         </LinearLayout>
@@ -473,6 +475,7 @@
                                 android:textColor="@color/text_black"
                                 android:textSize="12sp" />
                         </LinearLayout>
+
                     </LinearLayout>
                 </LinearLayout>
 
@@ -651,28 +654,12 @@
                                 android:textSize="12sp" />
                         </LinearLayout>
 
-
                         <LinearLayout
-                            android:id="@+id/ll_my_book"
                             android:layout_width="0dp"
                             android:layout_height="match_parent"
                             android:layout_weight="1"
                             android:gravity="center"
-                            android:orientation="vertical">
-
-                            <ImageView
-                                android:layout_width="wrap_content"
-                                android:layout_height="25dp"
-                                android:src="@drawable/icon_mine_reserve" />
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_marginTop="7dp"
-                                android:text="我的预定"
-                                android:textColor="@color/text_black"
-                                android:textSize="12sp" />
-                        </LinearLayout>
+                            android:orientation="vertical" />
 
                         <LinearLayout
                             android:layout_width="0dp"
