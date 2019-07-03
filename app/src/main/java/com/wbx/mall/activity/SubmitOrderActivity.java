@@ -23,14 +23,12 @@ import com.tencent.mm.opensdk.modelpay.PayReq;
 import com.tencent.mm.opensdk.openapi.IWXAPI;
 import com.tencent.mm.opensdk.openapi.WXAPIFactory;
 import com.wbx.mall.R;
-import com.wbx.mall.adapter.PayWayAdapter;
 import com.wbx.mall.adapter.SubmitOrderGoodsAdapter;
 import com.wbx.mall.api.Api;
 import com.wbx.mall.api.HttpListener;
 import com.wbx.mall.api.MyHttp;
 import com.wbx.mall.base.AppConfig;
 import com.wbx.mall.base.BaseActivity;
-import com.wbx.mall.base.BaseAdapter;
 import com.wbx.mall.bean.AddressInfo;
 import com.wbx.mall.bean.GoodsInfo2;
 import com.wbx.mall.bean.OrderInfo;
@@ -39,6 +37,7 @@ import com.wbx.mall.bean.PaymentInfo;
 import com.wbx.mall.bean.WxPayInfo;
 import com.wbx.mall.common.ActivityManager;
 import com.wbx.mall.common.LoginUtil;
+import com.wbx.mall.dialog.PayWayDialog;
 import com.wbx.mall.dialog.GuaKaDialogFragment;
 import com.wbx.mall.utils.MD5;
 import com.wbx.mall.utils.SPUtils;
@@ -62,7 +61,7 @@ import butterknife.OnClick;
  * 提交订单
  */
 
-public class SubmitOrderActivity extends BaseActivity {
+public class SubmitOrderActivity extends BaseActivity implements PayWayDialog.DialogListener {
     private static final int SDK_PAY_FLAG = 1;
     private static final int SDK_CHECK_FLAG = 2;
     public static final int REQUEST_SELECT_ADDRESS = 1000;
@@ -76,8 +75,6 @@ public class SubmitOrderActivity extends BaseActivity {
     LinearLayout llSelectedAddress;
     @Bind(R.id.recycler_view_goods)
     RecyclerView rvGoods;
-    @Bind(R.id.recycler_view_choose_pay_type)
-    RecyclerView rvPayType;
     @Bind(R.id.tv_receive_info)
     TextView tvReceiveInfo;
     @Bind(R.id.tv_address)
@@ -108,8 +105,6 @@ public class SubmitOrderActivity extends BaseActivity {
     TextView tvActualPayFeeBar;
     @Bind(R.id.tv_discount_fee_bar)
     TextView tvDiscountFeeBar;
-    @Bind(R.id.ll_choose_pay_type)
-    LinearLayout llChoosePayType;
     @Bind(R.id.iv_select_address)
     ImageView ivSelectAddress;
     @Bind(R.id.ll_remark)
@@ -124,7 +119,6 @@ public class SubmitOrderActivity extends BaseActivity {
     private List<GoodsInfo2> lstGoods = new ArrayList<>();
     private List<PaymentInfo> lstPayType = new ArrayList<>();
     private SubmitOrderGoodsAdapter orderAdapter;
-    private PayWayAdapter mPayWayAdapter;
     private Dialog dialog;
     private boolean isBook;
     private MyHttp myHttp;
@@ -167,6 +161,7 @@ public class SubmitOrderActivity extends BaseActivity {
             }
         }
     };
+    private PayWayDialog mPayDialog;
 
     @Override
     public int getLayoutId() {
@@ -181,13 +176,6 @@ public class SubmitOrderActivity extends BaseActivity {
     @Override
     public void initView() {
         initGoodsRv();
-        initPayTypeRv();
-    }
-
-    private void initPayTypeRv() {
-        rvPayType.setLayoutManager(new LinearLayoutManager(this));
-        mPayWayAdapter = new PayWayAdapter(lstPayType, mContext);
-        rvPayType.setAdapter(mPayWayAdapter);
     }
 
     private void initGoodsRv() {
@@ -249,7 +237,6 @@ public class SubmitOrderActivity extends BaseActivity {
         lstPayType.clear();
         lstPayType.addAll(JSONArray.parseArray(data.getString("payment"), PaymentInfo.class));
         lstPayType.get(0).setChecked(true);
-        mPayWayAdapter.notifyDataSetChanged();
         tvPayType.setText(lstPayType.get(0).getName());
 
         lstGoods.clear();
@@ -303,19 +290,6 @@ public class SubmitOrderActivity extends BaseActivity {
 
     @Override
     public void setListener() {
-        mPayWayAdapter.setOnItemClickListener(R.id.root_view, new BaseAdapter.ItemClickListener() {
-            @Override
-            public void onItemClicked(View view, int position) {
-                payCode = lstPayType.get(position).getCode();
-                for (PaymentInfo paymentBean : lstPayType) {
-                    paymentBean.setChecked(false);
-                }
-                lstPayType.get(position).setChecked(true);
-                tvPayType.setText(lstPayType.get(position).getName());
-                mPayWayAdapter.notifyDataSetChanged();
-                llChoosePayType.setVisibility(View.GONE);
-            }
-        });
     }
 
     @Override
@@ -488,23 +462,20 @@ public class SubmitOrderActivity extends BaseActivity {
         }
     }
 
-    @OnClick({R.id.rl_address, R.id.ll_pay_type, R.id.tv_pay_now, R.id.cover_choose_pay_type, R.id.iv_close_choose_pay_type, R.id.ll_remark})
+    @OnClick({R.id.rl_address, R.id.ll_pay_type, R.id.tv_pay_now, R.id.ll_remark})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.rl_address:
                 selectAddress();
                 break;
             case R.id.ll_pay_type:
-                llChoosePayType.setVisibility(View.VISIBLE);
+                if (mPayDialog == null) {
+                    mPayDialog = new PayWayDialog(this, lstPayType, this);
+                }
+                mPayDialog.show();
                 break;
             case R.id.tv_pay_now:
                 payNow();
-                break;
-            case R.id.cover_choose_pay_type:
-                llChoosePayType.setVisibility(View.GONE);
-                break;
-            case R.id.iv_close_choose_pay_type:
-                llChoosePayType.setVisibility(View.GONE);
                 break;
             case R.id.ll_remark:
                 addRemark();
@@ -569,5 +540,11 @@ public class SubmitOrderActivity extends BaseActivity {
             LoadingDialog.showDialogForLoading(mActivity, "支付中...", false);
             startPay();
         }
+    }
+
+    @Override
+    public void ListClick(View v, PaymentInfo info) {
+        payCode = info.getCode();
+        tvPayType.setText(info.getName());
     }
 }

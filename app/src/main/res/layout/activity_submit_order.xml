@@ -503,12 +503,12 @@
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="10dp"
                         android:layout_weight="1"
+                        android:drawableEnd="@drawable/more"
+                        android:drawablePadding="5dp"
                         android:gravity="end"
                         android:hint="口味、偏好"
                         android:textColor="#CCCCCC"
                         android:textColorHint="#CCCCCC"
-                        android:drawablePadding="5dp"
-                        android:drawableEnd="@drawable/more"
                         android:textSize="15sp" />
 
                 </LinearLayout>
@@ -582,57 +582,4 @@
             android:src="@drawable/icon_shop_car" />
     </RelativeLayout>
 
-    <LinearLayout
-        android:id="@+id/ll_choose_pay_type"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical"
-        android:visibility="gone">
-
-        <View
-            android:id="@+id/cover_choose_pay_type"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1"
-            android:background="#55000000" />
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="325dp"
-            android:background="@color/white"
-            android:orientation="vertical">
-
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="49dp">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_centerInParent="true"
-                    android:text="选择支付方式"
-                    android:textColor="@color/black"
-                    android:textSize="18sp" />
-
-                <ImageView
-                    android:id="@+id/iv_close_choose_pay_type"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentRight="true"
-                    android:layout_centerVertical="true"
-                    android:padding="15dp"
-                    android:src="@drawable/icon_close_gray" />
-            </RelativeLayout>
-
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="0.5dp"
-                android:background="@color/divider_light" />
-
-            <android.support.v7.widget.RecyclerView
-                android:id="@+id/recycler_view_choose_pay_type"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent" />
-        </LinearLayout>
-    </LinearLayout>
 </RelativeLayout>
