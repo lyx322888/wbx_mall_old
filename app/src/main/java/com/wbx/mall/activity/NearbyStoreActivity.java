@@ -49,9 +49,9 @@ public class NearbyStoreActivity extends BaseActivity implements BaseRefreshList
     PullToRefreshLayout refreshLayout;
     @Bind(R.id.img_empty_data)
     ImageView bgEmptyView;
-    private int[] mBannerID = {R.drawable.bg_banner1, R.drawable.bg_banner2, R.drawable.bg_banner3, R.drawable.bg_banner4, R.drawable.bg_banner5};
-    private String[] mCateID = {"15", "19", "22", "23", "20"};
-    private String[] mTitle = {"附近买菜", "超市便利", "果蔬生鲜", "甜点饮品", "餐饮美食"};
+    private int[] mBannerID = {R.drawable.bg_banner6, R.drawable.bg_banner2, R.drawable.bg_banner5, R.drawable.bg_banner4, R.drawable.banner_techan};
+    private String[] mCateID = {"15", "19", "20", "23", "22"};
+    private String[] mTitle = {"果蔬生鲜", "超市便利", "餐饮美食", "甜点饮品", "特产零食"};
     public static final String STORE_INDEX = "StoreIndex";
     private int mStoreIndex;//页面类型
     private boolean canLoadMore = true;
@@ -75,7 +75,6 @@ public class NearbyStoreActivity extends BaseActivity implements BaseRefreshList
 
     @Override
     public void initPresenter() {
-
     }
 
     @Override

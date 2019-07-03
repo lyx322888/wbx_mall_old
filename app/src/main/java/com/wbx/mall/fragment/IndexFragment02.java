@@ -423,30 +423,30 @@ public class IndexFragment02 extends BaseFragment implements BaseRefreshListener
         }
     }
 
-    @OnClick({R.id.fragment_index_search_tv, R.id.tv_vegetables, R.id.tv_market, R.id.tv_fruits, R.id.tv_snacks, R.id.tv_foods, R.id.tv_address, R.id.rl_right, R.id.service_im})
+    @OnClick({R.id.fragment_index_search_tv, R.id.tv_fruits, R.id.tv_market, R.id.tv_foods, R.id.tv_drinks, R.id.tv_snacks, R.id.tv_address, R.id.rl_right, R.id.service_im})
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.fragment_index_search_tv:
                 startActivity(new Intent(getActivity(), SearchActivity.class));
                 break;
-            case R.id.tv_vegetables:
-//                startActivity(new Intent(getActivity(), VegetablesActivity.class));
+            case R.id.tv_fruits:
+//                startActivity(new Intent(getActivity(), FruitsActivity.class));
                 NearbyStoreActivity.startNearbyStore(getActivity(), 0);
                 break;
             case R.id.tv_market:
 //                startActivity(new Intent(getActivity(), MarketActivity.class));
                 NearbyStoreActivity.startNearbyStore(getActivity(), 1);
                 break;
-            case R.id.tv_fruits:
-//                startActivity(new Intent(getActivity(), FruitsActivity.class));
+            case R.id.tv_foods:
+//                startActivity(new Intent(getActivity(), FoodsActivity.class));
                 NearbyStoreActivity.startNearbyStore(getActivity(), 2);
                 break;
-            case R.id.tv_snacks:
+            case R.id.tv_drinks:
 //                startActivity(new Intent(getActivity(), SnacksActivity.class));
                 NearbyStoreActivity.startNearbyStore(getActivity(), 3);
                 break;
-            case R.id.tv_foods:
-//                startActivity(new Intent(getActivity(), FoodsActivity.class));
+            case R.id.tv_snacks:
+//                startActivity(new Intent(getActivity(), SnacksActivity.class));
                 NearbyStoreActivity.startNearbyStore(getActivity(), 4);
                 break;
             case R.id.tv_address:

@@ -81,10 +81,10 @@
                             android:orientation="horizontal">
 
                             <TextView
-                                android:id="@+id/tv_vegetables"
+                                android:id="@+id/tv_fruits"
                                 style="@style/textWithImageStyle"
-                                android:drawableTop="@drawable/icon_index_vegetables"
-                                android:text="附近买菜" />
+                                android:drawableTop="@drawable/icon_index_fruits"
+                                android:text="果蔬生鲜" />
 
                             <TextView
                                 android:id="@+id/tv_market"
@@ -93,22 +93,30 @@
                                 android:text="超市便利" />
 
                             <TextView
-                                android:id="@+id/tv_fruits"
+                                android:id="@+id/tv_foods"
                                 style="@style/textWithImageStyle"
-                                android:drawableTop="@drawable/icon_index_fruits"
-                                android:text="果蔬生鲜" />
+                                android:drawableTop="@drawable/icon_index_foods"
+                                android:text="餐饮美食" />
 
                             <TextView
-                                android:id="@+id/tv_snacks"
+                                android:id="@+id/tv_drinks"
                                 style="@style/textWithImageStyle"
                                 android:drawableTop="@drawable/icon_index_drinks"
                                 android:text="甜点饮品" />
 
                             <TextView
-                                android:id="@+id/tv_foods"
+                                android:id="@+id/tv_snacks"
                                 style="@style/textWithImageStyle"
-                                android:drawableTop="@drawable/icon_index_foods"
-                                android:text="餐饮美食" />
+                                android:drawableTop="@drawable/icon_index_snacks"
+                                android:text="特产零食"
+                                android:visibility="visible" />
+
+                            <TextView
+                                android:id="@+id/tv_vegetables"
+                                style="@style/textWithImageStyle"
+                                android:drawableTop="@drawable/icon_index_vegetables"
+                                android:text="附近买菜"
+                                android:visibility="gone" />
 
                             <TextView
                                 android:id="@+id/index_country_tv"

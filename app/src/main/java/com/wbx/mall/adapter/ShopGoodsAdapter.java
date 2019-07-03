@@ -83,7 +83,7 @@ public class ShopGoodsAdapter extends BaseAdapter<ShopInfo2, Context> {
         GlideUtils.showRoundMediumPic(mContext, storePicIm, shopInfo.getPhoto());
         holder.setText(R.id.promotion_name_tv, shopInfo.getShop_name())
                 .setRating(R.id.rb_score, shopInfo.getScore())
-                .setText(R.id.item_promotion_info_tv, String.format("起送¥%.2f", shopInfo.getSince_money() / 100.00) + ((LoginUtil.isLogin() && LoginUtil.getUserInfo().getIs_salesman() == 1) ? " 销量:" + sold_num : ""))
+                .setText(R.id.item_promotion_info_tv, String.format("起送 ¥%.2f", shopInfo.getSince_money() / 100.00) + ((LoginUtil.isLogin() && LoginUtil.getUserInfo().getIs_salesman() == 1) ? " 配送 ¥" + shopInfo.getLogistics() : ""))
                 .setText(R.id.promotion_address_tv, "地址:" + shopInfo.getAddr())
                 .setText(R.id.item_promotion_distance_tv, shopInfo.getD())
                 .setText(R.id.item_promotion_attestation_tv, shopInfo.getIs_renzheng() == 0 ? "未认证" : "已认证");
