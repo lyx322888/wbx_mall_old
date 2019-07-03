@@ -23,7 +23,7 @@ public final class AppBarBehavior extends AppBarLayout.Behavior {
     @Override
     public boolean onStartNestedScroll(CoordinatorLayout parent, AppBarLayout child, View directTargetChild, View target, int nestedScrollAxes, int type) {
         //购物车详情和优惠券详情的滚动不要引起标题栏的折叠与展开
-        if (target.getId() == R.id.recycler_view_shop_car_detail || target.getId() == R.id.recycler_view_shop_coupon) {
+        if (target.getId() == R.id.recycler_view_shop_car_detail) {
             return false;
         }
         return super.onStartNestedScroll(parent, child, directTargetChild, target, nestedScrollAxes, type);

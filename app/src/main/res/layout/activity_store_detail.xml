@@ -104,7 +104,7 @@
                         android:textSize="10sp" />
 
                     <TextView
-                        android:id="@+id/tv_full_reduce"
+                        android:id="@+id/tv_discount"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="10dp"
@@ -116,7 +116,7 @@
                         android:textSize="11sp" />
 
                     <TextView
-                        android:id="@+id/tv_full_reduce_num"
+                        android:id="@+id/tv_discount_more"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="5dp"
@@ -257,10 +257,6 @@
     <include layout="@layout/view_shop_car_detail" />
 
     <include layout="@layout/view_shopping_car" />
-
-    <include layout="@layout/view_discount_activity" />
-
-    <include layout="@layout/view_shop_coupon" />
 
     <com.wbx.mall.widget.DragImageView
         android:id="@+id/iv_book"

@@ -122,7 +122,6 @@ public class IndexFragment02 extends BaseFragment implements BaseRefreshListener
     public void initPresenter() {
 //        getCountData();
         showLoadingDialog("定位中...");
-//        Log.e("TAG",LoginUtil.getLoginToken());
         Youhui();
         SPUtils.remove(getActivity(), "city_name_select");
         myHttp = new MyHttp();

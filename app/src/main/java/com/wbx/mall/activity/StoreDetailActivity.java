@@ -41,7 +41,6 @@ import com.wbx.mall.adapter.GoodsFreeAdapter;
 import com.wbx.mall.adapter.GoodsFreeAdapter2;
 import com.wbx.mall.adapter.NatureAdapter;
 import com.wbx.mall.adapter.ShopCarAdapter;
-import com.wbx.mall.adapter.ShopCouponAdapter;
 import com.wbx.mall.api.Api;
 import com.wbx.mall.api.HttpListener;
 import com.wbx.mall.api.MyHttp;
@@ -61,12 +60,13 @@ import com.wbx.mall.bean.SpecInfo;
 import com.wbx.mall.bean.StoreDetailBean;
 import com.wbx.mall.common.LoginUtil;
 import com.wbx.mall.dialog.RedPacketFragment;
+import com.wbx.mall.dialog.ShopCouponDialog;
+import com.wbx.mall.dialog.ShopDiscountDialog;
 import com.wbx.mall.fragment.GoodsFragment;
 import com.wbx.mall.fragment.MerchantInfoFragment;
 import com.wbx.mall.fragment.ShopCommentFragment;
 import com.wbx.mall.presenter.GoodsFreePresenterImp;
 import com.wbx.mall.utils.SPUtils;
-import com.wbx.mall.utils.ToastUitl;
 import com.wbx.mall.view.GoodsFreeView;
 import com.wbx.mall.widget.AddWidget;
 import com.wbx.mall.widget.DragImageView;
@@ -89,7 +89,7 @@ import butterknife.OnClick;
 import static android.view.View.GONE;
 
 
-public class StoreDetailActivity extends BaseActivity implements AddWidget.OnAddClick, GoodsFreeView {
+public class StoreDetailActivity extends BaseActivity implements AddWidget.OnAddClick, GoodsFreeView, ShopCouponDialog.DialogListener {
     public static final String IS_VEGETABLE_MARKET = "IS_VEGETABLE_MARKET";
     public static final String STORE_ID = "STORE_ID";
     public static final String GOODS_ID = "GOODS_ID";
@@ -106,12 +106,10 @@ public class StoreDetailActivity extends BaseActivity implements AddWidget.OnAdd
     LinearLayout llContainerCoupoon;
     @Bind(R.id.tv_member_condition)
     TextView tvMemberCondition;
-    @Bind(R.id.tv_full_reduce)
-    TextView tvFullReduce;
-    @Bind(R.id.tv_full_reduce_num)
-    TextView tvFullReduceNum;
-    @Bind(R.id.tv_full_reduce_detail)
-    TextView tvFullReduceDetail;
+    @Bind(R.id.tv_discount)
+    TextView tvDisCount;
+    @Bind(R.id.tv_discount_more)
+    TextView tvDisCountMore;
     @Bind(R.id.root_view)
     CoordinatorLayout rootView;
     //    @Bind(R.id.root_view)
@@ -124,8 +122,6 @@ public class StoreDetailActivity extends BaseActivity implements AddWidget.OnAdd
     DragImageView ivBook;
     @Bind(R.id.blackview)
     View blackView;
-    @Bind(R.id.recycler_view_shop_coupon)
-    RecyclerView rvShopCoupon;
     @Bind(R.id.new_shop_recycler)
     RecyclerView newRecycler;
     @Bind(R.id.new_shop_recycler2)
@@ -141,10 +137,7 @@ public class StoreDetailActivity extends BaseActivity implements AddWidget.OnAdd
     public String mStoreId;
     public String bookSeatId = "";
     private BottomSheetBehavior shopCarDetailBehavior;
-    private BottomSheetBehavior discountActivityBehavior;
-    private BottomSheetBehavior couponBehavior;
     public ShopCarAdapter shopCarAdapter;
-    public ShopCouponAdapter couponAdapter;
     private ArrayList<GoodsInfo2> lstSelectedGoods = new ArrayList<>();
     private GoodsFragment goodsFragment;
     //    private GoodsFragment2 goodsFragment2;
@@ -153,6 +146,9 @@ public class StoreDetailActivity extends BaseActivity implements AddWidget.OnAdd
     private int shopCartTotalNum;
     private List<CouponInfo> lstCoupon;
     public StoreDetailBean storeDetailBean;
+    private ShopCouponDialog couponDialog;//领取优惠券弹窗
+    private ShopDiscountDialog shopDiscountDialog;//优惠活动弹窗
+    private String mStrDiscount;//优惠活动文字
 
 
     public static void actionStart(Context context, int grade_id, String storeId) {
@@ -197,41 +193,10 @@ public class StoreDetailActivity extends BaseActivity implements AddWidget.OnAdd
 
     @Override
     public void initView() {
-
         initBehavior();
     }
 
     private void initBehavior() {
-        discountActivityBehavior = BottomSheetBehavior.from(findViewById(R.id.shop_discount_activity));
-        discountActivityBehavior.setBottomSheetCallback(new BottomSheetBehavior.BottomSheetCallback() {
-            @Override
-            public void onStateChanged(@NonNull View bottomSheet, int newState) {
-                if (newState == BottomSheetBehavior.STATE_COLLAPSED || newState == BottomSheetBehavior.STATE_HIDDEN) {
-                    blackView.setVisibility(GONE);
-                }
-            }
-
-            @Override
-            public void onSlide(@NonNull View bottomSheet, float slideOffset) {
-                blackView.setVisibility(View.VISIBLE);
-                blackView.setAlpha(slideOffset);
-            }
-        });
-        couponBehavior = BottomSheetBehavior.from(findViewById(R.id.shop_coupon));
-        couponBehavior.setBottomSheetCallback(new BottomSheetBehavior.BottomSheetCallback() {
-            @Override
-            public void onStateChanged(@NonNull View bottomSheet, int newState) {
-                if (newState == BottomSheetBehavior.STATE_COLLAPSED || newState == BottomSheetBehavior.STATE_HIDDEN) {
-                    blackView.setVisibility(GONE);
-                }
-            }
-
-            @Override
-            public void onSlide(@NonNull View bottomSheet, float slideOffset) {
-                blackView.setVisibility(View.VISIBLE);
-                blackView.setAlpha(slideOffset);
-            }
-        });
         shopCarDetailBehavior = BottomSheetBehavior.from(findViewById(R.id.shop_car_detail_container));
         shopCarDetailBehavior.setBottomSheetCallback(new BottomSheetBehavior.BottomSheetCallback() {
             @Override
@@ -258,7 +223,6 @@ public class StoreDetailActivity extends BaseActivity implements AddWidget.OnAdd
 
     @Override
     public void fillData() {
-
         mStoreId = getIntent().getStringExtra(STORE_ID);
         LoadingDialog.showDialogForLoading(this);
         new MyHttp().doPost(getIntent().getBooleanExtra(IS_VEGETABLE_MARKET, false) ? Api.getDefault().getVegetableShopInfo(mStoreId, SPUtils.getSharedStringData(mContext, AppConfig.LOGIN_TOKEN), getIntent().getStringExtra(GOODS_ID)) :
@@ -434,10 +398,10 @@ public class StoreDetailActivity extends BaseActivity implements AddWidget.OnAdd
     private void addFullReduce(JSONObject result) {
         List<FullInfo> fullInfoList = JSONArray.parseArray(result.getJSONObject("data").getString("full_money_reduce"), FullInfo.class);
         if (fullInfoList == null || fullInfoList.size() == 0) {
-            ((View) tvFullReduce.getParent()).setVisibility(GONE);
+            ((View) tvDisCount.getParent()).setVisibility(GONE);
             return;
         }
-        ((View) tvFullReduce.getParent()).setVisibility(View.VISIBLE);
+        ((View) tvDisCount.getParent()).setVisibility(View.VISIBLE);
         StringBuilder sbFullReduce = new StringBuilder();
         for (int i = 0; i < fullInfoList.size(); i++) {
             sbFullReduce.append(String.format("满%.2f元减%.2f元", fullInfoList.get(i).getFull_money() / 100.00, fullInfoList.get(i).getReduce_money() / 100.00));
@@ -445,9 +409,9 @@ public class StoreDetailActivity extends BaseActivity implements AddWidget.OnAdd
                 sbFullReduce.append(",");
             }
         }
-        tvFullReduce.setText(sbFullReduce.toString());
-        tvFullReduceDetail.setText(sbFullReduce.toString());
-        tvFullReduceNum.setText(fullInfoList.size() + "个优惠");
+        mStrDiscount = sbFullReduce.toString();
+        tvDisCount.setText(mStrDiscount);
+        tvDisCountMore.setText(fullInfoList.size() + "个优惠");
     }
 
     private void addCoupon(JSONObject result) {
@@ -457,7 +421,6 @@ public class StoreDetailActivity extends BaseActivity implements AddWidget.OnAdd
             return;
         }
         updateCoupon();
-        initCouponView(lstCoupon);
     }
 
     private void updateCoupon() {
@@ -476,46 +439,6 @@ public class StoreDetailActivity extends BaseActivity implements AddWidget.OnAdd
             }
             llContainerCoupoon.addView(layout);
         }
-    }
-
-    private void initCouponView(final List<CouponInfo> couponInfos) {
-        rvShopCoupon.setLayoutManager(new LinearLayoutManager(mContext));
-        ((DefaultItemAnimator) rvShopCoupon.getItemAnimator()).setSupportsChangeAnimations(false);
-        couponAdapter = new ShopCouponAdapter(couponInfos);
-        couponAdapter.bindToRecyclerView(rvShopCoupon);
-        couponAdapter.setOnItemChildClickListener(new BaseQuickAdapter.OnItemChildClickListener() {
-            @Override
-            public void onItemChildClick(BaseQuickAdapter adapter, View view, int position) {
-                if (view.getId() == R.id.iv_receive) {
-                    CouponInfo data = couponInfos.get(position);
-                    if (data.getIs_receive() != 1) {
-                        if (LoginUtil.isLogin()) {
-                            receiveCoupon(data);
-                        } else {
-                            LoginUtil.login();
-                        }
-                    }
-                }
-            }
-        });
-    }
-
-    private void receiveCoupon(final CouponInfo data) {
-        LoadingDialog.showDialogForLoading(this);
-        new MyHttp().doPost(Api.getDefault().rceiveCoupon(SPUtils.getSharedStringData(this, AppConfig.LOGIN_TOKEN), data.getCoupon_id()), new HttpListener() {
-            @Override
-            public void onSuccess(JSONObject result) {
-                ToastUitl.showShort("领取成功!");
-                data.setIs_receive(1);
-                couponAdapter.notifyDataSetChanged();
-                updateCoupon();
-            }
-
-            @Override
-            public void onError(int code) {
-
-            }
-        });
     }
 
     private void initShopCartDetail() {
@@ -600,7 +523,7 @@ public class StoreDetailActivity extends BaseActivity implements AddWidget.OnAdd
 
     }
 
-    @OnClick({R.id.iv_book, R.id.iv_intelligent_pay, R.id.ll_container_coupoon, R.id.tv_full_reduce_num, R.id.tv_clear_shop_car, R.id.btn_ensure_order, R.id.blackview, R.id.iv_close_discount_pop, R.id.iv_close_coupon_pop})
+    @OnClick({R.id.iv_book, R.id.iv_intelligent_pay, R.id.ll_container_coupoon, R.id.tv_discount_more, R.id.tv_clear_shop_car, R.id.btn_ensure_order, R.id.blackview})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.iv_book:
@@ -610,10 +533,16 @@ public class StoreDetailActivity extends BaseActivity implements AddWidget.OnAdd
                 intelligentPay();
                 break;
             case R.id.ll_container_coupoon:
-                couponBehavior.setState(BottomSheetBehavior.STATE_EXPANDED);
+                if (couponDialog == null) {
+                    couponDialog = new ShopCouponDialog(StoreDetailActivity.this, lstCoupon, this);
+                }
+                couponDialog.show();
                 break;
-            case R.id.tv_full_reduce_num:
-                discountActivityBehavior.setState(BottomSheetBehavior.STATE_EXPANDED);
+            case R.id.tv_discount_more:
+                if (shopDiscountDialog == null) {
+                    shopDiscountDialog = new ShopDiscountDialog(StoreDetailActivity.this, mStrDiscount);
+                }
+                shopDiscountDialog.show();
                 break;
             case R.id.tv_clear_shop_car:
                 clearShopCart();
@@ -622,22 +551,7 @@ public class StoreDetailActivity extends BaseActivity implements AddWidget.OnAdd
                 ensureOrder();
                 break;
             case R.id.blackview:
-            case R.id.iv_close_discount_pop:
-            case R.id.iv_close_coupon_pop:
-                closePopWindow();
                 break;
-        }
-    }
-
-    private void closePopWindow() {
-        if (discountActivityBehavior != null) {
-            discountActivityBehavior.setState(BottomSheetBehavior.STATE_COLLAPSED);
-        }
-        if (shopCarDetailBehavior != null) {
-            shopCarDetailBehavior.setState(BottomSheetBehavior.STATE_COLLAPSED);
-        }
-        if (couponBehavior != null) {
-            couponBehavior.setState(BottomSheetBehavior.STATE_COLLAPSED);
         }
     }
 
@@ -654,23 +568,23 @@ public class StoreDetailActivity extends BaseActivity implements AddWidget.OnAdd
         }
         LoadingDialog.showDialogForLoading(this, "下单中...", false);
         new MyHttp().doPost(storeDetailBean.getDetail().getGrade_id() == AppConfig.StoreType.VEGETABLE_MARKET
-                ? Api.getDefault().createVegetableOrder(SPUtils.getSharedStringData(mContext, AppConfig.LOGIN_TOKEN), createGoodsJson())
-                : Api.getDefault().createOrder(SPUtils.getSharedStringData(mContext, AppConfig.LOGIN_TOKEN), createGoodsJson(), bookSeatId),
+                        ? Api.getDefault().createVegetableOrder(SPUtils.getSharedStringData(mContext, AppConfig.LOGIN_TOKEN), createGoodsJson())
+                        : Api.getDefault().createOrder(SPUtils.getSharedStringData(mContext, AppConfig.LOGIN_TOKEN), createGoodsJson(), bookSeatId),
                 new HttpListener() {
-            @Override
-            public void onSuccess(JSONObject result) {
-                String orderId = result.getJSONObject("data").getString("order_id");
-                Intent intent = new Intent(mActivity, SubmitOrderActivity.class);
-                intent.putExtra("isPhysical", storeDetailBean.getDetail().getGrade_id() != AppConfig.StoreType.VEGETABLE_MARKET);
-                intent.putExtra("orderId", orderId);
-                intent.putExtra("isBook", !TextUtils.isEmpty(bookSeatId));
-                startActivity(intent);
-            }
+                    @Override
+                    public void onSuccess(JSONObject result) {
+                        String orderId = result.getJSONObject("data").getString("order_id");
+                        Intent intent = new Intent(mActivity, SubmitOrderActivity.class);
+                        intent.putExtra("isPhysical", storeDetailBean.getDetail().getGrade_id() != AppConfig.StoreType.VEGETABLE_MARKET);
+                        intent.putExtra("orderId", orderId);
+                        intent.putExtra("isBook", !TextUtils.isEmpty(bookSeatId));
+                        startActivity(intent);
+                    }
 
-            @Override
-            public void onError(int code) {
-            }
-        });
+                    @Override
+                    public void onError(int code) {
+                    }
+                });
     }
 
     private String createGoodsJson() {
@@ -1224,23 +1138,16 @@ public class StoreDetailActivity extends BaseActivity implements AddWidget.OnAdd
 
     }
 
-//    @Override
-//    public void getCate(CateInfo2 cateInfo2) {
-//        CateAdapter cateAdapter = new CateAdapter(mContext, cateInfo2.getData());
-//        cateRecycler.setAdapter(cateAdapter);
-//        cateAdapter.setRecyclerViewItemClieck(new CateAdapter.RecyclerViewItemClieck() {
-//            @Override
-//            public void recyclerViewItemClieck(int position, View view, RecyclerView.ViewHolder viewHolder) {
-//
-//            }
-//        });
-//    }
-
+    @Override
+    public void ListClick(List<CouponInfo> info) {
+        lstCoupon = info;
+        updateCoupon();
+    }
 
     public class ShopDetailPagerAdapter extends FragmentStatePagerAdapter {
         String[] titles;
 
-        public ShopDetailPagerAdapter(String[] titles, FragmentManager fm) {
+        ShopDetailPagerAdapter(String[] titles, FragmentManager fm) {
             super(fm);
             this.titles = titles;
         }
@@ -1302,7 +1209,7 @@ public class StoreDetailActivity extends BaseActivity implements AddWidget.OnAdd
         path.quadTo(carLoc[0], addLoc[1] - 200, carLoc[0], carLoc[1]);
 
         final TextView textView = new TextView(context);
-//        textView.setBackgroundResource(R.drawable.circle_app_color);
+        textView.setBackgroundResource(R.drawable.circle_app_color);
         textView.setText("1");
         textView.setTextColor(Color.WHITE);
         textView.setGravity(Gravity.CENTER);
