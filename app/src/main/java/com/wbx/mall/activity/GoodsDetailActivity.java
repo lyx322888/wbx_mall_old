@@ -273,15 +273,6 @@ public class GoodsDetailActivity extends BaseActivity implements GoodsView {
             case R.id.detail_store_tv:
                 finish();
                 break;
-//            case R.id.share_wx_circle_tv:
-//                shareWx(SendMessageToWX.Req.WXSceneTimeline);
-//                break;
-//            case R.id.share_wx_friends_tv:
-//                shareWx(SendMessageToWX.Req.WXSceneSession);
-//                break;
-//            case R.id.share_wx_collect_tv:
-//                shareWx(SendMessageToWX.Req.WXSceneFavorite);
-//                break;
             case R.id.forwarding:
                 showBottomDialog();
                 break;

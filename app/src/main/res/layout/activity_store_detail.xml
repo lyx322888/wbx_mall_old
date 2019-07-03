@@ -246,14 +246,6 @@
         android:elevation="4dp"
         android:visibility="gone" />
 
-    <!--<ImageView-->
-    <!--android:id="@+id/img_fenl"-->
-    <!--android:layout_width="55dp"-->
-    <!--android:layout_height="55dp"-->
-    <!--android:layout_marginLeft="50dp"-->
-    <!--android:layout_marginTop="700dp"-->
-    <!--android:src="@drawable/fenl" />-->
-
     <include layout="@layout/view_shop_car_detail" />
 
     <include layout="@layout/view_shopping_car" />
