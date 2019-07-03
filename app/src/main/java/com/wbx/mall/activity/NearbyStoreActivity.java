@@ -53,7 +53,6 @@ public class NearbyStoreActivity extends BaseActivity implements BaseRefreshList
     private String[] mCateID = {"15", "19", "20", "23", "22"};
     private String[] mTitle = {"果蔬生鲜", "超市便利", "餐饮美食", "甜点饮品", "特产零食"};
     public static final String STORE_INDEX = "StoreIndex";
-    private int mStoreIndex;//页面类型
     private boolean canLoadMore = true;
     private int pageNum = AppConfig.pageNum;
     private int pageSize = AppConfig.pageSize;
@@ -79,7 +78,7 @@ public class NearbyStoreActivity extends BaseActivity implements BaseRefreshList
 
     @Override
     public void initView() {
-        mStoreIndex = getIntent().getIntExtra(STORE_INDEX, 0);
+        int mStoreIndex = getIntent().getIntExtra(STORE_INDEX, 0);//页面类型
         tvTitle.setText(mTitle[mStoreIndex]);
         bannerIm.setImageResource(mBannerID[mStoreIndex]);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
