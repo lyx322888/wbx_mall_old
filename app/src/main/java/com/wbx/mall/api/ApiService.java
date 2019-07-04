@@ -765,4 +765,9 @@ public interface ApiService {
     @FormUrlEncoded
     @POST("/api/unifyshop/list_goods")
     Observable<JSONObject> getListGoods(@Field("login_token") String login_token, @Field("cate_id") int cate_id, @Field("shop_id") String shop_id, @Field("page") int page, @Field("num") int num);
+
+    @FormUrlEncoded
+    @POST("/api/index/index_count_data")
+    Observable<JSONObject> getIndexCountData(@Field("login_token") String login_token, @Field("city_id") int city_id);
+
 }

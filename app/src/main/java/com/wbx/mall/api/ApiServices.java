@@ -4,7 +4,6 @@ import com.wbx.mall.bean.BuygreensGoodsBean;
 import com.wbx.mall.bean.CateInfo2;
 import com.wbx.mall.bean.GoodsInfo2;
 import com.wbx.mall.bean.HomeCouponBean;
-import com.wbx.mall.bean.HomeShufflingData;
 import com.wbx.mall.bean.ListShopDataBean;
 import com.wbx.mall.bean.NewFreeInfoBean2;
 import com.wbx.mall.bean.SalesDetailBean;
@@ -26,9 +25,6 @@ public interface ApiServices {
     @POST("/api/index/list_index_coupon")
     Observable<HomeCouponBean> getIndexCoupon(@FieldMap Map<String, String> params);
 
-    @FormUrlEncoded
-    @POST("/api/index/index_count_data")
-    Observable<HomeShufflingData> getIndexCountData(@Field("login_token") String login_token, @Field("city_id") int city_id);
 
     //店铺详情（菜市场）
     @FormUrlEncoded

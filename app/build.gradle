@@ -133,8 +133,7 @@ dependencies {
     implementation 'io.supercharge:shimmerlayout:2.1.0'
     //评分
     implementation 'com.hedgehog.ratingbar:app:1.1.2'
-
-
+    implementation 'com.sunfusheng:MarqueeView:1.4.1'
 }
 configurations {
     all*.exclude group: 'x.x.x.x'

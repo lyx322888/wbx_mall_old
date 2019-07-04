@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/index2_fragment"
     android:layout_width="match_parent"
@@ -128,15 +129,36 @@
                     </RelativeLayout>
                 </RelativeLayout>
 
-                <com.wbx.mall.widget.AutoPollRecyclerView
-                    android:id="@+id/recycler_polling"
+                <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="30dp"
+                    android:layout_height="wrap_content"
                     android:layout_marginLeft="10dp"
                     android:layout_marginTop="8dp"
                     android:layout_marginRight="10dp"
                     android:background="@drawable/shape_corner"
-                    android:padding="@dimen/dp_3" />
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal">
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="5dp"
+                        android:background="@drawable/icon_notify" />
+
+                    <com.sunfusheng.marqueeview.MarqueeView
+                        android:id="@+id/marqueeView"
+                        android:layout_marginStart="5dp"
+                        android:layout_width="match_parent"
+                        android:layout_height="30dp"
+                        app:mvAnimDuration="2000"
+                        app:mvDirection="bottom_to_top"
+                        app:mvInterval="3000"
+                        app:mvSingleLine="true"
+                        app:mvTextColor="@color/black"
+                        app:mvTextSize="14sp" />
+
+                </LinearLayout>
+
 
                 <TextView
                     android:id="@+id/tv_history"

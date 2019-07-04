@@ -20,8 +20,10 @@ import android.widget.TextView;
 
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
+import com.google.gson.Gson;
 import com.hyphenate.chat.EMChatManager;
 import com.hyphenate.chat.EMClient;
+import com.sunfusheng.marqueeview.MarqueeView;
 import com.wbx.mall.R;
 import com.wbx.mall.activity.IntelligentServiceActivity;
 import com.wbx.mall.activity.MessageCenterActivity;
@@ -29,7 +31,6 @@ import com.wbx.mall.activity.NearbyStoreActivity;
 import com.wbx.mall.activity.SearchActivity;
 import com.wbx.mall.activity.SelectAddressActivity;
 import com.wbx.mall.activity.StoreDetailActivity;
-import com.wbx.mall.adapter.HomeShufflingAdapter;
 import com.wbx.mall.adapter.ShopGoodsAdapter;
 import com.wbx.mall.adapter.VisitShopAdapter;
 import com.wbx.mall.api.Api;
@@ -40,24 +41,22 @@ import com.wbx.mall.base.BaseAdapter;
 import com.wbx.mall.base.BaseApplication;
 import com.wbx.mall.base.BaseFragment;
 import com.wbx.mall.baserx.NewRxBus;
-import com.wbx.mall.bean.HomeShufflingData;
+import com.wbx.mall.bean.IndexCountBean;
 import com.wbx.mall.bean.LocationInfo;
 import com.wbx.mall.bean.NewFreeInfoBean;
 import com.wbx.mall.bean.ShopInfo2;
+import com.wbx.mall.bean.StoreDetailBean;
 import com.wbx.mall.bean.VisitShopBean;
 import com.wbx.mall.common.LoginUtil;
-import com.wbx.mall.presenter.HomeShufflingPresenterImp;
 import com.wbx.mall.presenter.VisitShopPresenterImp;
 import com.wbx.mall.service.LocationService;
 import com.wbx.mall.utils.GlideUtils;
 import com.wbx.mall.utils.SPUtils;
-import com.wbx.mall.view.HomeShufflingView;
+import com.wbx.mall.utils.TimeUtil;
 import com.wbx.mall.view.VisitShopView;
-import com.wbx.mall.widget.AutoPollRecyclerView;
 import com.wbx.mall.widget.CircleImageView;
 import com.wbx.mall.widget.LoadingDialog;
 import com.wbx.mall.widget.MyScrollview;
-import com.wbx.mall.widget.ScrollSpeedLinearLayoutManger;
 import com.wbx.mall.widget.refresh.BaseRefreshListener;
 import com.wbx.mall.widget.refresh.PullToRefreshLayout;
 
@@ -73,7 +72,7 @@ import rx.functions.Action1;
 /**
  * Created by wushenghui on 2018/1/9.
  */
-public class IndexFragment02 extends BaseFragment implements BaseRefreshListener, HomeShufflingView, VisitShopView {
+public class IndexFragment02 extends BaseFragment implements BaseRefreshListener, VisitShopView {
     @Bind(R.id.index_refresh_layout)
     PullToRefreshLayout mRefreshLayout;
     @Bind(R.id.scroll_view)
@@ -86,8 +85,6 @@ public class IndexFragment02 extends BaseFragment implements BaseRefreshListener
     RecyclerView mRecyclerView;
     @Bind(R.id.has_message_tv)
     TextView unReadMsgTv;
-    @Bind(R.id.recycler_polling)
-    AutoPollRecyclerView shufflingRecycler;
     @Bind(R.id.iv_activity_user)
     CircleImageView img_user;
     @Bind(R.id.tv_activity)
@@ -98,6 +95,8 @@ public class IndexFragment02 extends BaseFragment implements BaseRefreshListener
     RecyclerView mShopVisited;
     @Bind({R.id.tv_history})
     TextView mTvHistory;
+    @Bind(R.id.marqueeView)
+    MarqueeView marqueeView;
     private int pageNum = AppConfig.pageNum;
     private int pageSize = AppConfig.pageSize;
     private HashMap<String, Object> mParams = new HashMap<>();
@@ -108,10 +107,8 @@ public class IndexFragment02 extends BaseFragment implements BaseRefreshListener
     private MyReceiver refreshUIReceiver;
     private Intent intent;
     private Dialog mLoadingDialog;
-    private MyHttp myHttp;
-    private HomeShufflingPresenterImp shufflingPresenterImp;
     private LinearLayoutManager shopLayoutManager;
-    private List<HomeShufflingData.DataBean.OrderBean> data = new ArrayList<>();
+    private IndexCountBean indexCountBean;
 
     @Override
     protected int getLayoutResource() {
@@ -124,7 +121,6 @@ public class IndexFragment02 extends BaseFragment implements BaseRefreshListener
         showLoadingDialog("定位中...");
         Youhui();
         SPUtils.remove(getActivity(), "city_name_select");
-        myHttp = new MyHttp();
         IntentFilter filter = new IntentFilter("refreshHasLocation");
         refreshHasLocationReceiver = new MyReceiver();
         getActivity().registerReceiver(refreshHasLocationReceiver, filter);
@@ -139,22 +135,9 @@ public class IndexFragment02 extends BaseFragment implements BaseRefreshListener
 
     @Override
     protected void initView() {
-        shufflingPresenterImp = new HomeShufflingPresenterImp(this);
-        shufflingPresenterImp.getHomeShuffling(LoginUtil.getLoginToken(), mLocationInfo.getCity_id());
-        ScrollSpeedLinearLayoutManger layoutManager = new ScrollSpeedLinearLayoutManger(getActivity());
-        layoutManager.setSmoothScrollbarEnabled(true);
-        layoutManager.setAutoMeasureEnabled(true);
-        shufflingRecycler.setLayoutManager(layoutManager);// 布局管理器。
-
         VisitShopPresenterImp presenterImp = new VisitShopPresenterImp(this);
         presenterImp.getVisitShop(LoginUtil.getLoginToken(), AppConfig.pageNum, AppConfig.pageSize, mLocationInfo.getLat() + "", mLocationInfo.getLng() + "");
         mShopVisited.setLayoutManager(new GridLayoutManager(getContext(), 1, LinearLayoutManager.HORIZONTAL, false));
-
-        if (LoginUtil.isLogin()) {
-            shufflingRecycler.start();
-        } else {
-            shufflingRecycler.stop();
-        }
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         mAdapter = new ShopGoodsAdapter(shopInfoList, getContext());
         mRecyclerView.setAdapter(mAdapter);
@@ -190,6 +173,29 @@ public class IndexFragment02 extends BaseFragment implements BaseRefreshListener
                         }
                     }
                 });
+        getIndexCountData();
+    }
+
+    private void getIndexCountData() {
+        new MyHttp().doPost(Api.getDefault().getIndexCountData(LoginUtil.getLoginToken(), mLocationInfo.getCity_id()), new HttpListener() {
+            @Override
+            public void onSuccess(JSONObject result) {
+                indexCountBean = result.getObject("data", IndexCountBean.class);
+                List<String> list = new ArrayList<>();
+                for (IndexCountBean.OrderBean bean : indexCountBean.getActivity_user()) {
+                    String time = TimeUtil.getfriendlyTime(bean.getCreate_time() * 1000);
+                    list.add(bean.getNickname() + time + "购买了" + bean.getTitle());
+                }
+                marqueeView.startWithList(list);
+                String time = TimeUtil.getfriendlyTime(indexCountBean.getOrder().getCreate_time() * 1000);
+                tv_user.setText(indexCountBean.getOrder().getNickname() + time + "购买了" + indexCountBean.getOrder().getTitle());
+                GlideUtils.showSmallPic(getContext(), img_user, indexCountBean.getOrder().getFace());
+            }
+
+            @Override
+            public void onError(int code) {
+            }
+        });
     }
 
     private void startGetData() {
@@ -207,34 +213,7 @@ public class IndexFragment02 extends BaseFragment implements BaseRefreshListener
         getActivity().unregisterReceiver(refreshHasLocationReceiver);
         getActivity().unregisterReceiver(refreshUIReceiver);
         getActivity().stopService(intent);
-
-
     }
-
-
-//    private void getCountData() {
-//        new MyHttp().doPost(Api.getDefault().getIndexCountData(), new HttpListener() {
-//            @Override
-//            public void onSuccess(JSONObject result) {
-//                Log.e("轮播图", "");
-//                if ("暂无数据".equals(result.getString("msg")) && pageNum == AppConfig.pageNum) {
-//                    return;
-//                }
-//
-//                List<HomeShufflingData> dataList = JSONArray.parseArray(result.getString("data"), HomeShufflingData.class);
-//
-//                if (null == dataList) {
-//                    return;
-//                }
-//            }
-//
-//            @Override
-//            public void onError(int code) {
-//                Log.e("error==", "" + code);
-//
-//            }
-//        });
-//    }
 
     private void getServiceData() {
         mParams.put("page", pageNum);
@@ -286,6 +265,7 @@ public class IndexFragment02 extends BaseFragment implements BaseRefreshListener
     public void onResume() {
         super.onResume();
         getUnreadNum();
+        marqueeView.startFlipping();
     }
 
     private void getUnreadNum() {
@@ -315,12 +295,6 @@ public class IndexFragment02 extends BaseFragment implements BaseRefreshListener
                 }
             });
         }
-    }
-
-    @Override
-    public void onPause() {
-        super.onPause();
-//        shufflingRecycler.stop();
     }
 
     @Override
@@ -362,20 +336,6 @@ public class IndexFragment02 extends BaseFragment implements BaseRefreshListener
         }
         pageNum++;
         getServiceData();
-    }
-
-    @Override
-    public void getHomeShuffling(HomeShufflingData homeShufflingData) {
-        data.add(homeShufflingData.getData().getOrder());
-        HomeShufflingAdapter shufflingAdapter = new HomeShufflingAdapter(getActivity(), data);
-        shufflingRecycler.setAdapter(shufflingAdapter);
-//        shufflingAdapter.notifyDataSetChanged();
-        int size = homeShufflingData.getData().getActivity_user().size() - 1;
-        if (homeShufflingData.getData().getActivity_user().size() == 0) {
-            ll_fragment02.setVisibility(View.GONE);
-        }
-        tv_user.setText(homeShufflingData.getData().getActivity_user().get(size).getNickname() + "刚刚购买了" + homeShufflingData.getData().getActivity_user().get(size).getTitle());
-        GlideUtils.showSmallPic(getContext(), img_user, homeShufflingData.getData().getActivity_user().get(size).getFace());
     }
 
     @Override
