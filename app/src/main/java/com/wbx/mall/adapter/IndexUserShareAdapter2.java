@@ -22,6 +22,7 @@ public class IndexUserShareAdapter2 extends BaseQuickAdapter<NewFreeInfoBean2.Da
         if (item.getPics() != null) {
             num = item.getPics().size();
         }
+        helper.setGone(R.id.tv_num, num != 0);
         helper.setText(R.id.tv_num, num + "张")
                 .setText(R.id.tv_comment, item.getMessage())
                 .setText(R.id.tv_user_name, item.getNickname());

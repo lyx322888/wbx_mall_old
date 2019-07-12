@@ -41,21 +41,12 @@
         android:layout_marginBottom="5dp"
         android:src="@drawable/index_free" />
 
-    <com.wbx.mall.widget.DragFrameLayout
+    <com.wbx.mall.widget.DragImageView
         android:id="@+id/fl_shopping_cart"
         android:layout_width="45dp"
         android:layout_height="45dp"
         android:layout_gravity="end|bottom"
-        android:layout_marginBottom="80dp">
+        android:layout_marginBottom="80dp"
+        android:src="@drawable/icon_shopping_cart" />
 
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/icon_shopping_cart" />
-
-        <TextView
-            android:id="@+id/tv_shopping_cart_num"
-            style="@style/badge_style"
-            android:layout_gravity="end" />
-    </com.wbx.mall.widget.DragFrameLayout>
 </FrameLayout>

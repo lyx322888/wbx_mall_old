@@ -260,7 +260,7 @@ public class SnacksActivity extends BaseActivity implements BaseRefreshListener 
                     return;
                 }
                 ShopInfo2 shopInfo = shopInfoList.get(position);
-                StoreDetailActivity.actionStart(mContext, shopInfo.getGrade_id(), String.valueOf(shopInfo.getShop_id()));
+                StoreDetailActivity.actionStart(mContext, shopInfo.getGrade_id()== AppConfig.StoreType.VEGETABLE_MARKET, String.valueOf(shopInfo.getShop_id()));
             }
         });
     }

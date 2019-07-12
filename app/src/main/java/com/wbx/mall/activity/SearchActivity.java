@@ -261,7 +261,7 @@ public class SearchActivity extends BaseActivity implements BaseRefreshListener 
             @Override
             public void onItemClicked(View view, int position) {
                 ShopInfo2 shopInfo = mAdapter.getItem(position);
-                StoreDetailActivity.actionStart(mContext, shopInfo.getGrade_id(), String.valueOf(shopInfo.getShop_id()));
+                StoreDetailActivity.actionStart(mContext, shopInfo.getGrade_id()== AppConfig.StoreType.VEGETABLE_MARKET, String.valueOf(shopInfo.getShop_id()));
             }
         });
     }

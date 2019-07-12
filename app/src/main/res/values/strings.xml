@@ -90,6 +90,7 @@
         <item>商家数据</item>
         <item>我的软件</item>
         <item>销售明细</item>>
+        <item>我要分包</item>
     </string-array>
 
     <string-array name="type_agent_src">
@@ -105,6 +106,7 @@
         <item>@drawable/agent_shop_user</item>
         <item>@drawable/my_app</item>
         <item>@drawable/agent_sales</item>
+        <item>@drawable/icon_agent_split</item>
     </string-array>
 
 </resources>

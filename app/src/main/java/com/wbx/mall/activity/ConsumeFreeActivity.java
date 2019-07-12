@@ -29,6 +29,7 @@ import com.wbx.mall.bean.OrderBean;
 import com.wbx.mall.bean.PollingBean;
 import com.wbx.mall.common.LoginUtil;
 import com.wbx.mall.dialog.ShareFreeActivityDialog;
+import com.wbx.mall.module.mine.ui.InviteActivity;
 import com.wbx.mall.utils.DateUtil;
 import com.wbx.mall.utils.DisplayUtil;
 import com.wbx.mall.utils.GlideUtils;
@@ -321,7 +322,7 @@ public class ConsumeFreeActivity extends BaseActivity {
         }
         switch (view.getId()) {
             case R.id.tv_enter_shop:
-                StoreDetailActivity.actionStart(this, gradeId, String.valueOf(data.getShop().getShop_id()));
+                StoreDetailActivity.actionStart(this, gradeId == AppConfig.StoreType.VEGETABLE_MARKET, String.valueOf(data.getShop().getShop_id()));
                 break;
             case R.id.iv_open_store:
                 InviteActivity.actionStart(this, "http://www.wbx365.com/wbxwaphome/purchase/index.html", false);

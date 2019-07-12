@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="287dp"
     android:layout_height="wrap_content"
     android:layout_marginRight="10dp"
@@ -15,7 +16,7 @@
             android:id="@+id/iv_comment"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:src="@color/app_color" />
+            tools:src="@color/app_color" />
 
         <TextView
             android:id="@+id/tv_num"
@@ -26,45 +27,47 @@
             android:background="@drawable/rect_solid_000000_15dp"
             android:paddingHorizontal="8dp"
             android:paddingVertical="3dp"
-            android:text="1张"
             android:textColor="@color/white"
-            android:textSize="12sp" />
+            android:textSize="12sp"
+            tools:text="1张" />
     </RelativeLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginHorizontal="15dp"
         android:orientation="vertical">
 
         <TextView
             android:id="@+id/tv_comment"
             android:layout_width="match_parent"
             android:layout_height="55dp"
-            android:text="好划算 以后每天都上微百姓享免单 微百姓为百姓免单！！！"
             android:textColor="#333333"
-            android:textSize="12sp" />
+            android:textSize="12sp"
+            tools:text="好划算 以后每天都上微百姓享免单 微百姓为百姓免单！！！" />
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:gravity="end|center_vertical"
+            android:gravity="center_vertical"
             android:orientation="horizontal">
 
             <TextView
                 android:id="@+id/tv_user_name"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:text="user1"
+                android:layout_weight="1"
+                android:ellipsize="end"
+                android:maxLines="1"
                 android:textColor="#333333"
-                android:textSize="12sp" />
+                android:textSize="12sp"
+                tools:text="user1user1user1us1" />
 
             <com.wbx.mall.widget.CircleImageView
                 android:id="@+id/iv_user"
                 android:layout_width="30dp"
                 android:layout_height="30dp"
                 android:layout_marginLeft="10dp"
-                android:src="@color/app_color" />
+                tools:src="@color/app_color" />
         </LinearLayout>
     </LinearLayout>
 </LinearLayout>

@@ -8,8 +8,6 @@ import android.content.IntentFilter;
 import android.graphics.Color;
 import android.graphics.drawable.AnimationDrawable;
 import android.os.Handler;
-import android.support.v4.app.FragmentTransaction;
-import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -20,13 +18,13 @@ import android.widget.TextView;
 
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
-import com.google.gson.Gson;
 import com.hyphenate.chat.EMChatManager;
 import com.hyphenate.chat.EMClient;
 import com.sunfusheng.marqueeview.MarqueeView;
 import com.wbx.mall.R;
-import com.wbx.mall.activity.IntelligentServiceActivity;
-import com.wbx.mall.activity.MessageCenterActivity;
+import com.wbx.mall.activity.DetailActivity;
+import com.wbx.mall.module.mine.ui.IntelligentServiceActivity;
+import com.wbx.mall.module.mine.ui.MessageCenterActivity;
 import com.wbx.mall.activity.NearbyStoreActivity;
 import com.wbx.mall.activity.SearchActivity;
 import com.wbx.mall.activity.SelectAddressActivity;
@@ -40,14 +38,12 @@ import com.wbx.mall.base.AppConfig;
 import com.wbx.mall.base.BaseAdapter;
 import com.wbx.mall.base.BaseApplication;
 import com.wbx.mall.base.BaseFragment;
-import com.wbx.mall.baserx.NewRxBus;
 import com.wbx.mall.bean.IndexCountBean;
 import com.wbx.mall.bean.LocationInfo;
-import com.wbx.mall.bean.NewFreeInfoBean;
 import com.wbx.mall.bean.ShopInfo2;
-import com.wbx.mall.bean.StoreDetailBean;
 import com.wbx.mall.bean.VisitShopBean;
 import com.wbx.mall.common.LoginUtil;
+import com.wbx.mall.dialog.IndexCouponDialog;
 import com.wbx.mall.presenter.VisitShopPresenterImp;
 import com.wbx.mall.service.LocationService;
 import com.wbx.mall.utils.GlideUtils;
@@ -66,8 +62,6 @@ import java.util.List;
 
 import butterknife.Bind;
 import butterknife.OnClick;
-import rx.Subscription;
-import rx.functions.Action1;
 
 /**
  * Created by wushenghui on 2018/1/9.
@@ -89,8 +83,6 @@ public class IndexFragment02 extends BaseFragment implements BaseRefreshListener
     CircleImageView img_user;
     @Bind(R.id.tv_activity)
     TextView tv_user;
-    @Bind(R.id.ll_fragment02)
-    LinearLayout ll_fragment02;
     @Bind(R.id.recycler_shops_visited)
     RecyclerView mShopVisited;
     @Bind({R.id.tv_history})
@@ -107,8 +99,8 @@ public class IndexFragment02 extends BaseFragment implements BaseRefreshListener
     private MyReceiver refreshUIReceiver;
     private Intent intent;
     private Dialog mLoadingDialog;
-    private LinearLayoutManager shopLayoutManager;
     private IndexCountBean indexCountBean;
+    private IndexCouponDialog indexCouponDialog;
 
     @Override
     protected int getLayoutResource() {
@@ -119,7 +111,6 @@ public class IndexFragment02 extends BaseFragment implements BaseRefreshListener
     public void initPresenter() {
 //        getCountData();
         showLoadingDialog("定位中...");
-        Youhui();
         SPUtils.remove(getActivity(), "city_name_select");
         IntentFilter filter = new IntentFilter("refreshHasLocation");
         refreshHasLocationReceiver = new MyReceiver();
@@ -137,11 +128,14 @@ public class IndexFragment02 extends BaseFragment implements BaseRefreshListener
     protected void initView() {
         VisitShopPresenterImp presenterImp = new VisitShopPresenterImp(this);
         presenterImp.getVisitShop(LoginUtil.getLoginToken(), AppConfig.pageNum, AppConfig.pageSize, mLocationInfo.getLat() + "", mLocationInfo.getLng() + "");
-        mShopVisited.setLayoutManager(new GridLayoutManager(getContext(), 1, LinearLayoutManager.HORIZONTAL, false));
+        LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity());
+        layoutManager.setOrientation(LinearLayoutManager.HORIZONTAL);
+        mShopVisited.setLayoutManager(layoutManager);
+        mShopVisited.setHasFixedSize(true);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+        mRecyclerView.setHasFixedSize(true);
         mAdapter = new ShopGoodsAdapter(shopInfoList, getContext());
         mRecyclerView.setAdapter(mAdapter);
-        ll_fragment02.getBackground().setAlpha(200);
     }
 
     @Override
@@ -152,27 +146,6 @@ public class IndexFragment02 extends BaseFragment implements BaseRefreshListener
         IntentFilter filter = new IntentFilter("refreshHasLocation");
         refreshHasLocationReceiver = new MyReceiver();
         getActivity().registerReceiver(refreshHasLocationReceiver, filter);
-       /* intent = new Intent(getActivity(), LocationService.class);
-        try {
-            getActivity().startService(intent);
-        } catch (IllegalStateException e) {
-        }*/
-        Subscription subscribe = NewRxBus.getInstance().tObservable(NewFreeInfoBean.class)
-                .subscribe(new Action1<NewFreeInfoBean>() {
-                    @Override
-                    public void call(NewFreeInfoBean newFreeInfoBean) {
-                        if (null != mAdapter) {
-                            int showIndex = shopLayoutManager.findFirstVisibleItemPosition();
-                            boolean isFirst = mAdapter.isFirstsFreeInfo();
-                            mAdapter.setFreeInfo(newFreeInfoBean);
-                            if (isFirst) {
-                                mAdapter.notifyDataSetChanged();
-                            } else {
-                                mAdapter.notifyItemChanged(showIndex, "refresh");
-                            }
-                        }
-                    }
-                });
         getIndexCountData();
     }
 
@@ -205,6 +178,10 @@ public class IndexFragment02 extends BaseFragment implements BaseRefreshListener
         mParams.put("lng", mLocationInfo.getLng());
         cityTv.setText(mLocationInfo.getAddressName());
         getServiceData();
+        if (indexCouponDialog == null) {
+            indexCouponDialog = new IndexCouponDialog(getActivity());
+        }
+        indexCouponDialog.show();
     }
 
     @Override
@@ -250,7 +227,8 @@ public class IndexFragment02 extends BaseFragment implements BaseRefreshListener
                     public void onItemClicked(View view, int position) {
                         ShopInfo2 shopInfo = shopInfoList.get(position);
                         SPUtils.put("shopInfo_goods", shopInfo.getShop_id() + "", getActivity());
-                        StoreDetailActivity.actionStart(getActivity(), shopInfo.getGrade_id(), String.valueOf(shopInfo.getShop_id()));
+//                        StoreDetailActivity.actionStart(getActivity(), shopInfo.getGrade_id()== AppConfig.StoreType.VEGETABLE_MARKET, String.valueOf(shopInfo.getShop_id()));
+                        DetailActivity.actionStart(getActivity(), shopInfo.getGrade_id() == AppConfig.StoreType.VEGETABLE_MARKET, String.valueOf(shopInfo.getShop_id()));
                     }
                 });
             }
@@ -353,7 +331,7 @@ public class IndexFragment02 extends BaseFragment implements BaseRefreshListener
             adapter.setOnItemClickListener(R.id.root_view, new BaseAdapter.ItemClickListener() {
                 @Override
                 public void onItemClicked(View view, int position) {
-                    StoreDetailActivity.actionStart(getActivity(), data.get(position).getGrade_id(), String.valueOf(data.get(position).getShop_id()));
+                    StoreDetailActivity.actionStart(getActivity(), data.get(position).getGrade_id() == AppConfig.StoreType.VEGETABLE_MARKET, String.valueOf(data.get(position).getShop_id()));
                 }
             });
         }
@@ -439,12 +417,6 @@ public class IndexFragment02 extends BaseFragment implements BaseRefreshListener
         mLoadingDialog.setCanceledOnTouchOutside(false);
         mLoadingDialog.setContentView(view, new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.MATCH_PARENT));
         mLoadingDialog.show();
-    }
-
-    private void Youhui() {
-        CouponFragment couponFragment = new CouponFragment();
-        FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();
-        transaction.add(R.id.index2_fragment, couponFragment).commit();
     }
 
     private void dismissDialog() {

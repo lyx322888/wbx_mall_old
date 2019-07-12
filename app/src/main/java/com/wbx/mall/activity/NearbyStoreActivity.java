@@ -97,7 +97,7 @@ public class NearbyStoreActivity extends BaseActivity implements BaseRefreshList
             public void onItemClicked(View view, int position) {
                 ShopInfo2 shopInfo = shopInfoList.get(position);
                 SPUtils.put("shopInfo_goods", shopInfo.getShop_id() + "", NearbyStoreActivity.this);
-                StoreDetailActivity.actionStart(NearbyStoreActivity.this, shopInfo.getGrade_id(), String.valueOf(shopInfo.getShop_id()));
+                StoreDetailActivity.actionStart(NearbyStoreActivity.this, shopInfo.getGrade_id()== AppConfig.StoreType.VEGETABLE_MARKET, String.valueOf(shopInfo.getShop_id()));
             }
         });
     }

@@ -81,7 +81,7 @@ public class ShoppingCartAdapter extends BaseAdapter<ShopCart, Context> {
         holder.getView(R.id.ll_shop_info).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                StoreDetailActivity.actionStart(mContext, shopCart.getGrade_id(), String.valueOf(shopCart.getShop_id()));
+                StoreDetailActivity.actionStart(mContext, shopCart.getGrade_id()== AppConfig.StoreType.VEGETABLE_MARKET, String.valueOf(shopCart.getShop_id()));
             }
         });
         adapter.setOnItemClickListener(R.id.select_layout, new ItemClickListener() {

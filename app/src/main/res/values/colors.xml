@@ -37,7 +37,7 @@
     <color name="black">#000000</color><!--黑色 -->
     <color name="white">#ffffff</color><!--白色 -->
     <color name="bg_cant_order">#535353</color><!--白色 -->
-
+    <color name="gray_normal">#666667</color>
     <color name="text_black">#4F4F4F</color>
 
     <!--自定义进度条背景颜色-->

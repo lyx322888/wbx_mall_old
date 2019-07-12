@@ -29,11 +29,11 @@ import com.wbx.mall.base.BaseApplication;
 import com.wbx.mall.common.ActivityManager;
 import com.wbx.mall.common.LoginUtil;
 import com.wbx.mall.dialog.UpdateDialogFragment;
-import com.wbx.mall.fragment.FindFragment;
+import com.wbx.mall.module.find.fragment.FindFragment;
 import com.wbx.mall.fragment.FreeFragment;
 import com.wbx.mall.fragment.IndexFragment02;
 import com.wbx.mall.fragment.IndexOrderFragment;
-import com.wbx.mall.fragment.MineFragment;
+import com.wbx.mall.module.mine.fragment.MineFragment;
 import com.wbx.mall.utils.SPUtils;
 import com.wbx.mall.widget.TabFragmentHost;
 
@@ -47,8 +47,6 @@ public class MainActivity extends BaseActivity implements EMMessageListener, EMC
     @Bind(android.R.id.tabhost)
     TabFragmentHost mTabHost;
     TabWidget mTabWidget;
-    @Bind(R.id.tv_shopping_cart_num)
-    TextView tvShoppingCartNum;
     private long mExitTime;
     public static boolean isGoBuy = false;
     private MyHttp myHttp;
@@ -287,31 +285,6 @@ public class MainActivity extends BaseActivity implements EMMessageListener, EMC
             mTabHost.setCurrentTab(1);
         }
         isGoBuy = false;
-        getShoppingCartGoodsNum();
-    }
-
-    private void getShoppingCartGoodsNum() {
-        if (LoginUtil.isLogin()) {
-            myHttp.doPost(Api.getDefault().getShoppingCartGoodsNum(LoginUtil.getLoginToken()), new HttpListener() {
-                @Override
-                public void onSuccess(JSONObject result) {
-                    Integer num = result.getJSONObject("data").getInteger("num");
-                    if (num > 0) {
-                        tvShoppingCartNum.setVisibility(View.VISIBLE);
-                        tvShoppingCartNum.setText(String.valueOf(num));
-                    } else {
-                        tvShoppingCartNum.setVisibility(View.INVISIBLE);
-                    }
-                }
-
-                @Override
-                public void onError(int code) {
-
-                }
-            });
-        } else {
-            tvShoppingCartNum.setVisibility(View.INVISIBLE);
-        }
     }
 
     @Override

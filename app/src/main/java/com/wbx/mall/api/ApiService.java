@@ -102,7 +102,7 @@ public interface ApiService {
     //店铺详情（实体店）
     @FormUrlEncoded
     @POST("/api/shop/get_goods")
-    Observable<JSONObject> getShopInfo(@Field("shop_id") String shop_id, @Field("login_token") String login_token, @Field("goods_id") String goods_id);
+    Observable<JSONObject> getShopInfo(@Field("shop_id") String shop_id, @Field("login_token") String login_token);
 
     //店铺详情（实体店）
     @FormUrlEncoded
@@ -427,7 +427,7 @@ public interface ApiService {
     //首页优惠券
     @FormUrlEncoded
     @POST("/api/index/list_index_coupon")
-    Observable<JSONObject> getIndexCoupon(@Field("city_id") int cityId);
+    Observable<JSONObject> getIndexCoupon(@Field("city_id") String cityId);
 
     //已绑客户
     @FormUrlEncoded
@@ -677,14 +677,14 @@ public interface ApiService {
      */
     @FormUrlEncoded
     @POST("/api/discovery/list_discover")
-    Observable<JSONObject> getDiscoveryList(@Field("city_name") String cityName, @Field("lat") double lat, @Field("lng") double lng, @Field("login_token") String loginToken,@Field("page") int page, @Field("num") int num);
+    Observable<JSONObject> getDiscoveryList(@Field("city_name") String cityName, @Field("lat") double lat, @Field("lng") double lng, @Field("login_token") String loginToken, @Field("page") int page, @Field("num") int num);
 
     /**
      * 获取随机红包
      */
     @FormUrlEncoded
     @POST("/api/redpacket/get_red_packet")
-    Observable<JSONObject> getRandomRedPacket(@Field("login_token") String loginToken, @Field("shop_id") int shop_id);
+    Observable<JSONObject> getRandomRedPacket(@Field("login_token") String loginToken, @Field("shop_id") String shop_id);
 
     /**
      * 领取红包
@@ -764,10 +764,25 @@ public interface ApiService {
 
     @FormUrlEncoded
     @POST("/api/unifyshop/list_goods")
-    Observable<JSONObject> getListGoods(@Field("login_token") String login_token, @Field("cate_id") int cate_id, @Field("shop_id") String shop_id, @Field("page") int page, @Field("num") int num);
+    Observable<JSONObject> getListGoods(@Field("login_token") String login_token, @Field("cate_id") String cate_id, @Field("shop_id") String shop_id, @Field("page") int page, @Field("num") int num);
 
     @FormUrlEncoded
     @POST("/api/index/index_count_data")
     Observable<JSONObject> getIndexCountData(@Field("login_token") String login_token, @Field("city_id") int city_id);
+
+    //10.7.	星伙商家数据
+    @FormUrlEncoded
+    @POST("/api/salesman/list_shop_data")
+    Observable<JSONObject> getMerchant(@Field("login_token") String login_token);
+
+    //10.9.	软件分包
+    @FormUrlEncoded
+    @POST("/api/salesman/software_subpackage")
+    Observable<JSONObject> upSoftSubPackage(@Field("login_token") String login_token, @Field("subpackage_mobile") String subpackage_mobile, @Field("subpackage_type") String subpackage_type, @Field("subpackage_num") String subpackage_num);
+
+    //10.10. 获取软件分包信息
+    @FormUrlEncoded
+    @POST("/api/salesman/get_software_subpackage_info")
+    Observable<JSONObject> getSoftSubPackage(@Field("login_token") String login_token);
 
 }

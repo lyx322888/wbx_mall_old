@@ -120,11 +120,11 @@
         <!-- 美食 -->
         <activity android:name=".activity.FoodsActivity" />
         <!-- 开票资料 -->
-        <activity android:name=".activity.TicketInfoActivity" />
+        <activity android:name=".module.mine.ui.TicketInfoActivity" />
         <!-- 网页 -->
         <activity android:name=".activity.WebActivity" />
         <!-- 智能客服 -->
-        <activity android:name=".activity.IntelligentServiceActivity" />
+        <activity android:name=".module.mine.ui.IntelligentServiceActivity" />
         <!-- 注册 -->
         <activity android:name=".activity.RegisterActivity" />
         <!-- 忘记密码 -->
@@ -146,29 +146,29 @@
         <!-- 提交订单 -->
         <activity android:name=".activity.SubmitOrderActivity" />
         <!-- 地址管理 -->
-        <activity android:name=".activity.AddressManagerActivity" />
+        <activity android:name=".module.mine.ui.AddressManagerActivity" />
         <!-- 地址编辑 -->
         <activity android:name=".activity.EditAddressActivity" />
         <!-- 个人信息 -->
-        <activity android:name=".activity.AccountInfoActivity" />
+        <activity android:name=".module.mine.ui.AccountInfoActivity" />
         <!-- 首页搜索 -->
         <activity android:name=".activity.SearchActivity" />
         <!-- 重置支付密码 -->
-        <activity android:name=".activity.ResetPayPswActivity" />
+        <activity android:name=".module.mine.ui.ResetPayPswActivity" />
         <!-- 重置密码 -->
-        <activity android:name=".activity.ResetPswActivity" />
+        <activity android:name=".module.mine.ui.ResetPswActivity" />
         <!-- 关于我们 -->
-        <activity android:name=".activity.AboutUsActivity" />
+        <activity android:name=".module.mine.ui.AboutUsActivity" />
         <!-- 菜市场搜索 -->
         <activity android:name=".activity.MarketSearchActivity" />
         <!-- 选择城市 -->
         <activity android:name=".activity.ChooseCityActivity" />
         <!-- 业务代理 -->
-        <activity android:name=".activity.AgentServiceActivity" />
+        <activity android:name=".module.mine.ui.AgentServiceActivity" />
         <!-- 我的客户 -->
-        <activity android:name=".activity.MyClientActivity" />
+        <activity android:name=".module.mine.ui.MyClientActivity" />
         <!-- 收藏 -->
-        <activity android:name=".activity.CollectionActivity" />
+        <activity android:name=".module.mine.ui.CollectionActivity" />
         <!-- 拍照 -->
         <activity
             android:name="me.iwf.photopicker.PhotoPickerActivity"
@@ -180,7 +180,7 @@
         <!-- 申请入驻 -->
         <activity android:name=".activity.ApplyJoinActivity" />
         <!-- 积分商城 -->
-        <activity android:name=".activity.IntegralMallActivity" />
+        <activity android:name=".module.mine.ui.IntegralMallActivity" />
         <!-- 对换记录 -->
         <activity android:name=".activity.IntegralExchangeRecordActivity" />
         <!-- 菜谱大全 -->
@@ -189,39 +189,32 @@
         <activity android:name=".activity.CookListActivity" />
         <!-- 菜谱详情 -->
         <activity android:name=".activity.CookBookDetailActivity" />
-        <!-- 星伙合伙人 -->
-        <activity android:name=".activity.PartnerActivity" />
         <!-- 星伙合伙人授权证书 -->
-        <activity android:name=".activity.agent.CredentialActivity" />
+        <activity android:name=".module.mine.ui.CredentialActivity" />
         <!-- 成为星伙合伙人 -->
-        <activity android:name=".activity.agent.ToBeAgentActivity" />
+        <activity android:name=".module.mine.ui.ToBeAgentActivity" />
         <!-- 升级合伙人等级 -->
         <!-- 提升星级 -->
         <!-- 我的押金 -->
-        <activity android:name=".activity.agent.MyDepositActivity" />
+        <activity android:name=".module.mine.ui.MyDepositActivity" />
         <!-- 绑定提现账号 -->
         <activity android:name=".activity.BindPayPlatformActivity" />
         <!-- 选择绑定提现账号 -->
-        <activity android:name=".activity.ChooseBindActivity" />
+        <activity android:name=".module.mine.ui.ChooseBindActivity" />
         <!-- 金融处理 -->
-        <activity android:name=".activity.FinanceOperationActivity" />
+        <activity android:name=".module.mine.ui.FinanceOperationActivity" />
         <activity android:name=".activity.ChooseFinanceWayActivity" />
         <!-- 绑定银联 -->
         <activity android:name=".activity.BindUnionpayActivity" />
         <!-- 余额明细 -->
-        <activity android:name=".activity.BalanceLogActivity" />
-        <!-- 代金券充值 -->
-        <activity android:name=".activity.VoucherActivity" />
-
-        <!-- 代金券日志 -->
-        <activity android:name=".activity.VoucherLogsActivity" />
+        <activity android:name=".module.mine.ui.BalanceLogActivity" />
 
         <!-- 预定座位 -->
         <activity android:name=".activity.BookSeatActivity" />
         <!-- 预定座位下单 -->
         <activity android:name=".activity.BookSeatPayActivity" />
         <!-- 预定订单 -->
-        <activity android:name=".activity.BookSeatOrderActivity" />
+        <activity android:name=".module.mine.ui.BookSeatOrderActivity" />
         <!-- 预定订单详情 -->
         <activity android:name=".activity.BookSeatOrderDetailActivity" />
         <service android:name=".service.LocationService" />
@@ -237,7 +230,7 @@
         <!-- 引导页 -->
         <activity android:name=".activity.GuideActivity" />
         <!-- 星伙 分享绑定的用户 -->
-        <activity android:name=".activity.agent.MyCustomerActivity" />
+        <activity android:name=".module.mine.ui.MyCustomerActivity" />
         <!-- User defined.  For test only  用户自定义的广播接收器 -->
         <receiver
             android:name=".jpush.MyReceiver"
@@ -290,23 +283,23 @@
         <service android:name=".service.DownloadService" />
         <service android:name=".update.UpdateService" />
 
-        <activity android:name=".activity.WinRecordActivity" />
+        <activity android:name=".module.mine.ui.WinRecordActivity" />
         <activity android:name=".activity.IntelligentPayActivity" />
         <activity android:name=".activity.IntelligentPayListActivity" />
         <activity android:name=".activity.DataAnalysisActivity" />
         <activity android:name=".activity.ContractSignActivity" />
         <activity android:name=".activity.SubmitAgentDetailActivity" />
-        <activity android:name=".activity.AuditResultActivity" />
+        <activity android:name=".module.mine.ui.AuditResultActivity" />
         <activity
-            android:name=".activity.ScanOrderListActivity"
+            android:name=".module.mine.ui.ScanOrderListActivity"
             android:launchMode="singleTask" />
-        <activity android:name=".activity.SignInActivity" />
-        <activity android:name=".activity.MessageCenterActivity" />
+        <activity android:name=".module.mine.ui.SignInActivity" />
+        <activity android:name=".module.mine.ui.MessageCenterActivity" />
         <activity android:name=".activity.IntegralGoodsDetailActivity" />
         <activity android:name=".activity.SubmitIntegralExchangeActivity" />
         <activity android:name=".activity.IntegralExchangeOrderDetailActivity" />
         <activity android:name=".activity.BuyVegetableActivity" />
-        <activity android:name=".activity.InviteActivity" />
+        <activity android:name=".module.mine.ui.InviteActivity" />
         <activity android:name=".activity.StoreDetailActivity" />
         <activity android:name=".activity.BusinessCertificationActivity" />
         <activity android:name=".activity.SelectReceivingAddressActivity" />
@@ -338,21 +331,22 @@
         <!-- 消费免单 -->
         <activity android:name=".activity.ShareFreeActivity" />
         <!-- 我的免单 -->
-        <activity android:name=".activity.MyFreeOrderActivity" />
+        <activity android:name=".module.mine.ui.MyFreeOrderActivity" />
         <!-- 我的优惠券 -->
         <activity android:name=".activity.MyFreeOrderCouponActivity" />
         <!-- 商家数据 -->
-        <activity android:name=".activity.MerchantDataActivity" />
+        <activity android:name=".module.mine.ui.MerchantDataActivity" />
         <!-- 订单 -->
-        <activity android:name=".activity.IndexOrderActivity" />
+        <activity android:name=".module.mine.ui.IndexOrderActivity" />
         <activity android:name=".activity.FruitsActivity" />
         <activity android:name=".activity.SnacksActivity" />
         <activity android:name=".activity.DrinksActivity" />
         <activity android:name=".activity.VegetablesActivity" />
         <activity android:name=".activity.MySoftwareActivity" />
-        <activity android:name=".activity.SalesDetailActivity"/>
+        <activity android:name=".module.mine.ui.SalesDetailActivity"/>
         <activity android:name=".activity.DetailActivity" />
         <activity android:name=".activity.NearbyStoreActivity" />
+        <activity android:name=".module.mine.ui.SplitActivity" />
     </application>
 
 </manifest>

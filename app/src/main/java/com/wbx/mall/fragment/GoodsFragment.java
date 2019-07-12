@@ -35,9 +35,7 @@ public class GoodsFragment extends BaseFragment {
     private List<CateInfo> lstCate = new ArrayList<>();
     private HashMap<Integer, List<GoodsInfo2>> goodsHm = new HashMap<>();
 
-    public GoodsFragment() {
-        // Required empty public constructor
-    }
+    public GoodsFragment() { }
 
     public static GoodsFragment newInstance() {
         GoodsFragment fragment = new GoodsFragment();

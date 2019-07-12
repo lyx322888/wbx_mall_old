@@ -38,6 +38,9 @@ import java.util.Map;
 import butterknife.Bind;
 import butterknife.OnClick;
 
+/**
+ * 支付订单
+ */
 public class IntelligentPayActivity extends BaseActivity {
     private static final int SDK_PAY_FLAG = 1;
     private static final int SDK_CHECK_FLAG = 2;

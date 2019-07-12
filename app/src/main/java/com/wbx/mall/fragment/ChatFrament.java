@@ -11,7 +11,7 @@ import com.hyphenate.chat.EMConversation;
 import com.hyphenate.easeui.ui.EaseConversationListFragment;
 import com.wbx.mall.R;
 import com.wbx.mall.activity.ChatActivity;
-import com.wbx.mall.activity.MessageCenterActivity;
+import com.wbx.mall.module.mine.ui.MessageCenterActivity;
 import com.wbx.mall.base.AppConfig;
 import com.wbx.mall.base.BaseFragment;
 

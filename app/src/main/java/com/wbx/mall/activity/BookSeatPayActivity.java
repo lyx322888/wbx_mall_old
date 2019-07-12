@@ -30,6 +30,7 @@ import com.wbx.mall.base.BaseAdapter;
 import com.wbx.mall.bean.PayResult;
 import com.wbx.mall.bean.PaymentInfo;
 import com.wbx.mall.bean.WxPayInfo;
+import com.wbx.mall.module.mine.ui.BookSeatOrderActivity;
 import com.wbx.mall.utils.FormatUtil;
 import com.wbx.mall.utils.MD5;
 import com.wbx.mall.utils.SPUtils;

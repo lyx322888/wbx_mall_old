@@ -53,15 +53,6 @@ public class HomeCouponBean {
         private String shop_id;
         private int grade_id;
         private String shop_name;
-        private List<GoodsInfo2> goods;
-
-        public List<GoodsInfo2> getGoods() {
-            return goods;
-        }
-
-        public void setGoods(List<GoodsInfo2> goods) {
-            this.goods = goods;
-        }
 
         public int getCondition_money() {
             return condition_money;

@@ -15,6 +15,7 @@ import com.wbx.mall.base.BaseActivity;
 import com.wbx.mall.bean.AddressInfo;
 import com.wbx.mall.bean.IntegralGoodsDetailBean;
 import com.wbx.mall.common.LoginUtil;
+import com.wbx.mall.module.mine.ui.AddressManagerActivity;
 import com.wbx.mall.utils.GlideUtils;
 import com.wbx.mall.utils.ToastUitl;
 import com.wbx.mall.widget.LoadingDialog;

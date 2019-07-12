@@ -25,7 +25,7 @@
             android:layout_width="32dp"
             android:layout_height="32dp"
             android:layout_marginLeft="93dp"
-            android:src="@drawable/miand" />
+            android:src="@drawable/icon_index_free_action" />
 
         <LinearLayout
             android:layout_width="match_parent"

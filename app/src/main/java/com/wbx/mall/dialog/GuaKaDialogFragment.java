@@ -12,7 +12,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.wbx.mall.R;
-import com.wbx.mall.activity.WinRecordActivity;
+import com.wbx.mall.module.mine.ui.WinRecordActivity;
 
 /**
  * Created by Administrator on 2018/3/5 0005.

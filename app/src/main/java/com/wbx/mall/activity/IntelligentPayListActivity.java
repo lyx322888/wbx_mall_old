@@ -25,6 +25,9 @@ import java.util.List;
 
 import butterknife.Bind;
 
+/**
+ * 到店付款
+ */
 public class IntelligentPayListActivity extends BaseActivity implements BaseRefreshListener {
     @Bind(R.id.recyclerView)
     RecyclerView recyclerView;

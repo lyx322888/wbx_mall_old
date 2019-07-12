@@ -34,45 +34,11 @@
                     android:scrollbars="none">
 
                     <LinearLayout
-                        android:id="@+id/ll_container_coupoon"
+                        android:id="@+id/ll_container_coupon"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:orientation="horizontal" />
                 </HorizontalScrollView>
-
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="10dp"
-                    android:layout_marginBottom="5dp"
-                    android:orientation="horizontal"
-                    android:visibility="visible">
-
-                    <TextView
-                        android:layout_width="24dp"
-                        android:layout_height="14dp"
-                        android:background="@drawable/bg_member"
-                        android:gravity="center"
-                        android:text="会员"
-                        android:textColor="@color/app_color"
-                        android:textSize="10sp" />
-
-                    <TextView
-                        android:id="@+id/tv_member_condition"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="10dp"
-                        android:text="消费满100元"
-                        android:textColor="@color/app_color"
-                        android:textSize="11sp" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="立即成为本店VIP会员"
-                        android:textColor="@color/black"
-                        android:textSize="11sp" />
-                </LinearLayout>
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -91,7 +57,7 @@
                         android:textSize="10sp" />
 
                     <TextView
-                        android:id="@+id/tv_full_reduce"
+                        android:id="@+id/tv_discount"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="10dp"
@@ -103,7 +69,7 @@
                         android:textSize="11sp" />
 
                     <TextView
-                        android:id="@+id/tv_full_reduce_num"
+                        android:id="@+id/tv_discount_more"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="5dp"
@@ -121,14 +87,12 @@
                     android:id="@+id/goods_free"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:visibility="gone">
+                    android:visibility="visible">
 
                     <ImageView
                         android:layout_width="match_parent"
                         android:layout_height="220dp"
-                        android:layout_marginLeft="5dp"
                         android:layout_marginTop="40dp"
-                        android:layout_marginRight="5dp"
                         android:scaleType="fitXY"
                         android:src="@drawable/new_shop1" />
 
@@ -145,41 +109,8 @@
                         android:layout_width="170dp"
                         android:layout_height="40dp"
                         android:layout_centerHorizontal="true"
-                        android:layout_marginTop="5dp"
                         android:src="@drawable/new_shop2" />
 
-                </RelativeLayout>
-
-                <RelativeLayout
-                    android:id="@+id/goods_free2"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:visibility="gone">
-
-                    <ImageView
-                        android:layout_width="match_parent"
-                        android:layout_height="220dp"
-                        android:layout_marginLeft="5dp"
-                        android:layout_marginTop="40dp"
-                        android:layout_marginRight="5dp"
-                        android:scaleType="fitXY"
-                        android:src="@drawable/new_shop1" />
-
-                    <android.support.v7.widget.RecyclerView
-                        android:id="@+id/new_shop_recycler2"
-                        android:layout_width="match_parent"
-                        android:layout_height="180dp"
-                        android:layout_marginLeft="15dp"
-                        android:layout_marginTop="45dp"
-                        android:layout_marginRight="15dp"
-                        android:background="@drawable/shape_corner" />
-
-                    <ImageView
-                        android:layout_width="170dp"
-                        android:layout_height="40dp"
-                        android:layout_centerHorizontal="true"
-                        android:layout_marginTop="5dp"
-                        android:src="@drawable/new_shop2" />
                 </RelativeLayout>
             </LinearLayout>
 
@@ -197,7 +128,11 @@
             android:id="@+id/tab_layout"
             android:layout_width="match_parent"
             android:layout_height="49dp"
-            android:background="@color/white" />
+            app:tabBackground="@color/white"
+            app:tabIndicatorColor="@color/app_color"
+            app:tabMode="fixed"
+            app:tabSelectedTextColor="@color/app_color"
+            app:tabTextColor="@color/text_black" />
 
         <View
             android:layout_width="match_parent"
@@ -205,12 +140,19 @@
             android:background="#FAFAFA" />
     </android.support.design.widget.AppBarLayout>
 
-    <android.support.v4.view.ViewPager
-        android:id="@+id/view_pager"
+    <LinearLayout
+        android:id="@+id/scroll_container"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:overScrollMode="never"
-        app:layout_behavior="@string/appbar_scrolling_view_behavior" />
+        android:orientation="vertical"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+        <android.support.v4.view.ViewPager
+            android:id="@+id/view_pager"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:overScrollMode="never" />
+    </LinearLayout>
 
     <com.wbx.mall.widget.ShopInfoContainer
         android:id="@+id/shop_info_container"
@@ -218,18 +160,7 @@
         android:layout_height="wrap_content"
         app:layout_behavior="com.wbx.mall.behaviors.ShopContainerBehavior" />
 
-    <View
-        android:id="@+id/blackview"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="#60000000"
-        android:elevation="4dp"
-        android:visibility="gone" />
-
-    <include layout="@layout/view_shop_car_detail" />
-
     <include layout="@layout/view_shopping_car" />
-
 
     <com.wbx.mall.widget.DragImageView
         android:id="@+id/iv_book"
@@ -237,7 +168,6 @@
         android:layout_height="45dp"
         android:layout_gravity="end"
         android:layout_marginTop="75dp"
-        android:layout_marginRight="50dp"
         android:src="@drawable/reserve"
         android:visibility="gone" />
 
@@ -247,6 +177,5 @@
         android:layout_height="80dp"
         android:layout_gravity="end"
         android:layout_marginTop="110dp"
-        android:layout_marginRight="25dp"
         android:src="@drawable/icon_daodian" />
 </android.support.design.widget.CoordinatorLayout>

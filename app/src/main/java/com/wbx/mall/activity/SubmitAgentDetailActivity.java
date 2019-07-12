@@ -16,7 +16,7 @@ import com.tencent.mm.opensdk.modelpay.PayReq;
 import com.tencent.mm.opensdk.openapi.IWXAPI;
 import com.tencent.mm.opensdk.openapi.WXAPIFactory;
 import com.wbx.mall.R;
-import com.wbx.mall.activity.agent.ToBeAgentActivity;
+import com.wbx.mall.module.mine.ui.ToBeAgentActivity;
 import com.wbx.mall.api.Api;
 import com.wbx.mall.api.HttpListener;
 import com.wbx.mall.api.MyHttp;
@@ -26,6 +26,7 @@ import com.wbx.mall.base.BaseApplication;
 import com.wbx.mall.bean.PayResult;
 import com.wbx.mall.bean.UserInfo;
 import com.wbx.mall.bean.WxPayInfo;
+import com.wbx.mall.module.mine.ui.AuditResultActivity;
 import com.wbx.mall.utils.SPUtils;
 import com.wbx.mall.widget.LoadingDialog;
 

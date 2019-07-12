@@ -81,18 +81,6 @@ public class ShopGoodsContainer extends LinearLayout {
         view.setMinimumHeight(DisplayUtil.dip2px(50));
         typeAdapter.addFooterView(view);
         typeAdapter.bindToRecyclerView(recyclerViewType);
-//        GoodsPresenterImp goodsPresenterImp=new GoodsPresenterImp(this);
-//        goodsPresenterImp.getGoods(SPUtils.getString("shopInfo_goods",""),LoginUtil.getLoginToken(),AppConfig.pageSize,AppConfig.pageNum,"");
-//        img_fenl.setOnClickListener(new OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                if (recyclerViewType.getVisibility() == GONE) {
-//                    recyclerViewType.setVisibility(VISIBLE);
-//                } else {
-//                    recyclerViewType.setVisibility(GONE);
-//                }
-//            }
-//        });
         recyclerViewType.addItemDecoration(new SimpleDividerDecoration(mContext));
         ((DefaultItemAnimator) recyclerViewType.getItemAnimator()).setSupportsChangeAnimations(false);
         recyclerViewType.addOnItemTouchListener(new OnItemClickListener() {
@@ -143,9 +131,9 @@ public class ShopGoodsContainer extends LinearLayout {
 
     public void setGoodsAdapter(boolean isFoodStreet, boolean isShopMemberUser, AddWidget.OnAddClick onAddClick) {
         if (isFoodStreet) {
-            goodsAdapter = new GoodsAdapter(R.layout.item_food_goods, lstGoods, onAddClick, isShopMemberUser);
+            goodsAdapter = new GoodsAdapter( lstGoods, onAddClick, isShopMemberUser);
         } else {
-            goodsAdapter = new GoodsAdapter(R.layout.item_goods, lstGoods, onAddClick, isShopMemberUser);
+            goodsAdapter = new GoodsAdapter( lstGoods, onAddClick, isShopMemberUser);
         }
         View view = new View(mContext);
         view.setMinimumHeight(DisplayUtil.dip2px(50));

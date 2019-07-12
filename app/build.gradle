@@ -9,13 +9,16 @@ android {
         release {
             keyAlias 'wbx3652017'
             keyPassword 'wbx36520178888'
-            storeFile file('D:/Android Project/keystore/wbx365.jks')
+            storeFile file('../wbx365.jks')
             storePassword 'wbx3658888'
         }
     }
     compileSdkVersion rootProject.ext.compileSdkVersion
     defaultConfig {
         javaCompileOptions { annotationProcessorOptions { includeCompileClasspath = true } }
+        ndk {
+            abiFilters "armeabi-v7a"
+        }
         multiDexEnabled true
         applicationId rootProject.ext.applicationId
         minSdkVersion rootProject.ext.minSdkVersion

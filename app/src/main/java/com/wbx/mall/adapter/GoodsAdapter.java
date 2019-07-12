@@ -25,8 +25,8 @@ public class GoodsAdapter extends BaseQuickAdapter<GoodsInfo2, BaseViewHolder> {
     private boolean isShopMemberUser;
     private AddWidget.OnAddClick onAddClick;
 
-    public GoodsAdapter(int layoutId, @Nullable List<GoodsInfo2> data, AddWidget.OnAddClick onAddClick, boolean isShopMemberUser) {
-        super(layoutId, data);
+    public GoodsAdapter(@Nullable List<GoodsInfo2> data, AddWidget.OnAddClick onAddClick, boolean isShopMemberUser) {
+        super(R.layout.item_goods, data);
         this.onAddClick = onAddClick;
         this.isShopMemberUser = isShopMemberUser;
     }
@@ -106,7 +106,6 @@ public class GoodsAdapter extends BaseQuickAdapter<GoodsInfo2, BaseViewHolder> {
         }
         AddWidget addWidget = helper.getView(R.id.addwidget);
         addWidget.setData(onAddClick, goodsInfo);
-        helper.addOnClickListener(R.id.goods_pic_im)
-                .addOnClickListener(R.id.tv_free_gain);
+        helper.addOnClickListener(R.id.tv_free_gain);
     }
 }

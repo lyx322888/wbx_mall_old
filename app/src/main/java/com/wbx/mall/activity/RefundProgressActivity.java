@@ -27,6 +27,9 @@ import java.util.List;
 import butterknife.Bind;
 import butterknife.OnClick;
 
+/**
+ * 退款进度
+ */
 public class RefundProgressActivity extends BaseActivity {
     @Bind(R.id.tv_state)
     TextView tvState;
@@ -110,7 +113,7 @@ public class RefundProgressActivity extends BaseActivity {
         lstGoods.addAll(data.getGoods());
         goodsAdapter.notifyDataSetChanged();
         tvApplyNum.setText(String.valueOf(data.getNum()));
-        tvApplyMoney.setText(String.format("¥%.2f", data.getNeed_pay()/100.00));
+        tvApplyMoney.setText(String.format("¥%.2f", data.getNeed_pay() / 100.00));
         tvApplyTime.setText(DateUtil.formatDateAndTime3(data.getApply_time()));
     }
 

@@ -17,7 +17,6 @@ import com.wbx.mall.activity.StoreDetailActivity;
 import com.wbx.mall.base.AppConfig;
 import com.wbx.mall.base.BaseAdapter;
 import com.wbx.mall.base.BaseViewHolder;
-import com.wbx.mall.bean.NewFreeInfoBean;
 import com.wbx.mall.bean.ShopInfo2;
 import com.wbx.mall.common.LoginUtil;
 import com.wbx.mall.utils.GlideUtils;
@@ -29,7 +28,6 @@ import java.util.List;
  */
 
 public class ShopGoodsAdapter extends BaseAdapter<ShopInfo2, Context> {
-    private NewFreeInfoBean newFreeInfo;
 
     public ShopGoodsAdapter(List<ShopInfo2> dataList, Context context) {
         super(dataList, context);
@@ -128,22 +126,12 @@ public class ShopGoodsAdapter extends BaseAdapter<ShopInfo2, Context> {
                     LoginUtil.login();
                     return;
                 }
-                if (shopInfo.getGoods().get(position).getIs_share_free() == 1 || shopInfo.getGoods().get(position).getIs_consume_free() == 1) {
+                if (shopInfo.getGoods().get(position).getFree_goods_type().equals("share_free")) {
                     FreeActivityDetailActivity.actionStart(mContext, shopInfo.getShop_id() + "", shopInfo.getGoods().get(position).getGoods_id() + "", shopInfo.getGrade_id());
                 } else {
-                    StoreDetailActivity.actionStart(mContext, shopInfo.getGrade_id(), shopInfo.getShop_id() + "", shopInfo.getGoods().get(position).getGoods_id());
+                    StoreDetailActivity.actionStart(mContext, shopInfo.getGrade_id() == AppConfig.StoreType.VEGETABLE_MARKET, shopInfo.getShop_id() + "");
                 }
             }
         });
     }
-
-
-    public void setFreeInfo(NewFreeInfoBean newFreeInfoBean) {
-        this.newFreeInfo = newFreeInfoBean;
-    }
-
-    public boolean isFirstsFreeInfo() {
-        return this.newFreeInfo == null;
-    }
-
 }

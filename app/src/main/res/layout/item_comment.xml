@@ -1,78 +1,75 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:hedgehog="http://schemas.android.com/apk/res-auto"
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="@color/colorWhite"
-    android:orientation="vertical">
+    android:background="@color/colorWhite">
 
-    <LinearLayout
-        android:layout_width="match_parent"
+    <com.wbx.mall.widget.CircleImageView
+        android:id="@+id/comment_face_im"
+        android:layout_width="45dp"
+        android:layout_height="45dp"
+        android:layout_margin="15dp"
+        android:src="@mipmap/app_logo"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/comment_user_name_tv"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:orientation="horizontal">
+        android:layout_marginStart="16dp"
+        android:ellipsize="end"
+        android:maxLines="1"
+        android:textColor="@color/black"
+        android:textSize="14sp"
+        app:layout_constraintStart_toEndOf="@+id/comment_face_im"
+        app:layout_constraintTop_toTopOf="@+id/comment_face_im"
+        tools:text="考拉睡了多久" />
 
-        <com.wbx.mall.widget.CircleImageView
-            android:id="@+id/comment_face_im"
-            android:layout_width="45dp"
-            android:layout_height="45dp"
-            android:layout_margin="15dp"
-            android:src="@mipmap/app_logo" />
+    <TextView
+        android:id="@+id/comment_content_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ellipsize="end"
+        android:maxLines="1"
+        android:textSize="13sp"
+        app:layout_constraintBottom_toBottomOf="@+id/comment_face_im"
+        app:layout_constraintStart_toStartOf="@+id/comment_user_name_tv"
+        tools:text="送货及时" />
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
+    <com.hedgehog.ratingbar.RatingBar
+        android:id="@+id/rb_score"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        app:clickable="false"
+        app:layout_constraintStart_toStartOf="@+id/comment_user_name_tv"
+        app:layout_constraintTop_toBottomOf="@+id/comment_content_tv"
+        app:starCount="5"
+        app:starEmpty="@drawable/no_evaluation"
+        app:starFill="@drawable/evaluation"
+        app:starImageHeight="20dp"
+        app:starImagePadding="5dp"
+        app:starImageWidth="20dp" />
 
-            <TextView
-                android:id="@+id/comment_user_name_tv"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="15dp"
-                android:text="考拉睡了多久"
-                android:textColor="@color/black"
-                android:textSize="14sp" />
+    <TextView
+        android:id="@+id/tv_time"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:gravity="end"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/rb_score"
+        app:layout_constraintTop_toTopOf="@+id/rb_score"
+        tools:text="2017/06/08" />
 
-            <TextView
-                android:id="@+id/comment_content_tv"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="5dp"
-                android:text="送货及时"
-                android:textSize="13sp" />
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="center_vertical"
-                android:orientation="horizontal">
-
-                <com.hedgehog.ratingbar.RatingBar
-                    android:id="@+id/rb_score"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    hedgehog:clickable="false"
-                    hedgehog:starCount="5"
-                    hedgehog:starEmpty="@drawable/no_evaluation"
-                    hedgehog:starFill="@drawable/evaluation"
-                    hedgehog:starImageHeight="20dp"
-                    hedgehog:starImagePadding="5dp"
-                    hedgehog:starImageWidth="20dp" />
-
-                <TextView
-                    android:id="@+id/tv_time"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:layout_marginRight="10dp"
-                    android:gravity="right"
-                    android:text="2017/06/08" />
-            </LinearLayout>
-
-            <android.support.v7.widget.RecyclerView
-                android:id="@+id/comment_pic_rv"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="5dp" />
-        </LinearLayout>
-    </LinearLayout>
-</LinearLayout>
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/comment_pic_rv"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/rb_score"
+        app:layout_constraintTop_toBottomOf="@+id/rb_score" />
+</android.support.constraint.ConstraintLayout>

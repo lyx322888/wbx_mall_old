@@ -98,7 +98,7 @@ public class ShareUtils {
 
 
     public void share(final Context context, final String title, final String descrption, final String imageUrl, final String clickUrl) {
-        final Dialog shareDialog = new Dialog(context, R.style.ActionSheetDialogStyle);
+        final Dialog shareDialog = new Dialog(context, R.style.DialogTheme);
         View shareInflate = LayoutInflater.from(context).inflate(R.layout.share_pop_view, null);
         shareDialog.setContentView(shareInflate);
         //获取当前Activity所在的窗体
@@ -110,8 +110,9 @@ public class ShareUtils {
         WindowManager.LayoutParams lp = dialogWindow.getAttributes();
         lp.width = display.getWidth(); //设置宽度
         dialogWindow.setAttributes(lp);
+        dialogWindow.setWindowAnimations(R.style.main_menu_animStyle);
         shareDialog.show();//显示对话框
-
+        shareDialog.setCanceledOnTouchOutside(true);
         //微信好友
         shareInflate.findViewById(R.id.share_wechat_friends_tv).setOnClickListener(new View.OnClickListener() {
             @Override
@@ -137,12 +138,6 @@ public class ShareUtils {
             }
         });
         shareInflate.findViewById(R.id.poop_share_cancel_btn).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                shareDialog.dismiss();
-            }
-        });
-        shareInflate.findViewById(R.id.cover).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 shareDialog.dismiss();

@@ -38,8 +38,12 @@ public class ItemShopGoodsAdapter extends BaseQuickAdapter<GoodsInfo2, BaseViewH
             tvTitle.setText(goodsInfo.getProduct_name());
         }
         holder.setText(R.id.goods_price_tv, String.format("店内价:" + "¥%.2f", goodsInfo.getSales_promotion_price() == 0 ? goodsInfo.getPrice() / 100.00 : goodsInfo.getSales_promotion_price() / 100.00));
-        if (goodsInfo.getIs_share_free() == 1 || goodsInfo.getIs_consume_free() == 1) {
+        if (goodsInfo.getFree_goods_type().equals("goods")) {
             faceView.setVisibility(View.VISIBLE);
+            faceView.setBackgroundResource(R.drawable.icon_index_special_offer);
+        } else if (goodsInfo.getFree_goods_type().equals("share_free")) {
+            faceView.setVisibility(View.VISIBLE);
+            faceView.setBackgroundResource(R.drawable.icon_index_free_action);
         } else {
             faceView.setVisibility(View.GONE);
         }

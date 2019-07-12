@@ -12,7 +12,7 @@ import android.widget.Toast;
 
 import com.alibaba.fastjson.JSONObject;
 import com.wbx.mall.R;
-import com.wbx.mall.activity.agent.ToBeAgentActivity;
+import com.wbx.mall.module.mine.ui.ToBeAgentActivity;
 import com.wbx.mall.api.Api;
 import com.wbx.mall.api.ApiConstants;
 import com.wbx.mall.api.HttpListener;

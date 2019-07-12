@@ -25,7 +25,7 @@ public class GlideUtils {
             url = url + "?imageView2/0/w/100/h/100";
         }
         if (Util.isOnMainThread()) {
-            Glide.with(context).load(url).error(R.drawable.loading_logo).centerCrop().into(imageView);
+            Glide.with(context).load(url).error(R.drawable.loading_logo).placeholder(R.drawable.loading_logo).centerCrop().into(imageView);
         }
 
     }

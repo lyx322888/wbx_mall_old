@@ -55,7 +55,7 @@
         android:layout_width="85dp"
         android:layout_height="85dp"
         android:layout_marginLeft="10dp"
-        android:layout_marginTop="69dp"
+        android:layout_marginTop="75dp"
         android:scaleType="fitXY"
         tools:src="@color/red" />
 
@@ -64,7 +64,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="107dp"
-        android:layout_marginTop="70dp"
+        android:layout_marginTop="75dp"
         android:layout_marginRight="10dp"
         android:orientation="vertical">
 
@@ -134,15 +134,23 @@
                 android:textSize="12sp"
                 tools:text="欢迎购买" />
         </LinearLayout>
-    </LinearLayout>
 
-    <ImageView
-        android:id="@+id/iv_chat"
-        android:layout_width="60dp"
-        android:layout_height="60dp"
-        android:layout_gravity="end"
-        android:layout_marginTop="120dp"
-        android:layout_marginRight="15dp"
-        android:src="@drawable/icon_chat"
-        android:visibility="gone" />
+        <TextView
+            android:id="@+id/tv_fare"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/rect_solid_ffd161_2dp"
+            android:drawableStart="@drawable/icon_free_fare"
+            android:drawablePadding="5dp"
+            android:gravity="center"
+            android:paddingStart="5dp"
+            android:paddingTop="2dp"
+            android:paddingEnd="5dp"
+            android:paddingBottom="2dp"
+            android:textColor="#AD7007"
+            android:textSize="10sp"
+            tools:visibility="visible"
+            android:visibility="invisible"
+            tools:text="满20免配送费" />
+    </LinearLayout>
 </FrameLayout>

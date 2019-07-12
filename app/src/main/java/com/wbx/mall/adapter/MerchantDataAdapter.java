@@ -19,9 +19,9 @@ import java.util.List;
 public class MerchantDataAdapter extends RecyclerView.Adapter<MerchantDataAdapter.VH> {
 
     Context context;
-    List<ListShopDataBean.DataBean.ShopsBean> list;
+    List<ListShopDataBean.ShopsBean> list;
 
-    public MerchantDataAdapter(Context context, List<ListShopDataBean.DataBean.ShopsBean> list) {
+    public MerchantDataAdapter(Context context, List<ListShopDataBean.ShopsBean> list) {
         this.context = context;
         this.list = list;
     }

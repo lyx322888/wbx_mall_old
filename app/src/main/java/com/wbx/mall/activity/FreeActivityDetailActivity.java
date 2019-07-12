@@ -101,8 +101,6 @@ public class FreeActivityDetailActivity extends BaseActivity implements UpFreeIn
     TextView tvPrice3;
     @Bind(R.id.tv_buy_type_3)
     TextView tvBuyType3;
-    //    @Bind(R.id.layout_free_record)
-//    View freeInfoView;
     @Bind(R.id.layout_free_record)
     RecyclerView freeInfoView;
     private String goodsId;
@@ -256,7 +254,7 @@ public class FreeActivityDetailActivity extends BaseActivity implements UpFreeIn
                 finish();
                 break;
             case R.id.iv_shop:
-                StoreDetailActivity.actionStart(this, gradeId, shopId);
+                StoreDetailActivity.actionStart(this, gradeId== AppConfig.StoreType.VEGETABLE_MARKET, shopId);
                 break;
             case R.id.tv_share_rule:
                 break;

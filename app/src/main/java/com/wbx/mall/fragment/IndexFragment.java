@@ -24,9 +24,9 @@ import com.hyphenate.chat.EMClient;
 import com.wbx.mall.R;
 import com.wbx.mall.activity.CookBookActivity;
 import com.wbx.mall.activity.FoodsActivity;
-import com.wbx.mall.activity.IntegralMallActivity;
-import com.wbx.mall.activity.IntelligentServiceActivity;
-import com.wbx.mall.activity.MessageCenterActivity;
+import com.wbx.mall.module.mine.ui.IntegralMallActivity;
+import com.wbx.mall.module.mine.ui.IntelligentServiceActivity;
+import com.wbx.mall.module.mine.ui.MessageCenterActivity;
 import com.wbx.mall.activity.MarketActivity;
 import com.wbx.mall.activity.SearchActivity;
 import com.wbx.mall.activity.SelectAddressActivity;
@@ -179,7 +179,7 @@ public class IndexFragment extends BaseFragment implements BaseRefreshListener {
                     @Override
                     public void onItemClicked(View view, int position) {
                         ShopInfo2 shopInfo = shopInfoList.get(position);
-                        StoreDetailActivity.actionStart(getContext(), shopInfo.getGrade_id(), String.valueOf(shopInfo.getShop_id()));
+                        StoreDetailActivity.actionStart(getContext(), shopInfo.getGrade_id()== AppConfig.StoreType.VEGETABLE_MARKET, String.valueOf(shopInfo.getShop_id()));
                     }
                 });
             }

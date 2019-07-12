@@ -37,7 +37,7 @@ public class ShopCommentAdapter extends BaseQuickAdapter<CommentInfo, BaseViewHo
         GlideUtils.showRoundSmallPic(mContext, faceIm, commentInfo.getFace());
         RecyclerView commentPicRv = holder.getView(R.id.comment_pic_rv);
         commentPicRv.setLayoutManager(new GridLayoutManager(mContext, 3));
-        if (null != commentInfo.getPics()) {
+        if (null != commentInfo.getPics() && commentInfo.getPics().size() != 0) {
             CommentPicAdapter adapter = new CommentPicAdapter(commentInfo.getPics(), mContext);
             commentPicRv.setAdapter(adapter);
         }

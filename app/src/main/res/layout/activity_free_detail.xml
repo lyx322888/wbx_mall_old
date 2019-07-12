@@ -57,12 +57,12 @@
                 android:layout_height="wrap_content"
                 android:gravity="center"
                 android:paddingVertical="1dp"
-                android:text="219m"
                 android:textColor="@color/white"
                 android:textSize="9sp"
                 app:layout_constraintBottom_toBottomOf="@id/iv_shop"
                 app:layout_constraintLeft_toLeftOf="@id/iv_shop"
-                app:layout_constraintRight_toRightOf="@id/iv_shop" />
+                app:layout_constraintRight_toRightOf="@id/iv_shop"
+                tools:text="219m" />
 
             <ImageView
                 android:id="@+id/iv_identify"
@@ -77,30 +77,26 @@
 
             <TextView
                 android:id="@+id/tv_shop_name"
-                android:layout_width="wrap_content"
-                android:layout_height="15dp"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
                 android:layout_marginLeft="5dp"
                 android:layout_marginRight="5dp"
                 android:ellipsize="marquee"
                 android:marqueeRepeatLimit="marquee_forever"
                 android:scrollHorizontally="true"
                 android:singleLine="true"
-                android:text="微乐"
                 android:textColor="@color/white"
                 android:textSize="14sp"
-                app:layout_constrainedWidth="true"
                 app:layout_constraintBottom_toTopOf="@id/view_2"
-                app:layout_constraintHorizontal_chainStyle="spread_inside"
-                app:layout_constraintLeft_toRightOf="@id/iv_shop"
-                app:layout_constraintRight_toLeftOf="@id/iv_identify"
+                app:layout_constraintEnd_toStartOf="@+id/iv_identify"
+                app:layout_constraintStart_toEndOf="@id/iv_shop"
                 app:layout_constraintTop_toTopOf="@id/view_1"
-                app:layout_constraintVertical_chainStyle="packed" />
+                tools:text="微乐" />
 
             <TextView
                 android:id="@+id/view_2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
                 android:text="公告:"
                 android:textColor="@color/white"
                 android:textSize="10sp"
@@ -117,13 +113,13 @@
                 android:marqueeRepeatLimit="marquee_forever"
                 android:scrollHorizontally="true"
                 android:singleLine="true"
-                android:text="欢迎光临旗舰店，优惠11111多多"
                 android:textColor="@color/white"
                 android:textSize="10sp"
                 app:layout_constrainedWidth="true"
                 app:layout_constraintBottom_toBottomOf="@id/view_2"
                 app:layout_constraintLeft_toRightOf="@id/view_2"
-                app:layout_constraintRight_toRightOf="@id/view_1" />
+                app:layout_constraintRight_toRightOf="@id/view_1"
+                tools:text="欢迎光临旗舰店，优惠11111多多" />
 
             <ImageView
                 android:id="@+id/iv_close"
@@ -149,7 +145,7 @@
                 android:layout_marginLeft="15dp"
                 android:text="特惠价："
                 android:textColor="@color/white"
-                android:textSize="11sp"
+                android:textSize="15sp"
                 app:layout_constraintBottom_toTopOf="@id/view_5"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintTop_toTopOf="@id/view_3"
@@ -171,11 +167,11 @@
                 android:id="@+id/tv_price"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="666"
                 android:textColor="@color/white"
                 android:textSize="24sp"
                 app:layout_constraintBaseline_toBaselineOf="@id/view_5"
-                app:layout_constraintLeft_toRightOf="@id/view_5" />
+                app:layout_constraintLeft_toRightOf="@id/view_5"
+                tools:text="666" />
 
             <ImageView
                 android:id="@+id/iv_consume_free_rule"
@@ -194,25 +190,25 @@
                 android:background="@drawable/rect_stroke_ffffff_2dp"
                 android:gravity="center"
                 android:paddingHorizontal="3dp"
-                android:text="5人同行1人免单"
                 android:textColor="@color/white"
                 android:textSize="11sp"
                 android:translationX="-1dp"
                 app:layout_constraintBottom_toBottomOf="@id/iv_consume_free_rule"
                 app:layout_constraintLeft_toRightOf="@id/iv_consume_free_rule"
-                app:layout_constraintTop_toTopOf="@id/iv_consume_free_rule" />
+                app:layout_constraintTop_toTopOf="@id/iv_consume_free_rule"
+                tools:text="5人同行1人免单" />
 
             <TextView
                 android:id="@+id/tv_free_number"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginRight="12dp"
-                android:text="已有1558人免单成功"
                 android:textColor="@color/white"
                 android:textSize="11sp"
                 app:layout_constraintBottom_toBottomOf="@id/view_3"
                 app:layout_constraintRight_toRightOf="parent"
-                app:layout_constraintTop_toTopOf="@id/view_3" />
+                app:layout_constraintTop_toTopOf="@id/view_3"
+                tools:text="已有1558人免单成功" />
 
             <TextView
                 android:id="@+id/tv_goods_name"
@@ -220,11 +216,11 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="15dp"
                 android:layout_marginTop="15dp"
-                android:text="Apple苹果iPhoneX深空灰色全网通64GB"
                 android:textColor="@color/black"
                 android:textSize="16sp"
                 app:layout_constraintLeft_toLeftOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/view_3" />
+                app:layout_constraintTop_toBottomOf="@id/view_3"
+                tools:text="Apple苹果iPhoneX深空灰色全网通64GB" />
 
             <LinearLayout
                 android:id="@+id/ll_share_free_rule"
@@ -422,9 +418,8 @@
                 android:layout_marginTop="15dp"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintRight_toRightOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/ll_consume_free_rule">
+                app:layout_constraintTop_toBottomOf="@id/ll_consume_free_rule" />
 
-            </android.support.v7.widget.RecyclerView>
         </android.support.constraint.ConstraintLayout>
     </android.support.v4.widget.NestedScrollView>
 

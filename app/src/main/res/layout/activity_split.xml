@@ -1,0 +1,267 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:background="@color/app_color"
+        android:orientation="horizontal">
+
+        <RelativeLayout
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:onClick="back">
+
+            <ImageView
+                android:layout_width="15dp"
+                android:layout_height="15dp"
+                android:layout_alignParentBottom="true"
+                android:layout_marginLeft="10dp"
+                android:layout_marginBottom="10dp"
+                android:src="@drawable/w_return"
+                android:tint="@color/colorWhite" />
+        </RelativeLayout>
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom"
+            android:layout_marginBottom="4dp"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="在线分包"
+            android:textColor="@color/colorWhite"
+            android:textSize="15sp" />
+
+        <RelativeLayout
+            android:id="@+id/title_right_layout"
+            android:layout_width="60dp"
+            android:layout_height="60dp">
+
+            <TextView
+                android:id="@+id/tv_record"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:layout_marginBottom="10dp"
+                android:text="分包记录"
+                android:textColor="@color/colorWhite"
+                android:textSize="@dimen/text_size_13sp" />
+        </RelativeLayout>
+    </LinearLayout>
+
+    <android.support.v4.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1">
+
+        <android.support.constraint.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:paddingStart="16dp"
+            android:paddingTop="5dp"
+            android:paddingEnd="16dp"
+            android:paddingBottom="5dp">
+
+            <com.wbx.mall.widget.CircleImageView
+                android:id="@+id/iv_head"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:layout_marginTop="20dp"
+                android:src="@drawable/loading_logo"
+                app:bor_color="@color/colorWhite"
+                app:bor_width="1dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/tv_user_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="5dp"
+                android:ellipsize="end"
+                android:maxLines="1"
+                android:textColor="@color/text_black"
+                android:textSize="16sp"
+                app:layout_constraintStart_toEndOf="@+id/iv_head"
+                app:layout_constraintTop_toTopOf="@+id/iv_head"
+                tools:text="我是用户名称" />
+
+            <TextView
+                android:id="@+id/tv_user_type"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:layout_marginBottom="5dp"
+                android:ellipsize="end"
+                android:maxLines="1"
+                android:textSize="14sp"
+                app:layout_constraintBottom_toBottomOf="@+id/iv_head"
+                app:layout_constraintStart_toEndOf="@+id/iv_head"
+                tools:text="城市合伙人" />
+
+            <View
+                android:id="@+id/bg_split"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:background="@drawable/bg_split"
+                app:layout_constraintTop_toBottomOf="@+id/iv_head" />
+
+            <TextView
+                android:id="@+id/tv_title_480"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:text="480分包数量"
+                android:textColor="@color/white"
+                android:textSize="15sp"
+                app:layout_constraintEnd_toStartOf="@+id/tv_title_2580"
+                app:layout_constraintStart_toStartOf="@+id/bg_split"
+                app:layout_constraintTop_toTopOf="@+id/bg_split" />
+
+            <TextView
+                android:id="@+id/tv_num_480"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:ellipsize="middle"
+                android:gravity="center"
+                android:maxEms="7"
+                android:singleLine="true"
+                android:text="0套"
+                android:textColor="@color/white"
+                android:textSize="18sp"
+                app:layout_constraintBottom_toBottomOf="@+id/bg_split"
+                app:layout_constraintEnd_toEndOf="@+id/tv_title_480"
+                app:layout_constraintStart_toStartOf="@+id/tv_title_480"
+                app:layout_constraintTop_toBottomOf="@+id/tv_title_480" />
+
+            <TextView
+                android:id="@+id/tv_title_2580"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="2580分包数量"
+                android:textColor="@color/white"
+                android:textSize="15sp"
+                app:layout_constraintEnd_toEndOf="@+id/bg_split"
+                app:layout_constraintStart_toEndOf="@+id/tv_title_480"
+                app:layout_constraintTop_toTopOf="@+id/tv_title_480" />
+
+            <TextView
+                android:id="@+id/tv_num_2580"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:ellipsize="middle"
+                android:gravity="center"
+                android:maxEms="7"
+                android:singleLine="true"
+                android:text="0套"
+                android:textColor="@color/white"
+                android:textSize="18sp"
+                app:layout_constraintBottom_toBottomOf="@+id/bg_split"
+                app:layout_constraintEnd_toEndOf="@+id/tv_title_2580"
+                app:layout_constraintStart_toStartOf="@+id/tv_title_2580"
+                app:layout_constraintTop_toBottomOf="@+id/tv_title_2580" />
+
+            <TextView
+                android:id="@+id/tv_tip_1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:text="第一步：请输入分包账号"
+                android:textColor="@color/text_black"
+                android:textSize="15sp"
+                app:layout_constraintTop_toBottomOf="@+id/bg_split" />
+
+            <EditText
+                android:id="@+id/edit_tip_1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/bg_split_nor"
+                android:hint="请输入分包手机号"
+                android:inputType="phone"
+                android:maxLength="11"
+                android:paddingStart="16dp"
+                android:paddingEnd="16dp"
+                android:textSize="15sp"
+                app:layout_constraintTop_toBottomOf="@+id/tv_tip_1" />
+
+            <TextView
+                android:id="@+id/tv_tip_2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:text="第二步：请选择分包类型 拷贝"
+                android:textColor="@color/text_black"
+                android:textSize="15sp"
+                app:layout_constraintTop_toBottomOf="@+id/edit_tip_1" />
+
+            <TextView
+                android:id="@+id/tv_type_480"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:background="@drawable/bg_split_btn"
+                android:gravity="center"
+                android:text="480/套"
+                android:textColor="@color/color_split_btn"
+                android:textSize="16sp"
+                app:layout_constraintTop_toBottomOf="@+id/tv_tip_2" />
+
+            <TextView
+                android:id="@+id/tv_type_2580"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="30dp"
+                android:layout_marginTop="15dp"
+                android:background="@drawable/bg_split_btn"
+                android:gravity="center"
+                android:text="2580/套"
+                android:textColor="@color/color_split_btn"
+                android:textSize="16sp"
+                app:layout_constraintStart_toEndOf="@+id/tv_type_480"
+                app:layout_constraintTop_toBottomOf="@+id/tv_tip_2" />
+
+            <TextView
+                android:id="@+id/tv_tip_3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:text="第三步：请输入分包数量"
+                android:textColor="@color/text_black"
+                android:textSize="15sp"
+                app:layout_constraintTop_toBottomOf="@+id/tv_type_480" />
+
+            <EditText
+                android:id="@+id/edit_tip_3"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/bg_split_nor"
+                android:hint="请输入分包数量"
+                android:inputType="number"
+                android:maxLength="11"
+                android:paddingStart="16dp"
+                android:paddingEnd="16dp"
+                android:textSize="15sp"
+                app:layout_constraintTop_toBottomOf="@+id/tv_tip_3" />
+        </android.support.constraint.ConstraintLayout>
+    </android.support.v4.widget.NestedScrollView>
+
+    <Button
+        android:id="@+id/btn_submit"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="16dp"
+        android:background="@drawable/text_view_bg_3"
+        android:text="确定分包"
+        android:textColor="@color/white" />
+</LinearLayout>

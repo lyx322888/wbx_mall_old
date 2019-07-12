@@ -36,11 +36,6 @@ public interface ApiServices {
     @POST("/api/shop/get_goods")
     Observable<ShopGoodsBean> getShop(@Field("shop_id") String shop_id, @Field("login_token") String login_token);
 
-    //店铺详情（实体店）
-    @FormUrlEncoded
-    @POST("/api/salesman/list_shop_data")
-    Observable<ListShopDataBean> getMerchant(@Field("login_token") String login_token);
-
     /**
      * 获取免单活动消息
      */
@@ -67,7 +62,7 @@ public interface ApiServices {
     @POST("/api/salesman/get_my_software_sell")
     Observable<SalesDetailBean> getSales(@Field("login_token") String login_token);
 
-    //销售明细
+    //首页浏览过的店铺
     @FormUrlEncoded
     @POST("/api/index/list_user_visit_shop")
     Observable<VisitShopBean> getVisit(@Field("login_token") String login_token,@Field("page") int page,@Field("num") int num,@Field("lat") String lat,@Field("lng") String lng);

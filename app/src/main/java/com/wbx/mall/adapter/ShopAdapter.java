@@ -142,7 +142,7 @@ public class ShopAdapter extends BaseAdapter<ShopInfo2, Context> {
                 if (shopInfo.getGoods().get(position).getIs_share_free() == 1 || shopInfo.getGoods().get(position).getIs_consume_free() == 1) {
                     FreeActivityDetailActivity.actionStart(mContext, shopInfo.getShop_id() + "", shopInfo.getGoods().get(position).getGoods_id(), shopInfo.getGrade_id());
                 } else {
-                    StoreDetailActivity.actionStart(mContext, shopInfo.getGrade_id(), shopInfo.getShop_id() + "", shopInfo.getGoods().get(position).getGoods_id());
+                    StoreDetailActivity.actionStart(mContext, shopInfo.getGrade_id() == AppConfig.StoreType.VEGETABLE_MARKET, shopInfo.getShop_id() + "");
                 }
             }
         });

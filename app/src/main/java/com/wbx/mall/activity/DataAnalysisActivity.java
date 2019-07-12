@@ -15,6 +15,7 @@ import com.wbx.mall.api.MyHttp;
 import com.wbx.mall.base.AppConfig;
 import com.wbx.mall.base.BaseActivity;
 import com.wbx.mall.bean.SalesManDataBean;
+import com.wbx.mall.module.mine.ui.FinanceOperationActivity;
 import com.wbx.mall.utils.SPUtils;
 import com.wbx.mall.widget.LineChart;
 

@@ -2,15 +2,8 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
     android:layout_height="match_parent"
-    android:gravity="center_horizontal"
+    android:gravity="bottom"
     android:orientation="vertical">
-
-    <View
-        android:id="@+id/cover"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"
-        android:background="#55000000" />
 
     <LinearLayout
         android:id="@+id/pop_layout"
@@ -26,8 +19,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:drawablePadding="8dp"
             android:drawableTop="@drawable/friends"
+            android:drawablePadding="8dp"
             android:gravity="center"
             android:text="朋友圈"
             android:textSize="@dimen/text_size_13sp" />
@@ -37,8 +30,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:drawablePadding="8dp"
             android:drawableTop="@drawable/icon_wechat"
+            android:drawablePadding="8dp"
             android:gravity="center"
             android:text="微信好友"
             android:textSize="@dimen/text_size_13sp" />
@@ -48,8 +41,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:drawablePadding="8dp"
             android:drawableTop="@drawable/w_collection"
+            android:drawablePadding="8dp"
             android:gravity="center"
             android:text="微信收藏"
             android:textSize="@dimen/text_size_13sp" />

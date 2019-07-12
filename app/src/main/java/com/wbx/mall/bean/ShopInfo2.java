@@ -71,6 +71,8 @@ public class ShopInfo2 implements Serializable {
     private String qr_url;
     private String small_routine_photo;
 
+    private int full_minus_shipping_fee;//满多少元减配送费
+    private int is_full_minus_shipping_fee;//是否开启满多少元减配送费
 
     private String audit_name;
     private String audit_addr;
@@ -423,4 +425,19 @@ public class ShopInfo2 implements Serializable {
         this.full_money_reduce = full_money_reduce;
     }
 
+    public int getFull_minus_shipping_fee() {
+        return full_minus_shipping_fee;
+    }
+
+    public void setFull_minus_shipping_fee(int full_minus_shipping_fee) {
+        this.full_minus_shipping_fee = full_minus_shipping_fee;
+    }
+
+    public int getIs_full_minus_shipping_fee() {
+        return is_full_minus_shipping_fee;
+    }
+
+    public void setIs_full_minus_shipping_fee(int is_full_minus_shipping_fee) {
+        this.is_full_minus_shipping_fee = is_full_minus_shipping_fee;
+    }
 }

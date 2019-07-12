@@ -39,6 +39,8 @@ import com.wbx.mall.common.ActivityManager;
 import com.wbx.mall.common.LoginUtil;
 import com.wbx.mall.dialog.PayWayDialog;
 import com.wbx.mall.dialog.GuaKaDialogFragment;
+import com.wbx.mall.module.mine.ui.AddressManagerActivity;
+import com.wbx.mall.module.mine.ui.BookSeatOrderActivity;
 import com.wbx.mall.utils.MD5;
 import com.wbx.mall.utils.SPUtils;
 import com.wbx.mall.utils.ToastUitl;

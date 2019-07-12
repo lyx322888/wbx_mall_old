@@ -9,6 +9,7 @@ import java.io.Serializable;
 public class CateInfo implements Serializable {
     private String cate_id;
     private String cate_name;
+    private String cate_num;
     private int buy_num;
 
     public CateInfo(String cate_id, String cate_name) {
@@ -41,5 +42,13 @@ public class CateInfo implements Serializable {
 
     public void setCate_name(String cate_name) {
         this.cate_name = cate_name;
+    }
+
+    public String getCate_num() {
+        return cate_num;
+    }
+
+    public void setCate_num(String cate_num) {
+        this.cate_num = cate_num;
     }
 }

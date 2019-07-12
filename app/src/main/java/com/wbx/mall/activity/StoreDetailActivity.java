@@ -17,7 +17,6 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.widget.DefaultItemAnimator;
-import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.Html;
@@ -38,7 +37,6 @@ import com.github.florent37.viewanimator.ViewAnimator;
 import com.google.gson.Gson;
 import com.wbx.mall.R;
 import com.wbx.mall.adapter.GoodsFreeAdapter;
-import com.wbx.mall.adapter.GoodsFreeAdapter2;
 import com.wbx.mall.adapter.NatureAdapter;
 import com.wbx.mall.adapter.ShopCarAdapter;
 import com.wbx.mall.api.Api;
@@ -46,16 +44,12 @@ import com.wbx.mall.api.HttpListener;
 import com.wbx.mall.api.MyHttp;
 import com.wbx.mall.base.AppConfig;
 import com.wbx.mall.base.BaseActivity;
-import com.wbx.mall.bean.BuygreensGoodsBean;
-import com.wbx.mall.bean.CateInfo;
 import com.wbx.mall.bean.CouponInfo;
 import com.wbx.mall.bean.FullInfo;
 import com.wbx.mall.bean.GoodsInfo2;
 import com.wbx.mall.bean.OrderBean;
 import com.wbx.mall.bean.RandomRedPacketBean;
 import com.wbx.mall.bean.ShopCart;
-import com.wbx.mall.bean.ShopGoodsBean;
-import com.wbx.mall.bean.ShopInfo2;
 import com.wbx.mall.bean.SpecInfo;
 import com.wbx.mall.bean.StoreDetailBean;
 import com.wbx.mall.common.LoginUtil;
@@ -65,9 +59,7 @@ import com.wbx.mall.dialog.ShopDiscountDialog;
 import com.wbx.mall.fragment.GoodsFragment;
 import com.wbx.mall.fragment.MerchantInfoFragment;
 import com.wbx.mall.fragment.ShopCommentFragment;
-import com.wbx.mall.presenter.GoodsFreePresenterImp;
 import com.wbx.mall.utils.SPUtils;
-import com.wbx.mall.view.GoodsFreeView;
 import com.wbx.mall.widget.AddWidget;
 import com.wbx.mall.widget.DragImageView;
 import com.wbx.mall.widget.LoadingDialog;
@@ -89,7 +81,7 @@ import butterknife.OnClick;
 import static android.view.View.GONE;
 
 
-public class StoreDetailActivity extends BaseActivity implements AddWidget.OnAddClick, GoodsFreeView, ShopCouponDialog.DialogListener {
+public class StoreDetailActivity extends BaseActivity implements AddWidget.OnAddClick, ShopCouponDialog.DialogListener {
     public static final String IS_VEGETABLE_MARKET = "IS_VEGETABLE_MARKET";
     public static final String STORE_ID = "STORE_ID";
     public static final String GOODS_ID = "GOODS_ID";
@@ -102,7 +94,7 @@ public class StoreDetailActivity extends BaseActivity implements AddWidget.OnAdd
     ShopInfoContainer shopInfoContainer;
     @Bind(R.id.shop_car_view)
     ShopCarView shopCarView;
-    @Bind(R.id.ll_container_coupoon)
+    @Bind(R.id.ll_container_coupon)
     LinearLayout llContainerCoupoon;
     @Bind(R.id.tv_member_condition)
     TextView tvMemberCondition;
@@ -112,8 +104,6 @@ public class StoreDetailActivity extends BaseActivity implements AddWidget.OnAdd
     TextView tvDisCountMore;
     @Bind(R.id.root_view)
     CoordinatorLayout rootView;
-    //    @Bind(R.id.root_view)
-//    public DrawerLayout rootView;
     @Bind(R.id.tab_layout)
     TabLayout tabLayout;
     @Bind(R.id.view_pager)
@@ -124,60 +114,27 @@ public class StoreDetailActivity extends BaseActivity implements AddWidget.OnAdd
     View blackView;
     @Bind(R.id.new_shop_recycler)
     RecyclerView newRecycler;
-    @Bind(R.id.new_shop_recycler2)
-    RecyclerView newRecycler2;
     @Bind(R.id.goods_free)
     RelativeLayout mRelative;
-    @Bind(R.id.goods_free2)
-    RelativeLayout mRelative2;
-    //    @Bind(R.id.cate_recycler)
-//    RecyclerView cateRecycler;
-//    @Bind(R.id.img_fenl)
-//    ImageView img_fenl;
     public String mStoreId;
+    private boolean isVM;//是否菜市场
     public String bookSeatId = "";
     private BottomSheetBehavior shopCarDetailBehavior;
     public ShopCarAdapter shopCarAdapter;
     private ArrayList<GoodsInfo2> lstSelectedGoods = new ArrayList<>();
     private GoodsFragment goodsFragment;
-    //    private GoodsFragment2 goodsFragment2;
     private SpecInfo selectSpec;//选中的规格Id
     private LinkedHashMap<String, GoodsInfo2.Nature_attr> hmSelectNature;//选中的规格属性
     private int shopCartTotalNum;
-    private List<CouponInfo> lstCoupon;
     public StoreDetailBean storeDetailBean;
     private ShopCouponDialog couponDialog;//领取优惠券弹窗
     private ShopDiscountDialog shopDiscountDialog;//优惠活动弹窗
     private String mStrDiscount;//优惠活动文字
 
-
-    public static void actionStart(Context context, int grade_id, String storeId) {
-        Intent intent = new Intent(context, StoreDetailActivity.class);
-        if (grade_id == AppConfig.StoreType.VEGETABLE_MARKET) {
-            intent.putExtra(IS_VEGETABLE_MARKET, true);
-        } else {
-            intent.putExtra(IS_VEGETABLE_MARKET, false);
-        }
-        intent.putExtra(STORE_ID, storeId);
-        context.startActivity(intent);
-    }
-
     public static void actionStart(Context context, boolean isVegetable, String storeId) {
         Intent intent = new Intent(context, StoreDetailActivity.class);
         intent.putExtra(IS_VEGETABLE_MARKET, isVegetable);
         intent.putExtra(STORE_ID, storeId);
-        context.startActivity(intent);
-    }
-
-    public static void actionStart(Context context, int grade_id, String storeId, String goodsId) {
-        Intent intent = new Intent(context, StoreDetailActivity.class);
-        if (grade_id == AppConfig.StoreType.VEGETABLE_MARKET) {
-            intent.putExtra(IS_VEGETABLE_MARKET, true);
-        } else {
-            intent.putExtra(IS_VEGETABLE_MARKET, false);
-        }
-        intent.putExtra(STORE_ID, storeId);
-        intent.putExtra(GOODS_ID, goodsId);
         context.startActivity(intent);
     }
 
@@ -212,24 +169,21 @@ public class StoreDetailActivity extends BaseActivity implements AddWidget.OnAdd
                 blackView.setAlpha(slideOffset);
             }
         });
-        GoodsFreePresenterImp goodsFreePresenterImp = new GoodsFreePresenterImp(this);
-        if (SPUtils.getString("shopInfo_goods", "") != null) {
-            goodsFreePresenterImp.getShop(SPUtils.getString("shopInfo_goods", ""), LoginUtil.getLoginToken());
-            goodsFreePresenterImp.getBuygreen(SPUtils.getString("shopInfo_goods", ""), "1", LoginUtil.getLoginToken());
-        }
-        newRecycler.setLayoutManager(new GridLayoutManager(mContext, 1, LinearLayoutManager.HORIZONTAL, false));
-        newRecycler2.setLayoutManager(new GridLayoutManager(mContext, 1, LinearLayoutManager.HORIZONTAL, false));
+        LinearLayoutManager manager = new LinearLayoutManager(this);
+        manager.setOrientation(LinearLayoutManager.HORIZONTAL);
+        newRecycler.setLayoutManager(manager);
     }
 
     @Override
     public void fillData() {
         mStoreId = getIntent().getStringExtra(STORE_ID);
+        isVM = getIntent().getBooleanExtra(IS_VEGETABLE_MARKET, false);
         LoadingDialog.showDialogForLoading(this);
-        new MyHttp().doPost(getIntent().getBooleanExtra(IS_VEGETABLE_MARKET, false) ? Api.getDefault().getVegetableShopInfo(mStoreId, SPUtils.getSharedStringData(mContext, AppConfig.LOGIN_TOKEN), getIntent().getStringExtra(GOODS_ID)) :
-                Api.getDefault().getShopInfo(mStoreId, SPUtils.getSharedStringData(mContext, AppConfig.LOGIN_TOKEN), getIntent().getStringExtra(GOODS_ID)), new HttpListener() {
+        new MyHttp().doPost(Api.getDefault().getShopInfo(mStoreId, SPUtils.getSharedStringData(mContext, AppConfig.LOGIN_TOKEN)), new HttpListener() {
             @Override
             public void onSuccess(JSONObject result) {
-                convertToSameModel(result);
+                storeDetailBean = result.getObject("data", StoreDetailBean.class);
+                convertToSameModel();
                 updateUI(result);
                 getShopCarInfo();
                 getRandomRedPacket();
@@ -241,31 +195,20 @@ public class StoreDetailActivity extends BaseActivity implements AddWidget.OnAdd
         });
     }
 
-    private void convertToSameModel(JSONObject result) {
-        storeDetailBean = result.getObject("data", StoreDetailBean.class);
-        if (getIntent().getBooleanExtra(IS_VEGETABLE_MARKET, false)) {
-            //菜市场数据模型转换为实体店
-            storeDetailBean.setDetail(result.getJSONObject("data").getObject("shop_detail", ShopInfo2.class));
-            if (storeDetailBean.getGoods() != null && storeDetailBean.getGoods().size() > 0) {
-                for (GoodsInfo2 goodsInfo : storeDetailBean.getGoods()) {
-                    goodsInfo.setGoods_id(goodsInfo.getProduct_id());
-                    goodsInfo.setTitle(goodsInfo.getProduct_name());
-                    goodsInfo.setIntro(goodsInfo.getDesc());
-                    goodsInfo.setShopcate_id(goodsInfo.getCate_id());
-                    if (goodsInfo.getGoods_attr() != null) {
-                        for (SpecInfo specInfo : goodsInfo.getGoods_attr()) {
-                            specInfo.setMall_price(specInfo.getPrice());
-                        }
-                    }
-                }
-            }
-            storeDetailBean.setCate(JSONArray.parseArray(result.getJSONObject("data").getString("menu"), CateInfo.class));
+    private void convertToSameModel() {
+        if (storeDetailBean.getSeckill_goods().size() == 0) {
+            mRelative.setVisibility(View.GONE);
+        } else {
+            mRelative.setVisibility(View.VISIBLE);
+            GoodsFreeAdapter adapter = new GoodsFreeAdapter(R.layout.layout_goodsfree, storeDetailBean.getSeckill_goods());
+            newRecycler.setAdapter(adapter);
+            adapter.notifyDataSetChanged();
         }
     }
 
     private void getRandomRedPacket() {
         if (LoginUtil.isLogin()) {
-            new MyHttp().doPost(Api.getDefault().getRandomRedPacket(LoginUtil.getLoginToken(), storeDetailBean.getDetail().getShop_id()), new HttpListener() {
+            new MyHttp().doPost(Api.getDefault().getRandomRedPacket(LoginUtil.getLoginToken(), storeDetailBean.getDetail().getShop_id()+""), new HttpListener() {
                 @Override
                 public void onSuccess(JSONObject result) {
                     RandomRedPacketBean data = result.getObject("data", RandomRedPacketBean.class);
@@ -289,26 +232,21 @@ public class StoreDetailActivity extends BaseActivity implements AddWidget.OnAdd
         }
     }
 
-    private void getGoodsFree() {
-        if (LoginUtil.isLogin()) {
-
-        }
-    }
-
     private void updateUI(JSONObject result) {
         shopInfoContainer.updateUI(this, storeDetailBean.getDetail());
         if (storeDetailBean.getDetail().getGrade_id() == AppConfig.StoreType.FOOD_STREET && storeDetailBean.getDetail().getIs_subscribe() == 1) {
             ivBook.setVisibility(View.VISIBLE);
         }
         shopCarView.setShopInfo(storeDetailBean.getDetail());
-        addCoupon(result);
+
         if (storeDetailBean.getDetail().getConsumption_money() == 0) {
             ((View) tvMemberCondition.getParent()).setVisibility(GONE);
         } else {
             ((View) tvMemberCondition.getParent()).setVisibility(View.VISIBLE);
             tvMemberCondition.setText(String.format("消费满%.2f元", storeDetailBean.getDetail().getConsumption_money() / 100.00));
         }
-        addFullReduce(result);
+        addCoupon();
+        addFullReduce();
         initViewPager();
     }
 
@@ -395,8 +333,11 @@ public class StoreDetailActivity extends BaseActivity implements AddWidget.OnAdd
         });
     }
 
-    private void addFullReduce(JSONObject result) {
-        List<FullInfo> fullInfoList = JSONArray.parseArray(result.getJSONObject("data").getString("full_money_reduce"), FullInfo.class);
+    /**
+     * 获取满减字段
+     */
+    private void addFullReduce() {
+        List<FullInfo> fullInfoList = storeDetailBean.getFull_money_reduce();
         if (fullInfoList == null || fullInfoList.size() == 0) {
             ((View) tvDisCount.getParent()).setVisibility(GONE);
             return;
@@ -414,9 +355,9 @@ public class StoreDetailActivity extends BaseActivity implements AddWidget.OnAdd
         tvDisCountMore.setText(fullInfoList.size() + "个优惠");
     }
 
-    private void addCoupon(JSONObject result) {
-        lstCoupon = JSONArray.parseArray(result.getJSONObject("data").getJSONObject("coupon").getString("list"), CouponInfo.class);
-        if (lstCoupon == null || lstCoupon.size() == 0) {
+    private void addCoupon() {
+        List<CouponInfo> list = storeDetailBean.getCoupon().getList();
+        if (list == null || list.size() == 0) {
             ((View) llContainerCoupoon.getParent()).setVisibility(GONE);
             return;
         }
@@ -425,7 +366,7 @@ public class StoreDetailActivity extends BaseActivity implements AddWidget.OnAdd
 
     private void updateCoupon() {
         llContainerCoupoon.removeAllViews();
-        for (CouponInfo couponInfo : lstCoupon) {
+        for (CouponInfo couponInfo : storeDetailBean.getCoupon().getList()) {
             View layout = LayoutInflater.from(this).inflate(R.layout.item_shop_coupon, null);
             TextView tvCoupon = layout.findViewById(R.id.tv_coupon);
             if (couponInfo.getIs_receive() == 1) {
@@ -523,7 +464,7 @@ public class StoreDetailActivity extends BaseActivity implements AddWidget.OnAdd
 
     }
 
-    @OnClick({R.id.iv_book, R.id.iv_intelligent_pay, R.id.ll_container_coupoon, R.id.tv_discount_more, R.id.tv_clear_shop_car, R.id.btn_ensure_order, R.id.blackview})
+    @OnClick({R.id.iv_book, R.id.iv_intelligent_pay, R.id.ll_container_coupon, R.id.tv_discount_more, R.id.tv_clear_shop_car, R.id.btn_ensure_order, R.id.blackview})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.iv_book:
@@ -532,9 +473,9 @@ public class StoreDetailActivity extends BaseActivity implements AddWidget.OnAdd
             case R.id.iv_intelligent_pay:
                 intelligentPay();
                 break;
-            case R.id.ll_container_coupoon:
+            case R.id.ll_container_coupon:
                 if (couponDialog == null) {
-                    couponDialog = new ShopCouponDialog(StoreDetailActivity.this, lstCoupon, this);
+                    couponDialog = new ShopCouponDialog(StoreDetailActivity.this, storeDetailBean.getCoupon().getList(), this);
                 }
                 couponDialog.show();
                 break;
@@ -1113,34 +1054,8 @@ public class StoreDetailActivity extends BaseActivity implements AddWidget.OnAdd
     }
 
     @Override
-    public void getBuygreen(BuygreensGoodsBean buygreensGoodsBean) {
-
-        if (buygreensGoodsBean.getData().getSeckill_goods().size() == 0 && storeDetailBean.getDetail().getGrade_id() == AppConfig.StoreType.FOOD_STREET) {
-            mRelative.setVisibility(GONE);
-        } else {
-            mRelative.setVisibility(View.VISIBLE);
-            GoodsFreeAdapter goodsFreeAdapter = new GoodsFreeAdapter(R.layout.layout_goodsfree, buygreensGoodsBean.getData().getSeckill_goods());
-            newRecycler.setAdapter(goodsFreeAdapter);
-            goodsFreeAdapter.notifyDataSetChanged();
-        }
-    }
-
-    @Override
-    public void getShop(ShopGoodsBean shopGoodsBean) {
-        if (shopGoodsBean.getData().getSeckill_goods().size() == 0 && storeDetailBean.getDetail().getGrade_id() != AppConfig.StoreType.FOOD_STREET) {
-            mRelative2.setVisibility(View.GONE);
-        } else {
-            mRelative2.setVisibility(View.VISIBLE);
-            GoodsFreeAdapter2 goodsFreeAdapter2 = new GoodsFreeAdapter2(R.layout.layout_goodsfree2, shopGoodsBean.getData().getSeckill_goods());
-            newRecycler2.setAdapter(goodsFreeAdapter2);
-            goodsFreeAdapter2.notifyDataSetChanged();
-        }
-
-    }
-
-    @Override
     public void ListClick(List<CouponInfo> info) {
-        lstCoupon = info;
+        storeDetailBean.getCoupon().setList(info);
         updateCoupon();
     }
 

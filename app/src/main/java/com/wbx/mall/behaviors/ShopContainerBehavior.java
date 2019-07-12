@@ -23,7 +23,7 @@ public class ShopContainerBehavior extends CoordinatorLayout.Behavior<ShopInfoCo
     private float distanceX, distanceY;//要移动的总长度和高度
     private View shopInfoContainer, iv_shop;
     private WeakReference<ShopInfoContainer> mContainer;
-    private View iv_shop_bg, cover;
+    private View iv_shop_bg, cover, tvFare;
     private int statusBarHeight;
     private int acBarHeight;
     private int shopBgMoveDistance;
@@ -46,6 +46,7 @@ public class ShopContainerBehavior extends CoordinatorLayout.Behavior<ShopInfoCo
             iv_shop = child.findViewById(R.id.iv_shop);
             iv_shop_bg = child.findViewById(R.id.iv_shop_bg);
             cover = child.findViewById(R.id.cover);
+            tvFare = child.findViewById(R.id.tv_fare);
         }
         return handled;
     }
@@ -76,6 +77,7 @@ public class ShopContainerBehavior extends CoordinatorLayout.Behavior<ShopInfoCo
                 iv_shop_bg.setTranslationY(-dt * shopBgMoveDistance);
                 //遮盖层
                 cover.setTranslationY(-dt * shopBgMoveDistance);
+                tvFare.setTranslationY(-dt * shopBgMoveDistance);
             } else {
                 shouldInitProperties();
             }

@@ -20,7 +20,7 @@ import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.wbx.mall.R;
 import com.wbx.mall.activity.BuyVegetableActivity;
-import com.wbx.mall.activity.IntelligentServiceActivity;
+import com.wbx.mall.module.mine.ui.IntelligentServiceActivity;
 import com.wbx.mall.activity.WebActivity;
 import com.wbx.mall.api.Api;
 import com.wbx.mall.api.ApiConstants;
@@ -45,7 +45,7 @@ public class IntelligentServiceAdapter extends RecyclerView.Adapter<RecyclerView
     public static final int TO_USER_MSG = 1;//发送消息类型
     public static final int FROM_ANSWER_MSG = 3;//接收到问题答案
     public static final int FINAL_ANSWER = 4;//最终答案
-    public static final String BASE_URL = ApiConstants.DEBUG ? "http://vrzff.com/Wbxwaphome/other/answer/question_id/" : "http://www.wbx365.com/Wbxwaphome/other/answer/question_id/";
+    public static final String BASE_URL = ApiConstants.DEBUG ? "http://app.xm32.cn/Wbxwaphome/other/answer/question_id/" : "http://www.wbx365.com/Wbxwaphome/other/answer/question_id/";
     public static String manualServiceUrl;
     private List<ChatMessageBean> userList = new ArrayList<ChatMessageBean>();
     private Context context;

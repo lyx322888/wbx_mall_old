@@ -119,6 +119,7 @@ public class GoodsInfo2 implements Serializable {
     private ArrayList<Nature> nature;
     private ArrayList<String> selected_nature_ids;
     private String nature_name;
+    private int cart_num;
     private HashMap<String, Integer> hmBuyNum = new HashMap<>();//key拼接规则：goodsId,attrId,natureId+natureId+natureId，例如100,5,1001+1002+1003
     private HashMap<String, Integer> cacheHmBuyNum = new HashMap<>();
 
@@ -720,6 +721,14 @@ public class GoodsInfo2 implements Serializable {
 
     public void setCurrent_num(int current_num) {
         this.current_num = current_num;
+    }
+
+    public int getCart_num() {
+        return cart_num;
+    }
+
+    public void setCart_num(int cart_num) {
+        this.cart_num = cart_num;
     }
 
     public static class Nature implements Serializable {

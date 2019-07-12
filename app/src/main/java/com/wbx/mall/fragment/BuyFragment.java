@@ -259,7 +259,7 @@ public class BuyFragment extends BaseFragment implements BaseRefreshListener, On
                     return;
                 }
                 ShopInfo2 shopInfo = shopInfoList.get(position);
-                StoreDetailActivity.actionStart(getContext(), shopInfo.getGrade_id(), String.valueOf(shopInfo.getShop_id()));
+                StoreDetailActivity.actionStart(getContext(), shopInfo.getGrade_id()== AppConfig.StoreType.VEGETABLE_MARKET, String.valueOf(shopInfo.getShop_id()));
             }
         });
     }

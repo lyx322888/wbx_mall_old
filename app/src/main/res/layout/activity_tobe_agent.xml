@@ -52,12 +52,12 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:background="@color/colorWhite"
             android:orientation="vertical">
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@color/colorWhite"
                 android:orientation="vertical"
                 android:paddingStart="15dp">
 
@@ -277,21 +277,41 @@
 
             <ImageView
                 android:id="@+id/iv_card_head"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center"
+                android:layout_marginStart="20dp"
                 android:layout_marginTop="25dp"
-                android:scaleType="centerCrop"
-                android:src="@drawable/idcard_head" />
+                android:layout_marginEnd="20dp"
+                android:src="@drawable/bg_id_card_head" />
+
+            <Button
+                android:id="@+id/btn_card_head"
+                android:layout_width="match_parent"
+                android:layout_height="46dp"
+                android:layout_marginStart="20dp"
+                android:layout_marginEnd="20dp"
+                android:background="@drawable/text_view_bg_3"
+                android:text="上传手持身份证正面"
+                android:textColor="@color/colorWhite" />
 
             <ImageView
                 android:id="@+id/iv_card_back"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center"
+                android:layout_marginStart="20dp"
                 android:layout_marginTop="20dp"
-                android:scaleType="centerCrop"
-                android:src="@drawable/idcard_back" />
+                android:layout_marginEnd="20dp"
+                android:src="@drawable/bg_id_card_back" />
+
+            <Button
+                android:id="@+id/btn_card_back"
+                android:layout_width="match_parent"
+                android:layout_height="46dp"
+                android:layout_marginStart="20dp"
+                android:layout_marginEnd="20dp"
+                android:background="@drawable/text_view_bg_3"
+                android:text="上传手持身份证背面"
+                android:textColor="@color/colorWhite" />
 
             <Button
                 android:id="@+id/btn_next"

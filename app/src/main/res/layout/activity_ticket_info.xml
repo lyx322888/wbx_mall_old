@@ -42,7 +42,7 @@
 
     <ImageView
         android:layout_width="wrap_content"
+        android:id="@+id/iv_bill"
         android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:src="@drawable/kaipiao_pic" />
+        android:layout_gravity="center"/>
 </LinearLayout>

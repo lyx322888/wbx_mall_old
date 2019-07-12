@@ -1,5 +1,6 @@
 package com.wbx.mall.widget;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.support.annotation.Nullable;
@@ -9,20 +10,16 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.alibaba.fastjson.JSONObject;
 import com.hedgehog.ratingbar.RatingBar;
 import com.wbx.mall.R;
-import com.wbx.mall.activity.ChatActivity;
 import com.wbx.mall.activity.LoginActivity;
-import com.wbx.mall.activity.StoreDetailActivity;
 import com.wbx.mall.api.Api;
 import com.wbx.mall.api.HttpListener;
 import com.wbx.mall.api.MyHttp;
 import com.wbx.mall.base.AppConfig;
 import com.wbx.mall.bean.ShopInfo2;
-import com.wbx.mall.common.LoginUtil;
 import com.wbx.mall.utils.GlideUtils;
 import com.wbx.mall.utils.SPUtils;
 import com.wbx.mall.utils.ScaleAnimatorUtils;
@@ -52,12 +49,12 @@ public class ShopInfoContainer extends RelativeLayout {
     TextView tvSellNum;
     @Bind(R.id.tv_announce)
     TextView tvAnnounce;
-    @Bind(R.id.iv_chat)
-    ImageView ivChat;
     @Bind(R.id.iv_collect)
     public ImageView ivCollect;
+    @Bind(R.id.tv_fare)
+    TextView tvFare;//满多少减配送费
     private ShopInfo2 shopInfo;
-    private StoreDetailActivity activity;
+    private Activity activity;
 
     public ShopInfoContainer(Context context) {
         super(context);
@@ -69,7 +66,7 @@ public class ShopInfoContainer extends RelativeLayout {
         ButterKnife.bind(this);
     }
 
-    public void updateUI(StoreDetailActivity activity, ShopInfo2 shopInfo) {
+    public void updateUI(Activity activity, ShopInfo2 shopInfo) {
         this.activity = activity;
         this.shopInfo = shopInfo;
         GlideUtils.showBlurBigPic(getContext(), ivShopBg, shopInfo.getPhoto());
@@ -77,17 +74,16 @@ public class ShopInfoContainer extends RelativeLayout {
         ivCollect.setImageResource(shopInfo.getIs_favorites() == 0 ? R.drawable.icon_collection_un : R.drawable.already);
         tvShopName.setText(shopInfo.getShop_name());
         rbScore.setStar(shopInfo.getScore());
-        if (LoginUtil.isLogin() && LoginUtil.getUserInfo().getIs_salesman() == 1) {
-            tvSellNum.setVisibility(VISIBLE);
-            tvSellNum.setText(String.format("销量 : %d", shopInfo.getSold_num()));
-        } else {
-            tvSellNum.setVisibility(INVISIBLE);
-        }
+        tvSellNum.setText(String.format("销量：%d", shopInfo.getSold_num()));
         if (TextUtils.isEmpty(shopInfo.getNotice())) {
             ((View) tvAnnounce.getParent()).setVisibility(View.GONE);
         } else {
             tvAnnounce.setText(shopInfo.getNotice());
             tvAnnounce.setSelected(true);
+        }
+        if (shopInfo.getIs_full_minus_shipping_fee() == 1) {
+            tvFare.setVisibility(VISIBLE);
+            tvFare.setText("满" + shopInfo.getFull_minus_shipping_fee() / 100 + "免配送费");
         }
     }
 
@@ -95,11 +91,11 @@ public class ShopInfoContainer extends RelativeLayout {
         ivShop.setAlpha(alpha);
         ((View) rbScore.getParent()).setAlpha(alpha);
         ((View) tvAnnounce.getParent()).setAlpha(alpha);
-        ivChat.setAlpha(alpha);
         cover.setAlpha(alpha);
+        tvFare.setAlpha(alpha);
     }
 
-    @OnClick({R.id.iv_back, R.id.iv_share, R.id.iv_collect, R.id.iv_chat})
+    @OnClick({R.id.iv_back, R.id.iv_share, R.id.iv_collect})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.iv_back:
@@ -111,9 +107,6 @@ public class ShopInfoContainer extends RelativeLayout {
             case R.id.iv_collect:
                 collect();
                 break;
-            case R.id.iv_chat:
-                chat();
-                break;
         }
     }
 
@@ -123,6 +116,9 @@ public class ShopInfoContainer extends RelativeLayout {
         }
     }
 
+    /**
+     * 分享店铺
+     */
     private void share() {
         if (activity == null || shopInfo == null) {
             return;
@@ -130,6 +126,9 @@ public class ShopInfoContainer extends RelativeLayout {
         ShareUtils.getInstance().share(activity, "我在微百姓购物，方便、实惠！推荐你也一起来使用吧！", "", shopInfo.getPhoto(), shopInfo.getGrade_id() == AppConfig.StoreType.VEGETABLE_MARKET ? String.format("http://www.wbx365.com/wap/ele/shop/shop_id/%s.html", String.valueOf(shopInfo.getShop_id())) : String.format("http://www.wbx365.com/wap/shop/goods/shop_id/%s.html", String.valueOf(shopInfo.getShop_id())));
     }
 
+    /**
+     * 收藏店铺
+     */
     private void collect() {
         if (activity == null || shopInfo == null) {
             return;
@@ -140,13 +139,16 @@ public class ShopInfoContainer extends RelativeLayout {
             getContext().startActivity(intent);
             return;
         }
+        if (shopInfo.getIs_favorites() == 1) {
+            ToastUitl.showShort("已经关注了");
+            return;
+        }
         LoadingDialog.showDialogForLoading(activity, "收藏中...", true);
         new MyHttp().doPost(Api.getDefault().followStore(Integer.valueOf(shopInfo.getShop_id()), SPUtils.getSharedStringData(getContext(), AppConfig.LOGIN_TOKEN)), new HttpListener() {
             @Override
             public void onSuccess(JSONObject result) {
-                ivCollect.setImageResource(R.drawable.already);
-                ScaleAnimatorUtils.setScalse(ivCollect);
-                Toast.makeText(activity, result.getString("msg"), Toast.LENGTH_SHORT).show();
+                updateCollect();
+                ToastUitl.showShort(result.getString("msg"));
             }
 
             @Override
@@ -156,22 +158,12 @@ public class ShopInfoContainer extends RelativeLayout {
         });
     }
 
-    private void chat() {
-        if (!LoginUtil.isLogin()) {
-            LoginUtil.login();
-            return;
-        }
-        if (shopInfo == null) {
-            return;
-        }
-        if (TextUtils.isEmpty(shopInfo.getHx_username())) {
-            ToastUitl.showShort("抱歉，该商家暂时无法在线聊天！");
-            return;
-        }
-        if (shopInfo.getIs_buy() != 1) {
-            ToastUitl.showShort("温馨提示：请下单后咨询商家！");
-            return;
-        }
-        ChatActivity.actionStart(getContext(), shopInfo.getHx_username(), shopInfo.getShop_name(), shopInfo.getPhoto());
+    /**
+     * 更新关注状态
+     */
+    public void updateCollect() {
+        shopInfo.setIs_favorites(1);
+        ivCollect.setImageResource(R.drawable.already);
+        ScaleAnimatorUtils.setScalse(ivCollect);
     }
 }
