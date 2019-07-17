@@ -113,6 +113,8 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="15dp"
                 android:background="@drawable/bg_split"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/iv_head" />
 
             <TextView
@@ -178,6 +180,7 @@
                 android:text="第一步：请输入分包账号"
                 android:textColor="@color/text_black"
                 android:textSize="15sp"
+                app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/bg_split" />
 
             <EditText
@@ -202,6 +205,7 @@
                 android:text="第二步：请选择分包类型 拷贝"
                 android:textColor="@color/text_black"
                 android:textSize="15sp"
+                app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/edit_tip_1" />
 
             <TextView
@@ -214,6 +218,7 @@
                 android:text="480/套"
                 android:textColor="@color/color_split_btn"
                 android:textSize="16sp"
+                app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/tv_tip_2" />
 
             <TextView
@@ -238,6 +243,7 @@
                 android:text="第三步：请输入分包数量"
                 android:textColor="@color/text_black"
                 android:textSize="15sp"
+                app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/tv_type_480" />
 
             <EditText

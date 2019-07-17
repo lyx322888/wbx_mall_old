@@ -784,5 +784,8 @@ public interface ApiService {
     @FormUrlEncoded
     @POST("/api/salesman/get_software_subpackage_info")
     Observable<JSONObject> getSoftSubPackage(@Field("login_token") String login_token);
-
+    //10.11. 分包列表
+    @FormUrlEncoded
+    @POST("/api/salesman/list_software_subpackage")
+    Observable<JSONObject> getSubPackageList(@Field("login_token") String login_token);
 }

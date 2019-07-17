@@ -347,6 +347,7 @@
         <activity android:name=".activity.DetailActivity" />
         <activity android:name=".activity.NearbyStoreActivity" />
         <activity android:name=".module.mine.ui.SplitActivity" />
+        <activity android:name=".module.mine.ui.SplitRecordActivity" />
     </application>
 
 </manifest>

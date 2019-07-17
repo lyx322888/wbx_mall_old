@@ -1,5 +1,6 @@
 package com.wbx.mall.module.mine.ui;
 
+import android.content.Intent;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.EditText;
@@ -110,7 +111,7 @@ public class SplitActivity extends BaseActivity {
                 tvType2580.setSelected(true);
                 break;
             case R.id.tv_record:
-                ToastUitl.showShort("分包记录");
+                startActivity(new Intent(SplitActivity.this, SplitRecordActivity.class));
                 break;
         }
     }

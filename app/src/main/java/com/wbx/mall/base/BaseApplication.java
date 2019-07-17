@@ -20,11 +20,9 @@ import com.hyphenate.easeui.utils.EaseCommonUtils;
 import com.hyphenate.easeui.utils.UserDao;
 import com.orhanobut.logger.AndroidLogAdapter;
 import com.orhanobut.logger.Logger;
-import com.squareup.leakcanary.LeakCanary;
 import com.wbx.mall.BuildConfig;
 import com.wbx.mall.R;
 import com.wbx.mall.activity.ChatActivity;
-import com.wbx.mall.api.ApiConstants;
 import com.wbx.mall.bean.UserInfo;
 import com.wbx.mall.chat.BaseManager;
 
@@ -57,11 +55,6 @@ public class BaseApplication extends MultiDexApplication {
     @Override
     public void onCreate() {
         super.onCreate();
-        if (LeakCanary.isInAnalyzerProcess(this)) {
-            // This process is dedicated to LeakCanary for heap analysis.
-            // You should not init your app in this process.
-            return;
-        }
         instance = this;
         init();
     }
@@ -78,7 +71,6 @@ public class BaseApplication extends MultiDexApplication {
     }
 
     private void initInUiThread() {
-//        LeakCanary.install(this);
         initJPush();
         initHxChat();
         initLog();

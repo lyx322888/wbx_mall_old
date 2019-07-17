@@ -3,7 +3,6 @@ package com.wbx.mall.activity;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
-import android.graphics.drawable.ColorDrawable;
 import android.support.annotation.Nullable;
 import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.TabLayout;
@@ -22,7 +21,6 @@ import android.widget.TextView;
 
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
-import com.squareup.haha.guava.collect.Collections2;
 import com.wbx.mall.R;
 import com.wbx.mall.adapter.GoodsFreeAdapter;
 import com.wbx.mall.adapter.ShopCarAdapter;
@@ -53,7 +51,6 @@ import com.wbx.mall.widget.ShopCarView;
 import com.wbx.mall.widget.ShopInfoContainer;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 
