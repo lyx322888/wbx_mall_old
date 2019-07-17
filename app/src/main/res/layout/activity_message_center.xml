@@ -21,8 +21,8 @@
                 android:layout_width="15dp"
                 android:layout_height="15dp"
                 android:layout_alignParentBottom="true"
-                android:layout_marginBottom="10dp"
                 android:layout_marginLeft="10dp"
+                android:layout_marginBottom="10dp"
                 android:src="@drawable/w_return"
                 android:tint="@color/colorWhite" />
         </RelativeLayout>
@@ -42,82 +42,9 @@
             android:layout_width="60dp"
             android:layout_height="60dp" />
     </LinearLayout>
-
-    <FrameLayout
-        android:id="@+id/rl_container"
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/recycler_view"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1" />
+        android:layout_height="match_parent" />
 
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:background="@color/divider" />
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:orientation="horizontal">
-
-        <RelativeLayout
-            android:id="@+id/rl_message"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1">
-
-            <TextView
-                android:id="@+id/tv_message"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerInParent="true"
-                android:drawableTop="@drawable/message_icon_mess"
-                android:gravity="center"
-                android:text="消息"
-                android:textColor="@color/color_message_center"
-                android:textSize="11sp" />
-
-            <TextView
-                android:id="@+id/tv_unread_message"
-                android:layout_width="14dp"
-                android:layout_height="14dp"
-                android:layout_centerHorizontal="true"
-                android:background="@drawable/bg_unread"
-                android:gravity="center"
-                android:text="5"
-                android:textColor="@color/white"
-                android:textSize="8sp"
-                android:translationX="10dp"
-                android:visibility="gone" />
-        </RelativeLayout>
-
-        <RelativeLayout
-            android:id="@+id/rl_notice"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1">
-
-            <TextView
-                android:id="@+id/tv_notice"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerInParent="true"
-                android:drawableTop="@drawable/message_icon_notice"
-                android:text="通知"
-                android:textColor="@color/color_message_center"
-                android:textSize="11sp" />
-
-            <TextView
-                android:id="@+id/tv_unread_notice"
-                android:layout_width="14dp"
-                android:layout_height="14dp"
-                android:layout_centerHorizontal="true"
-                android:background="@drawable/bg_unread"
-                android:gravity="center"
-                android:text="5"
-                android:textColor="@color/white"
-                android:textSize="8sp"
-                android:translationX="10dp"
-                android:visibility="gone" />
-        </RelativeLayout>
-    </LinearLayout>
 </LinearLayout>

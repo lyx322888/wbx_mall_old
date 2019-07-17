@@ -39,7 +39,6 @@ public class AppConfig {
     public static final String USER_DATA = "user";//保存用户信息
     public static final String LOGIN_TOKEN = "token";//token
     public static final int TAKE_PHOTO_CODE = 10066;
-    public static final String REFRESH_UI = "refreshUl";//刷新UI
     public static final int MAX_COUNT = 6;
     public static final int REQUEST_CONTACT = 10003;
     public static final int PERMISSIONS_CODE = 10004;

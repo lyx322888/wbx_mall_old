@@ -7,24 +7,10 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.alibaba.fastjson.JSONObject;
-import com.hyphenate.EMCallBack;
-import com.hyphenate.chat.EMClient;
 import com.wbx.mall.R;
-import com.wbx.mall.module.mine.ui.AccountInfoActivity;
-import com.wbx.mall.module.mine.ui.AddressManagerActivity;
-import com.wbx.mall.module.mine.ui.BookSeatOrderActivity;
-import com.wbx.mall.module.mine.ui.CollectionActivity;
-import com.wbx.mall.module.mine.ui.IndexOrderActivity;
-import com.wbx.mall.module.mine.ui.IntegralMallActivity;
 import com.wbx.mall.activity.IntelligentPayListActivity;
-import com.wbx.mall.module.mine.ui.IntelligentServiceActivity;
 import com.wbx.mall.activity.LoginActivity;
-import com.wbx.mall.module.mine.ui.MessageCenterActivity;
-import com.wbx.mall.module.mine.ui.MyFreeOrderActivity;
 import com.wbx.mall.activity.MyFreeOrderCouponActivity;
-import com.wbx.mall.module.mine.ui.ScanOrderListActivity;
-import com.wbx.mall.module.mine.ui.SignInActivity;
-import com.wbx.mall.module.mine.ui.WinRecordActivity;
 import com.wbx.mall.api.Api;
 import com.wbx.mall.api.HttpListener;
 import com.wbx.mall.api.MyHttp;
@@ -33,6 +19,18 @@ import com.wbx.mall.base.BaseApplication;
 import com.wbx.mall.base.BaseFragment;
 import com.wbx.mall.bean.UserInfo;
 import com.wbx.mall.common.LoginUtil;
+import com.wbx.mall.module.mine.ui.AccountInfoActivity;
+import com.wbx.mall.module.mine.ui.AddressManagerActivity;
+import com.wbx.mall.module.mine.ui.BookSeatOrderActivity;
+import com.wbx.mall.module.mine.ui.CollectionActivity;
+import com.wbx.mall.module.mine.ui.IndexOrderActivity;
+import com.wbx.mall.module.mine.ui.IntegralMallActivity;
+import com.wbx.mall.module.mine.ui.IntelligentServiceActivity;
+import com.wbx.mall.module.mine.ui.MessageCenterActivity;
+import com.wbx.mall.module.mine.ui.MyFreeOrderActivity;
+import com.wbx.mall.module.mine.ui.ScanOrderListActivity;
+import com.wbx.mall.module.mine.ui.SignInActivity;
+import com.wbx.mall.module.mine.ui.WinRecordActivity;
 import com.wbx.mall.utils.GlideUtils;
 import com.wbx.mall.utils.SPUtils;
 import com.wbx.mall.widget.iosdialog.AlertDialog;
@@ -210,23 +208,7 @@ public class MineFragment extends BaseFragment implements BaseRefreshListener {
                         .setPositiveButton("确定", new View.OnClickListener() {
                             @Override
                             public void onClick(View view) {
-                                EMClient.getInstance().logout(true, new EMCallBack() {
-                                    @Override
-                                    public void onSuccess() {
-                                        clearUserData();
-                                    }
-
-                                    @Override
-                                    public void onError(int i, String s) {
-                                        clearUserData();
-                                    }
-
-                                    @Override
-                                    public void onProgress(int i, String s) {
-
-                                    }
-                                });
-
+                                clearUserData();
                             }
                         }).show();
                 break;

@@ -10,8 +10,8 @@ import android.view.View;
 import android.view.WindowManager;
 import android.widget.TextView;
 
-import com.hyphenate.util.DensityUtil;
 import com.wbx.mall.R;
+import com.wbx.mall.utils.DisplayUtil;
 
 /**
  * 店铺满减弹窗
@@ -54,7 +54,7 @@ public class ShopDiscountDialog extends Dialog {
         Display display = windowManager.getDefaultDisplay();
         WindowManager.LayoutParams layoutParams = getWindow().getAttributes();
         layoutParams.width = display.getWidth();//设置Dialog的宽度为屏幕宽度
-        layoutParams.height = DensityUtil.dip2px(mContext, 200);//设置Dialog的高度
+        layoutParams.height = DisplayUtil.dip2px(200);//设置Dialog的高度
         getWindow().setAttributes(layoutParams);
         getWindow().setWindowAnimations(R.style.main_menu_animStyle);
     }

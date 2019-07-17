@@ -9,15 +9,6 @@ import android.widget.TabWidget;
 import android.widget.TextView;
 
 import com.alibaba.fastjson.JSONObject;
-import com.hyphenate.EMConnectionListener;
-import com.hyphenate.EMError;
-import com.hyphenate.EMMessageListener;
-import com.hyphenate.chat.EMClient;
-import com.hyphenate.chat.EMMessage;
-import com.hyphenate.easeui.EaseUI;
-import com.hyphenate.easeui.domain.EaseUser;
-import com.hyphenate.easeui.model.EaseAtMessageHelper;
-import com.hyphenate.easeui.utils.UserDao;
 import com.wbx.mall.activity.LoginActivity;
 import com.wbx.mall.activity.ShoppingCartActivity;
 import com.wbx.mall.api.Api;
@@ -26,24 +17,20 @@ import com.wbx.mall.api.MyHttp;
 import com.wbx.mall.base.AppConfig;
 import com.wbx.mall.base.BaseActivity;
 import com.wbx.mall.base.BaseApplication;
-import com.wbx.mall.common.ActivityManager;
 import com.wbx.mall.common.LoginUtil;
 import com.wbx.mall.dialog.UpdateDialogFragment;
-import com.wbx.mall.module.find.fragment.FindFragment;
 import com.wbx.mall.fragment.FreeFragment;
 import com.wbx.mall.fragment.IndexFragment02;
 import com.wbx.mall.fragment.IndexOrderFragment;
+import com.wbx.mall.module.find.fragment.FindFragment;
 import com.wbx.mall.module.mine.fragment.MineFragment;
 import com.wbx.mall.utils.SPUtils;
 import com.wbx.mall.widget.TabFragmentHost;
 
-import java.util.List;
-import java.util.Map;
-
 import butterknife.Bind;
 import butterknife.OnClick;
 
-public class MainActivity extends BaseActivity implements EMMessageListener, EMConnectionListener {
+public class MainActivity extends BaseActivity {
     @Bind(android.R.id.tabhost)
     TabFragmentHost mTabHost;
     TabWidget mTabWidget;
@@ -59,8 +46,6 @@ public class MainActivity extends BaseActivity implements EMMessageListener, EMC
     @Override
     public void initPresenter() {
         myHttp = new MyHttp();
-        EMClient.getInstance().chatManager().addMessageListener(this);
-        EMClient.getInstance().addConnectionListener(this);
     }
 
     @Override
@@ -205,78 +190,6 @@ public class MainActivity extends BaseActivity implements EMMessageListener, EMC
         return super.onKeyDown(keyCode, event);
     }
 
-    @Override
-    public void onMessageReceived(List<EMMessage> list) {
-        for (EMMessage emMessage : list) {
-            Map<String, Object> ext = emMessage.ext();
-            EaseUser easeUser = new EaseUser(emMessage.getFrom());
-            easeUser.setAvatar((String) ext.get("fromAvatar"));
-            easeUser.setNick((String) ext.get("fromNickname"));
-            easeUser.setNickname((String) ext.get("fromNickname"));
-            UserDao userDao = new UserDao(mContext);
-            userDao.openDataBase();
-            userDao.insertData(easeUser);
-            userDao.closeDataBase();
-        }
-
-        EaseUI.getInstance().getNotifier().onNewMesg(list);
-        //收到消息
-        Intent intent = new Intent();
-        intent.setAction(AppConfig.REFRESH_UI);
-        //发送广播
-        sendBroadcast(intent);
-        EaseAtMessageHelper.get().parseMessages(list);
-
-    }
-
-    @Override
-    public void onCmdMessageReceived(List<EMMessage> list) {
-
-    }
-
-    @Override
-    public void onMessageRead(List<EMMessage> list) {
-
-    }
-
-    @Override
-    public void onMessageDelivered(List<EMMessage> list) {
-
-    }
-
-    @Override
-    public void onMessageRecalled(List<EMMessage> list) {
-
-    }
-
-    @Override
-    public void onMessageChanged(EMMessage emMessage, Object o) {
-
-    }
-
-    @Override
-    public void onConnected() {
-
-    }
-
-    @Override
-    public void onDisconnected(final int error) {
-        runOnUiThread(new Runnable() {
-            @Override
-            public void run() {
-                if (error == EMError.USER_REMOVED) {
-                    // 显示帐号已经被移除
-//                      showAccountRemovedDialog();
-                } else if (error == EMError.USER_LOGIN_ANOTHER_DEVICE) {
-                    //账号在其它设备登录
-                    showShortToast("该账号已经在其它设备登录！");
-                    ActivityManager.finishAllActivity();
-                    SPUtils.setSharedBooleanData(mContext, AppConfig.LOGIN_STATE, false);
-                    startActivity(new Intent(mContext, LoginActivity.class));
-                }
-            }
-        });
-    }
 
     @Override
     protected void onResume() {
@@ -285,13 +198,6 @@ public class MainActivity extends BaseActivity implements EMMessageListener, EMC
             mTabHost.setCurrentTab(1);
         }
         isGoBuy = false;
-    }
-
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
-        EMClient.getInstance().chatManager().removeMessageListener(this);
-        EMClient.getInstance().removeConnectionListener(this);
     }
 
     @OnClick(R.id.fl_shopping_cart)

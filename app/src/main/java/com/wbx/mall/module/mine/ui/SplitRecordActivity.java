@@ -4,6 +4,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 
 import com.alibaba.fastjson.JSONObject;
+import com.google.gson.Gson;
 import com.wbx.mall.R;
 import com.wbx.mall.api.Api;
 import com.wbx.mall.api.HttpListener;
@@ -29,7 +30,7 @@ public class SplitRecordActivity extends BaseActivity {
 
     @Override
     public int getLayoutId() {
-        return R.layout.activity_split;
+        return R.layout.activity_split_record;
     }
 
     @Override
@@ -49,9 +50,11 @@ public class SplitRecordActivity extends BaseActivity {
         new MyHttp().doPost(Api.getDefault().getSubPackageList(LoginUtil.getLoginToken()), new HttpListener() {
             @Override
             public void onSuccess(JSONObject result) {
-                SplitRecordBean bean = result.getObject("data", SplitRecordBean.class);
-                list.addAll(bean.getData());
-                adapter.notifyDataSetChanged();
+                if (!"暂无数据".equals(result.getString("msg"))) {
+                    SplitRecordBean bean = new Gson().fromJson(result.toString(), SplitRecordBean.class);
+                    list.addAll(bean.getData());
+                    adapter.notifyDataSetChanged();
+                }
             }
 
             @Override

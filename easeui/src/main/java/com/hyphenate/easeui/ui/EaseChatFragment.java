@@ -1,10 +1,8 @@
 package com.hyphenate.easeui.ui;
 
-import android.Manifest;
 import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.ClipboardManager;
-import android.content.ContentValues;
 import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
@@ -13,7 +11,6 @@ import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.provider.MediaStore;
-import android.support.annotation.NonNull;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v4.widget.SwipeRefreshLayout.OnRefreshListener;
 import android.view.Gravity;
@@ -56,14 +53,10 @@ import com.hyphenate.easeui.widget.EaseVoiceRecorderView;
 import com.hyphenate.easeui.widget.EaseVoiceRecorderView.EaseVoiceRecorderCallback;
 import com.hyphenate.easeui.widget.chatrow.EaseCustomChatRowProvider;
 import com.hyphenate.util.EMLog;
-import com.hyphenate.util.PathUtil;
 
 import java.io.File;
 import java.util.List;
 
-import permissions.dispatcher.NeedsPermission;
-import permissions.dispatcher.PermissionUtils;
-import permissions.dispatcher.RuntimePermissions;
 
 /**
  * you can new an EaseChatFragment to use or you can inherit it to expand.
@@ -72,7 +65,6 @@ import permissions.dispatcher.RuntimePermissions;
  * <br/>
  * you can see ChatActivity in demo for your reference
  */
-@RuntimePermissions
 public class EaseChatFragment extends EaseBaseFragment implements EMMessageListener {
     protected static final String TAG = "EaseChatFragment";
     protected static final int REQUEST_CODE_MAP = 1;
@@ -141,17 +133,17 @@ public class EaseChatFragment extends EaseBaseFragment implements EMMessageListe
     protected void initView() {
         // hold to record voice
         //noinspection ConstantConditions
-        voiceRecorderView = (EaseVoiceRecorderView) getView().findViewById(R.id.voice_recorder);
+        voiceRecorderView = getView().findViewById(R.id.voice_recorder);
 
         // message list layout
-        messageList = (EaseChatMessageList) getView().findViewById(R.id.message_list);
+        messageList = getView().findViewById(R.id.message_list);
         if (chatType != EaseConstant.CHATTYPE_SINGLE)
             messageList.setShowUserNick(true);
 //        messageList.setAvatarShape(1);
         listView = messageList.getListView();
 
         extendMenuItemClickListener = new MyItemClickListener();
-        inputMenu = (EaseChatInputMenu) getView().findViewById(R.id.input_menu);
+        inputMenu = getView().findViewById(R.id.input_menu);
         registerExtendMenuItem();
         // init input menu
         inputMenu.init(null);
@@ -164,19 +156,13 @@ public class EaseChatFragment extends EaseBaseFragment implements EMMessageListe
 
             @Override
             public boolean onPressToSpeakBtnTouch(View v, MotionEvent event) {
-                boolean hasPermission = PermissionUtils.hasSelfPermissions(getActivity(), new String[]{Manifest.permission.RECORD_AUDIO});
-                if (hasPermission) {
-                    return voiceRecorderView.onPressToSpeakBtnTouch(v, event, new EaseVoiceRecorderCallback() {
+                return voiceRecorderView.onPressToSpeakBtnTouch(v, event, new EaseVoiceRecorderCallback() {
 
-                        @Override
-                        public void onVoiceRecordComplete(String voiceFilePath, int voiceTimeLength) {
-                            sendVoiceMessage(voiceFilePath, voiceTimeLength);
-                        }
-                    });
-                } else {
-                    EaseChatFragmentPermissionsDispatcher.recordAudioWithPermissionCheck(EaseChatFragment.this);
-                    return true;
-                }
+                    @Override
+                    public void onVoiceRecordComplete(String voiceFilePath, int voiceTimeLength) {
+                        sendVoiceMessage(voiceFilePath, voiceTimeLength);
+                    }
+                });
             }
 
             @Override
@@ -644,42 +630,6 @@ public class EaseChatFragment extends EaseBaseFragment implements EMMessageListe
         }
     }
 
-    @NeedsPermission(Manifest.permission.CAMERA)
-    void selectPicFromCamera() {
-        if (!EaseCommonUtils.isSdcardExist()) {
-            Toast.makeText(getActivity(), R.string.sd_card_does_not_exist, Toast.LENGTH_SHORT).show();
-            return;
-        }
-
-        cameraFile = new File(PathUtil.getInstance().getImagePath(), EMClient.getInstance().getCurrentUser()
-                + System.currentTimeMillis() + ".jpg");
-        //noinspection ResultOfMethodCallIgnored
-        cameraFile.getParentFile().mkdirs();
-
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
-            Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-            ContentValues contentValues = new ContentValues(1);
-            contentValues.put(MediaStore.Images.Media.DATA, cameraFile.getAbsolutePath());
-            Uri uri = getContext().getContentResolver().insert(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, contentValues);
-            intent.putExtra(MediaStore.EXTRA_OUTPUT, uri);
-            startActivityForResult(intent, REQUEST_CODE_CAMERA);
-        } else {
-            startActivityForResult(
-                    new Intent(MediaStore.ACTION_IMAGE_CAPTURE).putExtra(MediaStore.EXTRA_OUTPUT, Uri.fromFile(cameraFile)),
-                    REQUEST_CODE_CAMERA);
-        }
-    }
-
-    @Override
-    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
-        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-        EaseChatFragmentPermissionsDispatcher.onRequestPermissionsResult(this, requestCode, grantResults);
-    }
-
-    @NeedsPermission(Manifest.permission.RECORD_AUDIO)
-    void recordAudio() {
-    }
-
 
     /**
      * handle the click event for extend menu
@@ -695,7 +645,7 @@ public class EaseChatFragment extends EaseBaseFragment implements EMMessageListe
             }
             switch (itemId) {
                 case ITEM_TAKE_PICTURE:
-                    EaseChatFragmentPermissionsDispatcher.selectPicFromCameraWithPermissionCheck(EaseChatFragment.this);
+//                    EaseChatFragmentPermissionsDispatcher.selectPicFromCameraWithPermissionCheck(EaseChatFragment.this);
                     break;
                 case ITEM_PICTURE:
                     selectPicFromLocal();

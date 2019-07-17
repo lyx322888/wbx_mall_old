@@ -15,9 +15,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.alibaba.fastjson.JSONObject;
-import com.hyphenate.EMCallBack;
-import com.hyphenate.EMError;
-import com.hyphenate.chat.EMClient;
 import com.tencent.mm.opensdk.modelmsg.SendAuth;
 import com.tencent.mm.opensdk.openapi.IWXAPI;
 import com.tencent.mm.opensdk.openapi.WXAPIFactory;
@@ -250,48 +247,8 @@ public class LoginActivity extends BaseActivity {
         BaseApplication.getInstance().saveObject(userInfo, AppConfig.USER_DATA);
         SPUtils.setSharedStringData(mContext, AppConfig.LOGIN_TOKEN, login_token);
         SPUtils.setSharedBooleanData(mActivity, AppConfig.LOGIN_STATE, true);//保存登录状态
-        loginHx();
+        nextStep();
     }
-
-    /**
-     * 登录环信
-     */
-    private void loginHx() {
-        if (TextUtils.isEmpty(userInfo.getHx_username())) {
-            nextStep();
-        } else {
-            EMClient.getInstance().login(hxUserName, hxPsw, new EMCallBack() {
-                @Override
-                public void onSuccess() {
-                    nextStep();
-                }
-
-                @Override
-                public void onError(int error, String s) {
-                    if (error == EMError.USER_ALREADY_LOGIN) {
-                        hxErrorCount++;
-                        if (hxErrorCount >= 3) {
-                            nextStep();
-                        } else {
-                            EMClient.getInstance().logout(true);
-                            loginHx();
-                        }
-                    } else {
-                        dimissLoading();
-                        Looper.prepare();
-                        Toast.makeText(mContext, "环信异常：" + error + "," + s, Toast.LENGTH_SHORT).show();
-                        Looper.loop();
-                    }
-                }
-
-                @Override
-                public void onProgress(int i, String s) {
-
-                }
-            });
-        }
-    }
-
     private void nextStep() {
         dimissLoading();
         if (isMainTo) {
@@ -301,7 +258,6 @@ public class LoginActivity extends BaseActivity {
             finish();
         }
     }
-
     private void loginByWeChat() {
         IWXAPI wxapi = WXAPIFactory.createWXAPI(this, AppConfig.WX_APP_ID);
         wxapi.registerApp(AppConfig.WX_APP_ID);

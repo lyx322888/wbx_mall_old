@@ -122,7 +122,7 @@ public class SplitActivity extends BaseActivity {
             public void onSuccess(JSONObject result) {
                 String msg = result.getString("msg");
                 if ("成功".equals(msg)) {
-                    finish();
+                    startActivity(new Intent(SplitActivity.this, SplitRecordActivity.class));
                 }
                 ToastUitl.showShort("成功");
             }

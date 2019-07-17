@@ -19,8 +19,6 @@ import android.widget.TextView;
 
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
-import com.hyphenate.chat.EMChatManager;
-import com.hyphenate.chat.EMClient;
 import com.wbx.mall.R;
 import com.wbx.mall.activity.CookBookActivity;
 import com.wbx.mall.activity.FoodsActivity;
@@ -81,7 +79,6 @@ public class IndexFragment extends BaseFragment implements BaseRefreshListener {
     private boolean canLoadMore = true;
     private ShopGoodsAdapter mAdapter;
     private MyReceiver refreshHasLocationReceiver;
-    private MyReceiver refreshUIReceiver;
     private Intent intent;
     private Dialog mLoadingDialog;
     private MyHttp myHttp;
@@ -115,9 +112,6 @@ public class IndexFragment extends BaseFragment implements BaseRefreshListener {
 
     @Override
     protected void fillData() {
-        IntentFilter filtermsg = new IntentFilter(AppConfig.REFRESH_UI);
-        refreshUIReceiver = new MyReceiver();
-        getActivity().registerReceiver(refreshUIReceiver, filtermsg);
         IntentFilter filter = new IntentFilter("refreshHasLocation");
         refreshHasLocationReceiver = new MyReceiver();
         getActivity().registerReceiver(refreshHasLocationReceiver, filter);
@@ -141,7 +135,6 @@ public class IndexFragment extends BaseFragment implements BaseRefreshListener {
     public void onDestroy() {
         super.onDestroy();
         getActivity().unregisterReceiver(refreshHasLocationReceiver);
-        getActivity().unregisterReceiver(refreshUIReceiver);
         getActivity().stopService(intent);
     }
 
@@ -193,42 +186,6 @@ public class IndexFragment extends BaseFragment implements BaseRefreshListener {
     @Override
     public void onResume() {
         super.onResume();
-        getUnreadNum();
-    }
-
-    private void getUnreadNum() {
-        if (LoginUtil.isLogin()) {
-            new MyHttp().doPost(Api.getDefault().getUnreadSystemMessageNum(LoginUtil.getLoginToken()), new HttpListener() {
-                @Override
-                public void onSuccess(JSONObject result) {
-                    int messageUnreadCount = 0;
-                    int chatUnreadCount = 0;
-                    if (result.getJSONObject("data") != null && result.getJSONObject("data").getInteger("count") > 0) {
-                        messageUnreadCount = result.getJSONObject("data").getInteger("count");
-                    }
-                    EMChatManager emChatManager = EMClient.getInstance().chatManager();
-                    if (null != emChatManager) {
-                        chatUnreadCount = emChatManager.getUnreadMessageCount();
-                    }
-                    if (messageUnreadCount + chatUnreadCount > 0) {
-                        unReadMsgTv.setVisibility(View.VISIBLE);
-                    } else {
-                        unReadMsgTv.setVisibility(View.GONE);
-                    }
-                }
-
-                @Override
-                public void onError(int code) {
-
-                }
-            });
-        }
-    }
-
-    @Override
-    public void onPause() {
-        super.onPause();
-
     }
 
     @Override
@@ -275,21 +232,11 @@ public class IndexFragment extends BaseFragment implements BaseRefreshListener {
     class MyReceiver extends BroadcastReceiver {
         @Override
         public void onReceive(Context context, Intent intent) {
-            switch (intent.getAction()) {
-                case "refreshHasLocation":
-                    dismissDialog();
-                    pageNum = AppConfig.pageNum;
-                    canLoadMore = true;
-                    startGetData();
-                    break;
-                case AppConfig.REFRESH_UI:
-                    new Handler().post(new Runnable() {
-                        @Override
-                        public void run() {
-                            unReadMsgTv.setVisibility(View.VISIBLE);
-                        }
-                    });
-                    break;
+            if ("refreshHasLocation".equals(intent.getAction())) {
+                dismissDialog();
+                pageNum = AppConfig.pageNum;
+                canLoadMore = true;
+                startGetData();
             }
         }
     }

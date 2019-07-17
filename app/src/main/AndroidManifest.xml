@@ -219,14 +219,6 @@
         <activity android:name=".activity.BookSeatOrderDetailActivity" />
         <service android:name=".service.LocationService" />
         <activity android:name=".activity.SelectAddressActivity" />
-        <!-- 发送地图 -->
-        <activity android:name="com.hyphenate.easeui.ui.EaseBaiduMapActivity" />
-        <activity android:name="com.hyphenate.easeui.ui.EaseShowBigImageActivity" />
-        <!-- 聊天 -->
-        <activity
-            android:name=".activity.ChatActivity"
-            android:windowSoftInputMode="stateVisible|adjustResize" />
-        <!-- 聊天记录列表 -->
         <!-- 引导页 -->
         <activity android:name=".activity.GuideActivity" />
         <!-- 星伙 分享绑定的用户 -->
@@ -249,32 +241,6 @@
             <intent-filter>
                 <action android:name="android.intent.action.DOWNLOAD_NOTIFICATION_CLICKED" />
                 <action android:name="android.intent.action.DOWNLOAD_COMPLETE" />
-            </intent-filter>
-        </receiver>
-
-        <!-- 设置环信应用的AppKey -->
-        <meta-data
-            android:name="EASEMOB_APPKEY"
-            android:value="1163170724115702#wbx365" />
-        <!-- 声明SDK所需的service SDK核心功能 -->
-        <service
-            android:name="com.hyphenate.chat.EMChatService"
-            android:exported="true" />
-        <service
-            android:name="com.hyphenate.chat.EMJobService"
-            android:exported="true"
-            android:permission="android.permission.BIND_JOB_SERVICE" />
-        <!-- 声明SDK所需的receiver -->
-        <receiver android:name="com.hyphenate.chat.EMMonitorReceiver">
-            <intent-filter>
-                <action android:name="android.intent.action.PACKAGE_REMOVED" />
-
-                <data android:scheme="package" />
-            </intent-filter>
-            <!-- 可选filter -->
-            <intent-filter>
-                <action android:name="android.intent.action.BOOT_COMPLETED" />
-                <action android:name="android.intent.action.USER_PRESENT" />
             </intent-filter>
         </receiver>
 

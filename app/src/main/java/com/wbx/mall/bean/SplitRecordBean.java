@@ -13,7 +13,7 @@ public class SplitRecordBean {
         this.data = data;
     }
 
-    public class SplitBean {
+    public static class SplitBean {
         private long subpackage_time;//分包时间
         private String subpackage_type;//分包类型
         private String subpackage_num;//软件套数

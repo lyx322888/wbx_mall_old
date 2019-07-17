@@ -4,10 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_marginStart="16dp"
-    android:layout_marginTop="10dp"
-    android:layout_marginEnd="16dp"
-    android:background="@drawable/rect_stroke_d5d5d5_3dp"
+    android:background="@drawable/bg_split_nor"
     android:padding="16dp">
 
     <com.wbx.mall.widget.CircleImageView
@@ -36,6 +33,7 @@
         android:layout_marginTop="10dp"
         android:textSize="16sp"
         app:layout_constraintStart_toStartOf="@+id/tv_phone"
+        android:textColor="#00CABC"
         app:layout_constraintTop_toBottomOf="@+id/tv_phone"
         tools:text=" 480 (200套)" />
 

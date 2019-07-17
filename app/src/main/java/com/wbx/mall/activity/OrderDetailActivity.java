@@ -881,10 +881,6 @@ public class OrderDetailActivity extends BaseActivity {
     }
 
     private void chat() {
-        if (TextUtils.isEmpty(data.getHx_username())) {
-            ToastUitl.showShort("抱歉，该商家暂时无法在线聊天！");
-            return;
-        }
-        ChatActivity.actionStart(this, data.getHx_username(), data.getShop_name(), data.getShop_logo());
+        ToastUitl.showShort("抱歉，该商家暂时无法在线聊天！");
     }
 }

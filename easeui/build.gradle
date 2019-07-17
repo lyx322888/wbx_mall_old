@@ -37,6 +37,4 @@ dependencies {
     implementation "com.android.support:appcompat-v7:$rootProject.ext.supportVersion"
     implementation 'com.github.bumptech.glide:glide:3.7.0'
     api 'com.hyphenate:hyphenate-sdk-lite:3.4.1'
-    api "com.github.hotchemi:permissionsdispatcher:3.3.1"
-    annotationProcessor "com.github.hotchemi:permissionsdispatcher-processor:3.3.1"
 }

@@ -7,7 +7,6 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.graphics.Color;
 import android.graphics.drawable.AnimationDrawable;
-import android.os.Handler;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -18,13 +17,9 @@ import android.widget.TextView;
 
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
-import com.hyphenate.chat.EMChatManager;
-import com.hyphenate.chat.EMClient;
 import com.sunfusheng.marqueeview.MarqueeView;
 import com.wbx.mall.R;
 import com.wbx.mall.activity.DetailActivity;
-import com.wbx.mall.module.mine.ui.IntelligentServiceActivity;
-import com.wbx.mall.module.mine.ui.MessageCenterActivity;
 import com.wbx.mall.activity.NearbyStoreActivity;
 import com.wbx.mall.activity.SearchActivity;
 import com.wbx.mall.activity.SelectAddressActivity;
@@ -44,6 +39,8 @@ import com.wbx.mall.bean.ShopInfo2;
 import com.wbx.mall.bean.VisitShopBean;
 import com.wbx.mall.common.LoginUtil;
 import com.wbx.mall.dialog.IndexCouponDialog;
+import com.wbx.mall.module.mine.ui.IntelligentServiceActivity;
+import com.wbx.mall.module.mine.ui.MessageCenterActivity;
 import com.wbx.mall.presenter.VisitShopPresenterImp;
 import com.wbx.mall.service.LocationService;
 import com.wbx.mall.utils.GlideUtils;
@@ -96,7 +93,6 @@ public class IndexFragment02 extends BaseFragment implements BaseRefreshListener
     private boolean canLoadMore = true;
     private ShopGoodsAdapter mAdapter;
     private MyReceiver refreshHasLocationReceiver;
-    private MyReceiver refreshUIReceiver;
     private Intent intent;
     private Dialog mLoadingDialog;
     private IndexCountBean indexCountBean;
@@ -140,9 +136,6 @@ public class IndexFragment02 extends BaseFragment implements BaseRefreshListener
 
     @Override
     protected void fillData() {
-        IntentFilter filtermsg = new IntentFilter(AppConfig.REFRESH_UI);
-        refreshUIReceiver = new MyReceiver();
-        getActivity().registerReceiver(refreshUIReceiver, filtermsg);
         IntentFilter filter = new IntentFilter("refreshHasLocation");
         refreshHasLocationReceiver = new MyReceiver();
         getActivity().registerReceiver(refreshHasLocationReceiver, filter);
@@ -157,7 +150,7 @@ public class IndexFragment02 extends BaseFragment implements BaseRefreshListener
                 List<String> list = new ArrayList<>();
                 for (IndexCountBean.OrderBean bean : indexCountBean.getActivity_user()) {
                     String time = TimeUtil.getfriendlyTime(bean.getCreate_time() * 1000);
-                    list.add(bean.getNickname() + time + "购买了" + bean.getTitle());
+                    list.add(bean.getNickname() + "  " + time + "购买了" + bean.getTitle());
                 }
                 marqueeView.startWithList(list);
                 String time = TimeUtil.getfriendlyTime(indexCountBean.getOrder().getCreate_time() * 1000);
@@ -188,7 +181,6 @@ public class IndexFragment02 extends BaseFragment implements BaseRefreshListener
     public void onDestroy() {
         super.onDestroy();
         getActivity().unregisterReceiver(refreshHasLocationReceiver);
-        getActivity().unregisterReceiver(refreshUIReceiver);
         getActivity().stopService(intent);
     }
 
@@ -242,37 +234,13 @@ public class IndexFragment02 extends BaseFragment implements BaseRefreshListener
     @Override
     public void onResume() {
         super.onResume();
-        getUnreadNum();
         marqueeView.startFlipping();
     }
 
-    private void getUnreadNum() {
-        if (LoginUtil.isLogin()) {
-            new MyHttp().doPost(Api.getDefault().getUnreadSystemMessageNum(LoginUtil.getLoginToken()), new HttpListener() {
-                @Override
-                public void onSuccess(JSONObject result) {
-                    int messageUnreadCount = 0;
-                    int chatUnreadCount = 0;
-                    if (result.getJSONObject("data") != null && result.getJSONObject("data").getInteger("count") > 0) {
-                        messageUnreadCount = result.getJSONObject("data").getInteger("count");
-                    }
-                    EMChatManager emChatManager = EMClient.getInstance().chatManager();
-                    if (null != emChatManager) {
-                        chatUnreadCount = emChatManager.getUnreadMessageCount();
-                    }
-                    if (messageUnreadCount + chatUnreadCount > 0) {
-                        unReadMsgTv.setVisibility(View.VISIBLE);
-                    } else {
-                        unReadMsgTv.setVisibility(View.GONE);
-                    }
-                }
-
-                @Override
-                public void onError(int code) {
-
-                }
-            });
-        }
+    @Override
+    public void onPause() {
+        super.onPause();
+        marqueeView.stopFlipping();
     }
 
     @Override
@@ -341,21 +309,11 @@ public class IndexFragment02 extends BaseFragment implements BaseRefreshListener
     class MyReceiver extends BroadcastReceiver {
         @Override
         public void onReceive(Context context, Intent intent) {
-            switch (intent.getAction()) {
-                case "refreshHasLocation":
-                    dismissDialog();
-                    pageNum = AppConfig.pageNum;
-                    canLoadMore = true;
-                    startGetData();
-                    break;
-                case AppConfig.REFRESH_UI:
-                    new Handler().post(new Runnable() {
-                        @Override
-                        public void run() {
-                            unReadMsgTv.setVisibility(View.VISIBLE);
-                        }
-                    });
-                    break;
+            if ("refreshHasLocation".equals(intent.getAction())) {
+                dismissDialog();
+                pageNum = AppConfig.pageNum;
+                canLoadMore = true;
+                startGetData();
             }
         }
     }
