@@ -342,28 +342,34 @@ public class SubmitOrderActivity extends BaseActivity implements PayWayDialog.Di
         myHttp.doPost((isPhysical ? Api.getDefault().shopPayOrder(params) : Api.getDefault().marketPayOrder(params)), new HttpListener() {
             @Override
             public void onSuccess(JSONObject result) {
-                if (payCode.equals(AppConfig.PayType.alipay)) {
-                    final String data = result.getString("data");
-                    //支付宝支付
-                    Runnable payRunnable = new Runnable() {
-                        @Override
-                        public void run() {
-                            PayTask alipay = new PayTask(mActivity);
-                            Map<String, String> payResult = alipay.payV2(data, true);
-                            Message msg = new Message();
-                            msg.what = SDK_PAY_FLAG;
-                            msg.obj = payResult;
-                            mHandler.sendMessage(msg);
-                        }
-                    };
-                    Thread payThread = new Thread(payRunnable);
-                    payThread.start();
-                } else if (payCode.equals(AppConfig.PayType.wxpay)) {
-                    WxPayInfo data = result.getObject("data", WxPayInfo.class);
-                    startWxPay(data);
-                } else if (payCode.equals(AppConfig.PayType.money)) {
-                    //余额支付
-                    paySuccess();
+                switch (payCode) {
+                    case AppConfig.PayType.alipay: {
+                        final String data = result.getString("data");
+                        //支付宝支付
+                        Runnable payRunnable = new Runnable() {
+                            @Override
+                            public void run() {
+                                PayTask alipay = new PayTask(mActivity);
+                                Map<String, String> payResult = alipay.payV2(data, true);
+                                Message msg = new Message();
+                                msg.what = SDK_PAY_FLAG;
+                                msg.obj = payResult;
+                                mHandler.sendMessage(msg);
+                            }
+                        };
+                        Thread payThread = new Thread(payRunnable);
+                        payThread.start();
+                        break;
+                    }
+                    case AppConfig.PayType.wxpay: {
+                        WxPayInfo data = result.getObject("data", WxPayInfo.class);
+                        startWxPay(data);
+                        break;
+                    }
+                    case AppConfig.PayType.money:
+                        //余额支付
+                        paySuccess();
+                        break;
                 }
 
             }

@@ -224,7 +224,7 @@ public class DispatchingTimeDialog extends Dialog {
                     if (mIndexDate == 0 && mIndexTime == 0) {
                         str = "尽快送达 | " + format;
                     } else {
-                        str = mDate.get(mIndexDate).getDay() + "-" + mDate.get(mIndexDate).getWeek() + "(" + mDate.get(mIndexDate).getDate() + ")" + format;
+                        str = mDate.get(mIndexDate).getDate() + "-" + format;
                     }
                     onSubmitListener.onSubmit(time, str);
                 } else {
