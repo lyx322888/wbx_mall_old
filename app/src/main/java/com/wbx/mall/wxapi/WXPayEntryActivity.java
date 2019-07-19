@@ -52,8 +52,6 @@ public class WXPayEntryActivity extends Activity implements IWXAPIEventHandler {
             if (resp.errCode == 0) {
                 //成功
                 EventBus.getDefault().post("PaySuccess");
-            } else {
-
             }
 //			AlertDialog.Builder builder = new AlertDialog.Builder(this);
 //			builder.setTitle("支付结果");

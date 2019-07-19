@@ -302,8 +302,6 @@
         <activity android:name=".activity.MyFreeOrderCouponActivity" />
         <!-- 商家数据 -->
         <activity android:name=".module.mine.ui.MerchantDataActivity" />
-        <!-- 订单 -->
-        <activity android:name=".module.mine.ui.IndexOrderActivity" />
         <activity android:name=".activity.FruitsActivity" />
         <activity android:name=".activity.SnacksActivity" />
         <activity android:name=".activity.DrinksActivity" />

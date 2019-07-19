@@ -37,8 +37,9 @@ import com.wbx.mall.bean.PaymentInfo;
 import com.wbx.mall.bean.WxPayInfo;
 import com.wbx.mall.common.ActivityManager;
 import com.wbx.mall.common.LoginUtil;
-import com.wbx.mall.dialog.PayWayDialog;
+import com.wbx.mall.dialog.DispatchingTimeDialog;
 import com.wbx.mall.dialog.GuaKaDialogFragment;
+import com.wbx.mall.dialog.PayWayDialog;
 import com.wbx.mall.module.mine.ui.AddressManagerActivity;
 import com.wbx.mall.module.mine.ui.BookSeatOrderActivity;
 import com.wbx.mall.utils.MD5;
@@ -111,6 +112,8 @@ public class SubmitOrderActivity extends BaseActivity implements PayWayDialog.Di
     ImageView ivSelectAddress;
     @Bind(R.id.ll_remark)
     LinearLayout llRemark;
+    @Bind(R.id.tv_dispatching_time)
+    TextView tvDispatchTime;
     private int addressId;
     private String orderId;
     private String payCode = AppConfig.PayType.money;
@@ -164,6 +167,7 @@ public class SubmitOrderActivity extends BaseActivity implements PayWayDialog.Di
         }
     };
     private PayWayDialog mPayDialog;
+    private DispatchingTimeDialog timeDialog;
 
     @Override
     public int getLayoutId() {
@@ -309,7 +313,6 @@ public class SubmitOrderActivity extends BaseActivity implements PayWayDialog.Di
                 String remark = data.getStringExtra("remark");
                 tvRemark.setText(remark);
                 break;
-
         }
     }
 
@@ -370,7 +373,6 @@ public class SubmitOrderActivity extends BaseActivity implements PayWayDialog.Di
 
             }
         });
-
     }
 
     private void paySuccess() {
@@ -464,7 +466,7 @@ public class SubmitOrderActivity extends BaseActivity implements PayWayDialog.Di
         }
     }
 
-    @OnClick({R.id.rl_address, R.id.ll_pay_type, R.id.tv_pay_now, R.id.ll_remark})
+    @OnClick({R.id.rl_address, R.id.ll_pay_type, R.id.tv_pay_now, R.id.ll_remark, R.id.ll_dispatching_time})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.rl_address:
@@ -481,6 +483,9 @@ public class SubmitOrderActivity extends BaseActivity implements PayWayDialog.Di
                 break;
             case R.id.ll_remark:
                 addRemark();
+                break;
+            case R.id.ll_dispatching_time:
+                showTimeDialog();
                 break;
         }
     }
@@ -548,5 +553,18 @@ public class SubmitOrderActivity extends BaseActivity implements PayWayDialog.Di
     public void ListClick(View v, PaymentInfo info) {
         payCode = info.getCode();
         tvPayType.setText(info.getName());
+    }
+
+    private void showTimeDialog() {
+        if (timeDialog == null) {
+            timeDialog = new DispatchingTimeDialog(this, isPhysical, orderId, new DispatchingTimeDialog.OnSubmitListener() {
+                @Override
+                public void onSubmit(String time, String str) {
+                    tvDispatchTime.setText(str);
+                    timeDialog.dismiss();
+                }
+            });
+        }
+        timeDialog.show();
     }
 }

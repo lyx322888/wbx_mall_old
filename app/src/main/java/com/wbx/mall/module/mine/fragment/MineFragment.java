@@ -23,7 +23,6 @@ import com.wbx.mall.module.mine.ui.AccountInfoActivity;
 import com.wbx.mall.module.mine.ui.AddressManagerActivity;
 import com.wbx.mall.module.mine.ui.BookSeatOrderActivity;
 import com.wbx.mall.module.mine.ui.CollectionActivity;
-import com.wbx.mall.module.mine.ui.IndexOrderActivity;
 import com.wbx.mall.module.mine.ui.IntegralMallActivity;
 import com.wbx.mall.module.mine.ui.IntelligentServiceActivity;
 import com.wbx.mall.module.mine.ui.MessageCenterActivity;
@@ -36,6 +35,8 @@ import com.wbx.mall.utils.SPUtils;
 import com.wbx.mall.widget.iosdialog.AlertDialog;
 import com.wbx.mall.widget.refresh.BaseRefreshListener;
 import com.wbx.mall.widget.refresh.PullToRefreshLayout;
+
+import org.greenrobot.eventbus.EventBus;
 
 import butterknife.Bind;
 import butterknife.OnClick;
@@ -174,7 +175,7 @@ public class MineFragment extends BaseFragment implements BaseRefreshListener {
                 startActivity(new Intent(getActivity(), IntelligentServiceActivity.class));
                 break;
             case R.id.ll_my_order:
-                startActivity(new Intent(getActivity(), IndexOrderActivity.class));
+                EventBus.getDefault().post("toOrder");
                 break;
             case R.id.ll_my_book:
                 startActivity(new Intent(getActivity(), BookSeatOrderActivity.class));

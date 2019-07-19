@@ -70,6 +70,7 @@ public class OrderDetailBean {
     private String carrier_driver_name;
     private String dm_name;
     private String dm_mobile;
+    private long dispatching_time;//配送时间
 
     public String getDm_name() {
         return dm_name;
@@ -325,6 +326,14 @@ public class OrderDetailBean {
 
     public void setIs_fengniao(int is_fengniao) {
         this.is_fengniao = is_fengniao;
+    }
+
+    public long getDispatching_time() {
+        return dispatching_time;
+    }
+
+    public void setDispatching_time(long dispatching_time) {
+        this.dispatching_time = dispatching_time;
     }
 
     public AddressBean getAddress() {

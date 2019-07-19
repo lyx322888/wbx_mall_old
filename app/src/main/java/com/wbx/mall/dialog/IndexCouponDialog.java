@@ -38,6 +38,7 @@ import java.util.List;
 
 /**
  * 首页免单推荐弹窗
+ * DispatchingTimeDialog
  */
 public class IndexCouponDialog extends Dialog {
     private Context mContext;

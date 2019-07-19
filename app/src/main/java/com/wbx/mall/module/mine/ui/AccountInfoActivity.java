@@ -24,6 +24,8 @@ import com.wbx.mall.utils.SPUtils;
 import com.wbx.mall.utils.UpLoadPicUtils;
 import com.wbx.mall.widget.LoadingDialog;
 
+import org.greenrobot.eventbus.EventBus;
+
 import java.io.IOException;
 import java.util.ArrayList;
 

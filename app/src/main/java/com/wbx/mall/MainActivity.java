@@ -27,6 +27,10 @@ import com.wbx.mall.module.mine.fragment.MineFragment;
 import com.wbx.mall.utils.SPUtils;
 import com.wbx.mall.widget.TabFragmentHost;
 
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
+
 import butterknife.Bind;
 import butterknife.OnClick;
 
@@ -50,6 +54,7 @@ public class MainActivity extends BaseActivity {
 
     @Override
     public void initView() {
+        EventBus.getDefault().register(this);
         initTabHost();
         initFragment();
     }
@@ -147,7 +152,6 @@ public class MainActivity extends BaseActivity {
                 } else {
                     mTabHost.setCurrentTab(4);
                 }
-
             }
         });
         mTabWidget.getChildTabViewAt(1).setOnClickListener(new View.OnClickListener() {
@@ -207,5 +211,20 @@ public class MainActivity extends BaseActivity {
         } else {
             LoginUtil.login();
         }
+    }
+
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void onMessageEvent(String event) {
+        if ("toOrder".equals(event)) {
+            if (null != BaseApplication.getInstance().readObject(AppConfig.LOCATION_DATA)) {
+                mTabHost.setCurrentTab(3);
+            }
+        }
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+        EventBus.getDefault().unregister(this);
     }
 }

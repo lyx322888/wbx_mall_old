@@ -784,8 +784,25 @@ public interface ApiService {
     @FormUrlEncoded
     @POST("/api/salesman/get_software_subpackage_info")
     Observable<JSONObject> getSoftSubPackage(@Field("login_token") String login_token);
+
     //10.11. 分包列表
     @FormUrlEncoded
     @POST("/api/salesman/list_software_subpackage")
     Observable<JSONObject> getSubPackageList(@Field("login_token") String login_token);
+
+    //获取店铺可预订时间
+    @FormUrlEncoded
+    @POST("/api/unifyshop/get_dispatching_time")
+    Observable<JSONObject> getDispatchTime(@Field("shop_id") String shop_id);
+
+    //指定配送时间(实体店)
+    @FormUrlEncoded
+    @POST("/api/mall/update_dispatching_time")
+    Observable<JSONObject> updateMallTime(@FieldMap Map<String, Object> params);
+
+    //指定配送时间(菜市场)
+    @FormUrlEncoded
+    @POST("/api/buygreens/update_dispatching_time")
+    Observable<JSONObject> updateBuyGreensTime(@FieldMap Map<String, Object> params);
+
 }

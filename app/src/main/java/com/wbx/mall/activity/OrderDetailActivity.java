@@ -47,6 +47,7 @@ import com.wbx.mall.bean.RefundInfo;
 import com.wbx.mall.common.LoginUtil;
 import com.wbx.mall.utils.DateUtil;
 import com.wbx.mall.utils.DisplayUtil;
+import com.wbx.mall.utils.FormatUtil;
 import com.wbx.mall.utils.GlideUtils;
 import com.wbx.mall.utils.ToastUitl;
 import com.wbx.mall.widget.CustomDragExpandLayout;
@@ -474,6 +475,7 @@ public class OrderDetailActivity extends BaseActivity {
         }
         tvDriverName.setText(data.getIs_dada() == 1 ? data.getDm_name() : data.getCarrier_driver_name());
         tvSendType.setText(data.getIs_dada() == 1 ? "达达配送" : (data.getIs_fengniao() == 1 ? "蜂鸟快递" : "商家自配"));
+        tvSendTime.setText(data.getDispatching_time() == 0?"立即配送":FormatUtil.stampToDate(data.getDispatching_time() + ""));
         tvSendInfo.setText(data.getAddress().getXm() + "  " + data.getAddress().getTel());
         tvSendAddress.setText(data.getAddress().getInfo());
         tvOrderId.setText(data.getOrder_id());
