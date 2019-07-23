@@ -1,6 +1,7 @@
 package com.wbx.mall.base;
 
 import android.app.ActivityManager;
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageInfo;
@@ -11,8 +12,10 @@ import android.support.multidex.MultiDexApplication;
 
 import com.orhanobut.logger.AndroidLogAdapter;
 import com.orhanobut.logger.Logger;
+import com.tencent.bugly.crashreport.CrashReport;
 import com.wbx.mall.BuildConfig;
 import com.wbx.mall.chat.BaseManager;
+import com.wbx.mall.utils.APPUtil;
 
 import org.apache.commons.codec.binary.Base64;
 
@@ -59,6 +62,21 @@ public class BaseApplication extends MultiDexApplication {
     private void initInUiThread() {
         initJPush();
         initLog();
+        initBugly();
+    }
+
+    private void initBugly() {
+        Context context = getApplicationContext();
+        // 获取当前包名
+        String packageName = context.getPackageName();
+        // 获取当前进程名
+        String processName = APPUtil.getProcessName(android.os.Process.myPid());
+        // 设置是否为上报进程
+        CrashReport.UserStrategy strategy = new CrashReport.UserStrategy(context);
+        strategy.setUploadProcess(processName == null || processName.equals(packageName));
+        strategy.setAppReportDelay(20000);
+        // 初始化Bugly
+        CrashReport.initCrashReport(context, "77a74b0ab9", true, strategy);
     }
 
     public long getAppInitTime() {
