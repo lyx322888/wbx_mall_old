@@ -152,7 +152,7 @@ public class BookSeatOrderFragment extends BaseFragment implements BaseRefreshLi
                 if (item.getType() == 2) {//立即点菜
                     Intent orderIntent = new Intent(getActivity(), SubmitOrderActivity.class);
                     orderIntent.putExtra("isBook", true);
-                    orderIntent.putExtra("isPhysical", true);
+                    orderIntent.putExtra("isPhysical", false);
                     orderIntent.putExtra("orderId", item.getOrder_id() + "");
                     startActivity(orderIntent);
                 } else {//到店点菜

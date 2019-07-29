@@ -166,7 +166,11 @@
             android:id="@+id/tab_layout"
             android:layout_width="match_parent"
             android:layout_height="49dp"
-            android:background="@color/white" />
+            app:tabBackground="@color/white"
+            app:tabIndicatorColor="@color/app_color"
+            app:tabMode="fixed"
+            app:tabSelectedTextColor="@color/app_color"
+            app:tabTextColor="@color/text_black" />
 
         <View
             android:layout_width="match_parent"
@@ -212,7 +216,6 @@
         android:layout_height="45dp"
         android:layout_gravity="end"
         android:layout_marginTop="75dp"
-        android:layout_marginRight="50dp"
         android:src="@drawable/reserve"
         android:visibility="gone" />
 
@@ -222,6 +225,5 @@
         android:layout_height="80dp"
         android:layout_gravity="end"
         android:layout_marginTop="110dp"
-        android:layout_marginRight="25dp"
         android:src="@drawable/icon_daodian" />
 </android.support.design.widget.CoordinatorLayout>

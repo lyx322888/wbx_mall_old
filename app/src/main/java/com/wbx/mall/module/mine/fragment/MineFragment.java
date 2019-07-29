@@ -131,7 +131,7 @@ public class MineFragment extends BaseFragment implements BaseRefreshListener {
 
     }
 
-    @OnClick({R.id.ll_free_activity, R.id.ll_free_sheet, R.id.ll_my_order, R.id.iv_sign_in, R.id.ll_my_integrate, R.id.ll_red_packet, R.id.ll_my_collection, R.id.ll_my_integral, R.id.ll_help, R.id.ll_my_book, R.id.ll_message, R.id.ll_address_manager, R.id.ll_personal, R.id.mine_out_login_btn, R.id.ll_scan_order, R.id.ll_invite, R.id.ll_payment_store})
+    @OnClick({R.id.ll_free_activity, R.id.ll_free_sheet, R.id.iv_sign_in, R.id.ll_my_integrate, R.id.ll_red_packet, R.id.ll_my_collection, R.id.ll_my_integral, R.id.ll_help, R.id.ll_my_book, R.id.ll_message, R.id.ll_address_manager, R.id.ll_personal, R.id.mine_out_login_btn, R.id.ll_scan_order, R.id.ll_invite, R.id.ll_payment_store})
     public void onViewClicked(View view) {
         Intent intent;
         switch (view.getId()) {
@@ -173,9 +173,6 @@ public class MineFragment extends BaseFragment implements BaseRefreshListener {
 //                break;
             case R.id.ll_help:
                 startActivity(new Intent(getActivity(), IntelligentServiceActivity.class));
-                break;
-            case R.id.ll_my_order:
-                EventBus.getDefault().post("toOrder");
                 break;
             case R.id.ll_my_book:
                 startActivity(new Intent(getActivity(), BookSeatOrderActivity.class));

@@ -807,7 +807,7 @@ public class OrderDetailActivity extends BaseActivity {
     private void pay() {
         Intent intent = new Intent(mContext, SubmitOrderActivity.class);
         intent.putExtra("orderId", data.getOrder_id());
-        intent.putExtra("isPhysical", data.getOrder_type() == 2);
+        intent.putExtra("isPhysical", data.getOrder_type() != 2);
         mContext.startActivity(intent);
     }
 

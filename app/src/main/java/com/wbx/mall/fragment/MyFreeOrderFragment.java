@@ -41,7 +41,7 @@ import java.util.List;
 
 import butterknife.Bind;
 
-public class MyFreeOrderFragment extends BaseFragment implements OnRefreshListener, OnLoadMoreListener{
+public class MyFreeOrderFragment extends BaseFragment implements OnRefreshListener, OnLoadMoreListener {
     private static final String POSITION = "POSITION";
     @Bind(R.id.srl)
     SmartRefreshLayout srl;
@@ -172,7 +172,7 @@ public class MyFreeOrderFragment extends BaseFragment implements OnRefreshListen
             public void onSuccess(JSONObject result) {
                 String orderId = result.getJSONObject("data").getString("order_id");
                 Intent intent = new Intent(getContext(), SubmitOrderActivity.class);
-                intent.putExtra("isPhysical", data.getGrade_id() != AppConfig.StoreType.VEGETABLE_MARKET);
+                intent.putExtra("isPhysical", data.getGrade_id() == AppConfig.StoreType.VEGETABLE_MARKET);
                 intent.putExtra("orderId", orderId);
                 startActivity(intent);
             }

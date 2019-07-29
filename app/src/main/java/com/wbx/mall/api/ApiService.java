@@ -97,7 +97,7 @@ public interface ApiService {
     //店铺详情（菜市场）
     @FormUrlEncoded
     @POST("/api/buygreens/get_goods")
-    Observable<JSONObject> getVegetableShopInfo(@Field("shop_id") String shop_id, @Field("login_token") String login_token, @Field("goods_id") String goods_id);
+    Observable<JSONObject> getVegetableShopInfo(@Field("shop_id") String shop_id, @Field("login_token") String login_token);
 
     //店铺详情（实体店）
     @FormUrlEncoded
@@ -764,7 +764,7 @@ public interface ApiService {
 
     @FormUrlEncoded
     @POST("/api/unifyshop/list_goods")
-    Observable<JSONObject> getListGoods(@Field("login_token") String login_token, @Field("cate_id") String cate_id, @Field("shop_id") String shop_id, @Field("page") int page, @Field("num") int num);
+    Observable<JSONObject> getListGoods(@Field("login_token") String login_token, @Field("cate_id") String cate_id, @Field("shop_id") String shop_id, @Field("page") int page, @Field("num") int num,@Field("keyword")String keyword);
 
     @FormUrlEncoded
     @POST("/api/index/index_count_data")

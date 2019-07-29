@@ -169,10 +169,10 @@ public class AddWidget extends FrameLayout {
         this.goodsInfo = goodsInfo;
         this.onAddClick = onAddClick;
         count = 0;
-//        for (String s : goodsInfo.getHmBuyNum().keySet()) {
-//            count += goodsInfo.getHmBuyNum().get(s);
-//        }
-        count += goodsInfo.getCart_num();
+        for (String s : goodsInfo.getHmBuyNum().keySet()) {
+            count += goodsInfo.getHmBuyNum().get(s);
+        }
+//        count += goodsInfo.getCart_num();
         if (count == 0) {
             sub.setAlpha(0);
             tv_count.setAlpha(0);

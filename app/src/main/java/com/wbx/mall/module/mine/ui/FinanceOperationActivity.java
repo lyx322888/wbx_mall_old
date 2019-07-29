@@ -304,7 +304,7 @@ public class FinanceOperationActivity extends BaseActivity implements ActionShee
                             showMoneyTv.setTextColor(Color.parseColor("#F00C0C"));
                         } else {
                             showMoneyTv.setTextColor(Color.parseColor("#b9b9b9"));
-                            showMoneyTv.setText(String.format("实际提现¥%.2f(手续费¥%.2f/费率%s)", ticketType == 1 ? cashMoney - (cashMoney * 0.17) : cashMoney - (cashMoney * 0.007), ticketType == 1 ? cashMoney * 0.17 : cashMoney * 0.007, ticketType == 1 ? "17%" : "0.7%"));
+                            showMoneyTv.setText(String.format("实际提现¥%.2f(手续费¥%.2f/费率%s)", ticketType == 1 ? cashMoney - (cashMoney * 0.13) : cashMoney - (cashMoney * 0.007), ticketType == 1 ? cashMoney * 0.13 : cashMoney * 0.007, ticketType == 1 ? "13%" : "0.7%"));
                         }
                     }
                 }

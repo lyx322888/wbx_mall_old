@@ -119,14 +119,14 @@ public class ShoppingCartActivity extends BaseActivity implements BaseRefreshLis
             @Override
             public void onItemClicked(View view, int position) {
                 ShopCart shopCart = mAdapter.getItem(position);
-                isPhysical = shopCart.getGrade_id() != 15;
-                String cartGoodsJson = createGoodsJson(!isPhysical, shopCart);
+                isPhysical = shopCart.getGrade_id() == 15;
+                String cartGoodsJson = createGoodsJson(isPhysical, shopCart);
                 if (TextUtils.isEmpty(cartGoodsJson)) {
                     Toast.makeText(mContext, "请选中要结算的商品", Toast.LENGTH_SHORT).show();
                     return;
                 }
                 LoadingDialog.showDialogForLoading(ShoppingCartActivity.this);
-                new MyHttp().doPost(isPhysical ? Api.getDefault().createOrder(SPUtils.getSharedStringData(mContext, AppConfig.LOGIN_TOKEN), cartGoodsJson, "") : Api.getDefault().createVegetableOrder(SPUtils.getSharedStringData(mContext, AppConfig.LOGIN_TOKEN), cartGoodsJson), new HttpListener() {
+                new MyHttp().doPost(isPhysical ? Api.getDefault().createVegetableOrder(SPUtils.getSharedStringData(mContext, AppConfig.LOGIN_TOKEN), cartGoodsJson) : Api.getDefault().createOrder(SPUtils.getSharedStringData(mContext, AppConfig.LOGIN_TOKEN), cartGoodsJson, ""), new HttpListener() {
                     @Override
                     public void onSuccess(JSONObject result) {
                         String orderId = result.getJSONObject("data").getString("order_id");

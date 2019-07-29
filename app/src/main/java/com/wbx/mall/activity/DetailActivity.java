@@ -127,7 +127,7 @@ public class DetailActivity extends BaseActivity implements AddWidget.OnAddClick
 
     private void initViewPager() {
         fragmentList = new ArrayList<>();
-        fragmentList.add(Goods2Fragment.newInstance(mStoreId, isVM));
+//        fragmentList.add(Goods2Fragment.newInstance(mStoreId, isVM));
         fragmentList.add(ShopCommentFragment.newInstance(mStoreId));
         fragmentList.add(MerchantInfoFragment.newInstance(mStoreInfo.getDetail()));
         ShopDetailPagerAdapter pagerAdapter = new ShopDetailPagerAdapter(getSupportFragmentManager(), fragmentList);

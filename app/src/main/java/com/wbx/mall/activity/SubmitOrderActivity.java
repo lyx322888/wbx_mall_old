@@ -206,18 +206,20 @@ public class SubmitOrderActivity extends BaseActivity implements PayWayDialog.Di
      */
     private void getPayInfo() {
         LoadingDialog.showDialogForLoading(mActivity, "加载中...", true);
-        myHttp.doPost(isPhysical ? Api.getDefault().getShopPayInfo(SPUtils.getSharedStringData(mContext, AppConfig.LOGIN_TOKEN), orderId) : Api.getDefault().getPayInfo(SPUtils.getSharedStringData(mContext, AppConfig.LOGIN_TOKEN), orderId), new HttpListener() {
-            @Override
-            public void onSuccess(JSONObject result) {
-                JSONObject data = result.getJSONObject("data");
-                updateUI(data);
-            }
+        myHttp.doPost(isPhysical ? Api.getDefault().getPayInfo(SPUtils.getSharedStringData(mContext, AppConfig.LOGIN_TOKEN), orderId)
+                        : Api.getDefault().getShopPayInfo(SPUtils.getSharedStringData(mContext, AppConfig.LOGIN_TOKEN), orderId)
+                , new HttpListener() {
+                    @Override
+                    public void onSuccess(JSONObject result) {
+                        JSONObject data = result.getJSONObject("data");
+                        updateUI(data);
+                    }
 
-            @Override
-            public void onError(int code) {
+                    @Override
+                    public void onError(int code) {
 
-            }
-        });
+                    }
+                });
     }
 
     private void updateUI(JSONObject data) {
@@ -319,7 +321,7 @@ public class SubmitOrderActivity extends BaseActivity implements PayWayDialog.Di
     private void updateAddress(final AddressInfo selectAddress) {
         llNoSelectAddress.setVisibility(View.GONE);
         llSelectedAddress.setVisibility(View.VISIBLE);
-        myHttp.doPost(isPhysical ? Api.getDefault().updateOrderAddress(LoginUtil.getLoginToken(), orderId, selectAddress.getId()) : Api.getDefault().updateVegetableOrderAddress(LoginUtil.getLoginToken(), orderId, selectAddress.getId()), new HttpListener() {
+        myHttp.doPost(isPhysical ? Api.getDefault().updateVegetableOrderAddress(LoginUtil.getLoginToken(), orderId, selectAddress.getId()) : Api.getDefault().updateOrderAddress(LoginUtil.getLoginToken(), orderId, selectAddress.getId()), new HttpListener() {
             @Override
             public void onSuccess(JSONObject result) {
                 addressId = selectAddress.getId();
@@ -339,7 +341,7 @@ public class SubmitOrderActivity extends BaseActivity implements PayWayDialog.Di
      * 开始支付
      */
     private void startPay() {
-        myHttp.doPost((isPhysical ? Api.getDefault().shopPayOrder(params) : Api.getDefault().marketPayOrder(params)), new HttpListener() {
+        myHttp.doPost((isPhysical ? Api.getDefault().marketPayOrder(params) : Api.getDefault().shopPayOrder(params)), new HttpListener() {
             @Override
             public void onSuccess(JSONObject result) {
                 switch (payCode) {
@@ -407,7 +409,7 @@ public class SubmitOrderActivity extends BaseActivity implements PayWayDialog.Di
         if (isBook) {
             startActivity(new Intent(mActivity, BookSeatOrderActivity.class));
         } else {
-            OrderDetailActivity.actionStart(mActivity, orderId, !isPhysical);
+            OrderDetailActivity.actionStart(mActivity, orderId, isPhysical);
         }
         finish();
     }

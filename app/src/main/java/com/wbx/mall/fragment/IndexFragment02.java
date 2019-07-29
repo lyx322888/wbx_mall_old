@@ -219,8 +219,8 @@ public class IndexFragment02 extends BaseFragment implements BaseRefreshListener
                     public void onItemClicked(View view, int position) {
                         ShopInfo2 shopInfo = shopInfoList.get(position);
                         SPUtils.put("shopInfo_goods", shopInfo.getShop_id() + "", getActivity());
-//                        StoreDetailActivity.actionStart(getActivity(), shopInfo.getGrade_id()== AppConfig.StoreType.VEGETABLE_MARKET, String.valueOf(shopInfo.getShop_id()));
-                        DetailActivity.actionStart(getActivity(), shopInfo.getGrade_id() == AppConfig.StoreType.VEGETABLE_MARKET, String.valueOf(shopInfo.getShop_id()));
+                        StoreDetailActivity.actionStart(getActivity(), shopInfo.getGrade_id()== AppConfig.StoreType.VEGETABLE_MARKET, String.valueOf(shopInfo.getShop_id()));
+//                        DetailActivity.actionStart(getActivity(), shopInfo.getGrade_id() == AppConfig.StoreType.VEGETABLE_MARKET, String.valueOf(shopInfo.getShop_id()));
                     }
                 });
             }

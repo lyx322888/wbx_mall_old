@@ -213,7 +213,7 @@ public class DispatchingTimeDialog extends Dialog {
         params.put("login_token", SPUtils.getSharedStringData(mContext, AppConfig.LOGIN_TOKEN));
         params.put("order_id", orderId);
         params.put("dispatching_time", time);
-        new MyHttp().doPost((isPhysical ? Api.getDefault().updateMallTime(params) : Api.getDefault().updateBuyGreensTime(params)), new HttpListener() {
+        new MyHttp().doPost((isPhysical ? Api.getDefault().updateBuyGreensTime(params) : Api.getDefault().updateMallTime(params)), new HttpListener() {
             @Override
             public void onSuccess(JSONObject result) {
                 String msg = result.getString("msg");

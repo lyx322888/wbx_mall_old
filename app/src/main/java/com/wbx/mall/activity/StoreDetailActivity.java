@@ -14,7 +14,7 @@ import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentStatePagerAdapter;
+import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
@@ -36,7 +36,6 @@ import com.github.florent37.viewanimator.AnimationListener;
 import com.github.florent37.viewanimator.ViewAnimator;
 import com.google.gson.Gson;
 import com.wbx.mall.R;
-import com.wbx.mall.adapter.GoodsFreeAdapter;
 import com.wbx.mall.adapter.NatureAdapter;
 import com.wbx.mall.adapter.ShopCarAdapter;
 import com.wbx.mall.api.Api;
@@ -50,13 +49,14 @@ import com.wbx.mall.bean.GoodsInfo2;
 import com.wbx.mall.bean.OrderBean;
 import com.wbx.mall.bean.RandomRedPacketBean;
 import com.wbx.mall.bean.ShopCart;
+import com.wbx.mall.bean.ShopInfo2;
 import com.wbx.mall.bean.SpecInfo;
 import com.wbx.mall.bean.StoreDetailBean;
 import com.wbx.mall.common.LoginUtil;
 import com.wbx.mall.dialog.RedPacketFragment;
 import com.wbx.mall.dialog.ShopCouponDialog;
 import com.wbx.mall.dialog.ShopDiscountDialog;
-import com.wbx.mall.fragment.GoodsFragment;
+import com.wbx.mall.fragment.Goods2Fragment;
 import com.wbx.mall.fragment.MerchantInfoFragment;
 import com.wbx.mall.fragment.ShopCommentFragment;
 import com.wbx.mall.utils.SPUtils;
@@ -122,7 +122,6 @@ public class StoreDetailActivity extends BaseActivity implements AddWidget.OnAdd
     private BottomSheetBehavior shopCarDetailBehavior;
     public ShopCarAdapter shopCarAdapter;
     private ArrayList<GoodsInfo2> lstSelectedGoods = new ArrayList<>();
-    private GoodsFragment goodsFragment;
     private SpecInfo selectSpec;//选中的规格Id
     private LinkedHashMap<String, GoodsInfo2.Nature_attr> hmSelectNature;//选中的规格属性
     private int shopCartTotalNum;
@@ -179,13 +178,14 @@ public class StoreDetailActivity extends BaseActivity implements AddWidget.OnAdd
         mStoreId = getIntent().getStringExtra(STORE_ID);
         isVM = getIntent().getBooleanExtra(IS_VEGETABLE_MARKET, false);
         LoadingDialog.showDialogForLoading(this);
-        new MyHttp().doPost(Api.getDefault().getShopInfo(mStoreId, SPUtils.getSharedStringData(mContext, AppConfig.LOGIN_TOKEN)), new HttpListener() {
+        new MyHttp().doPost(isVM ? Api.getDefault().getVegetableShopInfo(mStoreId, SPUtils.getSharedStringData(mContext, AppConfig.LOGIN_TOKEN)) :
+                Api.getDefault().getShopInfo(mStoreId, SPUtils.getSharedStringData(mContext, AppConfig.LOGIN_TOKEN)), new HttpListener() {
             @Override
             public void onSuccess(JSONObject result) {
-                storeDetailBean = result.getObject("data", StoreDetailBean.class);
-                convertToSameModel();
-                updateUI(result);
+//                storeDetailBean = result.getObject("data", StoreDetailBean.class);
+                convertToSameModel(result);
                 getShopCarInfo();
+                updateUI(result);
                 getRandomRedPacket();
             }
 
@@ -195,20 +195,25 @@ public class StoreDetailActivity extends BaseActivity implements AddWidget.OnAdd
         });
     }
 
-    private void convertToSameModel() {
-        if (storeDetailBean.getSeckill_goods().size() == 0) {
-            mRelative.setVisibility(View.GONE);
-        } else {
-            mRelative.setVisibility(View.VISIBLE);
-            GoodsFreeAdapter adapter = new GoodsFreeAdapter(R.layout.layout_goodsfree, storeDetailBean.getSeckill_goods());
-            newRecycler.setAdapter(adapter);
-            adapter.notifyDataSetChanged();
+    private void convertToSameModel(JSONObject result) {
+//        if (storeDetailBean.getSeckill_goods().size() == 0) {
+//            mRelative.setVisibility(View.GONE);
+//        } else {
+//            mRelative.setVisibility(View.VISIBLE);
+//            GoodsFreeAdapter adapter = new GoodsFreeAdapter(R.layout.layout_goodsfree, storeDetailBean.getSeckill_goods());
+//            newRecycler.setAdapter(adapter);
+//            adapter.notifyDataSetChanged();
+//        }
+        storeDetailBean = result.getObject("data", StoreDetailBean.class);
+        if (isVM) {//菜市场数据模型转换为实体店
+            storeDetailBean.setDetail(result.getJSONObject("data").getObject("shop_detail", ShopInfo2.class));
+//            storeDetailBean.setCate(JSONArray.parseArray(result.getJSONObject("data").getString("menu"), CateInfo.class));
         }
     }
 
     private void getRandomRedPacket() {
         if (LoginUtil.isLogin()) {
-            new MyHttp().doPost(Api.getDefault().getRandomRedPacket(LoginUtil.getLoginToken(), storeDetailBean.getDetail().getShop_id()+""), new HttpListener() {
+            new MyHttp().doPost(Api.getDefault().getRandomRedPacket(LoginUtil.getLoginToken(), storeDetailBean.getDetail().getShop_id() + ""), new HttpListener() {
                 @Override
                 public void onSuccess(JSONObject result) {
                     RandomRedPacketBean data = result.getObject("data", RandomRedPacketBean.class);
@@ -235,10 +240,9 @@ public class StoreDetailActivity extends BaseActivity implements AddWidget.OnAdd
     private void updateUI(JSONObject result) {
         shopInfoContainer.updateUI(this, storeDetailBean.getDetail());
         if (storeDetailBean.getDetail().getGrade_id() == AppConfig.StoreType.FOOD_STREET && storeDetailBean.getDetail().getIs_subscribe() == 1) {
-            ivBook.setVisibility(View.VISIBLE);
+            ivBook.setVisibility(GONE);
         }
         shopCarView.setShopInfo(storeDetailBean.getDetail());
-
         if (storeDetailBean.getDetail().getConsumption_money() == 0) {
             ((View) tvMemberCondition.getParent()).setVisibility(GONE);
         } else {
@@ -249,7 +253,6 @@ public class StoreDetailActivity extends BaseActivity implements AddWidget.OnAdd
         addFullReduce();
         initViewPager();
     }
-
 
     //获取购物车内容
     private void getShopCarInfo() {
@@ -298,18 +301,16 @@ public class StoreDetailActivity extends BaseActivity implements AddWidget.OnAdd
         });
     }
 
+    private List<Fragment> fragmentList;
+
     private void initViewPager() {
-        if (storeDetailBean.getDetail().getGrade_id() == AppConfig.StoreType.FOOD_STREET) {
-            title[0] = "热卖";
-        }
-        goodsFragment = GoodsFragment.newInstance();
-//        goodsFragment2= GoodsFragment2.newInstance();
-        ShopDetailPagerAdapter pagerAdapter = new ShopDetailPagerAdapter(title, getSupportFragmentManager());
+        fragmentList = new ArrayList<>();
+        fragmentList.add(Goods2Fragment.newInstance(mStoreId, isVM, storeDetailBean.getDetail()));
+        fragmentList.add(ShopCommentFragment.newInstance(mStoreId));
+        fragmentList.add(MerchantInfoFragment.newInstance(storeDetailBean.getDetail()));
+        ShopDetailPagerAdapter pagerAdapter = new ShopDetailPagerAdapter(getSupportFragmentManager(), fragmentList);
         viewPager.setAdapter(pagerAdapter);
         viewPager.setOffscreenPageLimit(2);
-        tabLayout.setTabTextColors(Color.parseColor("#343434"), Color.parseColor("#343434"));
-        tabLayout.setSelectedTabIndicatorColor(getResources().getColor(R.color.app_color));
-        tabLayout.setTabMode(TabLayout.MODE_FIXED);
         tabLayout.setupWithViewPager(viewPager);
         viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
@@ -492,6 +493,7 @@ public class StoreDetailActivity extends BaseActivity implements AddWidget.OnAdd
                 ensureOrder();
                 break;
             case R.id.blackview:
+                closePopWindow();
                 break;
         }
     }
@@ -508,7 +510,7 @@ public class StoreDetailActivity extends BaseActivity implements AddWidget.OnAdd
             return;
         }
         LoadingDialog.showDialogForLoading(this, "下单中...", false);
-        new MyHttp().doPost(storeDetailBean.getDetail().getGrade_id() == AppConfig.StoreType.VEGETABLE_MARKET
+        new MyHttp().doPost(isVM
                         ? Api.getDefault().createVegetableOrder(SPUtils.getSharedStringData(mContext, AppConfig.LOGIN_TOKEN), createGoodsJson())
                         : Api.getDefault().createOrder(SPUtils.getSharedStringData(mContext, AppConfig.LOGIN_TOKEN), createGoodsJson(), bookSeatId),
                 new HttpListener() {
@@ -516,7 +518,7 @@ public class StoreDetailActivity extends BaseActivity implements AddWidget.OnAdd
                     public void onSuccess(JSONObject result) {
                         String orderId = result.getJSONObject("data").getString("order_id");
                         Intent intent = new Intent(mActivity, SubmitOrderActivity.class);
-                        intent.putExtra("isPhysical", storeDetailBean.getDetail().getGrade_id() != AppConfig.StoreType.VEGETABLE_MARKET);
+                        intent.putExtra("isPhysical", isVM);
                         intent.putExtra("orderId", orderId);
                         intent.putExtra("isBook", !TextUtils.isEmpty(bookSeatId));
                         startActivity(intent);
@@ -617,13 +619,13 @@ public class StoreDetailActivity extends BaseActivity implements AddWidget.OnAdd
     public void onAddClick(View view, GoodsInfo2 goodsInfo) {
         addTvAnim(view, shopCarView.carLoc, this, rootView);
         addGoodsToServer(goodsInfo);
-        updateShopCart(goodsInfo, false);
+        updateShopCart(goodsInfo);
     }
 
     @Override
     public void onSubClick(GoodsInfo2 goodsInfo) {
         addGoodsToServer(goodsInfo);
-        updateShopCart(goodsInfo, false);
+        updateShopCart(goodsInfo);
     }
 
     @Override
@@ -1005,10 +1007,6 @@ public class StoreDetailActivity extends BaseActivity implements AddWidget.OnAdd
     private boolean isContain = false;
 
     public void updateShopCart(GoodsInfo2 goodsInfo) {
-        updateShopCart(goodsInfo, true);
-    }
-
-    public void updateShopCart(GoodsInfo2 goodsInfo, boolean isRefreshItemFragment) {
         if (goodsInfo != null) {
             isContain = false;
             String buyNumKey = goodsInfo.getHmBuyNum().keySet().iterator().next();
@@ -1031,7 +1029,7 @@ public class StoreDetailActivity extends BaseActivity implements AddWidget.OnAdd
                 lstSelectedGoods.add(goodsInfo);
             }
         }
-        goodsFragment.updateMenuNum(lstSelectedGoods);
+//        goodsFragment.updateMenuNum(lstSelectedGoods);
         shopCartTotalNum = 0;
         float shopCartTotalPrice = 0.00f;
         for (GoodsInfo2 selectGoods : lstSelectedGoods) {
@@ -1048,8 +1046,9 @@ public class StoreDetailActivity extends BaseActivity implements AddWidget.OnAdd
         }
         shopCarView.showBadge(shopCartTotalNum);
         shopCarView.updateAmount(shopCartTotalPrice, !TextUtils.isEmpty(bookSeatId));
-        if (isRefreshItemFragment) {
-            goodsFragment.updateShopCartGoods(lstSelectedGoods);
+        if (fragmentList.size() != 0) {
+            Goods2Fragment fragment = (Goods2Fragment) fragmentList.get(0);
+            fragment.updateShopCartGoods(lstSelectedGoods);
         }
     }
 
@@ -1059,59 +1058,42 @@ public class StoreDetailActivity extends BaseActivity implements AddWidget.OnAdd
         updateCoupon();
     }
 
-    public class ShopDetailPagerAdapter extends FragmentStatePagerAdapter {
-        String[] titles;
+    public class ShopDetailPagerAdapter extends FragmentPagerAdapter {
+        private List<Fragment> fragmentList;
 
-        ShopDetailPagerAdapter(String[] titles, FragmentManager fm) {
+        ShopDetailPagerAdapter(FragmentManager fm, List<Fragment> list) {
             super(fm);
-            this.titles = titles;
+            this.fragmentList = list;
         }
 
         @Override
         public Fragment getItem(int position) {
-            Fragment fragment = null;
-            switch (position) {
-                case 0:
-                    fragment = goodsFragment;
-                    break;
-                case 1:
-                    fragment = ShopCommentFragment.newInstance(mStoreId);
-                    break;
-                case 2:
-                    fragment = MerchantInfoFragment.newInstance(storeDetailBean.getDetail());
-                    break;
-            }
-            return fragment;
+            return fragmentList.get(position);
         }
 
         @Override
         public int getCount() {
-            return titles.length;
+            return title.length;
         }
 
         @Nullable
         @Override
         public CharSequence getPageTitle(int position) {
-            return titles[position];
+            return title[position];
         }
     }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        if (data == null) {
-            return;
-        }
-        switch (requestCode) {
-            case REQUEST_CODE_BOOK:
-                bookSeatId = data.getStringExtra("bookSeatId");
-                break;
-            case REQUEST_CODE_GOODS_DETAIL:
-                if (resultCode != RESULT_OK) {
-                    return;
-                }
-                getShopCarInfo();
-                break;
+        if (resultCode == RESULT_OK && data != null) {
+            switch (requestCode) {
+                case REQUEST_CODE_BOOK:
+                    bookSeatId = data.getStringExtra("bookSeatId");
+                    break;
+                case REQUEST_CODE_GOODS_DETAIL:
+                    getShopCarInfo();
+                    break;
+            }
         }
     }
 
@@ -1136,5 +1118,11 @@ public class StoreDetailActivity extends BaseActivity implements AddWidget.OnAdd
                 rootview.removeView(textView);
             }
         }).start();
+    }
+
+    private void closePopWindow() {
+        if (shopCarDetailBehavior != null) {
+            shopCarDetailBehavior.setState(BottomSheetBehavior.STATE_COLLAPSED);
+        }
     }
 }

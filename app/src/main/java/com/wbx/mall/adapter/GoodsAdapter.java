@@ -36,8 +36,8 @@ public class GoodsAdapter extends BaseQuickAdapter<GoodsInfo2, BaseViewHolder> {
         ImageView goodsPic = helper.getView(R.id.goods_pic_im);
         ImageView faceView = helper.getView(R.id.iv_free_activity);
         GlideUtils.showMediumPic(mContext, goodsPic, goodsInfo.getPhoto().contains("http://") ? goodsInfo.getPhoto().contains("wbx365888") ? goodsInfo.getPhoto() + "?imageView2/1/w/200/h/200" : goodsInfo.getPhoto() : "http://www.wbx365.com" + goodsInfo.getPhoto());
-        helper.setText(R.id.goods_name_tv, goodsInfo.getTitle())
-                .setText(R.id.need_price_tv, String.format("¥%.2f", goodsInfo.getPrice() / 100.00));
+        helper.setText(R.id.goods_name_tv, goodsInfo.getTitle());
+        helper.setText(R.id.need_price_tv, String.format("¥%.2f", goodsInfo.getPrice() / 100.00));
         if (goodsInfo.getSales_promotion_is() == 1) {
             helper.getView(R.id.is_sales_pro_im).setVisibility(VISIBLE);
         } else {
@@ -55,7 +55,7 @@ public class GoodsAdapter extends BaseQuickAdapter<GoodsInfo2, BaseViewHolder> {
         } else {
             helper.getView(R.id.is_seckill_im).setVisibility(View.GONE);
         }
-        if (goodsInfo.getIs_share_free() == 1 || goodsInfo.getIs_consume_free() == 1) {
+        if (goodsInfo.getIs_share_free() == 1 || goodsInfo.getIs_accumulate_free() == 1) {
             faceView.setVisibility(View.VISIBLE);
         } else {
             faceView.setVisibility(View.GONE);
@@ -106,6 +106,7 @@ public class GoodsAdapter extends BaseQuickAdapter<GoodsInfo2, BaseViewHolder> {
         }
         AddWidget addWidget = helper.getView(R.id.addwidget);
         addWidget.setData(onAddClick, goodsInfo);
+        helper.addOnClickListener(R.id.goods_pic_im);
         helper.addOnClickListener(R.id.tv_free_gain);
     }
 }

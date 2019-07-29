@@ -73,10 +73,10 @@ public class MyFreeOrderCouponAdapter extends BaseQuickAdapter<MyBuyGoodsListBea
     }
 
     private void toBuyGoods(MyBuyGoodsListBean.GoodsBean goods, int shopId, boolean isFree) {
-        final boolean isPhysical = goods.getGrade_id() != AppConfig.StoreType.VEGETABLE_MARKET;
-        String cartGoodsJson = createGoodsJson(!isPhysical, goods, shopId, isFree);
+        final boolean isPhysical = goods.getGrade_id() == AppConfig.StoreType.VEGETABLE_MARKET;
+        String cartGoodsJson = createGoodsJson(isPhysical, goods, shopId, isFree);
         LoadingDialog.showDialogForLoading(mActivity);
-        new MyHttp().doPost(isPhysical ? Api.getDefault().createOrder(SPUtils.getSharedStringData(mContext, AppConfig.LOGIN_TOKEN), cartGoodsJson, "") : Api.getDefault().createVegetableOrder(SPUtils.getSharedStringData(mContext, AppConfig.LOGIN_TOKEN), cartGoodsJson), new HttpListener() {
+        new MyHttp().doPost(isPhysical ? Api.getDefault().createVegetableOrder(SPUtils.getSharedStringData(mContext, AppConfig.LOGIN_TOKEN), cartGoodsJson) : Api.getDefault().createOrder(SPUtils.getSharedStringData(mContext, AppConfig.LOGIN_TOKEN), cartGoodsJson, ""), new HttpListener() {
             @Override
             public void onSuccess(JSONObject result) {
                 String orderId = result.getJSONObject("data").getString("order_id");

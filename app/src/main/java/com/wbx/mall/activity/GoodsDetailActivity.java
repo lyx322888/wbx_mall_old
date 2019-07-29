@@ -97,7 +97,7 @@ public class GoodsDetailActivity extends BaseActivity implements GoodsView {
     private String goodsId;
     private GoodsInfo mGoodsInfo;
     private List<String> images = new ArrayList<>();
-    private int shopId;
+    private String shopId;
     private HashMap<String, Object> mSpecParams = new HashMap<>();
     private SpecInfo selectSpec;//选中的规格Id
     private GoodsInfo2 goodsInfo;
@@ -121,11 +121,11 @@ public class GoodsDetailActivity extends BaseActivity implements GoodsView {
     @Override
     public void fillData() {
         goodsId = getIntent().getStringExtra("goodsId");
-        shopId = getIntent().getIntExtra("shopId", 0);
+        shopId = getIntent().getStringExtra("shopId");
         isShopMemberUser = getIntent().getBooleanExtra("isShopMemberUser", false);
 
         GoodsPresenterImp goodsPresenterImp = new GoodsPresenterImp(this);
-        goodsPresenterImp.getGoods(shopId + "", LoginUtil.getLoginToken(), AppConfig.pageNum, AppConfig.pageSize, 0);
+        goodsPresenterImp.getGoods(shopId, LoginUtil.getLoginToken(), AppConfig.pageNum, AppConfig.pageSize, 0);
         allRecycler.setLayoutManager(new LinearLayoutManager(this));
 
         mSpecParams.put("type", "shop");
@@ -305,6 +305,9 @@ public class GoodsDetailActivity extends BaseActivity implements GoodsView {
             getGoodsSpec();
         } else {
             //不是多规格
+            if (null == goodsInfo.getHmBuyNum().get(goodsInfo.getGoods_id() + ",,")) {
+                return;
+            }
             int count = goodsInfo.getHmBuyNum().get(goodsInfo.getGoods_id() + ",,");
             if (count == 0) {
                 showShortToast("购买数量不能小于0");
@@ -651,14 +654,14 @@ public class GoodsDetailActivity extends BaseActivity implements GoodsView {
             }
             lstGoods.add(orderBean);
         }
-        hashMap.put(String.valueOf(shopId), lstGoods);
+        hashMap.put(shopId, lstGoods);
         String orderGoodsJson = new Gson().toJson(hashMap);
         new MyHttp().doPost(Api.getDefault().createOrder(SPUtils.getSharedStringData(mContext, AppConfig.LOGIN_TOKEN), orderGoodsJson, getIntent().getStringExtra("bookId")), new HttpListener() {
             @Override
             public void onSuccess(JSONObject result) {
                 String orderId = result.getJSONObject("data").getString("order_id");
                 Intent intent = new Intent(mActivity, SubmitOrderActivity.class);
-                intent.putExtra("isPhysical", true);
+                intent.putExtra("isPhysical", false);
                 intent.putExtra("orderId", orderId);
                 intent.putExtra("isBook", !TextUtils.isEmpty(getIntent().getStringExtra("bookId")));
                 startActivity(intent);

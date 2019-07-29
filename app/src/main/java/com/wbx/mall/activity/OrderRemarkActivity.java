@@ -21,6 +21,9 @@ import com.wbx.mall.utils.ToastUitl;
 import butterknife.Bind;
 import butterknife.OnClick;
 
+/**
+ * 订单备注
+ */
 public class OrderRemarkActivity extends BaseActivity {
     @Bind(R.id.et_remark)
     EditText etRemark;
@@ -83,7 +86,7 @@ public class OrderRemarkActivity extends BaseActivity {
             ToastUitl.showShort("请输入备注信息");
             return;
         }
-        new MyHttp().doPost(getIntent().getBooleanExtra("isPhysical", true) ? Api.getDefault().addMallRemark(SPUtils.getSharedStringData(mContext, AppConfig.LOGIN_TOKEN), getIntent().getStringExtra("orderId"), remark) : Api.getDefault().addRemark(SPUtils.getSharedStringData(mContext, AppConfig.LOGIN_TOKEN), getIntent().getStringExtra("orderId"), remark), new HttpListener() {
+        new MyHttp().doPost(getIntent().getBooleanExtra("isPhysical", false) ? Api.getDefault().addRemark(SPUtils.getSharedStringData(mContext, AppConfig.LOGIN_TOKEN), getIntent().getStringExtra("orderId"), remark) : Api.getDefault().addMallRemark(SPUtils.getSharedStringData(mContext, AppConfig.LOGIN_TOKEN), getIntent().getStringExtra("orderId"), remark), new HttpListener() {
             @Override
             public void onSuccess(JSONObject result) {
                 Intent intent = new Intent();

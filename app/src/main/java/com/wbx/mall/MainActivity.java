@@ -54,7 +54,6 @@ public class MainActivity extends BaseActivity {
 
     @Override
     public void initView() {
-        EventBus.getDefault().register(this);
         initTabHost();
         initFragment();
     }
@@ -211,20 +210,5 @@ public class MainActivity extends BaseActivity {
         } else {
             LoginUtil.login();
         }
-    }
-
-    @Subscribe(threadMode = ThreadMode.MAIN)
-    public void onMessageEvent(String event) {
-        if ("toOrder".equals(event)) {
-            if (null != BaseApplication.getInstance().readObject(AppConfig.LOCATION_DATA)) {
-                mTabHost.setCurrentTab(3);
-            }
-        }
-    }
-
-    @Override
-    public void onStop() {
-        super.onStop();
-        EventBus.getDefault().unregister(this);
     }
 }
