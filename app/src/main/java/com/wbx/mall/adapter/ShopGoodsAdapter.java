@@ -96,7 +96,6 @@ public class ShopGoodsAdapter extends BaseAdapter<ShopInfo2, Context> {
         if (null != shopInfo.getFull_money_reduce() && shopInfo.getFull_money_reduce().size() > 0) {
             hasFullLayout.setVisibility(View.VISIBLE);
             holder.setText(R.id.shop_activity_tv, String.format("满%.2f减%.2f", shopInfo.getFull_money_reduce().get(0).getFull_money() / 100.00, shopInfo.getFull_money_reduce().get(0).getReduce_money() / 100.00));
-
         } else {
             hasFullLayout.setVisibility(View.GONE);
         }

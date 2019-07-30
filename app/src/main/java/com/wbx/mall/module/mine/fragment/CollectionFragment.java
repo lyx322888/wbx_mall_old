@@ -180,8 +180,6 @@ public class CollectionFragment extends BaseFragment implements BaseRefreshListe
                     } else if (code == AppConfig.ERROR_STATE.NO_NETWORK || code == AppConfig.ERROR_STATE.SERVICE_ERROR) {
                         mRefreshLayout.showView(ViewStatus.ERROR_STATUS);
                         mRefreshLayout.buttonClickError(CollectionFragment.this, "getCollectionInfo");
-                    } else {
-
                     }
                 } else {
                     if (code == AppConfig.ERROR_STATE.NULLDATA) {
@@ -192,7 +190,6 @@ public class CollectionFragment extends BaseFragment implements BaseRefreshListe
                 mRefreshLayout.finishLoadMore();
             }
         });
-
     }
 
     private void cancelCollectProduct(final int position) {

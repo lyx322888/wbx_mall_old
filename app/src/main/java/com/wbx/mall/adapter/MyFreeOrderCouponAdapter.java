@@ -38,10 +38,8 @@ public class MyFreeOrderCouponAdapter extends BaseQuickAdapter<MyBuyGoodsListBea
         this.mActivity = mActivity;
     }
 
-
     @Override
     protected void convert(BaseViewHolder helper, final MyBuyGoodsListBean item) {
-
         GlideUtils.showSmallPic(mContext, (ImageView) helper.getView(R.id.iv_shop), item.getLogo());
         TextView tvShopName = helper.getView(R.id.tv_shop_name);
         if (!TextUtils.isEmpty(item.getShop_name())) {
@@ -97,7 +95,6 @@ public class MyFreeOrderCouponAdapter extends BaseQuickAdapter<MyBuyGoodsListBea
     private String createGoodsJson(boolean isVegetable, MyBuyGoodsListBean.GoodsBean goodsBean, int shopId, boolean isFree) {
         HashMap<String, List<OrderBean>> hashMap = new HashMap<>();
         ArrayList<OrderBean> lstGoods = new ArrayList<>();
-
         OrderBean orderBean = new OrderBean();
         if (isVegetable) {
             orderBean.setProduct_id(String.valueOf(goodsBean.getGoods_id()));
@@ -111,7 +108,6 @@ public class MyFreeOrderCouponAdapter extends BaseQuickAdapter<MyBuyGoodsListBea
         }
         orderBean.setNum(1);
         lstGoods.add(orderBean);
-
         if (lstGoods.size() > 0) {
             hashMap.put(String.valueOf(shopId), lstGoods);
             return new Gson().toJson(hashMap);

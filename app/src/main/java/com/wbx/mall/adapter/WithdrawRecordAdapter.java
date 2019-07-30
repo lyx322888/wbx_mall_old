@@ -39,20 +39,20 @@ public class WithdrawRecordAdapter extends RecyclerView.Adapter<WithdrawRecordAd
     @Override
     public MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View layout = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_withdraw_record, parent, false);
-        MyViewHolder holder = new MyViewHolder(layout);
-        return holder;
+        return new MyViewHolder(layout);
     }
 
     @Override
-    public void onBindViewHolder(final MyViewHolder holder, int position) {
+    public void onBindViewHolder(MyViewHolder holder, int position) {
         WithdrawRecordBean data = lstData.get(position);
         holder.tvMoney.setText(String.format("微米提现: -%.2f", data.getMoney() / 100.00));
         if (data.getCommission() > 0) {
             holder.tvPoundage.setVisibility(View.VISIBLE);
-            holder.tvPoundage.setText(String.format("（手续费%.2f）", data.getCommission() / 100.00));
+            holder.tvPoundage.setText(String.format("(手续费%.2f)", data.getCommission() / 100.00));
         } else {
             holder.tvPoundage.setVisibility(View.GONE);
         }
+        holder.tvRealityMoney.setText(String.format("实际到账: -%.2f", data.getMoney() / 100.00 - data.getCommission() / 100.00));
         holder.tvTime.setText(DateUtil.formatDateAndTime2(data.getAddtime()));
         if (data.getStatus() == 0) {
             holder.tvStatus.setTextColor(mContext.getResources().getColor(R.color.app_color));
@@ -80,6 +80,8 @@ public class WithdrawRecordAdapter extends RecyclerView.Adapter<WithdrawRecordAd
         TextView tvTime;
         @Bind(R.id.tv_status)
         TextView tvStatus;
+        @Bind(R.id.tv_reality_money)
+        TextView tvRealityMoney;
 
         public MyViewHolder(View itemView) {
             super(itemView);

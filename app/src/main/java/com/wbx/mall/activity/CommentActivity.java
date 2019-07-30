@@ -81,7 +81,7 @@ public class CommentActivity extends BaseActivity {
     public void fillData() {
         mParams.put("order_id", getIntent().getStringExtra("orderId"));
         physical = getIntent().getBooleanExtra("physical", false);
-        mParams.put("type", physical ? 2 : 1);
+        mParams.put("type", physical ? 1 : 2);
         mParams.put("login_token", SPUtils.getSharedStringData(mContext, AppConfig.LOGIN_TOKEN));
     }
 

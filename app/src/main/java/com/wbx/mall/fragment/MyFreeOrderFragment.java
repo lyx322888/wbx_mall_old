@@ -1,9 +1,7 @@
 package com.wbx.mall.fragment;
 
-
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
@@ -12,10 +10,6 @@ import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.google.gson.Gson;
-import com.scwang.smartrefresh.layout.SmartRefreshLayout;
-import com.scwang.smartrefresh.layout.api.RefreshLayout;
-import com.scwang.smartrefresh.layout.listener.OnLoadMoreListener;
-import com.scwang.smartrefresh.layout.listener.OnRefreshListener;
 import com.wbx.mall.R;
 import com.wbx.mall.activity.CommentActivity;
 import com.wbx.mall.activity.ConsumeFreeActivity;
@@ -34,6 +28,9 @@ import com.wbx.mall.utils.SPUtils;
 import com.wbx.mall.utils.ShareUtils;
 import com.wbx.mall.utils.ToastUitl;
 import com.wbx.mall.widget.LoadingDialog;
+import com.wbx.mall.widget.refresh.BaseRefreshListener;
+import com.wbx.mall.widget.refresh.PullToRefreshLayout;
+import com.wbx.mall.widget.refresh.ViewStatus;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -41,17 +38,18 @@ import java.util.List;
 
 import butterknife.Bind;
 
-public class MyFreeOrderFragment extends BaseFragment implements OnRefreshListener, OnLoadMoreListener {
+public class MyFreeOrderFragment extends BaseFragment implements BaseRefreshListener {
     private static final String POSITION = "POSITION";
     @Bind(R.id.srl)
-    SmartRefreshLayout srl;
+    PullToRefreshLayout mRefreshLayout;
     @Bind(R.id.rv_free_activity)
     RecyclerView rvFreeActivity;
     private List<MyFreeOrderBean> lstData = new ArrayList<>();
     private MyFreeOrderAdapter adapter;
-    private int currentPage = 1;
-    private MyHttp myHttp;
     private int type;
+    private int pageNum = AppConfig.pageNum;
+    private int pageSize = AppConfig.pageSize;
+    private boolean canLoadMore = true;
 
     public MyFreeOrderFragment() {
     }
@@ -99,7 +97,6 @@ public class MyFreeOrderFragment extends BaseFragment implements OnRefreshListen
 
     @Override
     public void initPresenter() {
-        myHttp = new MyHttp();
     }
 
     @Override
@@ -111,13 +108,11 @@ public class MyFreeOrderFragment extends BaseFragment implements OnRefreshListen
 
     @Override
     protected void fillData() {
-        onRefresh(srl);
+        loadData();
     }
 
     @Override
     protected void bindEvent() {
-        srl.setOnLoadMoreListener(this);
-        srl.setOnRefreshListener(this);
         adapter.setOnItemChildClickListener(new BaseQuickAdapter.OnItemChildClickListener() {
             @Override
             public void onItemChildClick(BaseQuickAdapter adapter, View view, int position) {
@@ -146,7 +141,7 @@ public class MyFreeOrderFragment extends BaseFragment implements OnRefreshListen
                     case R.id.tv_comment:
                         Intent intent = new Intent(getContext(), CommentActivity.class);
                         intent.putExtra("activityId", data.getActivity_id());
-                        intent.putExtra("physical", data.getGrade_id() != AppConfig.StoreType.VEGETABLE_MARKET);
+                        intent.putExtra("physical", data.getGrade_id() == AppConfig.StoreType.VEGETABLE_MARKET);
                         startActivity(intent);
                         break;
                     default:
@@ -199,45 +194,46 @@ public class MyFreeOrderFragment extends BaseFragment implements OnRefreshListen
         return new Gson().toJson(hashMap);
     }
 
-    @Override
-    public void onRefresh(@NonNull RefreshLayout refreshLayout) {
-        srl.setEnableLoadMore(true);
-        currentPage = 1;
-        loadData();
-    }
-
-    @Override
-    public void onLoadMore(@NonNull RefreshLayout refreshLayout) {
-        currentPage++;
-        loadData();
-    }
-
     private void loadData() {
-        LoadingDialog.showDialogForLoading(getActivity());
-        myHttp.doPost(Api.getDefault().getMyFreeActivity(LoginUtil.getLoginToken(), type, currentPage, 10), new HttpListener() {
+        new MyHttp().doPost(Api.getDefault().getMyFreeActivity(LoginUtil.getLoginToken(), type, pageNum, pageSize), new HttpListener() {
             @Override
             public void onSuccess(JSONObject result) {
-                srl.finishRefresh();
-                srl.finishLoadMore();
                 List<MyFreeOrderBean> data = JSONArray.parseArray(result.getString("data"), MyFreeOrderBean.class);
                 if (data != null) {
-                    if (data.size() < 10) {
-                        srl.setEnableLoadMore(false);
-                    }
-                    if (currentPage == 1) {
+                    mRefreshLayout.showView(ViewStatus.CONTENT_STATUS);
+                    if (pageNum == AppConfig.pageNum) {
                         lstData.clear();
+                    }
+                    if (data.size() < pageSize) {
+                        canLoadMore = false;
                     }
                     lstData.addAll(data);
                     adapter.notifyDataSetChanged();
-                } else {
-                    srl.setEnableLoadMore(false);
+                } else if (lstData.size() == 0) {
+                    mRefreshLayout.showView(ViewStatus.EMPTY_STATUS);
+                    mRefreshLayout.buttonClickNullData(MyFreeOrderFragment.this, "loadData");
                 }
+                mRefreshLayout.finishRefresh();
+                mRefreshLayout.finishLoadMore();
             }
 
             @Override
             public void onError(int code) {
-                srl.finishRefresh();
-                srl.finishLoadMoreWithNoMoreData();
+                if (pageNum == AppConfig.pageNum) {
+                    if (code == AppConfig.ERROR_STATE.NULLDATA) {
+                        mRefreshLayout.showView(ViewStatus.EMPTY_STATUS);
+                        mRefreshLayout.buttonClickNullData(MyFreeOrderFragment.this, "loadData");
+                    } else if (code == AppConfig.ERROR_STATE.NO_NETWORK || code == AppConfig.ERROR_STATE.SERVICE_ERROR) {
+                        mRefreshLayout.showView(ViewStatus.ERROR_STATUS);
+                        mRefreshLayout.buttonClickError(MyFreeOrderFragment.this, "loadData");
+                    }
+                } else {
+                    if (code == AppConfig.ERROR_STATE.NULLDATA) {
+                        canLoadMore = false;
+                    }
+                }
+                mRefreshLayout.finishRefresh();
+                mRefreshLayout.finishLoadMore();
             }
         });
     }
@@ -246,5 +242,23 @@ public class MyFreeOrderFragment extends BaseFragment implements OnRefreshListen
     public void onDestroy() {
         super.onDestroy();
         adapter.cancelAllTimer();
+    }
+
+    @Override
+    public void refresh() {
+        canLoadMore = true;
+        pageNum = AppConfig.pageNum;
+        loadData();
+    }
+
+    @Override
+    public void loadMore() {
+        pageNum++;
+        if (!canLoadMore) {
+            mRefreshLayout.finishLoadMore();
+            showShortToast("没有更多数据了");
+            return;
+        }
+        loadData();
     }
 }

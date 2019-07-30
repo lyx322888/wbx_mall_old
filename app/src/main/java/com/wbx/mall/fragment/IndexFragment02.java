@@ -9,6 +9,7 @@ import android.graphics.Color;
 import android.graphics.drawable.AnimationDrawable;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ImageView;
@@ -19,7 +20,6 @@ import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.sunfusheng.marqueeview.MarqueeView;
 import com.wbx.mall.R;
-import com.wbx.mall.activity.DetailActivity;
 import com.wbx.mall.activity.NearbyStoreActivity;
 import com.wbx.mall.activity.SearchActivity;
 import com.wbx.mall.activity.SelectAddressActivity;
@@ -132,6 +132,14 @@ public class IndexFragment02 extends BaseFragment implements BaseRefreshListener
         mRecyclerView.setHasFixedSize(true);
         mAdapter = new ShopGoodsAdapter(shopInfoList, getContext());
         mRecyclerView.setAdapter(mAdapter);
+        mAdapter.setOnItemClickListener(R.id.root_view, new BaseAdapter.ItemClickListener() {
+            @Override
+            public void onItemClicked(View view, int position) {
+                ShopInfo2 shopInfo = shopInfoList.get(position);
+                StoreDetailActivity.actionStart(getActivity(), shopInfo.getGrade_id() == AppConfig.StoreType.VEGETABLE_MARKET, String.valueOf(shopInfo.getShop_id()));
+//                        DetailActivity.actionStart(getActivity(), shopInfo.getGrade_id() == AppConfig.StoreType.VEGETABLE_MARKET, String.valueOf(shopInfo.getShop_id()));
+            }
+        });
     }
 
     @Override
@@ -140,8 +148,12 @@ public class IndexFragment02 extends BaseFragment implements BaseRefreshListener
         refreshHasLocationReceiver = new MyReceiver();
         getActivity().registerReceiver(refreshHasLocationReceiver, filter);
         getIndexCountData();
+        getUnreadNum();
     }
 
+    /**
+     * 获取首页滚动订单数据
+     */
     private void getIndexCountData() {
         new MyHttp().doPost(Api.getDefault().getIndexCountData(LoginUtil.getLoginToken(), mLocationInfo.getCity_id()), new HttpListener() {
             @Override
@@ -150,7 +162,7 @@ public class IndexFragment02 extends BaseFragment implements BaseRefreshListener
                 List<String> list = new ArrayList<>();
                 for (IndexCountBean.OrderBean bean : indexCountBean.getActivity_user()) {
                     String time = TimeUtil.getfriendlyTime(bean.getCreate_time() * 1000);
-                    list.add(bean.getNickname() + "  " + time + "购买了" + bean.getTitle());
+                    list.add((TextUtils.isEmpty(bean.getNickname()) ? "匿名" : bean.getNickname()) + "  " + time + "购买了" + "  " + bean.getTitle());
                 }
                 marqueeView.startWithList(list);
                 String time = TimeUtil.getfriendlyTime(indexCountBean.getOrder().getCreate_time() * 1000);
@@ -163,6 +175,34 @@ public class IndexFragment02 extends BaseFragment implements BaseRefreshListener
             }
         });
     }
+
+    /**
+     * 获取首页未读消息数量
+     */
+    private void getUnreadNum() {
+        if (LoginUtil.isLogin()) {
+            new MyHttp().doPost(Api.getDefault().getUnreadSystemMessageNum(LoginUtil.getLoginToken()), new HttpListener() {
+                @Override
+                public void onSuccess(JSONObject result) {
+                    int messageUnreadCount = 0;
+                    if (result.getJSONObject("data") != null && result.getJSONObject("data").getInteger("count") > 0) {
+                        messageUnreadCount = result.getJSONObject("data").getInteger("count");
+                    }
+                    if (messageUnreadCount > 0) {
+                        unReadMsgTv.setVisibility(View.VISIBLE);
+                    } else {
+                        unReadMsgTv.setVisibility(View.GONE);
+                    }
+                }
+
+                @Override
+                public void onError(int code) {
+
+                }
+            });
+        }
+    }
+
 
     private void startGetData() {
         mLocationInfo = (LocationInfo) BaseApplication.getInstance().readObject(AppConfig.LOCATION_DATA);
@@ -214,15 +254,6 @@ public class IndexFragment02 extends BaseFragment implements BaseRefreshListener
                 }
                 shopInfoList.addAll(dataList);
                 mAdapter.notifyDataSetChanged();
-                mAdapter.setOnItemClickListener(R.id.root_view, new BaseAdapter.ItemClickListener() {
-                    @Override
-                    public void onItemClicked(View view, int position) {
-                        ShopInfo2 shopInfo = shopInfoList.get(position);
-                        SPUtils.put("shopInfo_goods", shopInfo.getShop_id() + "", getActivity());
-                        StoreDetailActivity.actionStart(getActivity(), shopInfo.getGrade_id()== AppConfig.StoreType.VEGETABLE_MARKET, String.valueOf(shopInfo.getShop_id()));
-//                        DetailActivity.actionStart(getActivity(), shopInfo.getGrade_id() == AppConfig.StoreType.VEGETABLE_MARKET, String.valueOf(shopInfo.getShop_id()));
-                    }
-                });
             }
 
             @Override

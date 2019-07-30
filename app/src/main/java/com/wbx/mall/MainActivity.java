@@ -91,7 +91,6 @@ public class MainActivity extends BaseActivity {
     private void initNearByFragment() {
         View mainTabView = getTabItemView(R.drawable.yst_nearby_center_selector, "");
         TabHost.TabSpec tabSpec = mTabHost.newTabSpec("2").setIndicator(mainTabView);
-//        mTabHost.addTab(tabSpec, BuyFragment.class, null);
         mTabHost.addTab(tabSpec, FreeFragment.class, null);
     }
 

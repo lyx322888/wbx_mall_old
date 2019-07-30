@@ -4,7 +4,6 @@
     android:layout_height="wrap_content"
     android:layout_marginStart="@dimen/dp_10"
     android:layout_marginEnd="@dimen/dp_10"
-    android:layout_marginTop="10dp"
     android:background="@drawable/rect_solid_ffffff_10dp"
     android:orientation="vertical">
 
@@ -13,8 +12,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/dp_10"
-        android:layout_marginEnd="@dimen/dp_10"
         android:layout_marginTop="10dp"
+        android:layout_marginEnd="@dimen/dp_10"
         android:gravity="center_vertical"
         android:orientation="horizontal">
 
@@ -39,4 +38,9 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/color_gray_line" />
 </LinearLayout>
