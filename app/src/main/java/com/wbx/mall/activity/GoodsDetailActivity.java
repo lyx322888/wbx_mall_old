@@ -32,17 +32,14 @@ import com.wbx.mall.api.HttpListener;
 import com.wbx.mall.api.MyHttp;
 import com.wbx.mall.base.AppConfig;
 import com.wbx.mall.base.BaseActivity;
-import com.wbx.mall.bean.GoodsInfo;
 import com.wbx.mall.bean.GoodsInfo2;
 import com.wbx.mall.bean.OrderBean;
 import com.wbx.mall.bean.SpecInfo;
 import com.wbx.mall.common.LoginUtil;
-import com.wbx.mall.presenter.GoodsPresenterImp;
 import com.wbx.mall.utils.GlideImageLoader;
 import com.wbx.mall.utils.SPUtils;
 import com.wbx.mall.utils.ShareUtils;
 import com.wbx.mall.utils.UilImageGetter;
-import com.wbx.mall.view.GoodsView;
 import com.wbx.mall.widget.LoadingDialog;
 import com.wbx.mall.widget.MyScrollview;
 import com.wbx.mall.widget.flowLayout.BaseTagAdapter;
@@ -63,7 +60,7 @@ import butterknife.OnClick;
  * 商品详情
  */
 
-public class GoodsDetailActivity extends BaseActivity implements GoodsView {
+public class GoodsDetailActivity extends BaseActivity {
     @Bind(R.id.banner)
     Banner mBanner;
     @Bind(R.id.product_detail_sv)
@@ -92,10 +89,10 @@ public class GoodsDetailActivity extends BaseActivity implements GoodsView {
     ImageView ivMember;
     @Bind(R.id.add_product_im)
     ImageView addProductIm;
-    @Bind(R.id.all_buy)
-    RecyclerView allRecycler;
+//    @Bind(R.id.all_buy)
+//    RecyclerView allRecycler;
     private String goodsId;
-    private GoodsInfo mGoodsInfo;
+    private GoodsInfo2 mGoodsInfo;
     private List<String> images = new ArrayList<>();
     private String shopId;
     private HashMap<String, Object> mSpecParams = new HashMap<>();
@@ -103,6 +100,7 @@ public class GoodsDetailActivity extends BaseActivity implements GoodsView {
     private GoodsInfo2 goodsInfo;
     private boolean isShopMemberUser;
     private LinkedHashMap<String, GoodsInfo2.Nature_attr> hmSelectNature;//选中的规格属性
+    private GoodsDetallAdapter mAllAdapter;
 
     @Override
     public int getLayoutId() {
@@ -115,19 +113,9 @@ public class GoodsDetailActivity extends BaseActivity implements GoodsView {
 
     @Override
     public void initView() {
-
-    }
-
-    @Override
-    public void fillData() {
         goodsId = getIntent().getStringExtra("goodsId");
         shopId = getIntent().getStringExtra("shopId");
         isShopMemberUser = getIntent().getBooleanExtra("isShopMemberUser", false);
-
-        GoodsPresenterImp goodsPresenterImp = new GoodsPresenterImp(this);
-        goodsPresenterImp.getGoods(shopId, LoginUtil.getLoginToken(), AppConfig.pageNum, AppConfig.pageSize, 0);
-        allRecycler.setLayoutManager(new LinearLayoutManager(this));
-
         mSpecParams.put("type", "shop");
         mSpecParams.put("goods_id", goodsId);
         goodsInfo = (GoodsInfo2) getIntent().getSerializableExtra("goodsInfo");
@@ -136,11 +124,19 @@ public class GoodsDetailActivity extends BaseActivity implements GoodsView {
             count += goodsInfo.getHmBuyNum().get(s);
         }
         tvBuyNum.setText(String.valueOf(count));
+//        allRecycler.setLayoutManager(new LinearLayoutManager(this));
+//        allRecycler.setHasFixedSize(true);
+//        mAllAdapter = new GoodsDetallAdapter(mContext, (List<GoodsInfo2>) goodsInfo);
+//        allRecycler.setAdapter(mAllAdapter);
+    }
+
+    @Override
+    public void fillData() {
         LoadingDialog.showDialogForLoading(mActivity, "加载中...", true);
         new MyHttp().doPost(Api.getDefault().getGoodsDetail(goodsId), new HttpListener() {
             @Override
             public void onSuccess(JSONObject result) {
-                mGoodsInfo = result.getObject("data", GoodsInfo.class);
+                mGoodsInfo = result.getObject("data", GoodsInfo2.class);
                 mGoodsInfo.setProduct_id(mGoodsInfo.getGoods_id());
                 mGoodsInfo.setProduct_name(mGoodsInfo.getTitle());
                 pullData();
@@ -259,13 +255,6 @@ public class GoodsDetailActivity extends BaseActivity implements GoodsView {
         textview.setCompoundDrawablePadding(5);
         storeInfoLayout.addView(textview);
     }
-
-    @Override
-    public void getGoods(GoodsInfo2 goodsInfo2) {
-        GoodsDetallAdapter goodsDetallAdapter = new GoodsDetallAdapter(mContext, (List<GoodsInfo2>) goodsInfo);
-        allRecycler.setAdapter(goodsDetallAdapter);
-    }
-
 
     @OnClick({R.id.detail_store_tv, R.id.sub_product_im, R.id.add_car_btn, R.id.now_buy_btn, R.id.collect_product_tv, R.id.forwarding})
     public void onClick(View view) {

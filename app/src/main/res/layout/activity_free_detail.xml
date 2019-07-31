@@ -312,105 +312,6 @@
                 </LinearLayout>
             </LinearLayout>
 
-            <LinearLayout
-                android:id="@+id/ll_consume_free_rule"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
-                android:orientation="vertical"
-                android:paddingHorizontal="15dp"
-                app:layout_constraintLeft_toLeftOf="parent"
-                app:layout_constraintRight_toRightOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/ll_share_free_rule">
-
-                <!--<LinearLayout-->
-                <!--android:layout_width="match_parent"-->
-                <!--android:layout_height="wrap_content"-->
-                <!--android:orientation="horizontal">-->
-
-                <!--<TextView-->
-                <!--android:layout_width="wrap_content"-->
-                <!--android:layout_height="wrap_content"-->
-                <!--android:layout_weight="1"-->
-                <!--android:text="消费免单流程"-->
-                <!--android:textColor="@color/black"-->
-                <!--android:textSize="14sp" />-->
-
-                <!--<TextView-->
-                <!--android:id="@+id/tv_consume_rule"-->
-                <!--android:layout_width="wrap_content"-->
-                <!--android:layout_height="wrap_content"-->
-                <!--android:drawableRight="@drawable/more"-->
-                <!--android:drawablePadding="5dp"-->
-                <!--android:text="规则说明"-->
-                <!--android:textColor="#FFB2B3B3"-->
-                <!--android:textSize="11sp" />-->
-                <!--</LinearLayout>-->
-
-                <!--<LinearLayout-->
-                <!--android:layout_width="match_parent"-->
-                <!--android:layout_height="wrap_content"-->
-                <!--android:layout_marginTop="15dp"-->
-                <!--android:orientation="horizontal">-->
-
-                <!--<TextView-->
-                <!--android:layout_width="0dp"-->
-                <!--android:layout_height="wrap_content"-->
-                <!--android:layout_weight="1"-->
-                <!--android:drawableTop="@drawable/icon_consume_free_rule_1"-->
-                <!--android:drawablePadding="10dp"-->
-                <!--android:gravity="center_horizontal"-->
-                <!--android:text="在线支付"-->
-                <!--android:textColor="@color/black"-->
-                <!--android:textSize="10sp" />-->
-
-                <!--<ImageView-->
-                <!--android:layout_width="wrap_content"-->
-                <!--android:layout_height="wrap_content"-->
-                <!--android:layout_marginTop="20dp"-->
-                <!--android:src="@drawable/icon_free_activity_connect" />-->
-
-
-                <!--<TextView-->
-                <!--android:layout_width="0dp"-->
-                <!--android:layout_height="wrap_content"-->
-                <!--android:layout_weight="1"-->
-                <!--android:drawableTop="@drawable/icon_consume_free_rule_3"-->
-                <!--android:drawablePadding="10dp"-->
-                <!--android:gravity="center_horizontal"-->
-                <!--android:text="下单成功"-->
-                <!--android:textColor="@color/black"-->
-                <!--android:textSize="10sp" />-->
-
-                <!--<ImageView-->
-                <!--android:layout_width="wrap_content"-->
-                <!--android:layout_height="wrap_content"-->
-                <!--android:layout_marginTop="20dp"-->
-                <!--android:src="@drawable/icon_free_activity_connect" />-->
-
-                <!--<TextView-->
-                <!--android:layout_width="0dp"-->
-                <!--android:layout_height="wrap_content"-->
-                <!--android:layout_weight="1"-->
-                <!--android:drawableTop="@drawable/icon_consume_free_rule_4"-->
-                <!--android:drawablePadding="10dp"-->
-                <!--android:gravity="center_horizontal"-->
-                <!--android:text="随机一名免单"-->
-                <!--android:textColor="@color/black"-->
-                <!--android:textSize="10sp" />-->
-                <!--</LinearLayout>-->
-            </LinearLayout>
-
-            <!--<include-->
-            <!--android:id="@+id/layout_free_record"-->
-            <!--layout="@layout/index_free_record"-->
-            <!--android:layout_width="0dp"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:layout_marginTop="15dp"-->
-            <!--android:visibility="gone"-->
-            <!--app:layout_constraintLeft_toLeftOf="parent"-->
-            <!--app:layout_constraintRight_toRightOf="parent"-->
-            <!--app:layout_constraintTop_toBottomOf="@id/ll_consume_free_rule" />-->
             <android.support.v7.widget.RecyclerView
                 android:id="@+id/layout_free_record"
                 android:layout_width="0dp"
@@ -418,7 +319,7 @@
                 android:layout_marginTop="15dp"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintRight_toRightOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/ll_consume_free_rule" />
+                app:layout_constraintTop_toBottomOf="@id/ll_share_free_rule" />
 
         </android.support.constraint.ConstraintLayout>
     </android.support.v4.widget.NestedScrollView>

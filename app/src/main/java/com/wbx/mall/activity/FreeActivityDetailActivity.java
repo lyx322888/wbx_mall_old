@@ -73,12 +73,6 @@ public class FreeActivityDetailActivity extends BaseActivity implements UpFreeIn
     TextView tvShareRule;
     @Bind(R.id.ll_share_free_rule)
     LinearLayout llShareFreeRule;
-    @Bind(R.id.ll_consume_free_rule)
-    LinearLayout llConsumeFreeRule;
-    //    @Bind(R.id.rv_free_record)
-//    ScrollRecycleView rvFreeRecord;
-//    @Bind(R.id.rv_user_share)
-//    RecyclerView rvUserShare;
     @Bind(R.id.scroll_view)
     NestedScrollView scrollView;
     @Bind(R.id.tv_home)
@@ -109,8 +103,6 @@ public class FreeActivityDetailActivity extends BaseActivity implements UpFreeIn
     private FreeGoodsDetailBean data;
     private String shopId;
     private UpFreeInfoPresenterImp upFreeInfoPresenterImp;
-//    private ScrollRecycleView rvFreeRecord;
-//    private RecyclerView rvUserShare;
     public static void actionStart(Context context, String shopId, String goodsId, int gradeId) {
         Intent intent = new Intent(context, FreeActivityDetailActivity.class);
         intent.putExtra("shopId", shopId);
@@ -138,7 +130,6 @@ public class FreeActivityDetailActivity extends BaseActivity implements UpFreeIn
         freeInfoView.setLayoutManager(new LinearLayoutManager(mContext));
         upFreeInfoPresenterImp = new UpFreeInfoPresenterImp(this);
         upFreeInfoPresenterImp.getUpFreeInfo();
-
     }
 
     @Override
@@ -209,11 +200,6 @@ public class FreeActivityDetailActivity extends BaseActivity implements UpFreeIn
             llShareFreeRule.setVisibility(View.VISIBLE);
         } else {
             llShareFreeRule.setVisibility(View.GONE);
-        }
-        if (data.getFree_goods().getIs_consume_free() == 1) {
-            llConsumeFreeRule.setVisibility(View.VISIBLE);
-        } else {
-            llConsumeFreeRule.setVisibility(View.GONE);
         }
         tvPrice1.setText(String.format("%.2f", data.getFree_goods().getPrice() / 100.00));
         if (data.getFree_goods().getIs_consume_free() == 1 && data.getFree_goods().getIs_share_free() == 1) {

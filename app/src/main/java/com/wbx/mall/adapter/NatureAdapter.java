@@ -6,7 +6,6 @@ import android.widget.TextView;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
 import com.wbx.mall.R;
-import com.wbx.mall.bean.GoodsInfo;
 import com.wbx.mall.bean.GoodsInfo2;
 import com.wbx.mall.widget.flowLayout.BaseTagAdapter;
 import com.wbx.mall.widget.flowLayout.TagFlowLayout;

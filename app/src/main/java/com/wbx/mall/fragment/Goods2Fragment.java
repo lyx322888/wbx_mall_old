@@ -26,6 +26,7 @@ import com.bumptech.glide.Glide;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.google.gson.Gson;
 import com.wbx.mall.R;
+import com.wbx.mall.activity.FreeActivityDetailActivity;
 import com.wbx.mall.activity.GoodsDetailActivity;
 import com.wbx.mall.activity.StoreDetailActivity;
 import com.wbx.mall.activity.SubmitOrderActivity;
@@ -142,7 +143,12 @@ public class Goods2Fragment extends BaseFragment implements BaseQuickAdapter.Req
             public void onItemChildClick(BaseQuickAdapter adapter, View view, int position) {
                 switch (view.getId()) {
                     case R.id.goods_pic_im:
-                        showGoodsDetail(position);
+                        GoodsInfo2 info2 = mGoodList.get(position);
+                        if (info2.getIs_share_free() == 1) {
+                            FreeActivityDetailActivity.actionStart(getActivity(), info2.getShop_id() + "", info2.getGoods_id() + "", info2.getGrade_id());
+                        } else {
+                            showGoodsDetail(info2);
+                        }
                         break;
                     case R.id.tv_free_gain:
                         freeGain(position);
@@ -254,8 +260,7 @@ public class Goods2Fragment extends BaseFragment implements BaseQuickAdapter.Req
         }
     }
 
-    private void showGoodsDetail(int position) {
-        GoodsInfo2 goodsInfo = mGoodAdapter.getItem(position);
+    private void showGoodsDetail(GoodsInfo2 info2) {
         if (isVM) {  //菜市场
             View inflate = getLayoutInflater().inflate(R.layout.dialog_product_detail, null);
             AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
@@ -264,10 +269,10 @@ public class Goods2Fragment extends BaseFragment implements BaseQuickAdapter.Req
             ViewPager vpPhoto = inflate.findViewById(R.id.view_pager);
             final TextView tvCount = inflate.findViewById(R.id.tv_count);
             final ArrayList<String> lstPhoto = new ArrayList<>();
-            if (goodsInfo.getGoods_photo() == null || goodsInfo.getGoods_photo().size() == 0) {
-                lstPhoto.add(goodsInfo.getPhoto());
+            if (info2.getGoods_photo() == null || info2.getGoods_photo().size() == 0) {
+                lstPhoto.add(info2.getPhoto());
             } else {
-                lstPhoto.addAll(goodsInfo.getGoods_photo());
+                lstPhoto.addAll(info2.getGoods_photo());
             }
             tvCount.setText("1/" + lstPhoto.size());
             vpPhoto.setAdapter(new PagerAdapter() {
@@ -320,19 +325,19 @@ public class Goods2Fragment extends BaseFragment implements BaseQuickAdapter.Req
             TextView tvMemberPrice = inflate.findViewById(R.id.tv_member_price);
             TextView tvPrice = inflate.findViewById(R.id.tv_price);
 //            AddWidget addWidget = inflate.findViewById(R.id.addwidget);
-            tvName.setText(goodsInfo.getProduct_name());
+            tvName.setText(info2.getProduct_name());
             if (LoginUtil.isLogin() && LoginUtil.getUserInfo().getIs_salesman() == 1) {
                 tvSoldNum.setVisibility(View.VISIBLE);
-                tvSoldNum.setText(String.format("销量: %d份", goodsInfo.getSold_num()));
+                tvSoldNum.setText(String.format("销量: %d份", info2.getSold_num()));
             } else {
                 tvSoldNum.setVisibility(GONE);
             }
-            if (goodsInfo.getIs_shop_member() == 1) {
-                tvMemberPrice.setText(String.format("%.2f", goodsInfo.getShop_member_price() / 100.00));
+            if (info2.getIs_shop_member() == 1) {
+                tvMemberPrice.setText(String.format("%.2f", info2.getShop_member_price() / 100.00));
             } else {
                 tvMemberPrice.setVisibility(GONE);
             }
-            tvPrice.setText(String.format("¥%.2f", goodsInfo.getPrice() / 100.00));
+            tvPrice.setText(String.format("¥%.2f", info2.getPrice() / 100.00));
 //            if (goodsInfo.getIs_attr() == 1 || (goodsInfo.getNature() != null && goodsInfo.getNature().size() > 0)) {
 //                addWidget.setVisibility(GONE);
 //            } else {
@@ -342,9 +347,9 @@ public class Goods2Fragment extends BaseFragment implements BaseQuickAdapter.Req
             dialog.show();
         } else {
             Intent intent = new Intent(getContext(), GoodsDetailActivity.class);
-            intent.putExtra("goodsId", goodsInfo.getGoods_id());
+            intent.putExtra("goodsId", info2.getGoods_id());
             intent.putExtra("shopId", mShopId);
-            intent.putExtra("goodsInfo", goodsInfo);
+            intent.putExtra("goodsInfo", info2);
             intent.putExtra("bookId", "");
             intent.putExtra("isShopMemberUser", mShopInfo.getIs_shop_member_user() == 1);
             startActivityForResult(intent, StoreDetailActivity.REQUEST_CODE_GOODS_DETAIL);
