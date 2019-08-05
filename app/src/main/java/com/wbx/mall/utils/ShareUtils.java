@@ -88,12 +88,6 @@ public class ShareUtils {
                 shareDialog.dismiss();
             }
         });
-        shareInflate.findViewById(R.id.cover).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                shareDialog.dismiss();
-            }
-        });
     }
 
 
@@ -266,7 +260,7 @@ public class ShareUtils {
 //        wxapi.sendReq(req);
 //    }
 
-    public void commitShareMiniProgram(final Context context, final String title, final String descrption, Bitmap resource, String path, final String clickUrl) {
+    private void commitShareMiniProgram(final Context context, final String title, final String descrption, Bitmap resource, String path, final String clickUrl) {
         if (resource == null) {
             Toast.makeText(context, "图片异常，请重试", Toast.LENGTH_SHORT).show();
             return;

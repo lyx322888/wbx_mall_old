@@ -668,8 +668,7 @@ public class StoreDetailActivity extends BaseActivity implements AddWidget.OnAdd
                     if (selectPosSet.size() == 0) {
                         return;
                     }
-                    SpecInfo specInfo = goodsInfo.getGoods_attr().get(selectPosSet.iterator().next());
-                    selectSpec = specInfo;
+                    selectSpec = goodsInfo.getGoods_attr().get(selectPosSet.iterator().next());
                     changeSpec(goodsInfo, inflate);
                 }
             });

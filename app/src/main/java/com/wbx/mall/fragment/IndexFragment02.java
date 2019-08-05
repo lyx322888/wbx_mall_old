@@ -155,14 +155,14 @@ public class IndexFragment02 extends BaseFragment implements BaseRefreshListener
      * 获取首页滚动订单数据
      */
     private void getIndexCountData() {
-        new MyHttp().doPost(Api.getDefault().getIndexCountData(LoginUtil.getLoginToken(), mLocationInfo.getCity_id()), new HttpListener() {
+        new MyHttp().doPost(Api.getDefault().getIndexCountData(), new HttpListener() {
             @Override
             public void onSuccess(JSONObject result) {
                 indexCountBean = result.getObject("data", IndexCountBean.class);
                 List<String> list = new ArrayList<>();
                 for (IndexCountBean.OrderBean bean : indexCountBean.getActivity_user()) {
                     String time = TimeUtil.getfriendlyTime(bean.getCreate_time() * 1000);
-                    list.add((TextUtils.isEmpty(bean.getNickname()) ? "匿名" : bean.getNickname()) + "  " + time + "购买了" + "  " + bean.getTitle());
+                    list.add((TextUtils.isEmpty(bean.getNickname()) ? "匿名" : bean.getNickname()) + " " + time + "购买了" + " " + bean.getTitle());
                 }
                 marqueeView.startWithList(list);
                 String time = TimeUtil.getfriendlyTime(indexCountBean.getOrder().getCreate_time() * 1000);
