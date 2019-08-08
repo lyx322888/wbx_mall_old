@@ -105,7 +105,6 @@ public class IndexFragment02 extends BaseFragment implements BaseRefreshListener
 
     @Override
     public void initPresenter() {
-//        getCountData();
         showLoadingDialog("定位中...");
         SPUtils.remove(getActivity(), "city_name_select");
         IntentFilter filter = new IntentFilter("refreshHasLocation");

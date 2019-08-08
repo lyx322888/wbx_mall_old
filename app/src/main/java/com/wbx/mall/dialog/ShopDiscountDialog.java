@@ -58,5 +58,4 @@ public class ShopDiscountDialog extends Dialog {
         getWindow().setAttributes(layoutParams);
         getWindow().setWindowAnimations(R.style.main_menu_animStyle);
     }
-
 }

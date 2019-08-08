@@ -141,5 +141,4 @@ public class ShopCouponDialog extends Dialog {
             holder.addOnClickListener(R.id.iv_receive);
         }
     }
-
 }
