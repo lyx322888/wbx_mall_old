@@ -269,7 +269,7 @@ public class ShareUtils {
         wxapi.registerApp(AppConfig.WX_APP_ID);
         WXMiniProgramObject miniProgramObj = new WXMiniProgramObject();
         miniProgramObj.webpageUrl = clickUrl; // 兼容低版本的网页链接
-        miniProgramObj.miniprogramType = WXMiniProgramObject.MINIPROGRAM_TYPE_PREVIEW;// 正式版:0，测试版:1，体验版:2
+        miniProgramObj.miniprogramType = WXMiniProgramObject.MINIPTOGRAM_TYPE_RELEASE;// 正式版:0，测试版:1，体验版:2
         miniProgramObj.userName = "gh_c90fe5b5ba40";     // 小程序原始id
         miniProgramObj.path = path;            //小程序页面路径
         WXMediaMessage msg = new WXMediaMessage(miniProgramObj);

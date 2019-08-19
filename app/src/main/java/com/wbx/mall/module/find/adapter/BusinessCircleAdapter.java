@@ -132,9 +132,9 @@ public class BusinessCircleAdapter extends RecyclerView.Adapter<BusinessCircleAd
         holder.tvShare.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                ShareUtils.getInstance().share(mContext, bean.getShop_name(), bean.getText(), bean.getPhotos() == null || bean.getPhotos().size() == 0 ? bean.getPhoto() : bean.getPhotos().get(0), bean.getShare_url());
-//                String path = "pages/found/found?shop_id=" + bean.getShop_id();
-//                ShareUtils.getInstance().shareMiniProgram(mContext, bean.getText(), "", bean.getPhotos().size() == 0 ? bean.getPhoto() : bean.getPhotos().get(0), path, "www.wbx365.com");
+//                ShareUtils.getInstance().share(mContext, bean.getShop_name(), bean.getText(), bean.getPhotos() == null || bean.getPhotos().size() == 0 ? bean.getPhoto() : bean.getPhotos().get(0), bean.getShare_url());
+                String path = "pages/found/found?shop_id=" + bean.getShop_id();
+                ShareUtils.getInstance().shareMiniProgram(mContext, bean.getText(), "", bean.getPhotos().size() == 0 ? bean.getPhoto() : bean.getPhotos().get(0), path, "www.wbx365.com");
             }
         });
     }
