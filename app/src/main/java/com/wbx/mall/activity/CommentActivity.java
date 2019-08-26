@@ -81,7 +81,7 @@ public class CommentActivity extends BaseActivity {
     public void fillData() {
         mParams.put("order_id", getIntent().getStringExtra("orderId"));
         physical = getIntent().getBooleanExtra("physical", false);
-        mParams.put("type", physical ? 1 : 2);
+        mParams.put("type", physical ? 2 : 1);
         mParams.put("login_token", SPUtils.getSharedStringData(mContext, AppConfig.LOGIN_TOKEN));
     }
 
@@ -135,7 +135,7 @@ public class CommentActivity extends BaseActivity {
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.submit_comment_btn:
-                if (TextUtils.isEmpty(messageEdit.getText())) {
+                if (TextUtils.isEmpty(messageEdit.getText().toString().trim())) {
                     showShortToast("说点什么吧？");
                     return;
                 }
@@ -174,7 +174,7 @@ public class CommentActivity extends BaseActivity {
 
     private void submit() {
         mParams.put("grade", mScore);
-        mParams.put("message", messageEdit.getText().toString());
+        mParams.put("message", messageEdit.getText().toString().trim());
         new MyHttp().doPost(Api.getDefault().publishComment(mParams), new HttpListener() {
             @Override
             public void onSuccess(JSONObject result) {
